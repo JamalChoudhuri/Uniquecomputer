@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>প্রফেশনাল আইডি কার্ড মেকার - কম্পিউটার ও আইটি সার্ভিস</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Hind Siliguri', 'Arial', sans-serif;
+            background-color: #f1f5f9;
+        }
+        /* Custom scrollbar for better UI */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        /* Style for Print Mode */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #idCardCanvas, #idCardCanvas * {
+                visibility: visible;
+            }
+            #idCardCanvas {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%) scale(1.2);
+                border: none !important;
+                box-shadow: none !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <header class="bg-gradient-to-r from-blue-700 to-indigo-800 text-white shadow-md no-print">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="bg-white text-blue-700 p-2.5 rounded-lg shadow-inner">
+                    <i class="fa-solid fa-id-card text-2xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-wide">স্মার্ট আইডি কার্ড জেনারেটর</h1>
+                    <p class="text-xs text-blue-200">মুহূর্তেই তৈরি করুন প্রফেশনাল মানের আইডি কার্ড</p>
+                </div>
+            </div>
+            <div class="flex gap-2">
+                <button onclick="resetForm()" class="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg text-xs font-semibold transition flex items-center gap-1.5 border border-white/20">
+                    <i class="fa-solid fa-rotate-left"></i> রিসেট করুন
+                </button>
+                <a href="index.html" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-xs font-semibold transition flex items-center gap-1.5 shadow-md">
+                    <i class="fa-solid fa-house"></i> হোম পেজ
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-6xl w-full mx-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 my-4">
+        
+        <section class="lg:col-span-7 bg-white rounded-2xl shadow-sm border border-slate-200 p-5 sm:p-6 flex flex-col justify-between no-print">
+            <div>
+                <div class="flex items-center gap-2 border-b border-slate-100 pb-3 mb-5">
+                    <span class="bg-blue-50 text-blue-600 p-1.5 rounded-md"><i class="fa-solid fa-pen-to-square"></i></span>
+                    <h2 class="text-md font-bold text-slate-800">আইডি কার্ডের তথ্য পূরণ করুন</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                    <div>
+                        <label class="block font-semibold text-slate-600 mb-1.5">🏢 প্রতিষ্ঠানের নাম <span class="text-red-500">*</span></label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400"><i class="fa-solid fa-building"></i></span>
+                            <input type="text" id="id_company" value="ডিজিটাল আইটি ও প্রিন্টিং" oninput="updateIdCard()" class="w-full pl-9 pr-3 py-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition font-medium text-slate-800">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-600 mb-1.5">👤 কার্ডধারীর নাম <span class="text-red-500">*</span></label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400"><i class="fa-solid fa-user"></i></span>
+                            <input type="text" id="id_name" value="মোঃ আবির হোসেন" oninput="updateIdCard()" class="w-full pl-9 pr-3 py-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition font-medium text-slate-800">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-600 mb-1.5">💼 পদবী / Designation <span class="text-red-500">*</span></label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400"><i class="fa-solid fa-briefcase"></i></span>
+                            <input type="text" id="id_designation" value="গ্রাফিক্স ডিজাইনার" oninput="updateIdCard()" class="w-full pl-9 pr-3 py-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition font-medium text-slate-800">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-600 mb-1.5">🆔 আইডি নম্বর</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400"><i class="fa-solid fa-id-badge"></i></span>
+                            <input type="text" id="id_number" value="ID-202609" oninput="updateIdCard()" class="w-full pl-9 pr-3 py-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition font-medium text-slate-800">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-600 mb-1.5">🩸 রক্তের গ্রুপ</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400"><i class="fa-solid fa-droplet text-red-500"></i></span>
+                            <input type="text" id="id_blood" value="O+" oninput="updateIdCard()" class="w-full pl-9 pr-3 py-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition font-medium text-slate-800">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-600 mb-1.5">📞 মোবাইল নম্বর</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400"><i class="fa-solid fa-phone"></i></span>
+                            <input type="text" id="id_phone" value="01700-000000" oninput="updateIdCard()" class="w-full pl-9 pr-3 py-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition font-medium text-slate-800">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 border-t border-slate-100 pt-5 space-y-4 text-xs">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 hover:border-blue-300 transition">
+                            <label class="block font-bold text-slate-700 mb-1.5"><i class="fa-solid fa-cloud-arrow-up text-blue-500"></i> institutions লোগো</label>
+                            <input type="file" accept="image/*" onchange="handleIdImages(event, 'logo')" class="w-full file:mr-2 file:py-1 file:px-2 file:rounded file:border-0 file:text-[10px] file:font-semibold file:bg-blue-100 file:text-blue-700 hover:file:bg-blue-200 cursor-pointer text-[10px] text-slate-500">
+                        </div>
+                        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 hover:border-green-300 transition">
+                            <label class="block font-bold text-slate-700 mb-1.5"><i class="fa-solid fa-image text-green-500"></i> কার্ডধারীর ছবি</label>
+                            <input type="file" accept="image/*" onchange="handleIdImages(event, 'photo')" class="w-full file:mr-2 file:py-1 file:px-2 file:rounded file:border-0 file:text-[10px] file:font-semibold file:bg-green-100 file:text-green-700 hover:file:bg-green-200 cursor-pointer text-[10px] text-slate-500">
+                        </div>
+                        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 hover:border-purple-300 transition">
+                            <label class="block font-bold text-slate-700 mb-1.5"><i class="fa-solid fa-signature text-purple-500"></i> অথরাইজ সিগনেচার</label>
+                            <input type="file" accept="image/*" onchange="handleIdImages(event, 'signature')" class="w-full file:mr-2 file:py-1 file:px-2 file:rounded file:border-0 file:text-[10px] file:font-semibold file:bg-purple-100 file:text-purple-700 hover:file:bg-purple-200 cursor-pointer text-[10px] text-slate-500">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-100 flex gap-3">
+                <button onclick="window.print()" class="flex-grow bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3 px-4 rounded-xl text-sm transition shadow-lg flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-print text-lg"></i> আইডি কার্ড প্রিন্ট করুন
+                </button>
+            </div>
+        </section>
+
+        <section class="lg:col-span-5 flex flex-col items-center justify-center bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+            <h3 class="text-xs font-bold text-slate-400 mb-4 tracking-wider uppercase no-print flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> আইডি কার্ড লাইভ প্রিভিউ (Standard Size)
+            </h3>
+            
+            <div id="idCardCanvas" style="width: 250px; height: 380px; background: #ffffff; border-radius: 12px; box-shadow: 0 10px 30px -5px rgba(0,0,0,0.15); border: 1px solid #e2e8f0; position: relative; font-family: Arial, sans-serif; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box;">
+                </div>
+            
+            <p class="text-[10px] text-slate-400 mt-4 text-center max-w-xs leading-relaxed no-print">
+                <i class="fa-solid fa-circle-info"></i> কার্ডের প্রিভিউটি রিয়েল-টাইমে আপডেট হয়। প্রিন্ট বাটনে চাপ দিলে শুধু কার্ডটিই এ৪ পেপারে সঠিক মাপে প্রিন্ট হবে।
+            </p>
+        </section>
+
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 py-3.5 text-center text-xs text-slate-500 font-medium no-print">
+        <div class="max-w-7xl mx-auto px-4">
+            কপিরাইট © ২০২৬ | আপনার কম্পিউটার ও প্রিন্টিং প্যাভিলিয়ন
+        </div>
+    </footer>
+
+    <script>
+        // ৩টি ইমেজ হ্যান্ডলিং করার জন্য ডায়নামিক অবজেক্ট
+        let idImages = {
+            logo: null,
+            photo: null,
+            signature: null
+        };
+
+        // ফাইল সিলেক্ট করা হলে রিড করে base64 এ কনভার্ট করা
+        function handleIdImages(event, type) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    idImages[type] = e.target.result; // base64 ডাটা সেট
+                    updateIdCard(); // লাইভ ক্যানভাস আপডেট
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // ফর্ম রিসেট করার ফাংশন
+        function resetForm() {
+            document.getElementById("id_company").value = "ডিজিটাল আইটি ও প্রিন্টিং";
+            document.getElementById("id_name").value = "মোঃ আবির হোসেন";
+            document.getElementById("id_designation").value = "গ্রাফিক্স ডিজাইনার";
+            document.getElementById("id_number").value = "ID-202609";
+            document.getElementById("id_blood").value = "O+";
+            document.getElementById("id_phone").value = "01700-000000";
+            
+            // ছবি রিসেট
+            idImages = { logo: null, photo: null, signature: null };
+            
+            // ইনপুট ফাইল ফিল্ডগুলো খালি করা
+            const fileInputs = document.querySelectorAll('input[type="file"]');
+            fileInputs.forEach(input => input.value = '');
+            
+            updateIdCard();
+        }
+
+        // মেইন ফাংশন: ইনপুটের ডাটা ও পিকচারগুলো ক্যানভাসে সাজিয়ে রেন্ডার করা
+        function updateIdCard() {
+            const canvas = document.getElementById("idCardCanvas");
+            
+            // ডাটা কালেকশন
+            const company = document.getElementById("id_company").value || "Company Name";
+            const name = document.getElementById("id_name").value || "Employee Name";
+            const designation = document.getElementById("id_designation").value || "Designation";
+            const idNum = document.getElementById("id_number").value || "N/A";
+            const blood = document.getElementById("id_blood").value || "N/A";
+            const phone = document.getElementById("id_phone").value || "01700-00000";
+
+            // ডিফল্ট প্লেসহোল্ডার জেনারেটর (যদি কোনো ছবি আপলোড করা না থাকে)
+            const defaultLogo = `
+                <div style="width:34px; height:34px; background:rgba(255,255,255,0.15); border:1px dashed rgba(255,255,255,0.3); border-radius:8px; display:flex; align-items:center; justify-content:center; color:white; font-size:7px; font-weight:bold;">
+                    LOGO
+                </div>
+            `;
+            const defaultPhoto = `
+                <div style="width:85px; height:98px; background:#f8fafc; border:2.5px dashed #cbd5e1; border-radius:8px; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#94a3b8;">
+                    <i class="fa-solid fa-user-plus" style="font-size:16px; margin-bottom:4px;"></i>
+                    <span style="font-size:8px; font-weight:bold;">PHOTO</span>
+                </div>
+            `;
+            const defaultSign = `
+                <div style="font-size:7px; color:#94a3b8; font-style:italic; padding-top:6px;">
+                    Authorized Signature
+                </div>
+            `;
+
+            // আপলোডেড পিকচার হ্যান্ডলার
+            const logoHtml = idImages.logo ? `<img src="${idImages.logo}" style="width:34px; height:34px; object-fit:contain; border-radius:6px; background:#fff; padding:2px;">` : defaultLogo;
+            const photoHtml = idImages.photo ? `<img src="${idImages.photo}" style="width:85px; height:98px; border-radius:8px; object-fit:cover; border:2.5px solid #3b82f6; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">` : defaultPhoto;
+            const signHtml = idImages.signature ? `<img src="${idImages.signature}" style="width:75px; height:24px; object-fit:contain;">` : defaultSign;
+
+            // আইডি কার্ডের ডায়নামিক HTML টেমপ্লেট
+            canvas.innerHTML = `
+                <div style="background: linear-gradient(135deg, #1e3a8a, #3b82f6); color: white; padding: 10px 14px; display: flex; align-items: center; gap: 10px; width: 100%; box-sizing: border-box; height: 58px;">
+                    ${logoHtml}
+                    <div style="text-align: left; overflow: hidden; flex-grow:1;">
+                        <div style="font-size: 11px; font-weight: bold; letter-spacing: 0.2px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">${company}</div>
+                        <div style="font-size: 6.5px; opacity: 0.85; letter-spacing: 1.2px; font-weight: bold; margin-top: 1.5px; text-transform: uppercase;">IDENTITY CARD</div>
+                    </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; align-items: center; margin-top: 14px; padding: 0 15px; flex-grow: 1;">
+                    <div style="margin-bottom: 8px;">${photoHtml}</div>
+                    
+                    <div style="font-size: 12.5px; font-weight: bold; color: #0f172a; margin-bottom: 2px; text-align:center;">${name}</div>
+                    <div style="font-size: 8.5px; font-weight: 700; color: #2563eb; margin-bottom: 12px; text-align:center; text-transform: uppercase; letter-spacing: 0.5px;">${designation}</div>
+                    
+                    <table style="width: 100%; font-size: 9px; border-collapse: collapse; text-align: left; color: #475569; line-height: 1.4;">
+                        <tr>
+                            <td style="font-weight: bold; width: 40%; padding: 2px 0; color: #64748b;">ID Number</td>
+                            <td style="color: #1e293b; font-weight: 600;">: ${idNum}</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; padding: 2px 0; color: #64748b;">Blood Group</td>
+                            <td style="color: #ef4444; font-weight: bold;">: ${blood}</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; padding: 2px 0; color: #64748b;">Mobile No</td>
+                            <td style="color: #1e293b; font-weight: 600;">: ${phone}</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div style="border-top: 1px solid #f1f5f9; padding: 8px 14px; display: flex; justify-content: space-between; align-items: flex-end; width: 100%; box-sizing: border-box; background: #f8fafc; height: 50px;">
+                    <div style="font-size: 5.5px; color: #94a3b8; text-align: left; line-height: 1.3;">
+                        * কার্ডটি হারানো গেলে<br>অবিলম্বে ফেরত দিন।
+                    </div>
+                    <div style="display: flex; flex-direction: column; align-items: center; width: 85px;">
+                        <div style="height: 24px; display: flex; align-items: center; justify-content: center; overflow:hidden;">
+                            ${signHtml}
+                        </div>
+                        <div style="font-size: 6.5px; font-weight: bold; color: #64748b; border-top: 1.5px solid #cbd5e1; width: 100%; text-align: center; margin-top: 2px; padding-top: 2.5px; letter-spacing: 0.2px;">
+                            Authorized Sign
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // পেজ ফার্স্ট টাইম ওপেন হলে আইডি কার্ড জেনারেট হয়ে যাবে
+        window.onload = function() {
+            updateIdCard();
+        };
+    </script>
+</body>
+</html>
