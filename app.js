@@ -1,109 +1,113 @@
-// ১. ৫০টি প্রফেশনাল ডিজাইন কালার ও থিম মেটাডেটা
-const templates = [];
-const colorPalettes = [
+// ৫০টি লাইভ ডিজাইন মেটাডেটা প্রিসেট
+const colorOptions = [
     { primary: '#1e3a8a', secondary: '#3b82f6', name: 'কর্পোরেট ব্লু' },
     { primary: '#0f766e', secondary: '#14b8a6', name: 'এলিজেন্ট টিল' },
     { primary: '#1e293b', secondary: '#64748b', name: 'মডার্ন ডার্ক' },
     { primary: '#b91c1c', secondary: '#ef4444', name: 'রয়্যাল রেড' },
     { primary: '#6d28d9', secondary: '#a855f7', name: 'লাক্সারি পার্পল' },
-    { primary: '#15803d', secondary: '#22c55e', name: 'ক্লাসিক গ্রিন' }
+    { primary: '#15803d', secondary: '#22c55e', name: 'ক্লাসিক গ্রিন' },
+    { primary: '#7c2d12', secondary: '#f97316', name: 'আর্থ ব্রাউন' }
 ];
 
-// ৫০টি ভিন্ন বৈচিত্র্যময় লেআউট জেনারেট করা
+const templates = [];
 for (let i = 1; i <= 50; i++) {
-    const palette = colorPalettes[(i - 1) % colorPalettes.length];
+    const defaultColor = colorOptions[(i - 1) % colorOptions.length];
     templates.push({
         id: i,
-        title: `থিম নম্বর: ${i} (${palette.name} - স্টাইল ${Math.ceil(i/6)})`,
-        primaryColor: palette.primary,
-        secondaryColor: palette.secondary,
-        layoutStyle: i % 2 === 0 ? 'two-column' : 'classic-single'
+        title: `থিম ${i}`,
+        primaryColor: defaultColor.primary,
+        secondaryColor: defaultColor.secondary,
+        layoutStyle: i % 2 === 0 ? 'two-column' : 'single-column'
     });
 }
 
-// ২. মুচি থেকে প্রধানমন্ত্রী সবার জন্য সয়ংসম্পূর্ণ ডাটা স্ট্রাকচার (Master Fields)
+// বিল্ট-ইন অল-ইন-ওয়ান স্কিল ট্যাগ ডাটাবেস (সবার জন্য ফিটিং)
+const predefinedSkills = [
+    "কম্পিউটার চালনা (MS Word & Excel)", "ইন্টারনেট ব্রাউজিং", "টাইপিং স্পিড (বাংলা ও ইংরেজি)",
+    "অটো-ড্রাইভিং (হালকা/ভারী লাইসেন্স)", "মোটরসাইকেল ড্রাইভিং", 
+    "উন্নত কৃষি চাষাবাদ ও বীজ প্রযুক্তি", "আধুনিক দর্জি বিজ্ঞান ও কাটিং", 
+    "কাস্টমার ম্যানেজমেন্ট ও সেলস স্কিল", "কঠোর পরিশ্রম ও ধৈর্য", 
+    "সাঁতার কাটা (উন্নত স্তর)", "ইলেকট্রিক্যাল হাউজ ওয়ার্কিং", "মোবাইল সার্ভিসিং",
+    "দলগত নেতৃত্ব (Leadership)", "দ্রুত সমস্যা সমাধান (Problem Solving)", "হিসাবরক্ষণ (Accounting)"
+];
+
 const masterFormSections = [
     {
-        title: "👤 মৌলিক ও ব্যক্তিগত তথ্য (Personal Details)",
+        title: "👤 ব্যক্তিগত মৌলিক তথ্য (Personal Info)",
         fields: [
             { id: 'fullName', label: 'পূর্ণ নাম (Full Name)', placeholder: 'উদা: শ্রাবণী আক্তার' },
-            { id: 'designation', label: 'পদবী/পেশা (Designation/Profession)', placeholder: 'উদা: ব্যাংকার / ফ্রিল্যান্সার / ব্যবসায়ী' },
+            { id: 'designation', label: 'পদবী/পেশা (Designation)', placeholder: 'উদা: কম্পিউটার অপারেটর / কৃষক / ম্যানেজার' },
             { id: 'email', label: 'ইমেইল (Email)', placeholder: 'sraboni@example.com' },
-            { id: 'mobile', label: 'মোবাইল নম্বর (Mobile)', placeholder: '01700-000000' },
-            { id: 'address', label: 'বর্তমান ঠিকানা (Mailing Address)', placeholder: 'গ্রাম, পোস্ট, থানা, জেলা' },
-            { id: 'nid', label: 'জাতীয় পরিচয়পত্র / পাসপোর্ট নম্বর', placeholder: 'NID or Passport' }
+            { id: 'mobile', label: 'মোবাইল (Mobile)', placeholder: '01797-143804' },
+            { id: 'address', label: 'বর্তমান ঠিকানা', placeholder: 'গ্রাম, পোস্ট, থানা, জেলা' }
         ]
     },
     {
-        title: "🎯 ক্যারিয়ার বা প্রফেশনাল উদ্দেশ্য",
+        title: "🛠️ স্কিল বা কারিগরি দক্ষতা (সার্চ করে ট্যাগ যোগ করুন)",
         fields: [
-            { id: 'objective', label: 'ক্যারিয়ার অবজেক্টিভ (Career Objective)', placeholder: 'আপনার কাজের লক্ষ্য ও উদ্দেশ্য লিখুন...', type: 'textarea' }
+            { id: 'skills', label: 'নির্বাচিত স্কিলসমূহ (নিচের ট্যাগ ক্লিক করে অ্যাড করুন)', placeholder: '', type: 'skills-tagger' }
         ]
     },
     {
-        title: "💼 কাজের অভিজ্ঞতা ও পলিটিক্যাল/সামাজিক প্রোফাইল (যদি থাকে)",
+        title: "💼 কাজের অভিজ্ঞতা ও শিক্ষাগত যোগ্যতা",
         fields: [
-            { id: 'exp_1', label: 'অভিজ্ঞতা ১ (কোম্পানি নাম, পদবী, বছর)', placeholder: 'উদা: সোনালী ব্যাংক, ক্যাশিয়ার, ২০২১-২০২৪' },
-            { id: 'exp_2', label: 'অভিজ্ঞতা ২', placeholder: 'উদা: রূপালী এজেন্সী, ম্যানেজার, ২০১৮-২০২১' },
-            { id: 'exp_3', label: 'অন্যান্য বিশেষ কাজের রেকর্ড', placeholder: 'মুচি/শ্রমিকদের জন্য পূর্বের কাজের বিবরণ বা ভিআইপিদের জন্য রাজনৈতিক অভিজ্ঞতা' }
+            { id: 'objective', label: 'ক্যারিয়ার অবজেক্টিভ', placeholder: 'কাজের লক্ষ্য...', type: 'textarea' },
+            { id: 'experience', label: 'কাজের অভিজ্ঞতা (কোম্পানি/কাজের নাম, পদবী, সময়কাল)', placeholder: 'উদা: জনতা টেলিকম, কম্পিউটার অপারেটর, ২ বছর', type: 'textarea' },
+            { id: 'education', label: 'শিক্ষাগত বিবরণ (ডিগ্রী, প্রতিষ্ঠান, সাল, রেজাল্ট)', placeholder: 'উদা: HSC - ফরিদপুর কলেজ, ২০১৯', type: 'textarea' }
         ]
     },
     {
-        title: "🎓 শিক্ষাগত যোগ্যতা (Academic Credentials)",
+        title: "📋 অন্যান্য প্রফেশনাল বিবরণ (ঐচ্ছিক)",
         fields: [
-            { id: 'edu_1', label: 'সর্বোচ্চ ডিগ্রী (Degree, Institute, Year, Result)', placeholder: 'উদা: BBA, Govt. Rajendra College, 2023, Appeared' },
-            { id: 'edu_2', label: 'দ্বাদশ শ্রেণী / HSC', placeholder: 'উদা: HSC, Saroda Sundari Mohila College, 2019, GPA-2.92' },
-            { id: 'edu_3', label: 'দশম শ্রেণী / SSC', placeholder: 'উদা: SSC, Kanipur High School, 2017, GPA-4.73' }
-        ]
-    },
-    {
-        title: "🛠️ টেকনিক্যাল স্কিল ও ভাষাগত পারদর্শিতা",
-        fields: [
-            { id: 'skills', label: 'কম্পিউটার/কারিগরি দক্ষতা (Skills)', placeholder: 'উদা: Ms Word, Excel, Internet Browsing' },
-            { id: 'languages', label: 'ভাষাগত দক্ষতা (Language Skills)', placeholder: 'উদা: বাংলা (চমৎকার), ইংরেজি (কমিউনিকেশন ভালো)' }
-        ]
-    },
-    {
-        title: "📋 অন্যান্য ব্যক্তিগত বিবরণ (মুচি থেকে প্রধানমন্ত্রী সবার ফিটিং এর জন্য)",
-        fields: [
-            { id: 'fatherName', label: 'পিতার নাম (Father\'s Name)', placeholder: 'Late. Sobahan Matubbor' },
-            { id: 'motherName', label: 'মাতার নাম (Mother\'s Name)', placeholder: 'Saheda Begum' },
-            { id: 'dob', label: 'জন্ম তারিখ (Date of Birth)', placeholder: '10-11-1999' },
-            { id: 'bloodGroup', label: 'রক্তের গ্রুপ (Blood Group)', placeholder: 'AB+' },
-            { id: 'heightWeight', label: 'উচ্চতা ও ওজন (ঐচ্ছিক)', placeholder: "5' 3\" - 58 kg" },
-            { id: 'hobbies', label: 'শখ ও আগ্রহ (Interests & Hobbies)', placeholder: 'Reading Novels, Drawing, Writing' }
+            { id: 'fatherName', label: 'পিতার নাম', placeholder: 'Late. Sobahan Matubbor' },
+            { id: 'motherName', label: 'মাতার নাম', placeholder: 'Saheda Begum' },
+            { id: 'dob', label: 'জন্ম তারিখ', placeholder: '10-11-1999' },
+            { id: 'bloodGroup', label: 'রক্তের গ্রুপ', placeholder: 'AB+' }
         ]
     }
 ];
 
 let selectedTemplate = null;
 let uploadedPhotoBase64 = null;
-let activeTab = 'cv';
+let currentCustomColors = null;
 
-// পেজ ইনিশিয়ালাইজেশন
 document.addEventListener("DOMContentLoaded", () => {
-    renderTemplateGrid();
-    buildSmartForm();
+    if(document.getElementById("templateGrid")) {
+        renderTemplateGrid();
+        buildSmartForm();
+    }
 });
 
-// ৫০টি ডিজাইনের গ্যালারি গ্রিড তৈরি করা
+// টেমপ্লেট গ্যালারি মেকিং (আগে থেকেই ডিজাইন ভিউ দেখা যাবে)
 function renderTemplateGrid() {
     const grid = document.getElementById("templateGrid");
     grid.innerHTML = "";
+    
     templates.forEach(t => {
         const card = document.createElement("div");
-        card.className = "border border-gray-200 rounded-xl overflow-hidden cursor-pointer bg-white shadow-xs hover:shadow-md hover:border-blue-500 transition block";
+        card.className = "border-2 border-gray-200 rounded-xl overflow-hidden cursor-pointer bg-white hover:border-blue-600 transition duration-300 p-2 block";
+        
+        // টেমপ্লেটের হুবহু মিনি-প্রিভিউ জ্যামিতিক নকশা
+        const isTwoCol = t.layoutStyle === 'two-column';
         card.innerHTML = `
-            <div class="h-28 p-3 flex flex-col justify-between" style="background: linear-gradient(135deg, ${t.primaryColor} 0%, ${t.secondaryColor} 100%)">
-                <span class="text-white text-xs font-bold px-2 py-0.5 bg-black/30 rounded w-fit">THEME ${t.id}</span>
-                <div class="flex space-x-1.5">
-                    <div class="w-3 h-3 bg-white/80 rounded-full"></div>
-                    <div class="w-8 h-2 bg-white/40 rounded-sm"></div>
+            <div class="h-40 bg-slate-50 border border-gray-100 rounded p-2 flex flex-col justify-between overflow-hidden relative">
+                <!-- হেডার মক -->
+                <div class="h-4 rounded-xs w-full mb-1" style="background-color: ${t.primaryColor}"></div>
+                <div class="h-2 rounded-xs w-2/3 mb-2" style="background-color: ${t.secondaryColor}"></div>
+                
+                <!-- বডি মক -->
+                <div class="flex flex-1 gap-1.5 w-full">
+                    ${isTwoCol ? `<div class="w-1/3 bg-gray-200 rounded-xs h-full"></div>` : ''}
+                    <div class="${isTwoCol ? 'w-2/3' : 'w-full'} space-y-1">
+                        <div class="h-1.5 bg-gray-300 w-full rounded-xs"></div>
+                        <div class="h-1.5 bg-gray-300 w-5/6 rounded-xs"></div>
+                        <div class="h-1.5 bg-gray-300 w-4/5 rounded-xs"></div>
+                    </div>
                 </div>
+                <div class="absolute inset-0 bg-black/5 opacity-0 hover:opacity-100 transition flex items-center justify-center text-white text-xs font-bold">সিলেক্ট করুন</div>
             </div>
-            <div class="p-3 bg-white text-center">
-                <h4 class="text-xs font-bold text-gray-800">${t.title}</h4>
-                <p class="text-[10px] text-gray-400 mt-1">${t.layoutStyle === 'two-column' ? '🔄 মডার্ন ২-কলাম' : '📃 ক্লাসিক ১-কলাম'}</p>
+            <div class="p-2 text-center bg-white">
+                <span class="text-xs font-bold text-gray-900">${t.title} (${isTwoCol ? '২-কলাম মডার্ন' : '১-কলাম ক্লাসিক'})</span>
             </div>
         `;
         card.onclick = () => selectTemplate(t.id);
@@ -111,7 +115,26 @@ function renderTemplateGrid() {
     });
 }
 
-// সম্পূর্ণ মাস্টার ফর্ম স্ক্রিনে বিল্ড করা
+// লাইভ কালার অপশন প্যালেট তৈরি
+function renderColorPickers() {
+    const container = document.getElementById("colorPickerContainer");
+    container.innerHTML = "";
+    
+    colorOptions.forEach(color => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "w-7 h-7 rounded-full border-2 border-white shadow-xs cursor-pointer transform hover:scale-110 transition";
+        btn.style.backgroundColor = color.primary;
+        btn.title = color.name;
+        btn.onclick = () => {
+            currentCustomColors = { primary: color.primary, secondary: color.secondary };
+            updateLivePreviews();
+        };
+        container.appendChild(btn);
+    });
+}
+
+// অল-ইন-ওয়ান ডায়নামিক ফরম রেন্ডারিং
 function buildSmartForm() {
     const container = document.getElementById("formFieldsContainer");
     container.innerHTML = "";
@@ -119,39 +142,71 @@ function buildSmartForm() {
     masterFormSections.forEach(sec => {
         const secDiv = document.createElement("div");
         secDiv.className = "bg-gray-50 p-4 rounded-xl border border-gray-200 space-y-3";
-        secDiv.innerHTML = `<h3 class="text-sm font-bold text-gray-900 border-b border-gray-200 pb-1">${sec.title}</h3>`;
+        secDiv.innerHTML = `<h3 class="text-xs font-bold text-gray-900 border-b border-gray-200 pb-1">${sec.title}</h3>`;
         
         sec.fields.forEach(f => {
             const fDiv = document.createElement("div");
-            fDiv.className = "block";
+            fDiv.className = "block text-xs";
             
-            // ডিফল্ট ডেমো ডাটা ইনজেক্ট করা (ব্যবহারকারীর প্রোভাইড করা ডাটা)
+            // ডিফল্ট ডেমো ভ্যালু
             let defaultVal = "";
             if(f.id === 'fullName') defaultVal = "SRABONI AKTER";
             if(f.id === 'email') defaultVal = "sraboniakter3804@gmail.com";
             if(f.id === 'mobile') defaultVal = "01797-143804";
-            if(f.id === 'address') defaultVal = "Vill: Roshiknagar, P.O: Kanaipur-7801, P.S: Kotwali, Dist: Faridpur";
-            if(f.id === 'objective') defaultVal = "To build up career working in a challenging environment with excellent career development prospect, where hard work, strict discipline, good communications skill & creative problem solving are the corner stone of success.";
-            if(f.id === 'edu_1') defaultVal = "BBA - Finance & Banking | Govt. Rajendra College, Faridpur (Passing Year: 2023, Result: Appeared)";
+            if(f.id === 'address') defaultVal = "Vill: Roshiknagar, Faridpur";
+            if(f.id === 'objective') defaultVal = "To build up a career working in a challenging environment with excellent career prospect...";
 
-            if(f.type === 'textarea') {
+            if (f.type === 'skills-tagger') {
                 fDiv.innerHTML = `
-                    <label class="block text-xs font-medium text-gray-600 mb-1">${f.label}</label>
-                    <textarea id="inp_${f.id}" oninput="updateLivePreviews()" rows="3" class="w-full text-xs p-2 border border-gray-300 rounded bg-white">${defaultVal}</textarea>
+                    <label class="block font-medium text-gray-700 mb-1">${f.label}</label>
+                    <input type="text" id="inp_skills" value="কম্পিউটার চালনা (MS Word & Excel), ধৈর্য" oninput="updateLivePreviews()" class="w-full p-2 border border-gray-300 rounded bg-white font-bold text-blue-700">
+                    <div class="mt-2 font-semibold text-gray-500 mb-1 text-[10px]">💡 সার্চ বা ক্লিক করে স্কিল যোগ করুন:</div>
+                    <div class="flex flex-wrap gap-1 max-h-24 overflow-y-auto bg-white p-2 border border-gray-200 rounded" id="tagCloud"></div>
+                `;
+            } else if(f.type === 'textarea') {
+                fDiv.innerHTML = `
+                    <label class="block font-medium text-gray-600 mb-1">${f.label}</label>
+                    <textarea id="inp_${f.id}" oninput="updateLivePreviews()" rows="2" class="w-full p-2 border border-gray-300 rounded bg-white">${defaultVal}</textarea>
                 `;
             } else {
                 fDiv.innerHTML = `
-                    <label class="block text-xs font-medium text-gray-600 mb-1">${f.label}</label>
-                    <input type="text" id="inp_${f.id}" value="${defaultVal}" oninput="updateLivePreviews()" class="w-full text-xs p-2 border border-gray-300 rounded bg-white" placeholder="${f.placeholder}">
+                    <label class="block font-medium text-gray-600 mb-1">${f.label}</label>
+                    <input type="text" id="inp_${f.id}" value="${defaultVal}" oninput="updateLivePreviews()" class="w-full p-2 border border-gray-300 rounded bg-white" placeholder="${f.placeholder}">
                 `;
             }
             secDiv.appendChild(fDiv);
         });
         container.appendChild(secDiv);
     });
+    
+    // স্কিল ক্লাউড ফিলআপ করা
+    populateSkillTags();
 }
 
-// ইমেজ ফাইল আপলোড হ্যান্ডেল ও বেস-৬৪ এ রূপান্তর
+// স্কিল ট্যাগ অপশন তৈরি
+function populateSkillTags() {
+    const cloud = document.getElementById("tagCloud");
+    if(!cloud) return;
+    cloud.innerHTML = "";
+    predefinedSkills.forEach(skill => {
+        const span = document.createElement("span");
+        span.className = "bg-slate-200 hover:bg-blue-600 hover:text-white px-2 py-0.5 rounded text-[11px] cursor-pointer transition font-medium text-gray-700";
+        span.innerText = `+ ${skill}`;
+        span.onclick = () => {
+            const input = document.getElementById("inp_skills");
+            if(input) {
+                let currentVals = input.value.split(',').map(s => s.trim()).filter(s => s !== "");
+                if(!currentVals.includes(skill)) {
+                    currentVals.push(skill);
+                    input.value = currentVals.join(', ');
+                    updateLivePreviews();
+                }
+            }
+        };
+        cloud.appendChild(span);
+    });
+}
+
 function handlePhotoUpload(event) {
     const file = event.target.files[0];
     if (file) {
@@ -164,17 +219,17 @@ function handlePhotoUpload(event) {
     }
 }
 
-// কোনো টেমপ্লেট পছন্দ করে ক্লিক করলে
 function selectTemplate(id) {
     selectedTemplate = templates.find(t => t.id === id);
+    currentCustomColors = { primary: selectedTemplate.primaryColor, secondary: selectedTemplate.secondaryColor };
+    
     document.getElementById("workspaceSection").classList.remove("hidden");
-    document.getElementById("workspaceSection").scrollIntoView({ behavior: 'smooth' });
+    renderColorPickers();
     updateLivePreviews();
+    document.getElementById("workspaceSection").scrollIntoView({ behavior: 'smooth' });
 }
 
-// ট্যাব সুইচিং (সিভি বনাম কভার লেটার)
 function switchTab(tab) {
-    activeTab = tab;
     const cvCanvas = document.getElementById("cvCanvas");
     const letterCanvas = document.getElementById("letterCanvas");
     const cvBtn = document.getElementById("tabCvBtn");
@@ -183,17 +238,16 @@ function switchTab(tab) {
     if(tab === 'cv') {
         cvCanvas.classList.remove("hidden");
         letterCanvas.classList.add("hidden");
-        cvBtn.className = "px-4 py-2 bg-white text-blue-600 font-bold rounded-t-lg border-t-2 border-blue-600 shadow-xs cursor-pointer";
-        letterBtn.className = "px-4 py-2 bg-gray-300 text-gray-700 font-medium rounded-t-lg shadow-xs cursor-pointer";
+        cvBtn.className = "px-4 py-2 bg-white text-blue-600 font-bold rounded-t-lg text-xs shadow-xs cursor-pointer";
+        letterBtn.className = "px-4 py-2 bg-gray-200 text-gray-600 font-medium rounded-t-lg text-xs shadow-xs cursor-pointer";
     } else {
         cvCanvas.classList.add("hidden");
         letterCanvas.classList.remove("hidden");
-        letterBtn.className = "px-4 py-2 bg-white text-blue-600 font-bold rounded-t-lg border-t-2 border-blue-600 shadow-xs cursor-pointer";
-        cvBtn.className = "px-4 py-2 bg-gray-300 text-gray-700 font-medium rounded-t-lg shadow-xs cursor-pointer";
+        letterBtn.className = "px-4 py-2 bg-white text-blue-600 font-bold rounded-t-lg text-xs shadow-xs cursor-pointer";
+        cvBtn.className = "px-4 py-2 bg-gray-200 text-gray-600 font-medium rounded-t-lg text-xs shadow-xs cursor-pointer";
     }
 }
 
-// ইনপুট ভ্যালু গেটার অবজেক্ট
 function getFormData() {
     const data = {};
     masterFormSections.forEach(sec => {
@@ -205,7 +259,7 @@ function getFormData() {
     return data;
 }
 
-// লজিক ইঞ্জিন: লাইভ রেন্ডারিং (সিভি এবং ম্যাচিং কভার লেটার)
+// লজিক ইঞ্জিন: কন্ডিশনাল হাইড ফিল্টারিং ও রেন্ডারিং
 function updateLivePreviews() {
     if (!selectedTemplate) return;
 
@@ -213,155 +267,140 @@ function updateLivePreviews() {
     const cvCanvas = document.getElementById("cvCanvas");
     const letterCanvas = document.getElementById("letterCanvas");
 
-    const pColor = selectedTemplate.primaryColor;
-    const sColor = selectedTemplate.secondaryColor;
+    const pColor = currentCustomColors.primary;
+    const sColor = currentCustomColors.secondary;
 
-    // ১. ছবি ব্লক ম্যানেজমেন্ট (যদি আপলোড করা থাকে তবেই দেখাবে)
     let photoHtml = "";
     if (uploadedPhotoBase64) {
-        photoHtml = `<img src="${uploadedPhotoBase64}" style="width: 100px; height: 110px; border-radius: 4px; border: 2px solid ${pColor}; object-fit: cover; margin-bottom: 10px;">`;
+        photoHtml = `<img src="${uploadedPhotoBase64}" style="width: 85px; height: 95px; border-radius: 4px; border: 2px solid ${pColor}; object-fit: cover; margin-bottom: 5px;">`;
     }
 
-    // ২. ডাইনামিক সেকশন ফিল্টারিং (যদি তথ্য থাকে তবেই ব্লকের এইচটিএমএল রিটার্ন করবে)
-    const createSection = (title, content) => {
-        if (!content || content.replace(/<[^>]*>/g, '').trim() === "") return ""; 
+    const renderBlock = (title, content) => {
+        if (!content || content.trim() === "") return "";
         return `
-            <div style="margin-bottom: 15px;">
-                <h3 style="color: ${pColor}; border-bottom: 1.5px solid ${pColor}; padding-bottom: 3px; font-size: 11pt; font-weight: bold; text-transform: uppercase; margin-bottom: 6px;">${title}</h3>
-                <div style="font-size: 9.5pt; text-align: justify;">${content}</div>
+            <div style="margin-bottom: 12px;">
+                <h3 style="color: ${pColor}; border-bottom: 1.5px solid ${pColor}; padding-bottom: 2px; font-size: 10.5pt; font-weight: bold; margin-bottom: 4px; text-transform: uppercase;">${title}</h3>
+                <div style="font-size: 9pt; color: #334155; line-height: 1.4;">${content}</div>
             </div>
         `;
     };
 
-    // ৩. এক্সপেরিয়েন্স ও এডুকেশন এর ইনপুট ফিল্টারিং
-    let expContent = "";
-    ['exp_1', 'exp_2', 'exp_3'].forEach(id => { if(data[id]) expContent += `<p style="margin: 3px 0;">• ${data[id]}</p>`; });
+    // স্কিল ট্যাগ ফরম্যাটিং
+    let formattedSkills = "";
+    if(data.skills) {
+        formattedSkills = data.skills.split(',').map(s => `<span style="display:inline-block; background:#f1f5f9; padding:2px 6px; margin:2px; border-radius:3px; border-left:2.5px solid ${pColor}; font-size:8.5pt;">${s.trim()}</span>`).join('');
+    }
 
-    let eduContent = "";
-    ['edu_1', 'edu_2', 'edu_3'].forEach(id => { if(data[id]) eduContent += `<p style="margin: 3px 0;">• ${data[id]}</p>`; });
+    // পার্সোনাল ডাটা টেবিল ফিল্টারিং
+    let pTable = "";
+    if(data.fatherName || data.motherName || data.dob || data.bloodGroup) {
+        pTable += `<table style="width:100%; border-collapse:collapse; font-size:9pt;">`;
+        if(data.fatherName) pTable += `<tr><td style="width:30%; font-weight:bold; padding:2px 0;">Father's Name</td><td>: ${data.fatherName}</td></tr>`;
+        if(data.motherName) pTable += `<tr><td style="font-weight:bold; padding:2px 0;">Mother's Name</td><td>: ${data.motherName}</td></tr>`;
+        if(data.dob) pTable += `<tr><td style="font-weight:bold; padding:2px 0;">Date of Birth</td><td>: ${data.dob}</td></tr>`;
+        if(data.bloodGroup) pTable += `<tr><td style="font-weight:bold; padding:2px 0;">Blood Group</td><td>: ${data.bloodGroup}</td></tr>`;
+        pTable += `</table>`;
+    }
 
-    // ৪. পার্সোনাল ইনফরমেশন টেবিল ফিল্টারিং (যা ব্ল্যাঙ্ক তা বাদ যাবে)
-    let pTableRows = "";
-    const pFields = [
-        {k: "Father's Name", v: data.fatherName}, {k: "Mother's Name", v: data.motherName},
-        {k: "Date of Birth", v: data.dob}, {k: "Blood Group", v: data.bloodGroup},
-        {k: "NID / Passport", v: data.nid}, {k: "Physical Status", v: data.heightWeight}
-    ];
-    pFields.forEach(f => {
-        if(f.v) pTableRows += `<tr style="border:none;"><td style="width:35%; font-weight:bold; padding:2px 0; border:none; font-size:9pt;">${f.k}</td><td style="padding:2px 0; border:none; font-size:9pt;">: ${f.v}</td></tr>`;
-    });
-
-    // ৫. সিভি লেআউট রেন্ডারিং (১-কলাম বা ২-কলাম স্টাইল)
-    let cvBody = "";
-    if (selectedTemplate.layoutStyle === 'two-column') {
-        cvBody = `
-            <div style="display: flex; gap: 15px; margin-top: 15px;">
-                <div style="width: 35%; background-color: #f8fafc; padding: 10px; border-right: 1px solid #e2e8f0;">
+    // লেআউট আর্কিটেকচার রেন্ডারিং
+    let mainLayout = "";
+    if(selectedTemplate.layoutStyle === 'two-column') {
+        mainLayout = `
+            <div style="display: flex; gap: 12px; margin-top: 12px;">
+                <div style="width: 35%; background: #f8fafc; padding: 8px; border-radius: 6px;">
                     ${photoHtml}
-                    ${createSection("Contact", `<p style="font-size:8.5pt;">📞 ${data.mobile}<br>✉️ ${data.email}<br>📍 ${data.address}</p>`)}
-                    ${createSection("Skills", data.skills ? `<p style="font-size:8.5pt;">${data.skills}</p>` : "")}
-                    ${createSection("Languages", data.languages ? `<p style="font-size:8.5pt;">${data.languages}</p>` : "")}
+                    ${renderBlock("Contact", `<p style="font-size:8.5pt; line-height:1.3;">📞 ${data.mobile}<br>✉️ ${data.email}<br>📍 ${data.address}</p>`)}
+                    ${renderBlock("Skills", formattedSkills)}
                 </div>
                 <div style="width: 65%;">
-                    ${createSection("Career Objective", data.objective)}
-                    ${createSection("Professional Experience", expContent)}
-                    ${createSection("Education", eduContent)}
-                    ${createSection("Personal Data", pTableRows ? `<table style="width:100%; border:none;">${pTableRows}</table>` : "")}
-                    ${createSection("Hobbies", data.hobbies)}
+                    ${renderBlock("Objective", data.objective)}
+                    ${renderBlock("Experience", data.experience ? data.experience.replace(/\n/g, '<br>') : '')}
+                    ${renderBlock("Education", data.education ? data.education.replace(/\n/g, '<br>') : '')}
+                    ${renderBlock("Personal Info", pTable)}
                 </div>
             </div>
         `;
     } else {
-        cvBody = `
-            <div style="margin-top: 15px;">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
-                    <div>
-                        <p style="margin: 2px 0; font-size: 9.5pt;">📞 <b>Phone:</b> ${data.mobile}</p>
-                        <p style="margin: 2px 0; font-size: 9.5pt;">✉️ <b>Email:</b> ${data.email}</p>
-                        <p style="margin: 2px 0; font-size: 9.5pt;">📍 <b>Address:</b> ${data.address}</p>
+        mainLayout = `
+            <div style="margin-top: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+                    <div style="font-size: 9pt; line-height: 1.3;">
+                        <p>📞 <b>Phone:</b> ${data.mobile}</p>
+                        <p>✉️ <b>Email:</b> ${data.email}</p>
+                        <p>📍 <b>Address:</b> ${data.address}</p>
                     </div>
                     ${photoHtml}
                 </div>
-                ${createSection("Career Objective", data.objective)}
-                ${createSection("Employment History", expContent)}
-                ${createSection("Education Background", eduContent)}
-                ${createSection("Key Skills & Core Competencies", data.skills)}
-                ${createSection("Language Proficiency", data.languages)}
-                ${createSection("Personal Information", pTableRows ? `<table style="width:100%; border:none;">${pTableRows}</table>` : "")}
-                ${createSection("Interests & Hobbies", data.hobbies)}
+                ${renderBlock("Objective", data.objective)}
+                ${renderBlock("Key Skills", formattedSkills)}
+                ${renderBlock("Work Experience", data.experience ? data.experience.replace(/\n/g, '<br>') : '')}
+                ${renderBlock("Education Background", data.education ? data.education.replace(/\n/g, '<br>') : '')}
+                ${renderBlock("Personal Profile", pTable)}
             </div>
         `;
     }
 
-    // মাস্টার সিভি ক্যানভাস রাইটিং
+    // সিভি ভিউ ইন্টারফেস
     cvCanvas.innerHTML = `
-        <div style="font-family: 'Arial', sans-serif; color: #1e293b; padding: 5px;">
-            <div style="border-left: 5px solid ${pColor}; padding-left: 12px; margin-bottom: 15px;">
-                <h1 style="font-size: 22pt; font-weight: bold; color: ${pColor}; margin: 0; text-transform: uppercase; line-height:1;">${data.fullName || "YOUR NAME"}</h1>
-                <p style="font-size: 11pt; color: ${sColor}; font-weight: 600; margin: 4px 0 0 0;">${data.designation || ""}</p>
+        <div style="font-family: 'Arial', sans-serif; color: #1e293b;">
+            <div style="border-left: 5px solid ${pColor}; padding-left: 10px; margin-bottom: 12px;">
+                <h1 style="font-size: 20pt; font-weight: bold; color: ${pColor}; margin: 0; text-transform: uppercase;">${data.fullName || "YOUR NAME"}</h1>
+                <p style="font-size: 10.5pt; color: ${sColor}; font-weight: 600; margin: 2px 0 0 0;">${data.designation || ""}</p>
             </div>
-            ${cvBody}
-            <div style="margin-top: 30px;">
-                <p style="font-size: 8pt; font-style: italic; color: #64748b;">I hereby declare that all the information provided above is authentic and true.</p>
-                <div style="margin-top: 20px; float: right; text-align: center; width: 150px; border-top: 1px solid #94a3b8; padding-top: 4px;">
-                    <span style="font-size: 9pt; font-weight: bold;">${data.fullName}</span>
-                </div>
-                <div style="clear: both;"></div>
-            </div>
+            ${mainLayout}
         </div>
     `;
 
-    // ৬. ম্যাচিং কভার লেটার জেনারেটর (একই কালার স্কিম ও থিমে ডিজাইন মিল রেখে)
+    // কভার লেটার ভিউ ইন্টারফেস
     letterCanvas.innerHTML = `
-        <div style="font-family: 'Arial', sans-serif; color: #1e293b; padding: 5px;">
-            <div style="border-bottom: 2px solid ${pColor}; padding-bottom: 10px; margin-bottom: 25px;">
-                <h1 style="font-size: 22pt; font-weight: bold; color: ${pColor}; margin: 0; text-transform: uppercase;">${data.fullName || "YOUR NAME"}</h1>
-                <p style="font-size: 10pt; color: #64748b; margin: 4px 0 0 0;">📍 ${data.address} | 📞 ${data.mobile}</p>
+        <div style="font-family: 'Arial', sans-serif; color: #1e293b; font-size: 9.5pt;">
+            <div style="border-bottom: 2px solid ${pColor}; padding-bottom: 6px; margin-bottom: 20px;">
+                <h1 style="font-size: 20pt; font-weight: bold; color: ${pColor}; margin: 0; text-transform: uppercase;">${data.fullName || "YOUR NAME"}</h1>
+                <p style="color: #64748b; margin: 2px 0 0 0;">📍 ${data.address} | 📞 ${data.mobile} | ✉️ ${data.email}</p>
             </div>
             
-            <p style="font-size: 10pt; margin-bottom: 20px;"><b>Date:</b> ${new Date().toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'})}</p>
+            <p style="margin-bottom: 15px;"><b>Date:</b> ${new Date().toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'})}</p>
             
-            <p style="font-size: 10pt; line-height: 1.2; margin-bottom: 25px;">
+            <p style="line-height: 1.3; margin-bottom: 20px;">
                 To,<br>
-                <b>The HR Manager / Hiring Authority</b><br>
-                Target Corporation / Destination Office
+                <b>The Hiring Specialist / HR Team</b><br>
+                Respected Organization Office
             </p>
 
-            <p style="font-size: 10pt; font-weight: bold; color: ${pColor}; margin-bottom: 15px;">Subject: Application for the post of ${data.designation || 'Suitable Position'}.</p>
+            <p style="font-weight: bold; color: ${pColor}; margin-bottom: 12px;">Subject: Application for the position of "${data.designation || 'Suitable Post'}".</p>
 
-            <p style="font-size: 10pt; text-align: justify; margin-bottom: 12px;">Dear Hiring Manager,</p>
-            <p style="font-size: 10pt; text-align: justify; margin-bottom: 12px; text-indent: 30px;">
-                I am writing to express my strong interest in the ${data.designation || 'Job'} position. With my background and acquired skills, I am confident that I can be a valuable asset to your team.
+            <p style="margin-bottom: 10px;">Dear Sir/Madam,</p>
+            <p style="text-align: justify; margin-bottom: 10px; text-indent: 20px;">
+                I am writing to express my eager interest in working with your esteemed team. Given my practical background, specialized skills, and solid work ethic, I believe I can dynamically fulfill the responsibilities of this position.
             </p>
-            <p style="font-size: 10pt; text-align: justify; margin-bottom: 12px; text-indent: 30px;">
-                My qualifications align well with the requirements necessary for success in this role. I possess strong capabilities in ${data.skills || 'core corporate skills'} alongside excellent communication skills in ${data.languages || 'required fields'}. I am highly motivated to contribute to your organization's progressive goals.
+            <p style="text-align: justify; margin-bottom: 10px; text-indent: 20px;">
+                I possess valuable proficiency in core domains including: <b>${data.skills || 'General Professional Competencies'}</b>. I have a proven record of handling workloads with utmost patience, dedication, and strict accuracy.
             </p>
-            <p style="font-size: 10pt; text-align: justify; margin-bottom: 25px; text-indent: 30px;">
-                Thank you for considering my application. My enclosed resume provides additional details regarding my academic and background profile. I welcome the opportunity for a personal interview.
+            <p style="text-align: justify; margin-bottom: 20px; text-indent: 20px;">
+                My attached resume outlines my complete personal history and qualifications. I would appreciate the opportunity to discuss my suitability with you in an interview. Thank you for your consideration.
             </p>
 
-            <p style="font-size: 10pt; margin-bottom: 30px;">Sincerely yours,</p>
-            <div style="width: 150px; border-top: 1px solid #94a3b8; padding-top: 4px; text-align: center;">
-                <span style="font-size: 10pt; font-weight: bold; color: ${pColor};">${data.fullName}</span>
+            <p style="margin-bottom: 25px;">Sincerely yours,</p>
+            <div style="width: 140px; border-top: 1px solid #94a3b8; padding-top: 3px; font-weight: bold; color: ${pColor};">
+                ${data.fullName}
             </div>
         </div>
     `;
 }
 
-// পিডিএফ ডাউনলোড ইঞ্জিন
+// ১০০% ওয়ার্কিং ডাইনামিক পিডিএফ মেকার
 function downloadDocument(type) {
-    if (!selectedTemplate) {
-        alert("অনুগ্রহ করে প্রথমে যেকোনো একটি ডিজাইন সিলেক্ট করুন।");
-        return;
-    }
+    if (!selectedTemplate) return;
+    
     const element = type === 'cv' ? document.getElementById('cvCanvas') : document.getElementById('letterCanvas');
     const data = getFormData();
-    
+    const filename = `${type === 'cv' ? 'CV' : 'Cover_Letter'}_${(data.fullName || 'User').replace(/\s+/g, '_')}.pdf`;
+
     const opt = {
-        margin:       [12, 12, 12, 12],
-        filename:     `${type === 'cv' ? 'CV' : 'Cover_Letter'}_${data.fullName.replace(/\s+/g, '_')}.pdf`,
+        margin:       [10, 10, 10, 10],
+        filename:     filename,
         image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true },
+        html2canvas:  { scale: 2, useCORS: true, logging: false },
         jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
     };
 
