@@ -51,7 +51,6 @@ const dummyData = {
     motherName: "Saheda Begum",
     dob: "10-11-2001",
     bloodGroup: "AB+",
-    // 💡 নতুন যুক্ত হওয়া ডাটা:
     nationality: "Bangladeshi",
     religion: "Islam",
     gender: "Female",
@@ -256,7 +255,7 @@ function resetGallery() {
             card.className = "border border-slate-300 rounded-xl p-3 bg-white hover:border-cyan-500 hover:shadow-lg transition flex flex-col justify-between cursor-pointer";
         }
     });
-    document.getElementById("galleryTitle").innerText = "১. নিচে ৫০টি সম্পূর্ণ ভিন্ন ভিজ্যুয়াল ডিজাইন দেওয়া হলো। আপনার পছন্দের ডিজাইনটির উপর ক্লিক করুন:";
+    document.getElementById("galleryTitle").innerText = "১. নিচে ৫০টি সম্পূর্ণ ভিন্ন ডিজাইন দেওয়া হলো। আপনার পছন্দের ডিজাইনটির উপর ক্লিক করুন:";
     document.getElementById("resetGalleryBtn").classList.add("hidden");
     document.getElementById("workspaceSection").classList.add("hidden");
     selectedTemplate = null;
@@ -325,7 +324,6 @@ function updateLivePreviews() {
         photoHtml = `<img src="${uploadedPhotoBase64}" style="width: 100px; height: 115px; border: 2px solid ${pColor}; object-fit: cover; border-radius: 6px;">`;
     }
 
-    // নিখুঁত মার্জিন ও জাস্টিফাইড রেন্ডারিং ব্লক
     const renderBlock = (title, content) => {
         if (!content || content.trim() === "") return "";
         return `
@@ -345,12 +343,11 @@ function updateLivePreviews() {
             .join('');
     }
 
-    // টেক্সট এবং ইমেইলকে কলামের মাঝে ফিক্স রাখার জন্য সিকিউর মেথড
     const wrapValue = (val) => {
         return `<span style="word-break: break-all !important; overflow-wrap: break-word !important; word-wrap: break-word !important; max-width: 100%; display: inline-block;">${val}</span>`;
     };
 
- // updateLivePreviews() ফাংশনের ভেতরের এই অংশটি পরিবর্তন করুন:
+    // 🎯 আপডেট করা ব্যক্তিগত তথ্যের নিখুঁত টেবিল
     let pTable = "";
     if(data.fatherName || data.motherName || data.dob || data.bloodGroup || data.nationality || data.religion || data.gender || data.maritalStatus || data.nid || data.height || data.weight) {
         pTable += `<table style="width:100%; border-collapse:collapse; font-size:10pt; text-align: left; line-height:1.8; table-layout: fixed;">`;
