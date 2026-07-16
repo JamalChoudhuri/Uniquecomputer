@@ -350,13 +350,21 @@ function updateLivePreviews() {
         return `<span style="word-break: break-all !important; overflow-wrap: break-word !important; word-wrap: break-word !important; max-width: 100%; display: inline-block;">${val}</span>`;
     };
 
+ // updateLivePreviews() ফাংশনের ভেতরের এই অংশটি পরিবর্তন করুন:
     let pTable = "";
-    if(data.fatherName || data.motherName || data.dob || data.bloodGroup) {
-        pTable += `<table style="width:100%; border-collapse:collapse; font-size:10pt; text-align: left; line-height:1.9; table-layout: fixed;">`;
-        if(data.fatherName) pTable += `<tr><td style="width:30%; font-weight:bold; color:#475569; vertical-align: top;">Father's Name</td><td style="vertical-align: top;">: ${wrapValue(data.fatherName)}</td></tr>`;
+    if(data.fatherName || data.motherName || data.dob || data.bloodGroup || data.nationality || data.religion || data.gender || data.maritalStatus || data.nid || data.height || data.weight) {
+        pTable += `<table style="width:100%; border-collapse:collapse; font-size:10pt; text-align: left; line-height:1.8; table-layout: fixed;">`;
+        if(data.fatherName) pTable += `<tr><td style="width:35%; font-weight:bold; color:#475569; vertical-align: top;">Father's Name</td><td style="vertical-align: top;">: ${wrapValue(data.fatherName)}</td></tr>`;
         if(data.motherName) pTable += `<tr><td style="font-weight:bold; color:#475569; vertical-align: top;">Mother's Name</td><td style="vertical-align: top;">: ${wrapValue(data.motherName)}</td></tr>`;
         if(data.dob) pTable += `<tr><td style="font-weight:bold; color:#475569; vertical-align: top;">Date of Birth</td><td style="vertical-align: top;">: ${wrapValue(data.dob)}</td></tr>`;
+        if(data.gender) pTable += `<tr><td style="font-weight:bold; color:#475569; vertical-align: top;">Gender</td><td style="vertical-align: top;">: ${wrapValue(data.gender)}</td></tr>`;
+        if(data.maritalStatus) pTable += `<tr><td style="font-weight:bold; color:#475569; vertical-align: top;">Marital Status</td><td style="vertical-align: top;">: ${wrapValue(data.maritalStatus)}</td></tr>`;
         if(data.bloodGroup) pTable += `<tr><td style="font-weight:bold; color:#475569; vertical-align: top;">Blood Group</td><td style="vertical-align: top;">: ${wrapValue(data.bloodGroup)}</td></tr>`;
+        if(data.nationality) pTable += `<tr><td style="font-weight:bold; color:#475569; vertical-align: top;">Nationality</td><td style="vertical-align: top;">: ${wrapValue(data.nationality)}</td></tr>`;
+        if(data.religion) pTable += `<tr><td style="font-weight:bold; color:#475569; vertical-align: top;">Religion</td><td style="vertical-align: top;">: ${wrapValue(data.religion)}</td></tr>`;
+        if(data.nid) pTable += `<tr><td style="font-weight:bold; color:#475569; vertical-align: top;">National ID (NID)</td><td style="vertical-align: top;">: ${wrapValue(data.nid)}</td></tr>`;
+        if(data.height) pTable += `<tr><td style="font-weight:bold; color:#475569; vertical-align: top;">Height</td><td style="vertical-align: top;">: ${wrapValue(data.height)}</td></tr>`;
+        if(data.weight) pTable += `<tr><td style="font-weight:bold; color:#475569; vertical-align: top;">Weight</td><td style="vertical-align: top;">: ${wrapValue(data.weight)}</td></tr>`;
         pTable += `</table>`;
     }
 
