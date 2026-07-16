@@ -51,6 +51,14 @@ const dummyData = {
     motherName: "Saheda Begum",
     dob: "10-11-2001",
     bloodGroup: "AB+",
+    // 💡 নতুন যুক্ত হওয়া ডাটা:
+    nationality: "Bangladeshi",
+    religion: "Islam",
+    gender: "Female",
+    maritalStatus: "Unmarried",
+    nid: "1234567890",
+    height: "5' 2\"",
+    weight: "52 kg",
     coverLetterBody: "I am writing to express my eager interest in joining your esteemed organization. Given my practical background, matching skill sets, and highly disciplined work approach, I believe I can dynamically fulfill the responsibilities of this position.\n\nI possess valuable proficiency in core domains including Microsoft Office, fast data processing, and document management. I have a proven record of handling workflows with dedication and strict accuracy."
 };
 
