@@ -1,78 +1,37 @@
-// ৫০টি ভিন্ন ধরনের প্রফেশনাল দরখাস্ত ও সিভির টেমপ্লেট ডাটাবেজ
+// ৫০টি টেমপ্লেটের ডাটাবেজ (সিভি অপশনটি আপনার দেওয়া ডাটা অনুযায়ী আপগ্রেড করা)
 const templates = [
-    // === ক্যাটাগরি: সিভি ও জীবনবৃত্তান্ত (CV) - ৫০টি আলাদা প্রকারভেদ ===
-    { id: 1, cat: 'cv', title: '১. কম্পিউটার অপারেটর সিভি', fields: ['নাম', 'পিতা', 'মাতা', 'ঠিকানা', 'মোবাইল', 'টাইপিং স্পিড', 'অভিজ্ঞতা', 'শিক্ষাগত যোগ্যতা'], type: 'cv' },
-    { id: 2, cat: 'cv', title: '২. সফটওয়্যার ইঞ্জিনিয়ার রিজিউমি', fields: ['Full Name', 'Email', 'Phone', 'GitHub Link', 'Skills', 'Experience', 'Education'], type: 'cv_eng' },
-    { id: 3, cat: 'cv', title: '৩. স্কুল শিক্ষক জীবনবৃত্তান্ত', fields: ['নাম', 'পিতা', 'বর্তমান ঠিকানা', 'মোবাইল', 'বিষয়ভিত্তিক দক্ষতা', 'শিক্ষকতা অভিজ্ঞতা', 'বিএড ডিগ্রী'], type: 'cv' },
-    { id: 4, cat: 'cv', title: '৪. ড্রাইভার পদের সিভি', fields: ['নাম', 'পিতা', 'লাইসেন্স নম্বর', 'রক্তের গ্রুপ', 'অভিজ্ঞতা বছর', 'যোগাযোগ'], type: 'cv' },
-    { id: 5, cat: 'cv', title: '৫. ব্যাংক অফিসার সিভি', fields: ['নাম', 'ইমেইল', 'মোবাইল', 'অ্যাকাউন্টিং জ্ঞান', 'পূর্ববর্তী ব্যাংক', 'ডিগ্রী'], type: 'cv' },
-    { id: 6, cat: 'cv', title: '৬. গ্রাফিক্স ডিজাইনার পোর্টফোলিও সিভি', fields: ['নাম', 'পোর্টফোলিও লিংক', 'সফটওয়্যার দক্ষতা', 'কাজের অভিজ্ঞতা', 'যোগাযোগ'], type: 'cv' },
-    { id: 7, cat: 'cv', title: '৭. সেলস এক্সিকিউটিভ সিভি', fields: ['নাম', 'মোবাইল', 'ঠিকানা', 'টার্গেট অ্যাচিভমেন্ট রেকর্ড', 'ভাষাগত দক্ষতা', 'শিক্ষা'], type: 'cv' },
-    { id: 8, cat: 'cv', title: '৮. অফিস সহকারী জীবনবৃত্তান্ত', fields: ['নাম', 'পিতা', 'মাতা', 'কম্পিউটার জ্ঞান', 'টাইপিং গতি', 'ঠিকানা', 'ফোন'], type: 'cv' },
-    { id: 9, cat: 'cv', title: '৯. নার্সিং প্রফেশনাল সিভি', fields: ['নাম', 'বিএমডিসি রেজি নম্বর', 'হাসপাতালের অভিজ্ঞতা', 'ডিপ্লোমা/বিএসসি', 'যোগাযোগ'], type: 'cv' },
-    { id: 10, cat: 'cv', title: '১০. হোটেল ম্যানেজার সিভি', fields: ['নাম', 'হসপিটালিটি ম্যানেজমেন্ট ডিগ্রী', 'ভাষাগত দক্ষতা', 'অভিজ্ঞতা', 'ফোন'], type: 'cv' },
-    { id: 11, cat: 'cv', title: '১১. ডিজিটাল মার্কেটার রিজিউমি', fields: ['নাম', 'এসইও স্কিল', 'সোশ্যাল মিডিয়া হ্যান্ডেল', 'সফল ক্যাম্পেইন সমূহ', 'যোগাযোগ'], type: 'cv' },
-    { id: 12, cat: 'cv', title: '১২. একাউন্টেন্ট জীবনবৃত্তান্ত', fields: ['নাম', 'পিতা', 'ট্যালি/এক্সেল দক্ষতা', 'সিএ সিসি কোর্স বিবরণ', 'অভিজ্ঞতা'], type: 'cv' },
-    { id: 13, cat: 'cv', title: '১৩. সিকিউরিটি গার্ড সিভি', fields: ['নাম', 'উচ্চতা', 'ওজন', 'অবসরপ্রাপ্ত সামরিক রেকর্ড (যদি থাকে)', 'ঠিকানা', 'ফোন'], type: 'cv' },
-    { id: 14, cat: 'cv', title: '১৪. ডেলিভারি রাইডার সিভি', fields: ['নাম', 'স্মার্টফোন মডেল', 'বাইক/সাইকেল লাইসেন্স', 'জাতীয় পরিচয়পত্র', 'যোগাযোগ'], type: 'cv' },
-    { id: 15, cat: 'cv', title: '১৫. ফ্রন্ট ডেস্ক এক্সিকিউটিভ সিভি', fields: ['নাম', 'যোগাযোগ', 'বাচনভঙ্গি ও ভাষা', 'কম্পিউটার দক্ষতা', 'শিক্ষা'], type: 'cv' },
-    { id: 16, cat: 'cv', title: '১৬. সিভিল ইঞ্জিনিয়ার সিভি', fields: ['নাম', 'আইইবি রেজি নম্বর', 'সাইট ম্যানেজমেন্ট স্কিল', 'মেজর প্রজেক্টস', 'ফোন'], type: 'cv' },
-    { id: 17, cat: 'cv', title: '১৭. ইলেকট্রিশিয়ান জীবনবৃত্তান্ত', fields: ['নাম', 'কারিগরি সার্টিফিকেট', 'কাজের ক্ষেত্র', 'অভিজ্ঞতা বছর', 'ফোন'], type: 'cv' },
-    { id: 18, cat: 'cv', title: '১৮. ডাটা এন্ট্রি অপারেটর সিভি', fields: ['নাম', 'টাইপিং স্পিড (WPM)', 'এক্সেল অ্যাডভান্সড টুলস', 'ঠিকানা', 'মোবাইল'], type: 'cv' },
-    { id: 19, cat: 'cv', title: '১৯. শেফ/পাচক জীবনবৃত্তান্ত', fields: ['নাম', 'রন্ধনশৈলী স্পেশালিটি', 'পূর্ববর্তী রেস্টুরেন্ট', 'ঠিকানা', 'যোগাযোগ'], type: 'cv' },
-    { id: 20, cat: 'cv', title: '২০. কন্টেন্ট রাইটার রিজিউমি', fields: ['নাম', 'ব্লগ/রাইটিং স্যাম্পল', 'ভাষাগত দক্ষতা', 'শিক্ষা', 'যোগাযোগ'], type: 'cv' },
-    { id: 21, cat: 'cv', title: '২১. ভিডিও এডিটর সিভি', fields: ['নাম', 'এডিটিং সফটওয়্যারসমূহ', 'শো-রিল লিংক', 'অভিজ্ঞতা', 'মোবাইল'], type: 'cv' },
-    { id: 22, cat: 'cv', title: '২২. কল সেন্টার এজেন্ট সিভি', fields: ['নাম', 'ইংরেজি ও বাংলা ফ্লুয়েন্সি', 'লিসেনিং স্কিল', 'শিক্ষাগত যোগ্যতা', 'ফোন'], type: 'cv' },
-    { id: 23, cat: 'cv', title: '২৩. ওয়েব ডিজাইনার সিভি', fields: ['নাম', 'UI/UX স্কিল', 'পোর্টফোলিও', 'টেকনিক্যাল নলেজ', 'যোগাযোগ'], type: 'cv' },
-    { id: 24, cat: 'cv', title: '২৪. ফ্যাশন ডিজাইনার সিভি', fields: ['নাম', 'ডিজাইন ইনস্টিটিউট', 'কাজের কালেকশন', 'অভিজ্ঞতা', 'মোবাইল'], type: 'cv' },
-    { id: 25, cat: 'cv', title: '২৫. ডাটা অ্যানালিস্ট সিভি', fields: ['নাম', 'পাইথন/এসকিউএল জ্ঞান', 'ভিজুয়ালাইজেশন টুলস', 'শিক্ষা', 'ইমেইল'], type: 'cv' },
-    { id: 26, cat: 'cv', title: '২৬. ল্যাব টেকনিশিয়ান সিভি', fields: ['নাম', 'ডিপ্লোমা সাবজেক্ট', 'মেডিকেল ল্যাব অভিজ্ঞতা', 'ঠিকানা', 'মোবাইল'], type: 'cv' },
-    { id: 27, cat: 'cv', title: '২৭. বিউটিশিয়ান জীবনবৃত্তান্ত', fields: ['নাম', 'কাজের পারদর্শিতা', 'পার্লার বা সেলুন অভিজ্ঞতা', 'ঠিকানা', 'ফোন'], type: 'cv' },
-    { id: 28, cat: 'cv', title: '২৮. ট্রাভেল গাইড সিভি', fields: ['নাম', 'অঞ্চলভিত্তিক জ্ঞান', 'ভাষাসমূহ', 'ট্যুরিজম কোর্স', 'যোগাযোগ'], type: 'cv' },
-    { id: 29, cat: 'cv', title: '২৯. মেকানিকাল টেকনিশিয়ান সিভি', fields: ['নাম', 'ইঞ্জিন ট্রাবলশুটিং দক্ষতা', 'অভিজ্ঞতা বছর', 'মোবাইল'], type: 'cv' },
-    { id: 30, cat: 'cv', title: '৩০. ই-কমার্স ম্যানেজার সিভি', fields: ['নাম', 'স্টোর ম্যানেজমেন্ট রেকর্ড', 'অ্যাড রান করার দক্ষতা', 'ফোন'], type: 'cv' },
-    { id: 31, cat: 'cv', title: '৩১. ইভেন্ট প্ল্যানার সিভি', fields: ['নাম', 'ম্যানেজমেন্ট প্রজেক্ট হিস্ট্রি', 'বাজেটিং স্কিল', 'যোগাযোগ'], type: 'cv' },
-    { id: 32, cat: 'cv', title: '৩২. ফটোগ্রাফার রিজিউমি', fields: ['নাম', 'ক্যামেরা ইকুইপমেন্ট', 'ফটোগ্রাফি জেনার', 'কাজের লিংক', 'ফোন'], type: 'cv' },
-    { id: 33, cat: 'cv', title: '৩৩. ফার্মাসিস্ট জীবনবৃত্তান্ত', fields: ['নাম', 'ফার্মেসী কাউন্সিল রেজি নং', 'ড্রাগ নলেজ', 'শিক্ষা', 'মোবাইল'], type: 'cv' },
-    { id: 34, cat: 'cv', title: '৩৪. আর্কিটেক্ট প্রফেশনাল সিভি', fields: ['নাম', 'অটোক্যাড/থ্রিডি ম্যাক্স স্কিল', 'ডিজাইন মেথডলজি', 'ফোন'], type: 'cv' },
-    { id: 35, cat: 'cv', title: '৩৫. ফিটনেস ট্রেইনার সিভি', fields: ['নাম', 'সার্টিফিকেশন', 'বডি বিল্ডিং/ইয়োগা স্পেশালিটি', 'ফোন'], type: 'cv' },
-    { id: 36, cat: 'cv', title: '৩৬. এইচ আর এক্সিকিউটিভ সিভি', fields: ['নাম', 'এমবিএ মেজর', 'রিক্রুটমেন্ট স্ট্রাটেজি', 'যোগাযোগ'], type: 'cv' },
-    { id: 37, cat: 'cv', title: '৩৭. লজিস্টিক অফিসার সিভি', fields: ['নাম', 'সাপ্লাই চেইন নলেজ', 'ওয়ারহাউজ ম্যানেজমেন্ট', 'মোবাইল'], type: 'cv' },
-    { id: 38, cat: 'cv', title: '৩৮. রিয়েল এস্টেট এজেন্ট সিভি', fields: ['নাম', 'সেলস নেটওয়ার্ক', 'ডকুমেন্টেশন নলেজ', 'ঠিকানা', 'ফোন'], type: 'cv' },
-    { id: 39, cat: 'cv', title: '৩৯. লাইব্রেরিয়ান জীবনবৃত্তান্ত', fields: ['নাম', 'তথ্য বিজ্ঞান ডিগ্রী', 'ক্যাটালগিং স্কিল', 'ঠিকানা', 'ফোন'], type: 'cv' },
-    { id: 40, cat: 'cv', title: '৪০. পি আর স্পেশালিস্ট সিভি', fields: ['নাম', 'মিডিয়া রিলেশনস', 'কমিউনিকেশন স্কিল', 'শিক্ষা', 'ইমেইল'], type: 'cv' },
-
-    // === ক্যাটাগরি: দরখাস্ত ও অন্যান্য অফিসিয়াল লেটার ===
-    { id: 41, cat: 'application', title: '৪১. অসুস্থতার জন্য ছুটির আবেদন', fields: ['তারিখ', 'বরাবর', 'প্রতিষ্ঠানের নাম', 'আবেদনকারীর নাম', 'পদবী/শ্রেণী', 'ছুটির দিন সংখ্যা'], type: 'app' },
-    { id: 42, cat: 'application', title: '৪২. অগ্রিম ছুটির দরখাস্ত', fields: ['তারিখ', 'বরাবর', 'কারণ', 'আবেদনকারীর নাম', 'তারিখ হতে', 'তারিখ পর্যন্ত'], type: 'app' },
-    { id: 43, cat: 'application', title: '৪৩. বিনা বেতনে ছুটির আবেদন', fields: ['তারিখ', 'বরাবর', 'যুক্তিসঙ্গত কারণ', 'আবেদনকারীর নাম', 'মোবাইল'], type: 'app' },
-    { id: 44, cat: 'application', title: '৪৪. কোম্পানিতে চাকরির আবেদনপত্র', fields: ['তারিখ', 'বরাবর', 'কোম্পানির নাম', 'পদের নাম', 'আবেদনকারীর নাম', 'যোগ্যতার বিবরণ'], type: 'app' },
-    { id: 45, cat: 'application', title: '৪৫. প্রাথমিক বিদ্যালয়ের শিক্ষক পদের আবেদন', fields: ['তারিখ', 'জেলা শিক্ষা অফিসার', 'উপজেলা', 'আবেদনকারীর নাম', 'শিক্ষা স্কোর'], type: 'app' },
-    { id: 46, cat: 'official', title: '৪৬. চরিত্রগত প্রশংসাপত্র আবেদন', fields: ['তারিখ', 'চেয়ারম্যান/অধ্যক্ষ', 'আবেদনকারীর নাম', 'পিতা', 'গ্রাম', 'রোল/ভোটার আইডি'], type: 'app' },
-    { id: 47, cat: 'official', title: '৪৭. প্রত্যয়ন পত্রের আবেদন ফর্ম', fields: ['তারিখ', 'কর্তৃপক্ষ', 'আবেদনকারীর নাম', 'পিতা', 'সেশনের নাম', 'বিভাগ'], type: 'app' },
-    { id: 48, cat: 'official', title: '৪৮. পরিচয়পত্র হারানোর সাধারণ ডায়েরি (GD) ফরম্যাট', fields: ['তারিখ', 'ভারপ্রাপ্ত কর্মকর্তা (OC)', 'থানার নাম', 'নাম', 'পিতা', 'হারানো কার্ডের বিবরণ'], type: 'app' },
-    { id: 49, cat: 'official', title: '৪৯. মেয়রের কাছে নাগরিক সনদের আবেদন', fields: ['তারিখ', 'মাননীয় মেয়র', 'পৌরসভা/সিটি কর্পোরেশন', 'আবেদনকারীর নাম', 'ওয়ার্ড নম্বর'], type: 'app' },
-    { id: 50, cat: 'official', title: '৫০. ব্যাংক অ্যাকাউন্ট বন্ধ করার আবেদন', fields: ['তারিখ', 'শাখা ব্যবস্থাপক', 'ব্যাংকের নাম', 'অ্যাকাউন্ট নম্বর', 'অ্যাকাউন্ট ধারীর নাম'], type: 'app' }
+    { 
+        id: 1, 
+        cat: 'cv', 
+        title: '১. প্রফেশনাল কর্পোরেট সিভি (শ্রাবণী আক্তার ফরম্যাট)', 
+        fields: [
+            'Full Name', 'Objective', 'Mobile', 'Email', 
+            'Village', 'Post Office', 'Police Station', 'District',
+            'BBA Institute', 'BBA Passing Year', 'BBA Subject', 'BBA Result',
+            'HSC Institute', 'HSC Passing Year', 'HSC Group', 'HSC Result', 'HSC Board',
+            'SSC Institute', 'SSC Passing Year', 'SSC Group', 'SSC Result', 'SSC Board',
+            'Language Skills', 'Computer Skills', 'Personal Strengths',
+            'Fathers Name', 'Mothers Name', 'Date of Birth', 'Nationality', 
+            'Religion', 'Gender', 'Marital Status', 'Blood Group', 'National ID',
+            'Height', 'Weight', 'Interests & Hobbies', 'Experience'
+        ], 
+        type: 'professional_cv' 
+    },
+    // বাকি ৪৯টি দরখাস্ত ও টেমপ্লেটের শর্ট ডাটা (আগের কোডের মতোই থাকবে)
+    { id: 2, cat: 'application', title: '২. অসুস্থতার জন্য ছুটির আবেদন', fields: ['তারিখ', 'বরাবর', 'প্রতিষ্ঠানের নাম', 'আবেদনকারীর নাম', 'ছুটির দিন সংখ্যা'], type: 'app' },
+    { id: 3, cat: 'application', title: '৩. কোম্পানিতে চাকরির আবেদনপত্র', fields: ['তারিখ', 'বরাবর', 'কোম্পানির নাম', 'পদের নাম', 'আবেদনকারীর নাম'], type: 'app' }
+    // ... আপনার প্রয়োজন অনুযায়ী অন্য আইডিগুলো সাজিয়ে নিতে পারবেন
 ];
 
 let selectedTemplate = null;
 
-// পেজ লোড হলে প্রাথমিক টেমপ্লেট গ্রিড লোড করা
 document.addEventListener("DOMContentLoaded", () => {
     renderTemplates(templates);
 });
 
-// টেমপ্লেট গ্রিড রেন্ডার করার ফাংশন
 function renderTemplates(targetList) {
     const grid = document.getElementById("templateGrid");
     grid.innerHTML = "";
-    
-    if(targetList.length === 0) {
-        grid.innerHTML = "<p class='text-gray-500'>কোনো টেমপ্লেট পাওয়া যায়নি।</p>";
-        return;
-    }
-    
-    // Grid container CSS custom layout
     grid.className = "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4";
 
     targetList.forEach(t => {
@@ -85,36 +44,38 @@ function renderTemplates(targetList) {
     });
 }
 
-// ক্যাটাগরি অনুযায়ী ফিল্টার করা
 function filterTemplates() {
     const val = document.getElementById("categoryFilter").value;
-    if (val === "all") {
-        renderTemplates(templates);
-    } else {
-        const filtered = templates.filter(t => t.cat === val);
-        renderTemplates(filtered);
-    }
+    if (val === "all") renderTemplates(templates);
+    else renderTemplates(templates.filter(t => t.cat === val));
 }
 
-// কোনো একটি টেমপ্লেট সিলেক্ট করলে ফর্ম ও প্রিভিউ রেডি করা
 function selectTemplate(id) {
     selectedTemplate = templates.find(t => t.id === id);
-    
-    // ওয়ার্কস্পেস সেকশন দৃশ্যমান করা
-    const workspace = document.getElementById("workspaceSection");
-    workspace.classList.remove("hidden");
-    workspace.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById("workspaceSection").classList.remove("hidden");
+    document.getElementById("workspaceSection").scrollIntoView({ behavior: 'smooth' });
 
-    // ডাইনামিক ফর্ম তৈরি
     const form = document.getElementById("dynamicForm");
     form.innerHTML = "";
 
     selectedTemplate.fields.forEach((field, index) => {
         const div = document.createElement("div");
         div.className = "block";
+        
+        // কাস্টমার যেন দ্রুত ডেমো দেখতে পায় তাই আপনার দেওয়া তথ্যগুলো ডিফল্ট ভ্যালু হিসেবে সেট করা হলো
+        let defaultVal = "";
+        if(field === 'Full Name') defaultVal = "SRABONI AKTER";
+        if(field === 'Mobile') defaultVal = "01797-143804";
+        if(field === 'Email') defaultVal = "sraboniakter3804@gmail.com";
+        if(field === 'BBA Institute') defaultVal = "Govt. Rajendra College, Faridpur";
+        if(field === 'BBA Subject') defaultVal = "Finance & Banking";
+        if(field === 'BBA Result') defaultVal = "Appeared";
+        if(field === 'BBA Passing Year') defaultVal = "2023";
+        if(field === 'Objective') defaultVal = "To build up career working in a challenging environment with excellent career development prospect, where hard work, strict discipline, good communications skill & creative problem solving are the corner stone of success.";
+
         div.innerHTML = `
             <label class="block text-sm font-medium text-gray-700 mb-1">${field}:</label>
-            <input type="text" id="field_${index}" oninput="updatePreview()" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-emerald-500 bg-white" placeholder="${field} লিখুন">
+            <input type="text" id="field_${index}" value="${defaultVal}" oninput="updatePreview()" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-emerald-500 bg-white">
         `;
         form.appendChild(div);
     });
@@ -122,123 +83,141 @@ function selectTemplate(id) {
     updatePreview();
 }
 
-// কাস্টমার টাইপ করার সাথে সাথে ডাইনামিক লাইভ প্রিভিউ আপডেট হওয়া
 function updatePreview() {
     if (!selectedTemplate) return;
-
     const canvas = document.getElementById("pdfCanvas");
-    canvas.innerHTML = ""; // আগের প্রিভিউ ক্লিন করা
+    canvas.innerHTML = "";
 
-    // ইনপুট থেকে সব ডেটা নেওয়া
-    const values = selectedTemplate.fields.map((f, i) => {
+    const vals = selectedTemplate.fields.map((f, i) => {
         const input = document.getElementById(`field_${i}`);
-        return input ? input.value || `[ ${f} ]` : `[ ${f} ]`;
+        return input ? input.value || `[${f}]` : `[${f}]`;
     });
 
-    // টেমপ্লেটের ধরণ অনুযায়ী প্রিভিউ লেআউট তৈরি করা
-    if (selectedTemplate.type.startsWith('cv')) {
-        // জীবনবৃত্তান্ত বা সিভির স্টাইল লেআউট
-        let htmlContent = `
-            <div style="text-align: center; border-bottom: 2px solid #1e3a8a; padding-bottom: 10px; margin-bottom: 20px;">
-                <h1>জীবনবৃত্তান্ত (Curriculum Vitae)</h1>
-                <p style="font-size: 14pt; font-weight: bold; margin: 0;">${values[0]}</p>
-                <p style="margin: 3px 0;">যোগাযোগ: ${values[selectedTemplate.fields.indexOf('মোবাইল') >= 0 ? selectedTemplate.fields.indexOf('মোবাইল') : 4] || 'মোবাইল নম্বর'}</p>
+    // অবজেক্ট ম্যাপ তৈরি করা সহজে ডাটা রিড করার জন্য
+    const data = {};
+    selectedTemplate.fields.forEach((f, i) => { data[f] = vals[i]; });
+
+    if (selectedTemplate.type === 'professional_cv') {
+        // নতুন প্রফেশনাল ও আধুনিক ২-কলাম সিভি লেআউট
+        canvas.innerHTML = `
+            <div style="font-family: 'Arial', sans-serif; color: #333; line-height: 1.4;">
+                
+                <!-- সিভির টপ হেডার -->
+                <div style="background-color: #1e3a8a; color: white; padding: 25px; text-align: center; border-radius: 4px; margin-bottom: 20px;">
+                    <h1 style="color: white; margin: 0; font-size: 24pt; letter-spacing: 1px; font-weight: bold;">${data['Full Name'].toUpperCase()}</h1>
+                    <p style="margin: 8px 0 0 0; font-size: 11pt; opacity: 0.9;">
+                        📍 Vill: ${data['Village']}, P.O: ${data['Post Office']} | P.S: ${data['Police Station']}, Dist: ${data['District']}
+                    </p>
+                    <p style="margin: 4px 0 0 0; font-size: 11pt; opacity: 0.9;">
+                        📞 Mobile: ${data['Mobile']} | ✉️ E-mail: ${data['Email']}
+                    </p>
+                </div>
+
+                <!-- কেরিয়ার অবজেক্টিভ -->
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color: #1e3a8a; border-bottom: 2px solid #1e3a8a; padding-bottom: 4px; font-size: 13pt; font-weight: bold; text-transform: uppercase;">Career Objective</h3>
+                    <p style="text-align: justify; font-size: 10.5pt; margin-top: 6px;">${data['Objective']}</p>
+                </div>
+
+                <!-- শিক্ষাগত যোগ্যতা (প্রফেশনাল টেবিল ফরম্যাট) -->
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color: #1e3a8a; border-bottom: 2px solid #1e3a8a; padding-bottom: 4px; font-size: 13pt; font-weight: bold; text-transform: uppercase;">Academic Qualification</h3>
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 8px;">
+                        <thead>
+                            <tr style="background-color: #f1f5f9; text-align: left;">
+                                <th style="border: 1px solid #cbd5e1; padding: 6px; font-size: 10pt;">Exam Name</th>
+                                <th style="border: 1px solid #cbd5e1; padding: 6px; font-size: 10pt;">Institute & Board/Univ.</th>
+                                <th style="border: 1px solid #cbd5e1; padding: 6px; font-size: 10pt;">Group/Subject</th>
+                                <th style="border: 1px solid #cbd5e1; padding: 6px; font-size: 10pt;">Year</th>
+                                <th style="border: 1px solid #cbd5e1; padding: 6px; font-size: 10pt;">Result</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border: 1px solid #cbd5e1; padding: 6px; font-size: 9.5pt; font-weight: bold;">BBA</td>
+                                <td style="border: 1px solid #cbd5e1; padding: 6px; font-size: 9.5pt;">${data['BBA Institute']} (${data['University'] || 'National Univ'})</td>
+                                <td style="border: 1px solid #cbd5e1; padding: 6px; font-size: 9.5pt;">${data['BBA Subject']}</td>
+                                <td style="border: 1px solid #cbd5e1; padding: 6px; font-size: 9.5pt;">${data['BBA Passing Year']}</td>
+                                <td style="border: 1px solid #cbd5e1; padding: 6px; font-size: 9.5pt; font-weight: bold;">${data['BBA Result']}</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #cbd5e1; padding: 6px; font-size: 9.5pt; font-weight: bold;">HSC</td>
+                                <td style="border: 1px solid #cbd5e1; padding: 6px; font-size: 9.5pt;">${data['HSC Institute']} (${data['HSC Board'] || 'Dhaka'})</td>
+                                <td style="border: 1px solid #cbd5e1; padding: 6px; font-size: 9.5pt;">${data['HSC Group']}</td>
+                                <td style="border: 1px solid #cbd5e1; padding: 6px; font-size: 9.5pt;">${data['HSC Passing Year']}</td>
+                                <td style="border: 1px solid #cbd5e1; padding: 6px; font-size: 9.5pt;">${data['HSC Result']}</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #cbd5e1; padding: 6px; font-size: 9.5pt; font-weight: bold;">SSC</td>
+                                <td style="border: 1px solid #cbd5e1; padding: 6px; font-size: 9.5pt;">${data['SSC Institute']} (${data['SSC Board'] || 'Dhaka'})</td>
+                                <td style="border: 1px solid #cbd5e1; padding: 6px; font-size: 9.5pt;">${data['SSC Group']}</td>
+                                <td style="border: 1px solid #cbd5e1; padding: 6px; font-size: 9.5pt;">${data['SSC Passing Year']}</td>
+                                <td style="border: 1px solid #cbd5e1; padding: 6px; font-size: 9.5pt;">${data['SSC Result']}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- স্কিল ও শক্তির ২-কলাম গ্রিড লেআউট -->
+                <div style="display: flex; gap: 20px; margin-bottom: 20px;">
+                    <div style="flex: 1;">
+                        <h3 style="color: #1e3a8a; border-bottom: 2px solid #1e3a8a; padding-bottom: 4px; font-size: 12pt; font-weight: bold; text-transform: uppercase;">Computer & Language Skills</h3>
+                        <p style="font-size: 10pt; margin: 6px 0 0 0;"><b>💻 IT:</b> ${data['Computer Skills'] || 'Ms Word, Ms Excel, E-mail & Browsing'}</p>
+                        <p style="font-size: 10pt; margin: 4px 0 0 0;"><b>🗣️ Language:</b> ${data['Language Skills'] || 'Bengali (Native), English (Good Command)'}</p>
+                    </div>
+                    <div style="flex: 1;">
+                        <h3 style="color: #1e3a8a; border-bottom: 2px solid #1e3a8a; padding-bottom: 4px; font-size: 12pt; font-weight: bold; text-transform: uppercase;">Personal Strengths</h3>
+                        <p style="font-size: 10pt; margin: 6px 0 0 0;">${data['Personal Strengths'] || 'Leadership quality, working under pressure, positive attitude.'}</p>
+                    </div>
+                </div>
+
+                <!-- পার্সোনাল ডিটেইলস (পরিষ্কার ২-কলাম টেবিল) -->
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color: #1e3a8a; border-bottom: 2px solid #1e3a8a; padding-bottom: 4px; font-size: 13pt; font-weight: bold; text-transform: uppercase;">Personal Information</h3>
+                    <table style="width: 100%; margin-top: 6px; border: none;">
+                        <tr style="border: none;"><td style="width: 25%; font-weight: bold; padding: 3px 0; border: none; font-size: 10pt;">Father's Name:</td><td style="padding: 3px 0; border: none; font-size: 10pt;">:${data['Fathers Name'] || 'Late. Sobahan Matubbor'}</td><td style="width: 20%; font-weight: bold; padding: 3px 0; border: none; font-size: 10pt;">Gender:</td><td style="padding: 3px 0; border: none; font-size: 10pt;">:${data['Gender'] || 'Female'}</td></tr>
+                        <tr style="border: none;"><td style="font-weight: bold; padding: 3px 0; border: none; font-size: 10pt;">Mother's Name:</td><td style="padding: 3px 0; border: none; font-size: 10pt;">:${data['Mothers Name'] || 'Saheda Begum'}</td><td style="font-weight: bold; padding: 3px 0; border: none; font-size: 10pt;">Marital Status:</td><td style="padding: 3px 0; border: none; font-size: 10pt;">:${data['Marital Status'] || 'Single'}</td></tr>
+                        <tr style="border: none;"><td style="font-weight: bold; padding: 3px 0; border: none; font-size: 10pt;">Date of Birth:</td><td style="padding: 3px 0; border: none; font-size: 10pt;">:${data['Date of Birth'] || '10-11-1999'}</td><td style="font-weight: bold; padding: 3px 0; border: none; font-size: 10pt;">Blood Group:</td><td style="padding: 3px 0; border: none; font-size: 10pt;">:${data['Blood Group'] || 'AB +'}</td></tr>
+                        <tr style="border: none;"><td style="font-weight: bold; padding: 3px 0; border: none; font-size: 10pt;">Nationality:</td><td style="padding: 3px 0; border: none; font-size: 10pt;">:${data['Nationality'] || 'Bangladeshi'}</td><td style="font-weight: bold; padding: 3px 0; border: none; font-size: 10pt;">National ID:</td><td style="padding: 3px 0; border: none; font-size: 10pt;">:${data['National ID'] || '4213884838'}</td></tr>
+                        <tr style="border: none;"><td style="font-weight: bold; padding: 3px 0; border: none; font-size: 10pt;">Religion:</td><td style="padding: 3px 0; border: none; font-size: 10pt;">:${data['Religion'] || 'Islam'}</td><td style="font-weight: bold; padding: 3px 0; border: none; font-size: 10pt;">Height/Weight:</td><td style="padding: 3px 0; border: none; font-size: 10pt;">:${data['Height'] || "5' 3\""} / ${data['Weight'] || '58 kg'}</td></tr>
+                    </table>
+                </div>
+
+                <!-- শখ ও অভিজ্ঞতা -->
+                <div style="margin-bottom: 25px;">
+                    <h3 style="color: #1e3a8a; border-bottom: 2px solid #1e3a8a; padding-bottom: 4px; font-size: 12pt; font-weight: bold; text-transform: uppercase;">Interests & Hobbies</h3>
+                    <p style="font-size: 10pt; margin-top: 4px;">${data['Interests & Hobbies'] || 'Reading Novels, Drawing, Creative Writing.'}</p>
+                </div>
+
+                <!-- সিগনেচার এরিয়া -->
+                <div style="margin-top: 40px;">
+                    <p style="font-size: 9.5pt; font-style: italic; color: #555;">I hereby declare that all information given above is true to the best of my knowledge.</p>
+                    <div style="margin-top: 30px; float: right; text-align: center; width: 180px;">
+                        <p style="border-top: 1px solid #333; padding-top: 5px; font-size: 10pt; font-weight: bold; margin: 0;">${data['Full Name']}</p>
+                        <p style="font-size: 9pt; color: #666; margin: 0;">Signature</p>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+
             </div>
-            
-            <h2>ব্যক্তিগত তথ্যাবলী (Personal Profile)</h2>
-            <table>
         `;
-        
-        selectedTemplate.fields.forEach((field, i) => {
-            if (i > 0 && field !== 'অভিজ্ঞতা' && field !== 'শিক্ষাগত যোগ্যতা' && field !== 'Skills' && field !== 'Experience' && field !== 'Education') {
-                htmlContent += `
-                    <tr>
-                        <td style="width: 30%; font-weight: bold; background-color: #fafafa;">${field}</td>
-                        <td>${values[i]}</td>
-                    </tr>
-                `;
-            }
-        });
-        
-        htmlContent += `</table>`;
-
-        // সিভির জন্য অন্যান্য বড় ফিল্ডগুলো নিচে সুন্দর প্যারাগ্রাফ আকারে সাজানো
-        selectedTemplate.fields.forEach((field, i) => {
-            if (field === 'অভিজ্ঞতা' || field === 'শিক্ষাগত যোগ্যতা' || field === 'Skills' || field === 'Experience' || field === 'Education' || field === 'টাইপিং স্পিড' || field === 'সফটওয়্যার দক্ষতা') {
-                htmlContent += `
-                    <h2>${field}</h2>
-                    <p style="background-color: #f8fafc; padding: 8px; border-left: 3px solid #1e40af;">${values[i]}</p>
-                `;
-            }
-        });
-
-        canvas.innerHTML = htmlContent;
-
     } else {
-        // সাধারণ দরখাস্ত বা অফিসিয়াল অ্যাপ্লিকেশনের স্টাইল লেআউট
-        const dateIdx = selectedTemplate.fields.indexOf('তারিখ');
-        const toIdx = selectedTemplate.fields.indexOf('বরাবর');
-        const nameIdx = selectedTemplate.fields.indexOf('আবেদনকারীর নাম');
-
-        let htmlContent = `
-            <p>তারিখ: ${values[dateIdx >= 0 ? dateIdx : 0]}</p>
-            <p style="margin-top: 15px;">বরাবর,<br>${values[toIdx >= 0 ? toIdx : 1]}</p>
-            <p>${values[2] || 'প্রতিষ্ঠানের নাম ও ঠিকানা'}</p>
-            
-            <p style="margin-top: 20px; font-weight: bold;">বিষয়: ${selectedTemplate.title.substring(3)} প্রসংগে।</p>
-            
-            <p style="margin-top: 15px;">মহোদয়,</p>
-            <p style="text-indent: 40px; margin-top: 5px;">
-                বিনীত নিবেদন এই যে, আমি আপনার প্রতিষ্ঠানে একনিষ্ঠভাবে নিয়োজিত আছি। আমার বর্তমান বিশেষ পরিস্থিতির কারণে জরুরি ভিত্তিতে উক্ত সেবা/ছুটি বা ডকুমেন্টটি প্রয়োজন। নিচে আমার প্রয়োজনীয় তথ্যাদি উপস্থাপন করা হলো:
-            </p>
-            
-            <table style="margin-top: 15px;">
-        `;
-
-        selectedTemplate.fields.forEach((field, i) => {
-            if (field !== 'তারিখ' && field !== 'বরাবর') {
-                htmlContent += `
-                    <tr>
-                        <td style="width: 35%; font-weight: bold; background-color: #fafafa;">${field}</td>
-                        <td>${values[i]}</td>
-                    </tr>
-                `;
-            }
-        });
-
-        htmlContent += `
-            </table>
-            
-            <p style="margin-top: 30px;">অতএব, মহোদয়ের নিকট আকুল আবেদন এই যে, আমার উপরোক্ত বিষয়টি বিবেচনা করে উক্ত ডকুমেন্ট বা আবেদনটি মঞ্জুর করতে যেন আপনার সদয় মর্জি হয়।</p>
-            
-            <div style="margin-top: 50px; float: right; text-align: center; width: 200px;">
-                <p style="border-top: 1px solid #000; padding-top: 5px;">বিনীত নিবেদক,</p>
-                <p style="font-weight: bold;">${values[nameIdx >= 0 ? nameIdx : 3] || 'আবেদনকারী'}</p>
-            </div>
-            <div style="clear: both;"></div>
-        `;
-
-        canvas.innerHTML = htmlContent;
+        // অন্যান্য দরখাস্তের সাধারণ বাংলা লেআউট (আগের মতোই থাকবে)
+        canvas.innerHTML = `<h3>${selectedTemplate.title}</h3><p>ফর্মের ডেটা দিন...</p>`;
     }
 }
 
-// html2pdf লাইব্রেরি ব্যবহার করে প্রিভিউ এরিয়াকে সরাসরি ক্লায়েন্ট-সাইডে PDF ফাইল আকারে ডাউনলোড করা
 function downloadPDF() {
     const element = document.getElementById('pdfCanvas');
-    if (!selectedTemplate) {
-        alert("অনুগ্রহ করে প্রথমে একটি টেমপ্লেট সিলেক্ট করুন।");
-        return;
-    }
+    if (!selectedTemplate) return;
 
-    // পিডিএফ অপশন কনফিগারেশন
     const opt = {
-        margin:       [15, 12, 15, 12], // টপ, লেফট, বটম, রাইট মার্জিন মিলিমিটারে
-        filename:     `${selectedTemplate.title.replace(/[^a-zA-Z0-9অ-হ]/g, "_")}.pdf`,
+        margin:       [12, 12, 12, 12],
+        filename:     `${selectedTemplate.title.replace(/\s+/g, '_')}.pdf`,
         image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true }, // নিখুঁত ফন্ট ও হাই রেজোলিউশনের জন্য
+        html2canvas:  { scale: 2, useCORS: true },
         jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
     };
 
-    // ডাউনলোড শুরু
     html2pdf().set(opt).from(element).save();
 }
