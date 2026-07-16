@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSC Certificate Dynamic Overlay Generator</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for Authentic Look -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Times+New+Roman&family=Great+Vibes&display=swap">
+    <!-- html2pdf.js for High Quality PDF Download -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
+    <style>
+        /* অরিজিনাল সনদের লেখার ফন্ট স্টাইল গাইডলাইন অনুসরণ */
+        .cert-text {
+            font-family: 'Times New Roman', Times, serif;
+            color: #111827; /* Deep Elegant Black */
+            font-style: italic;
+            font-weight: 600;
+        }
+        .cert-number {
+            font-family: 'Times New Roman', Times, serif;
+            color: #1f2937;
+            font-weight: bold;
+            letter-spacing: 0.05em;
+        }
+        /* প্রিন্ট সাইজ প্রিসিশন লজিক (A4 Landscape Standard) */
+        #certificateContainer {
+            width: 1123px;
+            height: 794px;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 min-h-screen text-slate-100 p-6 flex flex-col items-center">
+
+    <header class="mb-6 text-center">
+        <h1 class="text-2xl font-bold text-amber-400">HSC Certificate Dynamic Data Generator & PDF Exporter</h1>
+        <p class="text-xs text-slate-400 mt-1">লাল চিহ্নিত নির্দিষ্ট ফাঁকা স্থানে ডেটা ইনপুট দিন এবং হুবহু ম্যাচিং ফন্টে PDF প্রিন্ট করুন</p>
+    </header>
+
+    <div class="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        
+        <!-- বাম পাশে: কন্ট্রোল প্যানেল / ইনপুট ফর্ম -->
+        <div class="lg:col-span-4 bg-slate-800 p-5 rounded-xl border border-slate-700 space-y-4 shadow-xl">
+            <h2 class="text-base font-bold text-amber-400 border-b border-slate-700 pb-2">১. ডাটা এন্ট্রি প্যানেল</h2>
+            
+            <div class="space-y-3 text-sm">
+                <!-- ইমেজ আপলোডার ব্যাকগ্রাউন্ডের জন্য -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-1">সার্টিফিকেট ব্যাকগ্রাউন্ড টেমপ্লেট (.jpg)</label>
+                    <input type="file" id="bgUploader" accept="image/*" class="w-full text-xs bg-slate-700 p-1.5 rounded" onchange="loadBackground(event)">
+                </div>
+                
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="block text-xs text-slate-400">Serial No. DBHC</label>
+                        <input type="text" id="inSerial" value="8119907" class="w-full bg-slate-700 px-2 py-1.5 rounded text-white focus:outline-none focus:ring-1 focus:ring-amber-500" oninput="updateCertificate()">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-400">Registration No.</label>
+                        <input type="text" id="inRegNo" value="1310393961 / 2016" class="w-full bg-slate-700 px-2 py-1.5 rounded text-white focus:outline-none focus:ring-1 focus:ring-amber-500" oninput="updateCertificate()">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs text-slate-400">DBCHC Number</label>
+                    <input type="text" id="inDbchc" value="18224107" class="w-full bg-slate-700 px-2 py-1.5 rounded text-white focus:outline-none focus:ring-1 focus:ring-amber-500" oninput="updateCertificate()">
+                </div>
+
+                <div>
+                    <label class="block text-xs text-slate-400">Student Name (This is to Certify that)</label>
+                    <input type="text" id="inName" value="Jebunnesa Jerin" class="w-full bg-slate-700 px-2 py-1.5 rounded text-white focus:outline-none focus:ring-1 focus:ring-amber-500" oninput="updateCertificate()">
+                </div>
+
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="block text-xs text-slate-400">Father's Name (Son/Daughter of)</label>
+                        <input type="text" id="inFather" value="Md. Jamal Khan" class="w-full bg-slate-700 px-2 py-1.5 rounded text-white focus:outline-none focus:ring-1 focus:ring-amber-500" oninput="updateCertificate()">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-400">Mother's Name (and)</label>
+                        <input type="text" id="inMother" value="Munni Khanam" class="w-full bg-slate-700 px-2 py-1.5 rounded text-white focus:outline-none focus:ring-1 focus:ring-amber-500" oninput="updateCertificate()">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs text-slate-400">College Name (of)</label>
+                    <input type="text" id="inCollege" value="Govt. Sarda Sundari Mohila College" class="w-full bg-slate-700 px-2 py-1.5 rounded text-white focus:outline-none focus:ring-1 focus:ring-amber-500" oninput="updateCertificate()">
+                </div>
+
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="block text-xs text-slate-400">Bearing Roll No.</label>
+                        <input type="text" id="inRoll" value="167932" class="w-full bg-slate-700 px-2 py-1.5 rounded text-white focus:outline-none focus:ring-1 focus:ring-amber-500" oninput="updateCertificate()">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-400">Center Name (No.)</label>
+                        <input type="text" id="inCenter" value="Faridpur" class="w-full bg-slate-700 px-2 py-1.5 rounded text-white focus:outline-none focus:ring-1 focus:ring-amber-500" oninput="updateCertificate()">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="block text-xs text-slate-400">Group Name</label>
+                        <input type="text" id="inGroup" value="Science" class="w-full bg-slate-700 px-2 py-1.5 rounded text-white focus:outline-none focus:ring-1 focus:ring-amber-500" oninput="updateCertificate()">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-400">G.P.A Secured</label>
+                        <input type="text" id="inGpa" value="2.75" class="w-full bg-slate-700 px-2 py-1.5 rounded text-white focus:outline-none focus:ring-1 focus:ring-amber-500" oninput="updateCertificate()">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs text-slate-400">Date of Publication of Results</label>
+                    <input type="text" id="inPubDate" value="19 July, 2018." class="w-full bg-slate-700 px-2 py-1.5 rounded text-white focus:outline-none focus:ring-1 focus:ring-amber-500" oninput="updateCertificate()">
+                </div>
+            </div>
+
+            <button onclick="downloadPDF()" class="w-full mt-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 px-4 rounded transition tracking-wide flex items-center justify-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                হাই-কোয়ালিটি PDF ডাউনলোড
+            </button>
+        </div>
+
+        <!-- ডান পাশে: লাইভ সার্টিফিকেট প্রিভিউ উইন্ডো -->
+        <div class="lg:col-span-8 flex flex-col items-center overflow-x-auto bg-slate-800 p-4 rounded-xl border border-slate-700 shadow-xl">
+            <h2 class="text-sm font-bold text-slate-400 mb-2 self-start">২. লাইভ জেনারেটেড প্রিভিউ (A4 প্রপোর্পশন)</h2>
+            
+            <!-- ওয়ার্কস্পেস কন্টেইনার -->
+            <div class="shadow-2xl origin-top scale-[0.65] xl:scale-[0.72] transform transition-transform duration-200 bg-white">
+                <div id="certificateContainer" style="background-image: url('blank-certificate.jpg');">
+                    
+                    <!-- নিখুঁত পজিশনড টেক্সট লেয়ার সমুহ (হুবহু ৩ নম্বর ছবির পজিশন অনুযায়ী) -->
+                    <div id="txtSerial" class="absolute left-[215px] top-[204px] text-[18px] cert-number">8119907</div>
+                    <div id="txtDbchc" class="absolute left-[248px] top-[248px] text-[18px] cert-number">18224107</div>
+                    <div id="txtRegNo" class="absolute left-[780px] top-[204px] text-[18px] cert-number">1310393961 / 2016</div>
+                    
+                    <!-- মূল ডেসক্রিপশন টেক্সট বক্সসমূহ -->
+                    <div id="txtName" class="absolute left-[340px] top-[403px] text-[22px] cert-text">Jebunnesa Jerin</div>
+                    <div id="txtFather" class="absolute left-[450px] top-[448px] text-[22px] cert-text">Md. Jamal Khan</div>
+                    <div id="txtMother" class="absolute left-[145px] top-[494px] text-[22px] cert-text">Munni Khanam</div>
+                    <div id="txtCollege" class="absolute left-[565px] top-[538px] text-[22px] cert-text">Govt. Sarda Sundari Mohila College</div>
+                    
+                    <div id="txtCenter" class="absolute left-[645px] top-[604px] text-[22px] cert-text">Faridpur</div>
+                    <div id="txtRoll" class="absolute left-[215px] top-[604px] text-[22px] cert-text">167932</div>
+                    
+                    <div id="txtGroup" class="absolute left-[710px] top-[648px] text-[22px] cert-text">Science</div>
+                    <div id="txtGpa" class="absolute left-[148px] top-[695px] text-[21px] font-bold text-slate-800" style="font-family:'Times New Roman';">2.75</div>
+                    
+                    <div id="txtPubDate" class="absolute left-[310px] top-[714px] text-[17px] cert-text">19 July, 2018.</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- লজিক অপারেশনাল স্ক্রিপ্ট -->
+    <script>
+        // ইনপুট থেকে ডাইনামিক লাইভ টেক্সট চেঞ্জার
+        function updateCertificate() {
+            document.getElementById('txtSerial').innerText = document.getElementById('inSerial').value;
+            document.getElementById('txtRegNo').innerText = document.getElementById('inRegNo').value;
+            document.getElementById('txtDbchc').innerText = document.getElementById('inDbchc').value;
+            document.getElementById('txtName').innerText = document.getElementById('inName').value;
+            document.getElementById('txtFather').innerText = document.getElementById('inFather').value;
+            document.getElementById('txtMother').innerText = document.getElementById('inMother').value;
+            document.getElementById('txtCollege').innerText = document.getElementById('inCollege').value;
+            document.getElementById('txtRoll').innerText = document.getElementById('inRoll').value;
+            document.getElementById('txtCenter').innerText = document.getElementById('inCenter').value;
+            document.getElementById('txtGroup').innerText = document.getElementById('inGroup').value;
+            document.getElementById('txtGpa').innerText = document.getElementById('inGpa').value;
+            document.getElementById('txtPubDate').innerText = document.getElementById('inPubDate').value;
+        }
+
+        // ফাঁকা সার্টিফিকেট ইমেজ ফাইল লোডার
+        function loadBackground(event) {
+            const container = document.getElementById('certificateContainer');
+            if(event.target.files[0]) {
+                const url = URL.createObjectURL(event.target.files[0]);
+                container.style.backgroundImage = `url('${url}')`;
+            }
+        }
+
+        // ১০০% নিখুঁত হাই-রেজোলিউশন PDF এক্সপোর্ট ইঞ্জিন
+        function downloadPDF() {
+            const element = document.getElementById('certificateContainer');
+            const studentName = document.getElementById('inName').value.replace(/\s+/g, '_');
+            
+            const opt = {
+                margin:       0,
+                filename:     `HSC_Certificate_${studentName}.pdf`,
+                image:        { type: 'jpeg', quality: 1.0 },
+                html2canvas:  { scale: 2, useCORS: true, logging: false },
+                jsPDF:        { unit: 'px', format: [1123, 794], orientation: 'landscape' }
+            };
+
+            // পিডিএফ জেনারেট রান করা
+            html2pdf().set(opt).from(element).save();
+        }
+
+        // ইনিশিয়াল ডাটা রান
+        updateCertificate();
+    </script>
+</body>
+</html>
