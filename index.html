@@ -3,56 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>কম্পিউটার দোকান - অনলাইন ডকুমেন্ট ও সিভি জেনারেটর</title>
+    <title>স্মার্ট সিভি ও কভার লেটার বিল্ডার - কম্পিউটার দোকান</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- html2pdf.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-100 font-sans antialiased text-gray-800">
+<body class="bg-gray-50 text-gray-800 font-sans antialiased">
 
-    <header class="bg-blue-600 text-white shadow-md p-6 text-center">
-        <h1 class="text-3xl font-bold">অনলাইন ডকুমেন্ট ও সিভি জেনারেটর সার্ভিস</h1>
-        <p class="text-sm mt-2">আপনার তথ্য দিন এবং এক ক্লিকেই প্রফেশনাল PDF ডাউনলোড করুন</p>
+    <header class="bg-slate-900 text-white p-6 shadow-md text-center">
+        <h1 class="text-3xl font-extrabold tracking-tight text-blue-400">প্রিমিয়াম সিভি ও কভার লেটার জেনারেটর</h1>
+        <p class="text-sm mt-1 text-gray-400">৫০টি আধুনিক ডিজাইন | সয়ংক্রিয় কাস্টমাইজেশন | ইনস্ট্যান্ট পিডিএফ ডাউনলোড</p>
     </header>
 
     <main class="max-w-7xl mx-auto p-4 md:p-6 block">
         
-        <section class="bg-white p-6 rounded-lg shadow-md mb-8">
-            <h2 class="text-xl font-bold text-blue-600 mb-4 border-l-4 border-blue-600 pl-2">১. টেমপ্লেট নির্বাচন করুন (৫০টি ভিন্ন ফরম্যাট)</h2>
-            <div class="block mb-4">
-                <label class="font-semibold block mb-2 text-gray-700">ক্যাটাগরি ফিল্টার:</label>
-                <select id="categoryFilter" onchange="filterTemplates()" class="w-full md:w-64 p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
-                    <option value="all">সব টেমপ্লেট</option>
-                    <option value="cv">সিভি ও জীবনবৃত্তান্ত (CV & Resume)</option>
-                    <option value="application">চাকরি ও ছুটির দরখাস্ত</option>
-                    <option value="official">অফিসিয়াল ও অন্যান্য পত্র</option>
-                </select>
-            </div>
-            
-            <div id="templateGrid" class="block"></div>
+        <!-- ১. টেমপ্লেট গ্যালারি -->
+        <section class="bg-white p-6 rounded-xl shadow-xs mb-8 border border-gray-100">
+            <h2 class="text-xl font-bold text-slate-900 mb-4 border-l-4 border-blue-500 pl-2">১. আপনার পছন্দের ডিজাইন নির্বাচন করুন (৫০টি আপডেট থিম)</h2>
+            <div id="templateGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
         </section>
 
+        <!-- ২. এডিটিং ওয়ার্কস্পেস (সিলেকশনের পর ওপেন হবে) -->
         <section id="workspaceSection" class="hidden">
-            <div class="block md:table w-full border-collapse">
-                <div class="block md:table-row">
+            <div class="block lg:table w-full border-collapse">
+                <div class="block lg:table-row">
                     
-                    <div class="block md:table-cell md:w-1/2 bg-white p-6 rounded-lg shadow-md vertical-align-top mb-6 md:mb-0">
-                        <h2 class="text-xl font-bold text-emerald-600 mb-4 border-l-4 border-emerald-600 pl-2">২. প্রয়োজনীয় তথ্য পূরণ করুন</h2>
-                        <form id="dynamicForm" class="space-y-4">
-                            </form>
-                        <button type="button" onclick="downloadPDF()" class="mt-6 w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-md shadow transition duration-200">
-                            জেনারেল এবং ডাউনলোড পিডিএফ (PDF)
-                        </button>
+                    <!-- বাম পাশ: সয়ংসম্পূর্ণ অল-ইন-ওয়ান ইনপুট ফর্ম -->
+                    <div class="block lg:table-cell lg:w-5/12 bg-white p-6 rounded-xl shadow-xs border border-gray-100 vertical-align-top mb-6 lg:mb-0">
+                        <h2 class="text-xl font-bold text-slate-900 mb-4 border-l-4 border-emerald-500 pl-2">২. তথ্যাবলী পূরণ করুন (যা দিবেন না তা সিভিতে থাকবে না)</h2>
+                        
+                        <form id="smartForm" class="space-y-6">
+                            <!-- প্রোফাইল ছবি -->
+                            <div class="bg-slate-50 p-4 rounded-lg border border-dashed border-gray-300">
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">📸 প্রফেশনাল ছবি আপলোড করুন</label>
+                                <input type="file" id="userPhoto" accept="image/*" onchange="handlePhotoUpload(event)" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                            </div>
+
+                            <!-- ডায়নামিক সেকশনগুলো এখানে জাভাস্ক্রিপ্ট দিয়ে তৈরি হবে -->
+                            <div id="formFieldsContainer" class="space-y-4"></div>
+                        </form>
+                        
+                        <div class="mt-6 space-y-3">
+                            <button onclick="downloadDocument('cv')" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg shadow-md transition duration-200 cursor-pointer">⬇️ ডাউনলোড প্রিমিয়াম সিভি (PDF)</button>
+                            <button onclick="downloadDocument('letter')" class="w-full bg-slate-700 hover:bg-slate-800 text-white font-bold py-3 px-4 rounded-lg shadow-md transition duration-200 cursor-pointer">✉️ ডাউনলোড কভার লেটার (PDF)</button>
+                        </div>
                     </div>
 
-                    <div class="hidden md:table-cell w-6"></div>
+                    <!-- গ্যাপ -->
+                    <div class="hidden lg:table-cell w-6"></div>
 
-                    <div class="block md:table-cell md:w-1/2 bg-white p-6 rounded-lg shadow-md vertical-align-top">
-                        <h2 class="text-xl font-bold text-indigo-600 mb-4 border-l-4 border-indigo-600 pl-2">৩. লাইভ প্রিভিউ (ডকুমেন্ট ভিউ)</h2>
-                        <div class="border border-gray-300 p-2 rounded bg-gray-50 overflow-auto max-h-[600px]">
-                            <div id="pdfCanvas" class="bg-white p-8 mx-auto shadow-inner min-h-[500px]">
-                                <p class="text-gray-400 text-center mt-20">বাম পাশের ফর্ম পূরণ করলে এখানে লাইভ ডকুমেন্ট দেখা যাবে।</p>
-                            </div>
+                    <!-- ডান পাশ: লাইভ প্রিভিউ সেকশন (সিভি + কভার লেটার পাশাপাশি) -->
+                    <div class="block lg:table-cell lg:w-7/12 bg-slate-200 p-6 rounded-xl shadow-inner vertical-align-top">
+                        <h2 class="text-xl font-bold text-slate-900 mb-4 border-l-4 border-indigo-600 pl-2">৩. লাইভ রিয়েল-টাইম প্রিভিউ</h2>
+                        
+                        <!-- ট্যাব কন্ট্রোল -->
+                        <div class="flex space-x-2 mb-4">
+                            <button id="tabCvBtn" onclick="switchTab('cv')" class="px-4 py-2 bg-white text-blue-600 font-bold rounded-t-lg border-t-2 border-blue-600 shadow-xs cursor-pointer">📄 লাইভ সিভি</button>
+                            <button id="tabLetterBtn" onclick="switchTab('letter')" class="px-4 py-2 bg-gray-300 text-gray-700 font-medium rounded-t-lg shadow-xs cursor-pointer">✉️ ম্যাচিং কভার লেটার</button>
+                        </div>
+
+                        <!-- ক্যানভাস এরিয়া -->
+                        <div class="bg-white p-2 rounded shadow-md overflow-auto max-h-[850px]">
+                            <!-- সিভি ক্যানভাস -->
+                            <div id="cvCanvas" class="bg-white shadow-xs p-8 mx-auto min-h-[842px] w-[595px]"></div>
+                            <!-- কভার লেটার ক্যানভাস -->
+                            <div id="letterCanvas" class="hidden bg-white shadow-xs p-8 mx-auto min-h-[842px] w-[595px]"></div>
                         </div>
                     </div>
 
@@ -62,8 +79,8 @@
 
     </main>
 
-    <footer class="bg-gray-800 text-white text-center p-4 mt-12 text-sm">
-        &copy; 2026 কম্পিউটার দোকান ও প্রিন্টিং সার্ভিস। অল রাইটস রিজার্ভড।
+    <footer class="bg-slate-900 text-gray-400 text-center p-4 mt-12 text-sm border-t border-slate-800">
+        &copy; 2026 প্রিমিয়াম সিভি বিল্ডার সিস্টেম | আপনার ব্যবসার বিশ্বস্ত পার্টনার।
     </footer>
 
     <script src="app.js"></script>
