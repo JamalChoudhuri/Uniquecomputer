@@ -6,32 +6,36 @@
     <title>50+ Premium Visual CV & Cover Letter Engine</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
-        /* প্রিন্ট করার সময় ইউআরএল, টাইম ও ফুটার রিমোভ করার সেফ মেথড */
+        /* প্রিন্ট করার সময় ইউআরএল, টাইম ও ফুটার রিমোভ করার সুরক্ষিত উপায় */
         @page {
             size: A4;
-            margin: 6mm 0mm 6mm 0mm; /* হেডার-ফুটার রিমোভ করবে কিন্তু কন্টেন্ট নিরাপদ রাখবে */
+            margin: 10mm 12mm; /* হেডার ও ফুটার বাদ দিয়ে কন্টেন্টকে চারপাশ থেকে মার্জিন দেবে */
         }
         @media print {
+            /* মেইন উইন্ডো ছাড়া বাকি সবকিছু হাইড করা হবে */
             body {
-                background: #ffffff;
+                background: #ffffff !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
-            body * { visibility: hidden; }
-            #printArea, #printArea * { visibility: visible; }
-            #printArea { 
-                position: absolute; 
-                left: 0; 
-                top: 0; 
-                width: 210mm; 
-                margin: 0; 
-                padding: 0;
+            .no-print {
+                display: none !important;
             }
-            .no-print { display: none !important; }
+            /* প্রিভিউ বক্সের স্ক্রলবার প্রিন্ট হবে না */
+            .preview-box {
+                max-height: none !important;
+                overflow: visible !important;
+            }
+            #printArea {
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                box-shadow: none !important;
+            }
         }
         .preview-box { max-height: 850px; overflow-y: auto; }
         
-        /* গ্যালারির মিনি-ভিজ্যুয়াল প্রিভিউ কার্ডের জন্য সিএসএস */
+        /* গ্যালারির মিনি-ভিজ্যুয়াল প্রিভিউ কার্ড */
         .mini-preview-card {
             height: 140px;
             border: 1px solid #e2e8f0;
@@ -45,7 +49,7 @@
 <body class="bg-slate-100 text-slate-800 antialiased font-sans">
 
     <div class="bg-slate-950 text-white p-4 flex justify-between items-center shadow-lg no-print">
-        <h1 class="text-xl font-black tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">💎 PRESTIGE CV ENGINE v4.0</h1>
+        <h1 class="text-xl font-black tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">💎 PRESTIGE CV ENGINE v4.1</h1>
         <a href="index.html" class="text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white py-2 px-4 rounded border border-slate-700 transition">⬅️ Gallery</a>
     </div>
 
@@ -59,14 +63,14 @@
         </section>
 
         <!-- মূল ওয়ার্কস্পেস প্যানেল -->
-        <section id="workspaceSection" class="hidden no-print">
+        <section id="workspaceSection" class="hidden">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 
-                <!-- বাম পাশ: ডাটা ইনপুট ও কালার প্যালেট -->
-                <div class="lg:col-span-5 bg-white p-6 rounded-2xl shadow-xs border border-slate-200 space-y-6 max-h-[900px] overflow-y-auto">
+                <!-- বাম পাশ: ডাটা ইনপুট ও কালার প্যালেট (প্রিন্টে হাইড হবে) -->
+                <div class="lg:col-span-5 bg-white p-6 rounded-2xl shadow-xs border border-slate-200 space-y-6 max-h-[900px] overflow-y-auto no-print">
                     
                     <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
-                        <h3 class="text-xs font-bold text-slate-900 mb-2">🎨 কালার চেঞ্জার (সিলেক্ট করা লেআউটের রং পরিবর্তন করুন):</h3>
+                        <h3 class="text-xs font-bold text-slate-900 mb-2">🎨 কালার চেঞ্জার (রং পরিবর্তন করুন):</h3>
                         <div class="flex flex-wrap gap-2" id="colorPickerContainer"></div>
                     </div>
 
@@ -89,16 +93,16 @@
                     </div>
                 </div>
 
-                <!-- ডান পাশ: নিখুঁত A4 পেপার প্রিভিউ (জাস্ট্রিফাইড টেক্সট) -->
-                <div class="lg:col-span-7 bg-slate-200 p-4 rounded-2xl shadow-inner">
-                    <div class="flex space-x-2 mb-3">
+                <!-- ডান পাশ: নিখুঁত A4 পেপার প্রিভিউ -->
+                <div class="lg:col-span-7 bg-slate-200 p-4 rounded-2xl shadow-inner print:p-0 print:bg-white">
+                    <div class="flex space-x-2 mb-3 no-print">
                         <button id="tabCvBtn" onclick="switchTab('cv')" class="px-4 py-2 bg-white text-blue-600 font-bold rounded-t-xl text-xs shadow-xs cursor-pointer">📄 সিভির এডিটেবল লাইভ রূপ</button>
                         <button id="tabLetterBtn" onclick="switchTab('letter')" class="px-4 py-2 bg-gray-300 text-gray-600 font-medium rounded-t-xl text-xs shadow-xs cursor-pointer">✉️ কভার লেটার রূপ</button>
                     </div>
 
-                    <div class="bg-white p-2 rounded-xl shadow-md flex justify-center preview-box">
+                    <div class="bg-white p-2 rounded-xl shadow-md flex justify-center preview-box print:shadow-none print:p-0">
                         <!-- রিয়েল সাইজ A4 কন্টেইনার -->
-                        <div id="printArea" class="bg-white" style="width: 210mm; min-height: 297mm; padding: 18mm 15mm; box-sizing: border-box;">
+                        <div id="printArea" class="bg-white" style="width: 210mm; min-height: 297mm; padding: 15mm; box-sizing: border-box;">
                             <div id="cvCanvas"></div>
                             <div id="letterCanvas" class="hidden"></div>
                         </div>
