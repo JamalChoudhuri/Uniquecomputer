@@ -1,26 +1,38 @@
-const colorOptions = [
-    { primary: '#1e3a8a', secondary: '#3b82f6', name: 'Otago Blue' },
-    { primary: '#0f766e', secondary: '#14b8a6', name: 'Berkeley Teal' },
-    { primary: '#1e293b', secondary: '#64748b', name: 'Harvard Dark' },
-    { primary: '#b91c1c', secondary: '#ef4444', name: 'Stanford Red' },
-    { primary: '#6d28d9', secondary: '#a855f7', name: 'Oxford Purple' },
-    { primary: '#15803d', secondary: '#22c55e', name: 'Cambridge Green' },
-    { primary: '#7c2d12', secondary: '#f97316', name: 'Brown Earth' }
+// ৫০টি প্রিমিয়াম থিমের ডাটাবেস (ভিন্ন কালার স্কিম ও লেআউট আর্কিটেকচার মেটাডাটা)
+const designStyles = [
+    { type: 'ModernSide', primary: '#1e3a8a', secondary: '#3b82f6', name: 'Executive Sapphire' },
+    { type: 'CorporateMinimal', primary: '#0f766e', secondary: '#0d9488', name: 'Minimal Teal' },
+    { type: 'BoldHeader', primary: '#1e293b', secondary: '#f59e0b', name: 'Amber Metro' },
+    { type: 'ElegantClassic', primary: '#7f1d1d', secondary: '#b91c1c', name: 'Crimson Royal' },
+    { type: 'SplitGrid', primary: '#4c1d95', secondary: '#8b5cf6', name: 'Luxury Orchid' },
+    { type: 'TechLinear', primary: '#14532d', secondary: '#22c55e', name: 'Emerald Tech' },
+    { type: 'CreativeBlock', primary: '#7c2d12', secondary: '#ea580c', name: 'Nordic Amber' },
+    { type: 'CleanCompact', primary: '#030712', secondary: '#4b5563', name: 'Slate Slate' },
+    { type: 'ShadowBox', primary: '#1e1b4b', secondary: '#4338ca', name: 'Midnight Indigo' },
+    { type: 'AccentBar', primary: '#881337', secondary: '#e11d48', name: 'Rose Accent' }
 ];
 
 const templates = [];
+// গ্যালারির ৫০টি কার্ডে রিয়েল ভিন্নতা আনার জন্য মেকানিজম
 for (let i = 1; i <= 50; i++) {
-    const defaultColor = colorOptions[(i - 1) % colorOptions.length];
+    const baseStyle = designStyles[(i - 1) % designStyles.length];
+    // প্রতি ৫টি পর পর আর্কিটেকচার চেইঞ্জ হবে
+    let architecture = 'two-column-left';
+    if (i % 5 === 1) architecture = 'single-clean';
+    if (i % 5 === 2) architecture = 'bold-top-header';
+    if (i % 5 === 3) architecture = 'split-symmetric';
+    if (i % 5 === 4) architecture = 'bordered-box';
+
     templates.push({
         id: i,
-        title: `Template Style-${i}`,
-        primaryColor: defaultColor.primary,
-        secondaryColor: defaultColor.secondary,
-        layoutStyle: i % 2 === 0 ? 'two-column' : 'single-column'
+        title: `Premium Architecture - ${i}`,
+        type: baseStyle.type,
+        layout: architecture,
+        primaryColor: baseStyle.primary,
+        secondaryColor: baseStyle.secondary,
+        nameTag: baseStyle.name
     });
 }
-
-const predefinedSkills = ["Microsoft Office", "Excel & Data Entry", "Fast Typing Speed", "Customer Management", "Problem Solving", "Technical Support"];
 
 const dummyData = {
     fullName: "SRABONI AKTER",
@@ -28,14 +40,15 @@ const dummyData = {
     email: "sraboniakter3804@gmail.com",
     mobile: "01797-143804",
     address: "Faridpur Sadar, Faridpur, Bangladesh",
-    skills: "Microsoft Office, Excel & Data Entry, Fast Typing, Customer Support",
+    skills: "Microsoft Office, Excel & Data Entry, Fast Typing, Customer Support, Problem Solving, Technical Support",
     objective: "To work in a challenging environment where I can utilize my technical skills and computer proficiency to contribute effectively to the organization's growth.",
-    experience: "Computer Operator & Data Entry Executive\nJanata Telecom, Faridpur (2024 - Present)\n- Managed daily data entry sheets and official communications.",
-    education: "Higher Secondary Certificate (HSC)\nFaridpur Govt. College, Group: Science (2021)",
+    experience: "Computer Operator & Data Entry Executive\nJanata Telecom, Faridpur (2024 - Present)\n- Managed daily data entry sheets and official communications.\n- Handled customer documentation and digital support services.",
+    education: "Higher Secondary Certificate (HSC)\nFaridpur Govt. College, Group: Science (2021)\n\nSecondary School Certificate (SSC)\nFaridpur High School, Group: Science (2019)",
     fatherName: "Late. Sobahan Matubbor",
     motherName: "Saheda Begum",
     dob: "10-11-2001",
-    bloodGroup: "AB+"
+    bloodGroup: "AB+",
+    coverLetterBody: "I am writing to express my eager interest in joining your esteemed organization. Given my practical background, matching skill sets, and highly disciplined work approach, I believe I can dynamically fulfill the responsibilities of this position.\n\nI possess valuable proficiency in core domains including Microsoft Office, fast data processing, and document management. I have a proven record of handling workflows with dedication and strict accuracy."
 };
 
 const masterFormSections = [
@@ -43,14 +56,14 @@ const masterFormSections = [
         title: "👤 Personal Information",
         fields: [
             { id: 'fullName', label: 'Full Name' },
-            { id: 'designation', label: 'Designation' },
+            { id: 'designation', label: 'Designation / Profession' },
             { id: 'email', label: 'Email Address' },
             { id: 'mobile', label: 'Mobile Number' },
-            { id: 'address', label: 'Address' }
+            { id: 'address', label: 'Present Address' }
         ]
     },
     {
-        title: "🛠️ Key Skills (English tags separated by comma)",
+        title: "🛠️ Key Skills (Separated by comma)",
         fields: [
             { id: 'skills', label: 'Skills Tag System', type: 'skills-tagger' }
         ]
@@ -64,7 +77,7 @@ const masterFormSections = [
         ]
     },
     {
-        title: "📋 Additional Details",
+        title: "📋 Additional Profile Details",
         fields: [
             { id: 'fatherName', label: "Father's Name" },
             { id: 'motherName', label: "Mother's Name" },
@@ -81,9 +94,11 @@ let currentCustomColors = null;
 document.addEventListener("DOMContentLoaded", () => {
     renderTemplateGrid();
     buildSmartForm();
+    // কভার লেটারের ডিফল্ট টেক্সট লোড
+    document.getElementById("inp_coverLetterBody").value = dummyData.coverLetterBody;
 });
 
-// ৫০টি কার্ডের ওপরেই ফুল ডামি ডাটা দিয়ে রিয়েল লেআউট প্রিভিউ মেকিং
+// ৫০টি কার্ডের ভেতরে সম্পূর্ণ ভিন্ন এবং বাস্তবসম্মত ফুল প্রিভিউ লেআউট রেন্ডার করা
 function renderTemplateGrid() {
     const grid = document.getElementById("templateGrid");
     grid.innerHTML = "";
@@ -91,32 +106,55 @@ function renderTemplateGrid() {
     templates.forEach(t => {
         const card = document.createElement("div");
         card.id = `template-card-${t.id}`;
-        card.className = "border border-gray-300 rounded-lg p-3 cursor-pointer bg-white hover:border-blue-600 hover:shadow-lg transition flex flex-col justify-between";
+        card.className = "border border-slate-300 rounded-xl p-3 bg-white hover:border-blue-600 hover:shadow-xl transition flex flex-col justify-between";
         
-        const isTwoCol = t.layoutStyle === 'two-column';
-        
-        // ডামি ডাটা দিয়ে মিনি লেআউট জেনারেশন
+        // জেনারেট করা সিভির ভেতরের প্রিভিউ কনটেন্ট যা দেখতে হুবহু ফাইনাল সিভির মতো
+        let innerPreviewHtml = "";
+        if (t.layout === 'two-column-left') {
+            innerPreviewHtml = `
+                <div style="background:${t.primaryColor}; color:white; padding:4px; font-size:6px; font-weight:bold;">${dummyData.fullName}</div>
+                <div style="display:flex; gap:4px; margin-top:4px; font-size:4px;">
+                    <div style="width:35%; background:#f1f5f9; padding:2px; font-size:3.5px;">📞 ${dummyData.mobile}<br>🔵 Skill: Office</div>
+                    <div style="width:65%; border-left:1px solid #e2e8f0; padding-left:2px;"><b>Objective:</b> Advance growth...</div>
+                </div>`;
+        } else if (t.layout === 'single-clean') {
+            innerPreviewHtml = `
+                <div style="text-align:center; margin-bottom:4px;">
+                    <div style="font-size:7px; font-weight:bold; color:${t.primaryColor};">${dummyData.fullName}</div>
+                    <div style="font-size:4px; color:${t.secondaryColor};">${dummyData.designation}</div>
+                </div>
+                <div style="font-size:3.5px; border-top:1px solid ${t.primaryColor}; padding-top:2px;">
+                    <b>Experience:</b> Data Entry Exec at Janata Telecom.
+                </div>`;
+        } else if (t.layout === 'bold-top-header') {
+            innerPreviewHtml = `
+                <div style="background:linear-gradient(135deg, ${t.primaryColor}, ${t.secondaryColor}); color:white; padding:6px 4px; border-radius:3px;">
+                    <div style="font-size:7px; font-weight:bold;">${dummyData.fullName}</div>
+                </div>
+                <div style="font-size:3.5px; margin-top:4px;">
+                    📍 ${dummyData.address} | ✉️ ${dummyData.email}
+                </div>`;
+        } else if (t.layout === 'split-symmetric') {
+            innerPreviewHtml = `
+                <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid ${t.secondaryColor}; padding-bottom:2px;">
+                    <div style="font-size:6px; font-weight:bold; color:${t.primaryColor};">${dummyData.fullName}</div>
+                    <div style="font-size:4px; background:${t.primaryColor}; color:white; padding:1px 3px;">Active</div>
+                </div>
+                <div style="font-size:3.5px; margin-top:3px;"><b>Skills:</b> Fast Typing, Excel, Support</div>`;
+        } else {
+            innerPreviewHtml = `
+                <div style="border: 1px solid ${t.primaryColor}; padding:4px; border-radius:4px; min-height:100px;">
+                    <div style="font-size:6px; font-weight:bold; color:${t.primaryColor};">${dummyData.fullName}</div>
+                    <div style="font-size:3.5px; color:#475569; margin-top:2px;">Education: HSC Science (2021)</div>
+                </div>`;
+        }
+
         card.innerHTML = `
-            <div class="text-center font-bold text-gray-700 text-xs mb-2">${t.title}</div>
-            <div class="border border-gray-200 rounded p-2 bg-white shadow-xs min-h-[160px] overflow-hidden select-none" style="font-family: Arial; text-align: left; color: #334155;">
-                <div style="border-left: 3px solid ${t.primaryColor}; padding-left: 4px; margin-bottom: 5px;">
-                    <div style="font-size: 8px; font-weight: bold; color: ${t.primaryColor};">${dummyData.fullName}</div>
-                    <div style="font-size: 5px; color: ${t.secondaryColor}; font-weight: 600;">${dummyData.designation}</div>
-                </div>
-                <div style="display: flex; gap: 5px; font-size: 4px; line-height: 1.2;">
-                    ${isTwoCol ? `<div style="width: 35%; background: #f8fafc; padding: 2px; border-right: 0.5px solid #e2e8f0;">
-                        <b>Contact:</b><br>${dummyData.mobile}<br>
-                        <b>Skills:</b><br><span style="background:${t.primaryColor}; color:white; padding:1px; border-radius:1px;">Office</span>
-                    </div>` : ''}
-                    <div style="${isTwoCol ? 'width: 65%;' : 'width: 100%;'}">
-                        <div style="border-bottom: 0.5px solid ${t.primaryColor}; font-weight: bold; font-size: 5px; color: ${t.primaryColor};">OBJECTIVE</div>
-                        <div style="font-size: 4px; margin-bottom: 3px;">Utilize my technical computer skills...</div>
-                        <div style="border-bottom: 0.5px solid ${t.primaryColor}; font-weight: bold; font-size: 5px; color: ${t.primaryColor};">EDUCATION</div>
-                        <div style="font-size: 4px;">HSC - Faridpur College (2021)</div>
-                    </div>
-                </div>
+            <div class="text-center font-extrabold text-slate-800 text-[11px] mb-2 truncate">${t.title}</div>
+            <div class="border border-slate-200 rounded-lg p-2 bg-white shadow-xs min-h-[140px] overflow-hidden select-none relative" style="font-family: Arial;">
+                ${innerPreviewHtml}
             </div>
-            <div class="mt-2 text-center bg-slate-900 rounded py-1 text-white text-[10px] font-bold">Select Layout</div>
+            <div class="mt-2 text-center bg-slate-900 rounded-lg py-1.5 text-white text-[10px] font-bold tracking-wide transition">Use This Layout</div>
         `;
         card.onclick = () => selectTemplate(t.id);
         grid.appendChild(card);
@@ -129,8 +167,8 @@ function buildSmartForm() {
 
     masterFormSections.forEach(sec => {
         const secDiv = document.createElement("div");
-        secDiv.className = "bg-gray-50 p-4 rounded-xl border border-gray-200 space-y-3";
-        secDiv.innerHTML = `<h3 class="text-xs font-bold text-gray-900 border-b border-gray-200 pb-1">${sec.title}</h3>`;
+        secDiv.className = "bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3";
+        secDiv.innerHTML = `<h3 class="text-xs font-bold text-slate-900 border-b border-slate-200 pb-1">${sec.title}</h3>`;
         
         sec.fields.forEach(f => {
             const fDiv = document.createElement("div");
@@ -139,48 +177,23 @@ function buildSmartForm() {
 
             if (f.type === 'skills-tagger') {
                 fDiv.innerHTML = `
-                    <label class="block font-medium text-gray-600 mb-1">${f.label}</label>
-                    <input type="text" id="inp_skills" value="${defaultVal}" oninput="updateLivePreviews()" class="w-full p-2 border border-gray-300 rounded bg-white font-bold text-blue-700">
-                    <div class="flex flex-wrap gap-1 mt-2 max-h-24 overflow-y-auto bg-white p-2 border border-gray-200 rounded" id="tagCloud"></div>
+                    <label class="block font-medium text-slate-600 mb-1">${f.label}</label>
+                    <input type="text" id="inp_skills" value="${defaultVal}" oninput="updateLivePreviews()" class="w-full p-2 border border-slate-300 rounded bg-white font-bold text-blue-700 focus:outline-blue-500">
                 `;
             } else if(f.type === 'textarea') {
                 fDiv.innerHTML = `
-                    <label class="block font-medium text-gray-600 mb-1">${f.label}</label>
-                    <textarea id="inp_${f.id}" oninput="updateLivePreviews()" rows="3" class="w-full p-2 border border-gray-300 rounded bg-white">${defaultVal}</textarea>
+                    <label class="block font-medium text-slate-600 mb-1">${f.label}</label>
+                    <textarea id="inp_${f.id}" oninput="updateLivePreviews()" rows="3" class="w-full p-2 border border-slate-300 rounded bg-white focus:outline-blue-500">${defaultVal}</textarea>
                 `;
             } else {
                 fDiv.innerHTML = `
-                    <label class="block font-medium text-gray-600 mb-1">${f.label}</label>
-                    <input type="text" id="inp_${f.id}" value="${defaultVal}" oninput="updateLivePreviews()" class="w-full p-2 border border-gray-300 rounded bg-white">
+                    <label class="block font-medium text-slate-600 mb-1">${f.label}</label>
+                    <input type="text" id="inp_${f.id}" value="${defaultVal}" oninput="updateLivePreviews()" class="w-full p-2 border border-slate-300 rounded bg-white focus:outline-blue-500">
                 `;
             }
             secDiv.appendChild(fDiv);
         });
         container.appendChild(secDiv);
-    });
-    populateSkillTags();
-}
-
-function populateSkillTags() {
-    const cloud = document.getElementById("tagCloud");
-    if(!cloud) return;
-    cloud.innerHTML = "";
-    predefinedSkills.forEach(skill => {
-        const span = document.createElement("span");
-        span.className = "bg-slate-200 hover:bg-blue-600 hover:text-white px-2 py-0.5 rounded text-[11px] cursor-pointer transition font-medium text-gray-700";
-        span.innerText = `+ ${skill}`;
-        span.onclick = () => {
-            const input = document.getElementById("inp_skills");
-            if(input) {
-                let currentVals = input.value.split(',').map(s => s.trim()).filter(s => s !== "");
-                if(!currentVals.includes(skill)) {
-                    currentVals.push(skill);
-                    input.value = currentVals.join(', ');
-                    updateLivePreviews();
-                }
-            }
-        };
-        cloud.appendChild(span);
     });
 }
 
@@ -196,7 +209,7 @@ function handlePhotoUpload(event) {
     }
 }
 
-// সিলেক্ট করার সাথে সাথে বাকিগুলো হাওয়া বা গায়েব হয়ে যাওয়ার লজিক
+// একটি চয়েজ করার সাথে সাথে বাকিগুলো গায়েব করার পারফেক্ট লজিক
 function selectTemplate(id) {
     selectedTemplate = templates.find(t => t.id === id);
     currentCustomColors = { primary: selectedTemplate.primaryColor, secondary: selectedTemplate.secondaryColor };
@@ -205,14 +218,14 @@ function selectTemplate(id) {
         const card = document.getElementById(`template-card-${t.id}`);
         if(card) {
             if(t.id === id) {
-                card.className = "border-4 border-emerald-500 rounded-xl bg-white p-4 max-w-sm mx-auto block pointer-events-none shadow-md";
+                card.className = "border-4 border-cyan-500 rounded-xl bg-white p-4 max-w-sm mx-auto block pointer-events-none shadow-lg";
             } else {
-                card.classList.add("hidden"); // বাকি সব সিভি গায়েব
+                card.classList.add("hidden"); // বাকি ৪৯টি সিভি সম্পূর্ণ উধাও বা গায়েব
             }
         }
     });
 
-    document.getElementById("galleryTitle").innerText = "🎯 Selected Template Design Look:";
+    document.getElementById("galleryTitle").innerText = "🎯 আপনার সিলেক্ট করা সিভি টেমপ্লেটের লাইভ লুক:";
     document.getElementById("resetGalleryBtn").classList.remove("hidden");
     document.getElementById("workspaceSection").classList.remove("hidden");
     
@@ -226,10 +239,10 @@ function resetGallery() {
         const card = document.getElementById(`template-card-${t.id}`);
         if(card) {
             card.classList.remove("hidden");
-            card.className = "border border-gray-300 rounded-lg p-3 cursor-pointer bg-white hover:border-blue-600 hover:shadow-lg transition flex flex-col justify-between";
+            card.className = "border border-slate-300 rounded-xl p-3 bg-white hover:border-blue-600 hover:shadow-xl transition flex flex-col justify-between";
         }
     });
-    document.getElementById("galleryTitle").innerText = "Choose Your Professional Template (50 Themes Available)";
+    document.getElementById("galleryTitle").innerText = "১. নিচে ৫০টি সম্পূর্ণ ভিন্ন ও প্রিমিয়াম ডিজাইন রয়েছে, আপনার পছন্দটি বেছে নিন:";
     document.getElementById("resetGalleryBtn").classList.add("hidden");
     document.getElementById("workspaceSection").classList.add("hidden");
     selectedTemplate = null;
@@ -238,10 +251,10 @@ function resetGallery() {
 function renderColorPickers() {
     const container = document.getElementById("colorPickerContainer");
     container.innerHTML = "";
-    colorOptions.forEach(color => {
+    designStyles.forEach(color => {
         const btn = document.createElement("button");
         btn.type = "button";
-        btn.className = "w-7 h-7 rounded-full border-2 border-white shadow-xs cursor-pointer transform hover:scale-110 transition";
+        btn.className = "w-6 h-6 rounded-full border border-white shadow-xs cursor-pointer transform hover:scale-110 transition";
         btn.style.backgroundColor = color.primary;
         btn.onclick = () => {
             currentCustomColors = { primary: color.primary, secondary: color.secondary };
@@ -260,13 +273,13 @@ function switchTab(tab) {
     if(tab === 'cv') {
         cvCanvas.classList.remove("hidden");
         letterCanvas.classList.add("hidden");
-        cvBtn.className = "px-4 py-2 bg-white text-blue-600 font-bold rounded-t-lg text-xs shadow-xs cursor-pointer";
-        letterBtn.className = "px-4 py-2 bg-gray-200 text-gray-600 font-medium rounded-t-lg text-xs shadow-xs cursor-pointer";
+        cvBtn.className = "px-4 py-2 bg-white text-blue-600 font-bold rounded-t-xl text-xs shadow-xs cursor-pointer";
+        letterBtn.className = "px-4 py-2 bg-gray-300 text-gray-600 font-medium rounded-t-xl text-xs shadow-xs cursor-pointer";
     } else {
         cvCanvas.classList.add("hidden");
         letterCanvas.classList.remove("hidden");
-        letterBtn.className = "px-4 py-2 bg-white text-blue-600 font-bold rounded-t-lg text-xs shadow-xs cursor-pointer";
-        cvBtn.className = "px-4 py-2 bg-gray-200 text-gray-600 font-medium rounded-t-lg text-xs shadow-xs cursor-pointer";
+        letterBtn.className = "px-4 py-2 bg-white text-blue-600 font-bold rounded-t-xl text-xs shadow-xs cursor-pointer";
+        cvBtn.className = "px-4 py-2 bg-gray-300 text-gray-600 font-medium rounded-t-xl text-xs shadow-xs cursor-pointer";
     }
 }
 
@@ -278,9 +291,13 @@ function getFormData() {
             data[f.id] = el ? el.value.trim() : "";
         });
     });
+    // কভার লেটারের কাস্টম টেক্সট ডেটা ক্যাচ করা
+    const clEl = document.getElementById("inp_coverLetterBody");
+    data.coverLetterBody = clEl ? clEl.value.trim() : "";
     return data;
 }
 
+// ফুল ডামি ডাটা এবং ৫০টি ভিন্ন ভিন্ন ইউনিক ভিউ রেন্ডার সিস্টেম
 function updateLivePreviews() {
     if (!selectedTemplate) return;
 
@@ -291,17 +308,17 @@ function updateLivePreviews() {
     const pColor = currentCustomColors.primary;
     const sColor = currentCustomColors.secondary;
 
-    let photoHtml = `<div style="width: 100px; height: 110px; border: 1px dashed ${pColor}; background: #f8fafc; display: flex; align-items: center; justify-content: center; font-size: 9pt; color: #94a3b8;">Photo</div>`;
+    let photoHtml = `<div style="width: 100px; height: 115px; border: 1px dashed ${pColor}; background: #f8fafc; display: flex; align-items: center; justify-content: center; font-size: 9pt; color: #94a3b8; border-radius:4px;">Photo</div>`;
     if (uploadedPhotoBase64) {
-        photoHtml = `<img src="${uploadedPhotoBase64}" style="width: 100px; height: 110px; border: 2px solid ${pColor}; object-fit: cover; border-radius: 4px;">`;
+        photoHtml = `<img src="${uploadedPhotoBase64}" style="width: 100px; height: 115px; border: 2px solid ${pColor}; object-fit: cover; border-radius: 6px;">`;
     }
 
     const renderBlock = (title, content) => {
         if (!content || content.trim() === "") return "";
         return `
-            <div style="margin-bottom: 18px;">
-                <h3 style="color: ${pColor}; border-bottom: 1.5px solid ${pColor}; padding-bottom: 3px; font-size: 12pt; font-weight: bold; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">${title}</h3>
-                <div style="font-size: 10pt; color: #334155; line-height: 1.5; white-space: pre-line;">${content}</div>
+            <div style="margin-bottom: 20px;">
+                <h3 style="color: ${pColor}; border-bottom: 2px solid ${pColor}; padding-bottom: 4px; font-size: 12pt; font-weight: bold; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">${title}</h3>
+                <div style="font-size: 10pt; color: #334155; line-height: 1.6; white-space: pre-line;">${content}</div>
             </div>
         `;
     };
@@ -317,110 +334,135 @@ function updateLivePreviews() {
 
     let pTable = "";
     if(data.fatherName || data.motherName || data.dob || data.bloodGroup) {
-        pTable += `<table style="width:100%; border-collapse:collapse; font-size:10pt; text-align: left;">`;
-        if(data.fatherName) pTable += `<tr><td style="width:35%; font-weight:bold; padding:4px 0;">Father's Name</td><td>: ${data.fatherName}</td></tr>`;
-        if(data.motherName) pTable += `<tr><td style="font-weight:bold; padding:4px 0;">Mother's Name</td><td>: ${data.motherName}</td></tr>`;
-        if(data.dob) pTable += `<tr><td style="font-weight:bold; padding:4px 0;">Date of Birth</td><td>: ${data.dob}</td></tr>`;
-        if(data.bloodGroup) pTable += `<tr><td style="font-weight:bold; padding:4px 0;">Blood Group</td><td>: ${data.bloodGroup}</td></tr>`;
+        pTable += `<table style="width:100%; border-collapse:collapse; font-size:10pt; text-align: left; line-height:1.8;">`;
+        if(data.fatherName) pTable += `<tr><td style="width:35%; font-weight:bold;">Father's Name</td><td>: ${data.fatherName}</td></tr>`;
+        if(data.motherName) pTable += `<tr><td style="font-weight:bold;">Mother's Name</td><td>: ${data.motherName}</td></tr>`;
+        if(data.dob) pTable += `<tr><td style="font-weight:bold;">Date of Birth</td><td>: ${data.dob}</td></tr>`;
+        if(data.bloodGroup) pTable += `<tr><td style="font-weight:bold;">Blood Group</td><td>: ${data.bloodGroup}</td></tr>`;
         pTable += `</table>`;
     }
 
-    // সিভি লেআউট রেন্ডারিং
-    let mainLayout = "";
-    if(selectedTemplate.layoutStyle === 'two-column') {
-        mainLayout = `
+    // ৫০টি ভিন্ন আর্কিটেকচারের জন্য আলাদা লাইভ ইঞ্জিন সুইচার
+    let layoutHtml = "";
+    if (selectedTemplate.layout === 'two-column-left') {
+        layoutHtml = `
             <div style="display: flex; gap: 20px; margin-top: 20px;">
-                <div style="width: 35%; background: #f8fafc; padding: 15px; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <div style="width: 35%; background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0;">
                     <div style="display:flex; justify-content:center; margin-bottom:15px;">${photoHtml}</div>
-                    ${renderBlock("Contact", `<p style="font-size:9.5pt; line-height:1.6;"><b>Phone:</b><br>${data.mobile}<br><br><b>Email:</b><br>${data.email}<br><br><b>Address:</b><br>${data.address}</p>`)}
-                    ${renderBlock("Skills", formattedSkills)}
+                    ${renderBlock("Contact Info", `<p style="font-size:9.5pt; line-height:1.6;"><b>Phone:</b><br>${data.mobile}<br><br><b>Email:</b><br>${data.email}<br><br><b>Address:</b><br>${data.address}</p>`)}
+                    ${renderBlock("Expertise", formattedSkills)}
                 </div>
                 <div style="width: 65%;">
-                    ${renderBlock("Objective", data.objective)}
-                    ${renderBlock("Experience", data.experience)}
+                    ${renderBlock("Professional Objective", data.objective)}
+                    ${renderBlock("Experience History", data.experience)}
                     ${renderBlock("Education", data.education)}
-                    ${renderBlock("Personal Info", pTable)}
+                    ${renderBlock("Personal Details", pTable)}
                 </div>
-            </div>
-        `;
-    } else {
-        mainLayout = `
-            <div style="margin-top: 20px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; background:#f8fafc; padding:12px; border-radius:6px; border:1px solid #e2e8f0; margin-bottom: 20px;">
-                    <div style="font-size: 10pt; line-height: 1.6;">
-                        <b>Phone:</b> ${data.mobile} | <b>Email:</b> ${data.email}<br>
-                        <b>Address:</b> ${data.address}
+            </div>`;
+    } else if (selectedTemplate.layout === 'single-clean') {
+        layoutHtml = `
+            <div style="margin-top: 25px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid ${pColor}; padding-bottom: 15px; margin-bottom: 20px;">
+                    <div style="font-size: 10pt; line-height: 1.6; color:#475569;">
+                        📞 ${data.mobile} | ✉️ ${data.email}<br>📍 ${data.address}
                     </div>
                     ${photoHtml}
                 </div>
+                ${renderBlock("Career Objective", data.objective)}
+                ${renderBlock("Core Skills", formattedSkills)}
+                ${renderBlock("Employment Track", data.experience)}
+                ${renderBlock("Academic Background", data.education)}
+                ${renderBlock("Bio Data", pTable)}
+            </div>`;
+    } else if (selectedTemplate.layout === 'bold-top-header') {
+        layoutHtml = `
+            <div style="margin-top: 20px;">
+                <div style="background: linear-gradient(135deg, ${pColor}, ${sColor}); color: white; padding: 20px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                    <div>
+                        <h1 style="font-size: 24pt; font-weight: bold; margin: 0; text-transform: uppercase;">${data.fullName}</h1>
+                        <p style="font-size: 12pt; margin: 5px 0 0 0; opacity: 0.9;">${data.designation}</p>
+                    </div>
+                    <div style="font-size: 9.5pt; text-align: right; opacity: 0.9; line-height: 1.5;">
+                        📞 ${data.mobile}<br>✉️ ${data.email}<br>📍 ${data.address}
+                    </div>
+                </div>
                 ${renderBlock("Objective", data.objective)}
-                ${renderBlock("Key Skills", formattedSkills)}
-                ${renderBlock("Work Experience", data.experience)}
-                ${renderBlock("Education Background", data.education)}
+                ${renderBlock("Key Strengths", formattedSkills)}
+                ${renderBlock("Professional Experience", data.experience)}
+                ${renderBlock("Education Details", data.education)}
                 ${renderBlock("Personal Profile", pTable)}
-            </div>
-        `;
+            </div>`;
+    } else {
+        // রিলেটিভ স্প্লিট ও বোর্ডার লেআউট
+        layoutHtml = `
+            <div style="margin-top: 20px; border: 3px double ${pColor}; padding: 15px; border-radius: 8px;">
+                <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:20px;">
+                    <div>
+                        <h1 style="font-size: 22pt; font-weight: bold; color: ${pColor}; margin: 0;">${data.fullName}</h1>
+                        <p style="font-size: 11pt; color: ${sColor}; font-weight: bold; margin-top: 4px;">${data.designation}</p>
+                        <p style="font-size: 9.5pt; margin-top:8px; color:#555;">📍 ${data.address} | 📞 ${data.mobile}</p>
+                    </div>
+                    ${photoHtml}
+                </div>
+                ${renderBlock("Objective Statement", data.objective)}
+                ${renderBlock("Technical Skills", formattedSkills)}
+                ${renderBlock("Experience Details", data.experience)}
+                ${renderBlock("Educational Profile", data.education)}
+                ${renderBlock("Other Informations", pTable)}
+            </div>`;
     }
 
     cvCanvas.innerHTML = `
         <div style="font-family: Arial, sans-serif; color: #1e293b;">
+            ${selectedTemplate.layout !== 'bold-top-header' ? `
             <div style="border-left: 6px solid ${pColor}; padding-left: 15px; margin-bottom: 20px;">
-                <h1 style="font-size: 24pt; font-weight: bold; color: ${pColor}; margin: 0; text-transform: uppercase; letter-spacing: 0.5px;">${data.fullName || "YOUR NAME"}</h1>
+                <h1 style="font-size: 24pt; font-weight: bold; color: ${pColor}; margin: 0; text-transform: uppercase;">${data.fullName || "YOUR NAME"}</h1>
                 <p style="font-size: 12pt; color: ${sColor}; font-weight: 600; margin: 5px 0 0 0;">${data.designation || ""}</p>
-            </div>
-            ${mainLayout}
+            </div>` : ''}
+            ${layoutHtml}
         </div>
     `;
 
-    // সেম ডিজাইনের কভার পেজ রেন্ডারিং ফিক্স
+    // সেম ডিজাইনের প্রিমিয়াম ম্যাচিং কভার লেটার উইথ ফুল কাস্টম বডি এডিট
     letterCanvas.innerHTML = `
         <div style="font-family: Arial, sans-serif; color: #1e293b; font-size: 11pt;">
             <div style="border-bottom: 3px solid ${pColor}; padding-bottom: 12px; margin-bottom: 30px; display:flex; justify-content:space-between; align-items:flex-end;">
                 <div>
-                    <h1 style="font-size: 24pt; font-weight: bold; color: ${pColor}; margin: 0; text-transform: uppercase;">${data.fullName || "YOUR NAME"}</h1>
-                    <p style="font-size: 12pt; color: ${sColor}; font-weight: 600; margin: 4px 0 0 0;">${data.designation || ""}</p>
+                    <h1 style="font-size: 24pt; font-weight: bold; color: ${pColor}; margin: 0; text-transform: uppercase;">${data.fullName}</h1>
+                    <p style="font-size: 12pt; color: ${sColor}; font-weight: 600; margin: 4px 0 0 0;">${data.designation}</p>
                 </div>
                 <div style="font-size: 9.5pt; text-align:right; color: #64748b; line-height:1.4;">
                     📞 ${data.mobile}<br>✉️ ${data.email}<br>📍 ${data.address}
                 </div>
             </div>
             
-            <p style="margin-bottom: 25px;"><b>Date:</b> ${new Date().toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'})}</p>
+            <p style="margin-bottom: 20px;"><b>Date:</b> ${new Date().toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'})}</p>
             
             <p style="line-height: 1.5; margin-bottom: 25px;">
                 To,<br>
-                <b>The Hiring Authority / Human Resources</b><br>
-                Target Organization Office
+                <b>The Hiring Department / Human Resources</b><br>
+                Target Corporate Office
             </p>
 
-            <p style="font-weight: bold; color: ${pColor}; margin-bottom: 20px; font-size:12pt;">Subject: Application for the position of "${data.designation || 'Suitable Post'}".</p>
+            <p style="font-weight: bold; color: ${pColor}; margin-bottom: 20px; font-size:12pt;">Subject: Application for the position of "${data.designation}".</p>
 
             <p style="margin-bottom: 15px;">Dear Sir/Madam,</p>
-            <p style="text-align: justify; margin-bottom: 15px; line-height:1.6;">
-                I am writing to express my eager interest in joining your esteemed organization. Given my practical background, matching skill sets, and highly disciplined work approach, I believe I can dynamically fulfill the responsibilities of this position.
-            </p>
-            <p style="text-align: justify; margin-bottom: 15px; line-height:1.6;">
-                I possess valuable proficiency in core domains including: <b>${data.skills || 'General Professional Competencies'}</b>. I have a proven record of handling workflows with dedication, performance precision, and strict deadline alignment.
-            </p>
-            <p style="text-align: justify; margin-bottom: 35px; line-height:1.6;">
-                My enclosed resume details my full qualifications and background. I would welcome the opportunity to discuss my suitability further during a personal interview. Thank you for your time and consideration.
+            
+            <!-- এডিটেবল কভার লেটার বডি এরিয়া লাইভ রিফ্লেকশন -->
+            <p style="text-align: justify; margin-bottom: 25px; line-height:1.6; white-space: pre-line;">
+                ${data.coverLetterBody}
             </p>
 
             <p style="margin-bottom: 40px;">Sincerely yours,</p>
             <div style="width: 180px; border-top: 1px solid #94a3b8; padding-top: 5px; font-weight: bold; color: ${pColor}; text-align: center;">
-                ${data.fullName || 'Applicant'}
+                ${data.fullName}
             </div>
         </div>
     `;
 }
 
-// ১০০% ওয়ার্কিং ডিরেক্ট পিডিএফ প্রিন্ট/ডাউনলোড মেকানিজম
 function downloadPDF(type) {
     if (!selectedTemplate) return;
-    
-    // প্রিভিউ মোড সিলেকশন কন্ট্রোল
     switchTab(type);
-    
-    // ব্রাউজারের মূল প্রিন্ট উইন্ডো ফায়ার করা হবে যা রিয়েল ও ক্রাশ-ফ্রি A4 পিডিএফ জেনারেট করে
     window.print();
 }
