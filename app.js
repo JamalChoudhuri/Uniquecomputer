@@ -93,7 +93,14 @@ const masterFormSections = [
             { id: 'fatherName', label: "Father's Name" },
             { id: 'motherName', label: "Mother's Name" },
             { id: 'dob', label: 'Date of Birth' },
-            { id: 'bloodGroup', label: 'Blood Group' }
+            { id: 'gender', label: 'Gender' },
+            { id: 'maritalStatus', label: 'Marital Status' },
+            { id: 'bloodGroup', label: 'Blood Group' },
+            { id: 'nationality', label: 'Nationality' },
+            { id: 'religion', label: 'Religion' },
+            { id: 'nid', label: 'National ID (NID)' },
+            { id: 'height', label: 'Height' },
+            { id: 'weight', label: 'Weight' }
         ]
     }
 ];
