@@ -11,7 +11,6 @@
         @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap');
         body { font-family: 'Hind Siliguri', sans-serif; }
         .id-card-vertical { width: 2.125in; height: 3.375in; position: relative; overflow: hidden; }
-        /* কাস্টম স্ক্রলবার ডিজাইন গ্রিডের জন্য */
         .custom-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
         .custom-scroll::-webkit-scrollbar-thumb { bg-color: #cbd5e1; border-radius: 4px; }
     </style>
@@ -33,7 +32,7 @@
             
             <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
                 <h2 class="text-sm font-bold text-slate-700 mb-2"><i class="fa-solid fa-grid-2 text-blue-600 mr-1"></i> ১. ডিজাইন টেমপ্লেট পছন্দ করুন (১ - ১০০)</h2>
-                <p class="text-[11px] text-slate-500 mb-3">যেকোনো একটি নাম্বারে ক্লিক করুন, কার্ডের সম্পূর্ণ ব্যাকগ্রাউন্ড শেপ ও ডিজাইন বদলে যাবে।</p>
+                <p class="text-[11px] text-slate-500 mb-3">যেকোনো একটি নাম্বারে ক্লিক করুন, কার্ডের সামনের ও পিছনের সম্পূর্ণ ব্যাকগ্রাউন্ড শেপ ও ডিজাইন একসাথে বদলে যাবে।</p>
                 <div class="grid grid-cols-10 gap-1.5 max-h-40 overflow-y-auto pr-1 custom-scroll" id="designGrid">
                     </div>
             </div>
@@ -148,32 +147,28 @@
 
                 <div class="flex flex-col items-center">
                     <span class="text-xs font-bold text-slate-500 mb-2 uppercase tracking-wider"><i class="fa-solid fa-eye mr-1"></i> Back Side (পিছনে)</span>
-                    <div id="cardBack" class="id-card-vertical bg-slate-950 text-white rounded-xl shadow-2xl flex flex-col justify-between p-3">
+                    <div id="cardBack" class="id-card-vertical bg-white text-slate-800 rounded-xl shadow-2xl flex flex-col justify-between">
                         <div id="backShapes" class="absolute inset-0 z-0"></div>
 
-                        <div class="relative z-10 text-center pt-1">
-                            <div id="backIconBg" class="inline-block w-6 h-6 rounded-full mb-1 flex items-center justify-center text-white text-[10px] font-bold shadow-sm transition-all duration-300">
-                                <i class="fa-solid fa-building"></i>
-                            </div>
-                            <div class="text-[9px] font-bold tracking-wider opacity-60 uppercase">Terms & Conditions</div>
+                        <div class="relative z-10 text-center pt-4">
+                            <div class="text-[10px] font-bold tracking-wider opacity-90 uppercase text-white" id="backTitle">Terms & Conditions</div>
                         </div>
 
-                        <div class="relative z-10 flex-1 flex flex-col justify-center space-y-1.5 my-2 px-1 text-left">
-                            <p class="text-[8px] text-slate-300 leading-normal">১. এই কার্ডটি হস্তান্তরযোগ্য নয় এবং শুধুমাত্র প্রতিষ্ঠানের ভিতরে কার্যকর।</p>
-                            <p class="text-[8px] text-slate-300 leading-normal">২. কার্ডটি হারিয়ে গেলে অবিলম্বে কর্তৃপক্ষকে অবহিত করতে হবে।</p>
-                            <p class="text-[8px] text-slate-300 leading-normal">৩. কুড়িয়ে পেলে নিকটস্থ বক্সে অথবা ঠিকানায় পৌঁছে দেওয়ার অনুরোধ রইল।</p>
+                        <div class="relative z-10 flex-1 flex flex-col justify-center space-y-1.5 my-2 px-3 text-left">
+                            <p class="text-[8px] font-semibold text-slate-700 leading-normal">১. এই কার্ডটি হস্তান্তরযোগ্য নয় এবং শুধুমাত্র প্রতিষ্ঠানের ভিতরে কার্যকর।</p>
+                            <p class="text-[8px] font-semibold text-slate-700 leading-normal">২. কার্ডটি হারিয়ে গেলে অবিলম্বে authority কে অবহিত করতে হবে।</p>
+                            <p class="text-[8px] font-semibold text-slate-700 leading-normal">৩. কুড়িয়ে পেলে নিকটস্থ বক্সে অথবা ঠিকানায় পৌঁছে দেওয়ার অনুরোধ রইল।</p>
                         </div>
 
-                        <div class="relative z-10 border-t border-slate-800/80 pt-2 pb-1 text-[8px]">
-                            <div class="text-center font-semibold text-slate-400 mb-1">অফিস ঠিকানা:</div>
-                            <p id="cardAddress" class="text-center text-slate-200 leading-tight mb-2">২য় তলা, ডিজিটাল মার্কেট, ফরিদপুর সদর, ফরিদপুর।</p>
+                        <div id="backFooterBg" class="relative z-10 text-white text-[8px] px-3 py-2 transition-all duration-300">
+                            <p id="cardAddress" class="text-center text-white/90 leading-tight mb-2">২য় তলা, ডিজিটাল মার্কেট, ফরিদপুর সদর, ফরিদপুর।</p>
                             
                             <div class="flex flex-col items-center mt-1">
                                 <div class="w-16 h-6 flex items-center justify-center overflow-hidden mb-0.5">
-                                    <img id="cardSignature" src="https://via.placeholder.com/80x30?text=Signature" alt="Signature" class="max-w-full max-h-full object-contain filter invert opacity-80">
+                                    <img id="cardSignature" src="https://via.placeholder.com/80x30?text=Signature" alt="Signature" class="max-w-full max-h-full object-contain filter brightness-0 invert">
                                 </div>
-                                <div class="w-16 h-[1px] bg-slate-700 mb-0.5"></div>
-                                <span class="text-[7px] text-slate-500 font-bold uppercase tracking-wider">Authorized Signature</span>
+                                <div class="w-16 h-[0.5px] bg-white/50 mb-0.5"></div>
+                                <span class="text-[6px] text-white/70 font-bold uppercase tracking-wider">Authorized Signature</span>
                             </div>
                         </div>
                     </div>
@@ -188,7 +183,6 @@
     </div>
 
     <script>
-        // কালার প্যালেট কনфিগ
         const palettes = {
             blue: { primary: '#2563eb', secondary: '#1e40af', light: '#dbeafe', text: 'text-blue-600', fill: 'bg-blue-600' },
             emerald: { primary: '#059669', secondary: '#065f46', light: '#d1fae5', text: 'text-emerald-600', fill: 'bg-emerald-600' },
@@ -205,131 +199,137 @@
         let selectedDesign = 1;
         let selectedColor = 'blue';
 
-        // ১০০টি ভিন্ন জ্যামিতিক ডিজাইন মেকিং লজিক (১০টি মাদার শেপ লেআউট স্ট্রাকচার)
+        // সামনের এবং পিছনের পার্টকে হুবহু একই রকম ডিজাইনে রাখার জ্যামিতিক ইঞ্জিন
         function generateShapesHTML(designNum, colorKey) {
             const c = palettes[colorKey];
-            const layoutIndex = (designNum - 1) % 10; // ১০টি প্রধান আর্কিটেকচার
+            const layoutIndex = (designNum - 1) % 10; 
             
             let frontHTML = '';
             let backHTML = '';
 
             switch(layoutIndex) {
-                case 0: // ক্লাসিক কর্পোরেট কার্ভ
+                case 0: // কর্পোরেট কার্ভ থিম (সামনে ও পিছনে মিলানো)
                     frontHTML = `<svg class="w-full h-full" viewBox="0 0 200 320" preserveAspectRatio="none">
                         <path d="M0,0 L200,0 L200,60 Q100,90 0,60 Z" fill="${c.primary}"/>
                         <path d="M0,0 L200,0 L200,50 Q100,75 0,50 Z" fill="${c.secondary}" opacity="0.4"/>
                     </svg>`;
                     backHTML = `<svg class="w-full h-full" viewBox="0 0 200 320" preserveAspectRatio="none">
-                        <path d="M0,0 L200,0 L200,40 Q100,60 0,40 Z" fill="${c.primary}" opacity="0.3"/>
-                        <circle cx="200" cy="320" r="60" fill="${c.primary}" opacity="0.15"/>
+                        <path d="M0,0 L200,0 L200,60 Q100,90 0,60 Z" fill="${c.primary}"/>
+                        <path d="M0,0 L200,0 L200,50 Q100,75 0,50 Z" fill="${c.secondary}" opacity="0.4"/>
                     </svg>`;
                     break;
-                case 1: // ডায়াগোনাল মডার্ন ট্রায়াঙ্গেল
+                case 1: // ডায়াগোনাল ট্রায়াঙ্গেল থিম
                     frontHTML = `<svg class="w-full h-full" viewBox="0 0 200 320" preserveAspectRatio="none">
                         <polygon points="0,0 200,0 200,80 0,40" fill="${c.secondary}"/>
                         <polygon points="0,0 150,0 200,60 0,60" fill="${c.primary}" opacity="0.7"/>
                     </svg>`;
                     backHTML = `<svg class="w-full h-full" viewBox="0 0 200 320" preserveAspectRatio="none">
-                        <polygon points="0,0 200,0 200,30 0,50" fill="${c.secondary}" opacity="0.4"/>
-                        <polygon points="0,320 200,280 200,320" fill="${c.primary}" opacity="0.2"/>
+                        <polygon points="0,0 200,0 200,80 0,40" fill="${c.secondary}"/>
+                        <polygon points="0,0 150,0 200,60 0,60" fill="${c.primary}" opacity="0.7"/>
                     </svg>`;
                     break;
-                case 2: // ওয়েভ ও রয়্যাল আরক ডিজাইন
+                case 2: // রয়্যাল আরক থিম
                     frontHTML = `<svg class="w-full h-full" viewBox="0 0 200 320" preserveAspectRatio="none">
-                        <path d="M0,0 L200,0 L200,55 C150,80 50,40 0,75 Z" fill="${c.primary}"/>
+                        <path d="M0,0 L200,0 L200,65 C150,85 50,45 0,80 Z" fill="${c.primary}"/>
                     </svg>`;
                     backHTML = `<svg class="w-full h-full" viewBox="0 0 200 320" preserveAspectRatio="none">
-                        <path d="M0,0 L200,0 L200,35 C150,50 50,25 0,45 Z" fill="${c.primary}" opacity="0.3"/>
+                        <path d="M0,0 L200,0 L200,65 C150,85 50,45 0,80 Z" fill="${c.primary}"/>
                     </svg>`;
                     break;
-                case 3: // মিনিমাল বক্স স্ট্রাইপস
+                case 3: // মিনিমাল মডার্ন বক্স স্ট্রাইপস
                     frontHTML = `<div class="absolute top-0 left-0 right-0 h-16" style="background: ${c.primary}"></div>
                                  <div class="absolute top-16 left-0 right-0 h-2" style="background: ${c.secondary}"></div>`;
-                    backHTML = `<div class="absolute top-0 left-0 right-0 h-10" style="background: ${c.secondary}; opacity: 0.3"></div>`;
+                    backHTML = `<div class="absolute top-0 left-0 right-0 h-16" style="background: ${c.primary}"></div>
+                                 <div class="absolute top-16 left-0 right-0 h-2" style="background: ${c.secondary}"></div>`;
                     break;
-                case 4: // প্রিমিয়াম ডাবল গোল্ডেন সার্কেল কার্ভ
+                case 4: // ডাবল গোল্ডেন সার্কেল আরক
                     frontHTML = `<svg class="w-full h-full" viewBox="0 0 200 320" preserveAspectRatio="none">
                         <circle cx="100" cy="-30" r="110" fill="${c.primary}"/>
                         <circle cx="100" cy="-30" r="118" fill="none" stroke="${c.secondary}" stroke-width="2" opacity="0.5"/>
                     </svg>`;
                     backHTML = `<svg class="w-full h-full" viewBox="0 0 200 320" preserveAspectRatio="none">
-                        <circle cx="100" cy="-50" r="90" fill="${c.primary}" opacity="0.2"/>
+                        <circle cx="100" cy="-30" r="110" fill="${c.primary}"/>
+                        <circle cx="100" cy="-30" r="118" fill="none" stroke="${c.secondary}" stroke-width="2" opacity="0.5"/>
                     </svg>`;
                     break;
                 case 5: // জ্যামিতিক পলিগনাল আর্ট
                     frontHTML = `<svg class="w-full h-full" viewBox="0 0 200 320" preserveAspectRatio="none">
-                        <polygon points="0,0 200,0 200,45 100,75 0,45" fill="${c.primary}"/>
-                        <polygon points="0,0 200,0 200,35 100,60 0,35" fill="${c.secondary}" opacity="0.5"/>
+                        <polygon points="0,0 200,0 200,55 100,85 0,55" fill="${c.primary}"/>
+                        <polygon points="0,0 200,0 200,45 100,70 0,45" fill="${c.secondary}" opacity="0.5"/>
                     </svg>`;
                     backHTML = `<svg class="w-full h-full" viewBox="0 0 200 320" preserveAspectRatio="none">
-                        <polygon points="0,0 200,0 200,35 100,50 0,35" fill="${c.primary}" opacity="0.2"/>
+                        <polygon points="0,0 200,0 200,55 100,85 0,55" fill="${c.primary}"/>
+                        <polygon points="0,0 200,0 200,45 100,70 0,45" fill="${c.secondary}" opacity="0.5"/>
                     </svg>`;
                     break;
                 case 6: // ফুল বডি সাইডবার স্ট্রাইপ লুক
                     frontHTML = `<div class="absolute top-0 left-0 bottom-0 w-3" style="background: ${c.primary}"></div>
                                  <div class="absolute top-0 left-3 bottom-0 w-1" style="background: ${c.secondary}; opacity: 0.5"></div>
-                                 <div class="absolute top-0 left-0 right-0 h-12" style="background: linear-gradient(to bottom, ${c.light}, transparent)"></div>`;
-                    backHTML = `<div class="absolute top-0 left-0 bottom-0 w-2" style="background: ${c.primary}; opacity: 0.4"></div>`;
+                                 <div class="absolute top-0 left-0 right-0 h-14" style="background: linear-gradient(to bottom, ${c.light}, transparent)"></div>`;
+                    backHTML = `<div class="absolute top-0 left-0 bottom-0 w-3" style="background: ${c.primary}"></div>
+                                 <div class="absolute top-0 left-3 bottom-0 w-1" style="background: ${c.secondary}; opacity: 0.5"></div>
+                                 <div class="absolute top-0 left-0 right-0 h-14" style="background: linear-gradient(to bottom, ${c.light}, transparent)"></div>`;
                     break;
                 case 7: // অ্যাসিম্যাট্রিক স্ল্যান্ট ডিজাইন
                     frontHTML = `<svg class="w-full h-full" viewBox="0 0 200 320" preserveAspectRatio="none">
-                        <polygon points="0,0 200,0 200,90 0,55" fill="${c.primary}"/>
+                        <polygon points="0,0 200,0 200,95 0,60" fill="${c.primary}"/>
                     </svg>`;
                     backHTML = `<svg class="w-full h-full" viewBox="0 0 200 320" preserveAspectRatio="none">
-                        <polygon points="0,0 200,0 200,45 0,25" fill="${c.secondary}" opacity="0.3"/>
+                        <polygon points="0,0 200,0 200,95 0,60" fill="${c.primary}"/>
                     </svg>`;
                     break;
                 case 8: // টেক ফ্রেমওয়ার্ক জ্যামিতি
                     frontHTML = `<svg class="w-full h-full" viewBox="0 0 200 320" preserveAspectRatio="none">
-                        <path d="M0,0 L200,0 L200,50 L160,70 L40,70 L0,50 Z" fill="${c.secondary}"/>
+                        <path d="M0,0 L200,0 L200,55 L160,75 L40,75 L0,55 Z" fill="${c.secondary}"/>
                     </svg>`;
                     backHTML = `<svg class="w-full h-full" viewBox="0 0 200 320" preserveAspectRatio="none">
-                        <path d="M0,0 L200,0 L200,35 L160,50 L40,50 L0,35 Z" fill="${c.primary}" opacity="0.2"/>
+                        <path d="M0,0 L200,0 L200,55 L160,75 L40,75 L0,55 Z" fill="${c.secondary}"/>
                     </svg>`;
                     break;
                 case 9: // ডাবল ওয়েভ ইব
                     frontHTML = `<svg class="w-full h-full" viewBox="0 0 200 320" preserveAspectRatio="none">
-                        <path d="M0,0 L200,0 L200,70 C150,50 100,90 0,60 Z" fill="${c.primary}"/>
+                        <path d="M0,0 L200,0 L200,75 C150,55 100,95 0,65 Z" fill="${c.primary}"/>
                     </svg>`;
                     backHTML = `<svg class="w-full h-full" viewBox="0 0 200 320" preserveAspectRatio="none">
-                        <path d="M0,0 L200,0 L200,45 C150,35 100,55 0,40 Z" fill="${c.primary}" opacity="0.2"/>
+                        <path d="M0,0 L200,0 L200,75 C150,55 100,95 0,65 Z" fill="${c.primary}"/>
                     </svg>`;
                     break;
             }
             return { frontHTML, backHTML };
         }
 
-        // পুরো স্ক্রিন রেন্ডারিং ও কন্ট্রোল ইঞ্জিন
+        // রেন্ডারিং ও কন্ট্রোল ইঞ্জিন
         function renderCardTemplate() {
             const shapes = generateShapesHTML(selectedDesign, selectedColor);
             const c = palettes[selectedColor];
 
-            // শেপ ইনজেক্ট করা
             document.getElementById('frontShapes').innerHTML = shapes.frontHTML;
             document.getElementById('backShapes').innerHTML = shapes.backHTML;
 
-            // টেক্সট কালার থিমিং টিউনিং
             const companyEl = document.getElementById('cardCompany');
             const roleEl = document.getElementById('cardRole');
             const frameEl = document.getElementById('photoFrame');
-            const footerEl = document.getElementById('frontFooterBg');
-            const backIconBg = document.getElementById('backIconBg');
+            const frontFooterEl = document.getElementById('frontFooterBg');
+            const backFooterEl = document.getElementById('backFooterBg');
+            const backTitleEl = document.getElementById('backTitle');
 
             // ডিজাইন মোড নম্বর অনুযায়ী টেক্সট কালার ইনভার্স ম্যানেজমেন্ট
             const layoutIndex = (selectedDesign - 1) % 10;
             if(layoutIndex === 3 || layoutIndex === 6) {
-                companyEl.style.color = '#1e293b'; // ডার্ক টেক্সট
+                companyEl.style.color = '#1e293b'; 
+                backTitleEl.style.color = '#1e293b';
             } else {
-                companyEl.style.color = '#ffffff'; // হোয়াইট টেক্সট
+                companyEl.style.color = '#ffffff'; 
+                backTitleEl.style.color = '#ffffff';
             }
 
             roleEl.style.color = c.primary;
             frameEl.style.borderColor = c.light;
-            footerEl.style.backgroundColor = c.secondary;
-            backIconBg.style.backgroundColor = c.primary;
+            frontFooterEl.style.backgroundColor = c.secondary;
+            backFooterEl.style.backgroundColor = c.secondary;
         }
 
-        // ১০০টি ডিজাইন সিলেকশন বাটন জেনারেটর লুপিং
+        // ১০০টি ডিজাইন বাটন জেনারেটর
         function initDesignGrid() {
             const grid = document.getElementById('designGrid');
             for (let i = 1; i <= 100; i++) {
@@ -343,12 +343,8 @@
         }
 
         function selectDesignTemplate(num) {
-            // আগের বাটনের ডিজাইন রিমুভ
             document.getElementById(`btn-design-${selectedDesign}`).className = "py-1.5 text-xs font-bold rounded transition border bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100";
-            
             selectedDesign = num;
-            
-            // নতুন বাটন অ্যাক্টিভেট
             document.getElementById(`btn-design-${num}`).className = "py-1.5 text-xs font-bold rounded transition border bg-blue-600 text-white border-blue-600";
             renderCardTemplate();
         }
@@ -368,7 +364,7 @@
             document.getElementById('cardAddress').innerText = document.getElementById('inputAddress').value;
         }
 
-        // ইমেজ আপলোডার প্রিভিউ ইঞ্জিন (ডাইনামিক আইডি টার্গেটসহ)
+        // ইমেজ আপলোডার প্রিভিউ ইঞ্জিন
         function loadPhoto(event, targetImageId) {
             const output = document.getElementById(targetImageId);
             if(event.target.files[0]) {
@@ -377,7 +373,7 @@
             }
         }
 
-        // প্রফেশনাল ৩x প্রেস ডাউনলোড কোয়ালিটি ইঞ্জিন
+        // ডাউনলোড ইঞ্জিন
         function downloadCard(divId, filename) {
             const element = document.getElementById(divId);
             html2canvas(element, {
@@ -392,7 +388,6 @@
             });
         }
 
-        // উইন্ডো লোডে ইনিশিয়ালাইজেশন
         window.onload = function() {
             initDesignGrid();
             renderCardTemplate();
