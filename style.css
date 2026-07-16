@@ -1,0 +1,63 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Print specific configurations for standard A4 formatting */
+@page {
+    size: A4;
+    margin: 15mm 12mm;
+}
+
+/* Cross-browser alignment fallbacks */
+.vertical-align-top {
+    vertical-align: top;
+}
+
+/* PDF layout engine overrides to look crisp inside canvas */
+#pdfCanvas {
+    font-family: 'Times New Roman', 'Kalpurush', 'SolaimanLipi', sans-serif;
+    line-height: 1.5;
+    color: #1a1a1a;
+}
+
+#pdfCanvas h1 {
+    font-size: 22pt;
+    font-weight: bold;
+    color: #1e3a8a;
+    margin-bottom: 10px;
+}
+
+#pdfCanvas h2 {
+    font-size: 14pt;
+    font-weight: bold;
+    border-bottom: 1px solid #cbd5e1;
+    padding-bottom: 4px;
+    margin-top: 15px;
+    margin-bottom: 8px;
+    color: #1e40af;
+}
+
+#pdfCanvas p {
+    font-size: 11pt;
+    margin-bottom: 6px;
+    text-align: justify;
+}
+
+#pdfCanvas table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+#pdfCanvas th, #pdfCanvas td {
+    border: 1px solid #cbd5e1;
+    padding: 8px;
+    text-align: left;
+    font-size: 10.5pt;
+}
+
+#pdfCanvas th {
+    background-color: #f1f5f9;
+    font-weight: bold;
+}
