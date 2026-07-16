@@ -49,9 +49,9 @@
             <h2 class="text-base font-bold text-amber-400 border-b border-slate-700 pb-2">১. ডাটা এন্ট্রি প্যানেল</h2>
             
             <div class="space-y-3 text-sm">
-                <!-- ইমেজ আপলোডার ব্যাকগ্রাউন্ডের জন্য -->
+                <!-- ইমেজ আপলোডার (ব্যাকআপ হিসেবে রাখা হলো, গিটহাবের 1.jpg অটো লোড হবে) -->
                 <div>
-                    <label class="block text-xs font-semibold text-slate-400 mb-1">সার্টিফিকেট ব্যাকগ্রাউন্ড টেমপ্লেট (.jpg)</label>
+                    <label class="block text-xs font-semibold text-slate-400 mb-1">অন্য টেমপ্লেট পরিবর্তন করতে চাইলে (.jpg)</label>
                     <input type="file" id="bgUploader" accept="image/*" class="w-full text-xs bg-slate-700 p-1.5 rounded" onchange="loadBackground(event)">
                 </div>
                 
@@ -132,9 +132,10 @@
             
             <!-- ওয়ার্কস্পেস কন্টেইনার -->
             <div class="shadow-2xl origin-top scale-[0.65] xl:scale-[0.72] transform transition-transform duration-200 bg-white">
-                <div id="certificateContainer" style="background-image: url('blank-certificate.jpg');">
+                <!-- এখানে ব্যাকগ্রাউন্ড ইমেজ হিসেবে সরাসরি আপনার 1.jpg ফাইলটি দিয়ে দেওয়া হলো -->
+                <div id="certificateContainer" style="background-image: url('1.jpg');">
                     
-                    <!-- নিখুঁত পজিশনড টেক্সট লেয়ার সমুহ (হুবহু ৩ নম্বর ছবির পজিশন অনুযায়ী) -->
+                    <!-- নিখুঁত পজিশনড টেক্সট লেয়ার সমুহ -->
                     <div id="txtSerial" class="absolute left-[215px] top-[204px] text-[18px] cert-number">8119907</div>
                     <div id="txtDbchc" class="absolute left-[248px] top-[248px] text-[18px] cert-number">18224107</div>
                     <div id="txtRegNo" class="absolute left-[780px] top-[204px] text-[18px] cert-number">1310393961 / 2016</div>
@@ -176,7 +177,7 @@
             document.getElementById('txtPubDate').innerText = document.getElementById('inPubDate').value;
         }
 
-        // ফাঁকা সার্টিফিকেট ইমেজ ফাইল লোডার
+        // ফাঁকা সার্টিফিকেট ইমেজ ফাইল ম্যানুয়াল লোডার (যদি কখনো দরকার হয়)
         function loadBackground(event) {
             const container = document.getElementById('certificateContainer');
             if(event.target.files[0]) {
