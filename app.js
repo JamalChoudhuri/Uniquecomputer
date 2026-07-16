@@ -10,7 +10,6 @@ const layoutsRegistry = [
 const templates = [];
 for (let i = 1; i <= 50; i++) {
     const base = layoutsRegistry[(i - 1) % layoutsRegistry.length];
-    // গ্যালারিতে দেখানোর জন্য ভিন্ন ভিন্ন কালার টোন নির্ধারণ
     let pTone = '#1e3a8a'; let sTone = '#3b82f6';
     if(i % 4 === 1) { pTone = '#0f766e'; sTone = '#0d9488'; }
     if(i % 4 === 2) { pTone = '#7f1d1d'; sTone = '#dc2626'; }
@@ -101,7 +100,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("inp_coverLetterBody").value = dummyData.coverLetterBody;
 });
 
-// ৫০টি কার্ডের ভেতরে ১০০% রিয়েল মিনি-ভিজ্যুয়াল প্রিভিউ জেনারেট করার ফাংশন
 function renderTemplateGrid() {
     const grid = document.getElementById("templateGrid");
     grid.innerHTML = "";
@@ -111,7 +109,6 @@ function renderTemplateGrid() {
         card.id = `template-card-${t.id}`;
         card.className = "border border-slate-300 rounded-xl p-3 bg-white hover:border-cyan-500 hover:shadow-lg transition flex flex-col justify-between cursor-pointer";
         
-        // ভিজ্যুয়াল লেআউট আর্কিটেকচার স্ট্রাকচার রিপ্রেজেন্টেশন
         let visualBox = "";
         if (t.layout === 'two-column-left') {
             visualBox = `
@@ -313,11 +310,11 @@ function updateLivePreviews() {
         photoHtml = `<img src="${uploadedPhotoBase64}" style="width: 100px; height: 115px; border: 2px solid ${pColor}; object-fit: cover; border-radius: 6px;">`;
     }
 
-    // নিখুঁত অ্যালাইনমেন্ট ও জাস্টিফাইড টেক্সট মেকানিজম
+    // টেক্সট জাস্টিফাই ও ইমেইল র‍্যাপিং ফিক্সড মেথড
     const renderBlock = (title, content) => {
         if (!content || content.trim() === "") return "";
         return `
-            <div style="margin-bottom: 22px;">
+            <div style="margin-bottom: 22px; word-wrap: break-word; word-break: break-word;">
                 <h3 style="color: ${pColor}; border-bottom: 2px solid ${pColor}; padding-bottom: 3px; font-size: 11pt; font-weight: bold; margin-bottom: 8px; text-transform: uppercase; letter-spacing:0.3px;">${title}</h3>
                 <div style="font-size: 10pt; color: #334155; line-height: 1.6; text-align: justify; white-space: pre-line;">${content}</div>
             </div>
@@ -329,17 +326,22 @@ function updateLivePreviews() {
         formattedSkills = data.skills.split(',')
             .map(s => s.trim())
             .filter(s => s !== "")
-            .map(s => `<span style="display:inline-block; background:#f1f5f9; padding:4px 8px; margin:4px 4px 4px 0px; border-radius:4px; border-left:3px solid ${pColor}; font-size:9.5pt; font-weight:bold; color:#1e293b;">${s}</span>`)
+            .map(s => `<span style="display:inline-block; background:#f1f5f9; padding:4px 8px; margin:4px 4px 4px 0px; border-radius:4px; border-left:3px solid ${pColor}; font-size:9.5pt; font-weight:bold; color:#1e293b; word-break:break-all;">${s}</span>`)
             .join('');
     }
 
+    // জিমেইল বা টেক্সট বড় হলে যেন পরের লাইনে ভেঙে যায় তার স্ট্রং ফিক্স
+    const wrapValue = (val) => {
+        return `<span style="word-break: break-all; overflow-wrap: break-word; word-wrap: break-word;">${val}</span>`;
+    };
+
     let pTable = "";
     if(data.fatherName || data.motherName || data.dob || data.bloodGroup) {
-        pTable += `<table style="width:100%; border-collapse:collapse; font-size:10pt; text-align: left; line-height:1.9;">`;
-        if(data.fatherName) pTable += `<tr><td style="width:30%; font-weight:bold; color:#475569;">Father's Name</td><td>: ${data.fatherName}</td></tr>`;
-        if(data.motherName) pTable += `<tr><td style="font-weight:bold; color:#475569;">Mother's Name</td><td>: ${data.motherName}</td></tr>`;
-        if(data.dob) pTable += `<tr><td style="font-weight:bold; color:#475569;">Date of Birth</td><td>: ${data.dob}</td></tr>`;
-        if(data.bloodGroup) pTable += `<tr><td style="font-weight:bold; color:#475569;">Blood Group</td><td>: ${data.bloodGroup}</td></tr>`;
+        pTable += `<table style="width:100%; border-collapse:collapse; font-size:10pt; text-align: left; line-height:1.9; table-layout: fixed;">`;
+        if(data.fatherName) pTable += `<tr><td style="width:30%; font-weight:bold; color:#475569;">Father's Name</td><td>: ${wrapValue(data.fatherName)}</td></tr>`;
+        if(data.motherName) pTable += `<tr><td style="font-weight:bold; color:#475569;">Mother's Name</td><td>: ${wrapValue(data.motherName)}</td></tr>`;
+        if(data.dob) pTable += `<tr><td style="font-weight:bold; color:#475569;">Date of Birth</td><td>: ${wrapValue(data.dob)}</td></tr>`;
+        if(data.bloodGroup) pTable += `<tr><td style="font-weight:bold; color:#475569;">Blood Group</td><td>: ${wrapValue(data.bloodGroup)}</td></tr>`;
         pTable += `</table>`;
     }
 
@@ -347,13 +349,18 @@ function updateLivePreviews() {
     if (selectedTemplate.layout === 'two-column-left') {
         layoutHtml = `
             <div style="display: flex; gap: 24px; margin-top: 20px;">
-                <div style="width: 33%; background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                <div style="width: 33%; background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; box-sizing: border-box; word-break: break-word;">
                     <div style="display:flex; justify-content:center; margin-bottom:18px;">${photoHtml}</div>
-                    ${renderBlock("Contact Info", `<p style="font-size:9.5pt; line-height:1.6; text-align:left;"><b>Phone:</b><br>${data.mobile}<br><br><b>Email:</b><br>${data.email}<br><br><b>Address:</b><br>${data.address}</p>`)}
-                    <h3 style="color: ${pColor}; border-bottom: 2px solid ${pColor}; padding-bottom: 3px; font-size: 11pt; font-weight: bold; margin-bottom: 8px; text-transform: uppercase;">Skills</h3>
+                    <h3 style="color: ${pColor}; border-bottom: 2px solid ${pColor}; padding-bottom: 3px; font-size: 11pt; font-weight: bold; margin-bottom: 8px; text-transform: uppercase;">Contact Info</h3>
+                    <p style="font-size:9.5pt; line-height:1.6; text-align:left; word-break:break-all;">
+                        <b>Phone:</b><br>${data.mobile}<br><br>
+                        <b>Email:</b><br>${data.email}<br><br>
+                        <b>Address:</b><br>${data.address}
+                    </p>
+                    <h3 style="color: ${pColor}; border-bottom: 2px solid ${pColor}; padding-bottom: 3px; font-size: 11pt; font-weight: bold; margin-top: 20px; margin-bottom: 8px; text-transform: uppercase;">Skills</h3>
                     <div style="margin-top:5px;">${formattedSkills}</div>
                 </div>
-                <div style="width: 67%;">
+                <div style="width: 67%; word-break: break-word;">
                     ${renderBlock("Professional Objective", data.objective)}
                     ${renderBlock("Experience History", data.experience)}
                     ${renderBlock("Education & Qualifications", data.education)}
@@ -362,12 +369,12 @@ function updateLivePreviews() {
             </div>`;
     } else if (selectedTemplate.layout === 'single-clean') {
         layoutHtml = `
-            <div style="margin-top: 25px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid ${pColor}; padding-bottom: 15px; margin-bottom: 20px;">
-                    <div style="font-size: 10pt; line-height: 1.6; color:#475569; text-align:left;">
+            <div style="margin-top: 25px; word-break: break-word;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid ${pColor}; padding-bottom: 15px; margin-bottom: 20px; gap: 15px;">
+                    <div style="font-size: 10pt; line-height: 1.6; color:#475569; text-align:left; word-break: break-all; flex-grow: 1;">
                         📞 Phone: ${data.mobile} <br> ✉️ Email: ${data.email} <br> 📍 Address: ${data.address}
                     </div>
-                    ${photoHtml}
+                    <div>${photoHtml}</div>
                 </div>
                 ${renderBlock("Career Objective", data.objective)}
                 <div style="margin-bottom:20px;">
@@ -380,13 +387,13 @@ function updateLivePreviews() {
             </div>`;
     } else if (selectedTemplate.layout === 'bold-top-header') {
         layoutHtml = `
-            <div style="margin-top: 20px;">
-                <div style="background: ${pColor}; color: white; padding: 22px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
-                    <div>
+            <div style="margin-top: 20px; word-break: break-word;">
+                <div style="background: ${pColor}; color: white; padding: 22px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; gap: 15px;">
+                    <div style="flex-grow: 1;">
                         <h1 style="font-size: 22pt; font-weight: bold; margin: 0; text-transform: uppercase; color:#ffffff; letter-spacing:0.5px;">${data.fullName}</h1>
                         <p style="font-size: 11pt; margin: 5px 0 0 0; color:${sColor}; font-weight:bold;">${data.designation}</p>
                     </div>
-                    <div style="font-size: 9.5pt; text-align: right; line-height: 1.6; color:#ffffff;">
+                    <div style="font-size: 9.5pt; text-align: right; line-height: 1.6; color:#ffffff; word-break: break-all; min-width: 180px;">
                         📞 ${data.mobile}<br>✉️ ${data.email}<br>📍 ${data.address}
                     </div>
                 </div>
@@ -401,10 +408,10 @@ function updateLivePreviews() {
             </div>`;
     } else if (selectedTemplate.layout === 'split-symmetric') {
         layoutHtml = `
-            <div style="margin-top: 20px;">
-                <div style="border-bottom: 3px solid ${sColor}; padding-bottom: 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <div style="margin-top: 20px; word-break: break-word;">
+                <div style="border-bottom: 3px solid ${sColor}; padding-bottom: 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; gap: 15px;">
                     <div>${photoHtml}</div>
-                    <div style="text-align: right; font-size: 10pt; color: #475569; line-height:1.5;"><b>📍 Address:</b> ${data.address} <br> <b>📞 Phone:</b> ${data.mobile} <br> <b>✉️ Email:</b> ${data.email}</div>
+                    <div style="text-align: right; font-size: 10pt; color: #475569; line-height:1.5; word-break: break-all; flex-grow:1;"><b>📍 Address:</b> ${data.address} <br> <b>📞 Phone:</b> ${data.mobile} <br> <b>✉️ Email:</b> ${data.email}</div>
                 </div>
                 ${renderBlock("Career Objective", data.objective)}
                 <div style="margin-bottom:20px;">
@@ -417,12 +424,12 @@ function updateLivePreviews() {
             </div>`;
     } else {
         layoutHtml = `
-            <div style="margin-top: 20px; border: 2px solid ${pColor}; padding: 22px; border-radius: 12px;">
-                <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:22px;">
-                    <div>
+            <div style="margin-top: 20px; border: 2px solid ${pColor}; padding: 22px; border-radius: 12px; word-break: break-word;">
+                <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:22px; gap:15px;">
+                    <div style="flex-grow: 1;">
                         <h1 style="font-size: 20pt; font-weight: bold; color: ${pColor}; margin: 0; text-transform:uppercase;">${data.fullName}</h1>
                         <p style="font-size: 11pt; color: ${sColor}; font-weight: bold; margin-top: 4px;">${data.designation}</p>
-                        <p style="font-size: 9.5pt; margin-top:8px; color:#475569; text-align:left;">📍 ${data.address} | 📞 ${data.mobile} | ✉️ ${data.email}</p>
+                        <p style="font-size: 9.5pt; margin-top:8px; color:#475569; text-align:left; word-break: break-all;">📍 ${data.address} | 📞 ${data.mobile} | ✉️ ${data.email}</p>
                     </div>
                     ${photoHtml}
                 </div>
@@ -450,12 +457,12 @@ function updateLivePreviews() {
 
     letterCanvas.innerHTML = `
         <div style="font-family: Arial, sans-serif; color: #1e293b; font-size: 11pt;">
-            <div style="border-bottom: 3px solid ${pColor}; padding-bottom: 12px; margin-bottom: 30px; display:flex; justify-content:space-between; align-items:flex-end;">
-                <div style="text-align:left;">
+            <div style="border-bottom: 3px solid ${pColor}; padding-bottom: 12px; margin-bottom: 30px; display:flex; justify-content:space-between; align-items:flex-end; gap: 15px;">
+                <div style="text-align:left; flex-grow:1;">
                     <h1 style="font-size: 24pt; font-weight: bold; color: ${pColor}; margin: 0; text-transform: uppercase;">${data.fullName}</h1>
                     <p style="font-size: 12pt; color: ${sColor}; font-weight: 600; margin: 4px 0 0 0;">${data.designation}</p>
                 </div>
-                <div style="font-size: 9.5pt; text-align:right; color: #64748b; line-height:1.5;">
+                <div style="font-size: 9.5pt; text-align:right; color: #64748b; line-height:1.5; word-break: break-all; min-width: 180px;">
                     📞 ${data.mobile}<br>✉️ ${data.email}<br>📍 ${data.address}
                 </div>
             </div>
@@ -472,12 +479,12 @@ function updateLivePreviews() {
 
             <p style="margin-bottom: 15px; text-align:left;">Dear Sir/Madam,</p>
             
-            <p style="text-align: justify; margin-bottom: 25px; line-height:1.6; white-space: pre-line;">
+            <p style="text-align: justify; margin-bottom: 25px; line-height:1.6; white-space: pre-line; word-break: break-word;">
                 ${data.coverLetterBody}
             </p>
 
             <p style="margin-bottom: 40px; text-align:left;">Sincerely yours,</p>
-            <div style="width: 180px; border-top: 1px solid #94a3b8; padding-top: 5px; font-weight: bold; color: ${pColor}; text-align: center;">
+            <div style="width: 180px; border-top: 1px solid #94a3b8; padding-top: 5px; font-weight: bold; color: ${pColor}; text-align: center; word-break: break-all;">
                 ${data.fullName}
             </div>
         </div>
