@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>স্মার্ট সিভি ও কভার লেটার বিল্ডার ওয়ার্কস্পেস</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- Standalone html2pdf Library Setup -->
+    <!-- html2pdf.js এবং এর ডিপেন্ডেন্সি লাইব্রেরিসমূহ -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -26,11 +26,11 @@
             <!-- টেমপ্লেট গ্রিড এরিয়া -->
             <div id="templateGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
             
-            <!-- রিসেট/অন্য ডিজাইন দেখার বাটন (সিলেক্ট করার পর আসবে) -->
+            <!-- রিসেট/অন্য ডিজাইন দেখার বাটন -->
             <button id="resetGalleryBtn" onclick="resetGallery()" class="hidden mb-4 bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold py-2 px-4 rounded cursor-pointer">🔄 অন্য ডিজাইন পরিবর্তন করুন</button>
         </section>
 
-        <!-- ২. এডিটিং প্যানেল (সিলেকশনের পর দৃশ্যমান হবে) -->
+        <!-- ২. এডিটিং প্যানেল -->
         <section id="workspaceSection" class="hidden">
             <div class="block lg:table w-full border-collapse">
                 <div class="block lg:table-row">
@@ -74,10 +74,13 @@
                             <button id="tabLetterBtn" onclick="switchTab('letter')" class="px-4 py-2 bg-gray-200 text-gray-600 font-medium rounded-t-lg text-xs shadow-xs cursor-pointer">✉️ লাইভ কভার লেটার</button>
                         </div>
 
-                        <!-- ফাইনাল পেপার এরিয়া (A4 রেসিও ফিক্সড) -->
+                        <!-- ফাইনাল পেপার এরিয়া -->
                         <div class="bg-white p-2 rounded shadow-md overflow-x-auto">
-                            <div id="cvCanvas" class="bg-white p-8 mx-auto w-[650px] min-h-[880px]"></div>
-                            <div id="letterCanvas" class="hidden bg-white p-8 mx-auto w-[650px] min-h-[880px]"></div>
+                            <!-- ডাউনলোডের সমস্যা দূর করতে ফিক্সড কনফিগারেশন এরিয়া -->
+                            <div id="pdfWrapper" style="background: white; width: 100%; min-width: 650px;">
+                                <div id="cvCanvas" class="bg-white p-8 mx-auto" style="width: 100%; min-height: 880px; box-sizing: border-box;"></div>
+                                <div id="letterCanvas" class="hidden bg-white p-8 mx-auto" style="width: 100%; min-height: 880px; box-sizing: border-box;"></div>
+                            </div>
                         </div>
                     </div>
 
