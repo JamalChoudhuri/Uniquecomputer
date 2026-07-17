@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium ID Card Studio Studio - 50 Designs & Zero Clipping</title>
+    <title>Premium ID Card Studio - Perfect Preview Export</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     
     <style>
@@ -15,7 +16,7 @@
             background: #ffffff;
             font-family: 'Helvetica Neue', Arial, sans-serif;
             box-sizing: border-box;
-            padding: 8px;
+            overflow: hidden;
         }
         .svg-shape-layer {
             position: absolute;
@@ -42,7 +43,7 @@
 
     <header class="mb-4 text-center">
         <h1 class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-cyan-400 tracking-wide">ID Card Engine Pro</h1>
-        <p class="text-xs text-slate-400 mt-1">৫০টি সম্পূর্ণ প্রিমিয়াম ডিজাইন ও নো-কাটিং টেক্সট ফিক্সড সংস্করণ</p>
+        <p class="text-xs text-slate-400 mt-1">৫০টি ডিজাইন ও স্ক্রিন প্রিভিউ অনুযায়ী হুবহু ডাউনলোড সংস্করণ</p>
     </header>
 
     <div class="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
@@ -118,10 +119,10 @@
 
             <div class="space-y-2 pt-2 border-t border-slate-800">
                 <div class="grid grid-cols-2 gap-2">
-                    <button onclick="exportToPerfectPDF('front')" class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-black py-2.5 rounded text-xs tracking-wider shadow-lg active:scale-95">
+                    <button onclick="exportPerfectPreviewPDF('cardFront', 'Front')" class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-black py-2.5 rounded text-xs tracking-wider shadow-lg active:scale-95">
                         📄 FRONT SIDE (PDF)
                     </button>
-                    <button onclick="exportToPerfectPDF('back')" class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-black py-2.5 rounded text-xs tracking-wider shadow-lg active:scale-95">
+                    <button onclick="exportPerfectPreviewPDF('cardBack', 'Back')" class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-black py-2.5 rounded text-xs tracking-wider shadow-lg active:scale-95">
                         📄 BACK SIDE (PDF)
                     </button>
                 </div>
@@ -132,20 +133,20 @@
             
             <div class="flex flex-col items-center flex-shrink-0">
                 <span class="text-xs font-bold text-slate-500 mb-1.5 uppercase tracking-widest">Front Side Preview</span>
-                <div id="cardFront" class="id-card-render-box shadow-2xl rounded-lg overflow-hidden border border-gray-300">
+                <div id="cardFront" class="id-card-render-box shadow-2xl rounded-lg border border-gray-300">
                     <svg class="svg-shape-layer" viewBox="0 0 326 504" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="svgFrontShapes"></g>
                     </svg>
-                    <div class="relative z-20 h-full flex flex-col justify-between p-3">
+                    <div class="relative z-20 h-full flex flex-col justify-between p-4">
                         <div class="flex items-center gap-2">
                             <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center p-0.5 shadow-md">
                                 <img id="viewLogo" src="https://via.placeholder.com/40" class="w-full h-full object-contain rounded-full">
                             </div>
-                            <div id="txtCompany" class="font-black text-[11px] uppercase tracking-wide leading-tight line-clamp-2">DIGITAL COMPUTER & STUDIO</div>
+                            <div id="txtCompany" class="font-black text-[12px] uppercase tracking-wide leading-tight line-clamp-2">DIGITAL COMPUTER & STUDIO</div>
                         </div>
                         
                         <div class="flex justify-center my-2">
-                            <div id="photoFrame" class="bg-white shadow-md overflow-hidden flex items-center justify-center" style="width:100px; height:100px; border-radius:50%; border:3px solid #fff;">
+                            <div id="photoFrame" class="bg-white shadow-md overflow-hidden flex items-center justify-center" style="width:105px; height:105px; border-radius:50%; border:3px solid #fff;">
                                 <img id="viewUserPhoto" src="https://via.placeholder.com/150" class="w-full h-full object-cover">
                             </div>
                         </div>
@@ -155,13 +156,13 @@
                             <p id="txtDesignation" class="font-bold text-[11px] mt-0.5 truncate">Senior Graphic Designer</p>
                         </div>
 
-                        <div class="bg-gray-50/90 rounded p-2 space-y-1 text-[10px] text-gray-700 border border-gray-100">
+                        <div class="bg-gray-50/95 rounded-lg p-3 space-y-1 text-[11px] text-gray-700 border border-gray-100 shadow-sm">
                             <div class="flex justify-between"><span class="font-bold text-gray-400">ID NO:</span><span id="txtIdNo" class="font-mono font-bold text-gray-900">DCS-2026-089</span></div>
                             <div class="flex justify-between"><span class="font-bold text-gray-400">MOBILE:</span><span id="txtMobile" class="font-bold text-gray-900">+880 1712-345678</span></div>
                             <div class="flex justify-between"><span class="font-bold text-gray-400">ISSUE:</span><span id="txtIssue" class="font-medium text-gray-800">15/07/2026</span></div>
                         </div>
 
-                        <div id="footStrip" class="w-full h-[32px] rounded flex items-center justify-center text-[10px] font-bold uppercase tracking-widest text-center">
+                        <div id="footStrip" class="w-full h-[34px] rounded-md flex items-center justify-center text-[10px] font-bold uppercase tracking-widest text-center shadow-inner">
                             Identification Card
                         </div>
                     </div>
@@ -170,33 +171,34 @@
 
             <div class="flex flex-col items-center flex-shrink-0">
                 <span class="text-xs font-bold text-slate-500 mb-1.5 uppercase tracking-widest">Back Side Preview</span>
-                <div id="cardBack" class="id-card-render-box shadow-2xl rounded-lg overflow-hidden border border-gray-300 flex flex-col justify-between">
+                <div id="cardBack" class="id-card-render-box shadow-2xl rounded-lg border border-gray-300 flex flex-col justify-between">
                     <svg class="svg-shape-layer" viewBox="0 0 326 504" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="svgBackShapes"></g>
                     </svg>
+                    
                     <div class="h-28 relative z-20"></div>
                     
-                    <div class="relative z-20 px-4 flex-1 flex flex-col justify-start pt-4">
-                        <div class="flex items-center gap-1.5 mb-2">
+                    <div class="relative z-30 px-5 flex-1 flex flex-col justify-start pt-6 bg-white/80 backdrop-blur-[1px]">
+                        <div class="flex items-center gap-2 mb-2.5">
                             <div id="backAccentBar" class="w-1.5 h-4 rounded-sm"></div>
-                            <span class="text-[11px] font-extrabold text-gray-800 uppercase tracking-wider">Terms of Use</span>
+                            <span class="text-[12px] font-extrabold text-gray-900 uppercase tracking-wider">Terms of Use</span>
                         </div>
-                        <div class="space-y-1 text-[10px] text-gray-600 font-medium leading-tight">
+                        <div class="space-y-1.5 text-[10.5px] text-gray-700 font-semibold leading-relaxed">
                             <p id="txtTerm1">1. This card is non-transferable.</p>
                             <p id="txtTerm2">2. Holder must display this card while on duty.</p>
                             <p id="txtTerm3">3. If found, please return to office.</p>
                         </div>
-                        <div class="mt-3 pt-2 border-t border-dashed border-gray-300">
-                            <span class="block text-[8.5px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">Office Address:</span>
-                            <p id="txtAddress" class="text-[9.5px] text-gray-700 font-bold leading-tight">Main Road, Station Bazar, Faridpur.</p>
+                        <div class="mt-4 pt-3 border-t border-dashed border-gray-300">
+                            <span class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">Office Address:</span>
+                            <p id="txtAddress" class="text-[10px] text-gray-800 font-bold leading-tight">Main Road, Station Bazar, Faridpur.</p>
                         </div>
                     </div>
 
-                    <div class="relative z-20 bg-white/90 p-3 border-t border-gray-100 text-center flex flex-col items-center">
-                        <div class="h-8 w-28 flex items-end justify-center pb-0.5 overflow-hidden">
+                    <div class="relative z-30 bg-white p-3 border-t border-gray-100 text-center flex flex-col items-center">
+                        <div class="h-9 w-28 flex items-end justify-center pb-1 overflow-hidden">
                             <img id="viewSign" src="https://via.placeholder.com/120x35?text=Signature" class="max-h-full max-w-full object-contain">
                         </div>
-                        <span class="text-[8.5px] font-bold text-gray-800 border-t border-gray-300 pt-0.5 block w-full">Authorized Sign</span>
+                        <span class="text-[9px] font-bold text-gray-800 border-t border-gray-300 pt-0.5 block w-full">Authorized Sign</span>
                     </div>
                 </div>
             </div>
@@ -204,35 +206,30 @@
         </div>
     </div>
 
-    <canvas id="hiddenTextCanvas" style="display:none;"></canvas>
-
     <script>
         let activeShapeId = 1;
         let activePaletteId = 1;
 
-        // আপনার আগের ১০টি কালার প্যালেট সেট
         const masterPalettes = [
-            { primary: "#1e3a8a", secondary: "#3b82f6", textComp: "#ffffff" }, // P1
-            { primary: "#065f46", secondary: "#10b981", textComp: "#ffffff" }, // P2
-            { primary: "#111827", secondary: "#f97316", textComp: "#ffffff" }, // P3
-            { primary: "#4c1d95", secondary: "#a855f7", textComp: "#ffffff" }, // P4
-            { primary: "#0369a1", secondary: "#38bdf8", textComp: "#ffffff" }, // P5
-            { primary: "#b91c1c", secondary: "#f87171", textComp: "#ffffff" }, // P6
-            { primary: "#7c2d12", secondary: "#fb923c", textComp: "#ffffff" }, // P7
-            { primary: "#1e293b", secondary: "#94a3b8", textComp: "#ffffff" }, // P8
-            { primary: "#3f6212", secondary: "#a3e635", textComp: "#ffffff" }, // P9
-            { primary: "#db2777", secondary: "#f472b6", textComp: "#ffffff" }  // P10
+            { primary: "#1e3a8a", secondary: "#3b82f6", textComp: "#ffffff" }, 
+            { primary: "#065f46", secondary: "#10b981", textComp: "#ffffff" }, 
+            { primary: "#111827", secondary: "#f97316", textComp: "#ffffff" }, 
+            { primary: "#4c1d95", secondary: "#a855f7", textComp: "#ffffff" }, 
+            { primary: "#0369a1", secondary: "#38bdf8", textComp: "#ffffff" }, 
+            { primary: "#b91c1c", secondary: "#f87171", textComp: "#ffffff" }, 
+            { primary: "#7c2d12", secondary: "#fb923c", textComp: "#ffffff" }, 
+            { primary: "#1e293b", secondary: "#94a3b8", textComp: "#ffffff" }, 
+            { primary: "#3f6212", secondary: "#a3e635", textComp: "#ffffff" }, 
+            { primary: "#db2777", secondary: "#f472b6", textComp: "#ffffff" }  
         ];
 
-        // ৫০টি প্রিমিয়াম জিওমেট্রিক এবং কর্পোরেট ডিজাইন ডাইনামিক্যালি রেন্ডার করার অ্যালগরিদম ম্যাট্রিক্স
-        function getSvgPathData(id, p, s) {
-            let shapesHtml = '';
-            // বডি বা বেস ব্যাকগ্রাউন্ড এলিমেন্ট
-            shapesHtml += `<rect width="326" height="504" fill="#ffffff"/>`;
-
-            // ৫০টি নির্দিষ্ট প্রফেশনাল ভেক্টর ডিজাইনের জন্য লজিক ক্যালকুলেশন
+        // ৫০টি প্রিমিয়াম জ্যামিতিক ডিজাইন লজিক
+        function getSvgPathData(id, p, s, isBack = false) {
+            let shapesHtml = `<rect width="326" height="504" fill="#ffffff"/>`;
+            
+            // যদি ব্যাক পার্ট হয়, তবে ডিজাইন ছোট করে উপরে রাখা হবে যাতে টেক্সট সেভ থাকে
+            let offsetHeight = isBack ? 100 : (100 + (id * 1.5));
             let mod = id % 5;
-            let offsetHeight = 90 + (id * 1.5); // প্রতিটি আইডির জন্য ইউনিক হাইট রেশিও
 
             if (mod === 1) {
                 shapesHtml += `<path d="M0 0 H326 V${offsetHeight} L0 ${offsetHeight + 35} Z" fill="${p}"/>`;
@@ -251,46 +248,19 @@
                 shapesHtml += `<path d="M326 0 V${offsetHeight} L220 ${offsetHeight - 20} L326 0 Z" fill="${s}" opacity="0.2"/>`;
             }
 
-            // ৫০টি ডিজাইনের ভিন্নতা তৈরি করতে অতিরিক্ত জ্যামিতিক বটম এক্সেন্ট
-            if(id > 25) {
-                shapesHtml += `<path d="M0 504 text L326 504 V480 L250 504 Z" fill="${s}" opacity="0.3"/>`;
-            } else {
-                shapesHtml += `<path d="M0 504 H326 V490 H0 Z" fill="${p}" opacity="0.1"/>`;
+            // ৫০টি ডিজাইনের ভিন্নতার জন্য এক্সট্রা আর্ট এলিমেন্ট (শুধুমাত্র ফ্রন্ট সাইডের জন্য)
+            if(!isBack) {
+                if(id > 25) {
+                    shapesHtml += `<path d="M0 504 L326 504 V475 L240 504 Z" fill="${s}" opacity="0.4"/>`;
+                } else {
+                    shapesHtml += `<path d="M0 504 H326 V492 H0 Z" fill="${p}" opacity="0.15"/>`;
+                }
             }
 
             return shapesHtml;
         }
 
-        // টেক্সটের বাউন্ডারি সেফটি মার্জিন দিয়ে হাই-ডেফিনিশন ইমেজ জেনারেট করার ইঞ্জিন (কাটা পড়া রোধ করতে)
-        function generateTextAsImage(text, fontSize, color, isBold = false) {
-            const canvas = document.getElementById('hiddenTextCanvas');
-            const ctx = canvas.getContext('2d');
-            
-            const scale = 4; // প্রিন্ট কোয়ালিটি ধরে রাখতে ৪ গুণ হাই-রেজোলিউশন আপস্কেলিং
-            ctx.font = `${isBold ? 'bold' : 'normal'} ${fontSize * scale}px Arial, Helvetica, sans-serif`;
-            
-            const textWidth = ctx.measureText(text).width;
-            const textHeight = fontSize * scale * 1.6; // অক্ষরের উপরে/নিচে অতিরিক্ত ১৬০% সেফটি স্পেস প্যাডিং
-            
-            canvas.width = textWidth + 30;
-            canvas.height = textHeight;
-            
-            // ক্যানভাস সাইজ পরিবর্তনের পর ফন্ট রিবিল্ড
-            ctx.font = `${isBold ? 'bold' : 'normal'} ${fontSize * scale}px Arial, Helvetica, sans-serif`;
-            ctx.textBaseline = "middle";
-            ctx.fillStyle = color;
-            
-            // একদম মাঝখান থেকে টেক্সট ড্র করা যাতে বেসলাইনের বিন্দুমাত্র অংশও ক্লিপ বা কাট না হয়
-            ctx.fillText(text, 15, canvas.height / 2);
-            
-            return {
-                dataUrl: canvas.toDataURL('image/png'),
-                w: canvas.width / scale,
-                h: canvas.height / scale
-            };
-        }
-
-        // কন্ট্রোল প্যানেলে ৫০টি ডিজাইনের বাটন ডাইনামিক্যালি তৈরি
+        // গ্রিডে ৫০টি বাটন জেনারেট করা
         const shapeGrid = document.getElementById('shapeGridSelector');
         for (let i = 1; i <= 50; i++) {
             const btn = document.createElement('button');
@@ -301,7 +271,7 @@
             shapeGrid.appendChild(btn);
         }
 
-        // কন্ট্রোল প্যানেলে ১০টি প্রিমিয়াম কালার প্যালেট বাটন তৈরি
+        // ১০টি প্যালেট বাটন জেনারেট করা
         const paletteGrid = document.getElementById('paletteGridSelector');
         masterPalettes.forEach((pal, idx) => {
             const pId = idx + 1;
@@ -331,9 +301,11 @@
 
         function triggerCoreEngineRender() {
             const palette = masterPalettes[activePaletteId - 1];
-            const pathHtml = getSvgPathData(activeShapeId, palette.primary, palette.secondary);
-            document.getElementById('svgFrontShapes').innerHTML = pathHtml;
-            document.getElementById('svgBackShapes').innerHTML = pathHtml;
+            
+            // ফ্রন্ট ও ব্যাক সাইডের জন্য আলাদা আলাদা ডাইনামিক ডিজাইন ডাটা পাঠানো হচ্ছে
+            document.getElementById('svgFrontShapes').innerHTML = getSvgPathData(activeShapeId, palette.primary, palette.secondary, false);
+            document.getElementById('svgBackShapes').innerHTML = getSvgPathData(activeShapeId, palette.primary, palette.secondary, true);
+            
             document.getElementById('txtCompany').style.color = palette.textComp;
             document.getElementById('txtDesignation').style.color = palette.secondary;
             document.getElementById('footStrip').style.backgroundColor = palette.primary;
@@ -348,7 +320,7 @@
                 document.getElementById('btnRadCircle').className = "flex-1 bg-indigo-600 p-1.5 rounded text-xs font-bold text-white";
                 document.getElementById('btnRadSquare').className = "flex-1 bg-slate-700 p-1.5 rounded text-xs font-bold text-slate-300";
             } else {
-                pf.style.borderRadius = "6px";
+                pf.style.borderRadius = "8px";
                 document.getElementById('btnRadSquare').className = "flex-1 bg-indigo-600 p-1.5 rounded text-xs font-bold text-white";
                 document.getElementById('btnRadCircle').className = "flex-1 bg-slate-700 p-1.5 rounded text-xs font-bold text-slate-300";
             }
@@ -382,99 +354,35 @@
             }
         }
 
-        // ১০০% জিরো-ক্লিপিং এবং প্রিমিয়াম ভ্যাক্টোরিয়াল পিডিএফ জেনারেটর ইঞ্জিন
-        function exportToPerfectPDF(side) {
-            const { jsPDF } = window.jspdf;
-            
-            const doc = new jsPDF({
-                orientation: 'portrait',
-                unit: 'mm',
-                format: [54, 86]
+        // WYSIWYG ইঞ্জিন: স্ক্রিনে যা দেখা যাচ্ছে ঠিক সেটিকে হুবহু পিডিএফে কনভার্ট করার ফাংশন
+        function exportPerfectPreviewPDF(elementId, sideName) {
+            const element = document.getElementById(elementId);
+            const nameAttr = document.getElementById('inName').value.replace(/\s+/g, '_');
+
+            // হাই-রেজোলিউশন কোয়ালিটি নিশ্চিত করার কনফিগারেশন
+            const opt = {
+                scale: 4, // ৪ গুণ শার্প রেজোলিউশন (বিন্দুমাত্র ফাটবে না বা কাটবে না)
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: null
+            };
+
+            html2canvas(element, opt).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF({
+                    orientation: 'portrait',
+                    unit: 'mm',
+                    format: [54, 86] // ইন্টারন্যাশনাল আইডি কার্ড স্ট্যান্ডার্ড সাইজ
+                });
+
+                // একদম মার্জিন জিরো করে ক্যানভাস ইমেজটি বসানো
+                pdf.addImage(imgData, 'PNG', 0, 0, 54, 86);
+                pdf.save(`ID_${sideName}_${nameAttr}.pdf`);
+            }).catch(err => {
+                alert("পিডিএফ জেনারেট করতে সমস্যা হয়েছে, অনুগ্রহ করে আবার চেষ্টা করুন।");
             });
-
-            const pal = masterPalettes[activePaletteId - 1];
-            const name = document.getElementById('inName').value;
-            const company = document.getElementById('inCompany').value;
-
-            // ভ্যাক্টোরিয়াল ব্যাকগ্রাউন্ড জেনারেট
-            let targetHeight = 24 + (activeShapeId * 0.3);
-
-            if(side === 'front') {
-                // Header Base Dynamic Design
-                doc.setFillColor(pal.primary);
-                doc.rect(0, 0, 54, targetHeight, 'F');
-                
-                doc.setFillColor(pal.secondary);
-                doc.rect(0, targetHeight, 54, 1.5, 'F');
-                
-                // ১. প্রতিষ্ঠানের নামের ফন্ট কাটা রোধ করতে Matrix Image জেনারেট করে ইনসার্ট
-                const compImg = generateTextAsImage(company, 11, pal.textComp, true);
-                const compTargetWidth = Math.min(compImg.w * 0.22, 46);
-                const compX = (54 - compTargetWidth) / 2;
-                doc.addImage(compImg.dataUrl, 'PNG', compX, 7, compTargetWidth, compImg.h * 0.22);
-
-                // User Photo Block
-                const userPhotoImg = document.getElementById('viewUserPhoto');
-                try { doc.addImage(userPhotoImg, 'JPEG', 17, 30, 20, 20); } catch(e){}
-
-                // ২. কাস্টমারের নাম এবং পদবী ম্যাট্রিক্স কনভার্সন (বিন্দুমাত্র কাটা যাবে না)
-                const nameImg = generateTextAsImage(name, 13, '#111827', true);
-                const nameTargetWidth = Math.min(nameImg.w * 0.23, 46);
-                const nameX = (54 - nameTargetWidth) / 2;
-                doc.addImage(nameImg.dataUrl, 'PNG', nameX, 53, nameTargetWidth, nameImg.h * 0.23);
-                
-                const desigImg = generateTextAsImage(document.getElementById('inDesignation').value, 9.5, pal.secondary, true);
-                const desigTargetWidth = Math.min(desigImg.w * 0.23, 44);
-                const desigX = (54 - desigTargetWidth) / 2;
-                doc.addImage(desigImg.dataUrl, 'PNG', desigX, 58, desigTargetWidth, desigImg.h * 0.23);
-
-                // আইডি কার্ডের অন্যান্য ইনফরমেশন টেক্সট ডাটা
-                doc.setTextColor('#374151');
-                doc.setFontSize(6.5);
-                doc.text(`ID NO: ${document.getElementById('inIdNo').value}`, 8, 67);
-                doc.text(`MOBILE: ${document.getElementById('inMobile').value}`, 8, 71);
-                doc.text(`ISSUE DATE: ${document.getElementById('inIssue').value}`, 8, 75);
-
-                // Footer Bottom Strip
-                doc.setFillColor(pal.primary);
-                doc.rect(0, 80, 54, 6, 'F');
-                doc.setTextColor(pal.textComp);
-                doc.setFontSize(6);
-                doc.text("IDENTIFICATION CARD", 27, 84, { align: 'center' });
-
-            } else {
-                // Back Side Base Header
-                doc.setFillColor(pal.primary);
-                doc.rect(0, 0, 54, 14, 'F');
-
-                doc.setTextColor('#111827');
-                doc.setFont('Helvetica', 'bold');
-                doc.setFontSize(8);
-                doc.text("Terms of Use", 8, 23);
-
-                doc.setFont('Helvetica', 'normal');
-                doc.setFontSize(6.5);
-                doc.setTextColor('#4b5563');
-                doc.text(document.getElementById('inTerm1').value, 8, 29);
-                doc.text(document.getElementById('inTerm2').value, 8, 34);
-                doc.text(document.getElementById('inTerm3').value, 8, 39);
-
-                doc.setFont('Helvetica', 'bold');
-                doc.text("Office Address:", 8, 49);
-                doc.setFont('Helvetica', 'normal');
-                doc.text(document.getElementById('inAddress').value, 8, 53, { maxWidth: 38 });
-
-                // Authorized Signature Block
-                const signImg = document.getElementById('viewSign');
-                try { doc.addImage(signImg, 'JPEG', 15, 67, 24, 8); } catch(e){}
-                
-                doc.setDrawColor('#d1d5db');
-                doc.line(12, 76, 42, 76);
-                doc.setFontSize(6);
-                doc.text("Authorized Sign", 27, 79, { align: 'center' });
-            }
-
-            doc.save(`ID_${side === 'front' ? 'Front' : 'Back'}_${name.replace(/\s+/g, '_')}.pdf`);
         }
 
         triggerCoreEngineRender();
