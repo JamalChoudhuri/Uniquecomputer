@@ -123,13 +123,20 @@
             </div>
         </div>
 
-       <!-- কার্ডের প্রধান কন্টেইনার -->
-<div id="cardFront" class="id-card-render-box shadow-2xl rounded-xl border border-gray-200 overflow-hidden relative">
-    
-    <!-- SVG লেয়ার -->
-    <svg class="svg-shape-layer" viewBox="0 0 326 504" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g id="svgFrontShapes"></g>
-    </svg>
+      <div class="lg:col-span-7 flex flex-col md:flex-row gap-4 justify-center items-center bg-slate-900 p-5 rounded-xl border border-slate-800 shadow-2xl overflow-x-auto custom-scrollbar">
+            
+            <div class="flex flex-col items-center flex-shrink-0">
+                <span class="text-xs font-bold text-slate-500 mb-1.5 uppercase tracking-widest">Front Side Preview</span>
+                <div id="cardFront" class="id-card-render-box shadow-2xl rounded-xl border border-gray-200">
+                    <svg class="svg-shape-layer" viewBox="0 0 326 504" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g id="svgFrontShapes"></g>
+                    </svg>
+                    <div class="absolute top-0 left-0 w-full px-4 pt-3.5 flex items-center gap-2 z-20">
+                        <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center p-0.5 shadow-md flex-shrink-0">
+                            <img id="viewLogo" src="https://via.placeholder.com/40" class="w-full h-full object-contain rounded-full" crossOrigin="anonymous">
+                        </div>
+                        <div id="txtCompany" class="font-black text-[11px] uppercase tracking-wide leading-tight line-clamp-2">DIGITAL COMPUTER & STUDIO</div>
+                    </div>
     
     <!-- Logo & Company Container -->
     <div class="absolute top-0 left-0 w-full px-4 pt-3.5 flex items-center gap-2 z-20">
@@ -231,135 +238,7 @@
          function getSvgPathData(id, p, s) {
         const designs = [
             /* ডিজাইন ১ এর কোড পেস্ট করুন */ `
-<defs>
-    <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="${p}"/>
-        <stop offset="100%" stop-color="${s}"/>
-    </linearGradient>
 
-    <linearGradient id="g2" x1="100%" y1="0%" x2="0%" y2="100%">
-        <stop offset="0%" stop-color="${s}" stop-opacity="0.95"/>
-        <stop offset="100%" stop-color="${p}" stop-opacity="0.35"/>
-    </linearGradient>
-
-    <linearGradient id="glass1" x1="0%" y1="0%" x2="0%" y2="100%">
-        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.55"/>
-        <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-    </linearGradient>
-</defs>
-
-<!-- Main Header -->
-<path
-d="M0 0
-H326
-V115
-C285 130 245 145 205 135
-C155 123 110 95 60 108
-C30 116 15 130 0 142
-Z"
-fill="url(#g1)"/>
-
-<!-- Premium Ribbon -->
-<path
-d="M0 0
-H326
-V82
-C270 98 220 110 170 100
-C110 88 55 58 0 72
-Z"
-fill="url(#g2)"
-opacity="0.82"/>
-
-<!-- Glass Layer -->
-<path
-d="M0 0
-H326
-V60
-C270 72 210 82 150 72
-C90 62 40 40 0 48
-Z"
-fill="url(#glass1)"/>
-
-<!-- Right Crystal -->
-<polygon
-points="250,0 326,0 326,118"
-fill="${s}"
-opacity="0.22"/>
-
-<polygon
-points="285,0 326,0 326,82"
-fill="#ffffff"
-opacity="0.12"/>
-
-<!-- Left Accent -->
-<polygon
-points="0,0 95,0 0,82"
-fill="#ffffff"
-opacity="0.10"/>
-
-<!-- Bottom Ribbon -->
-<path
-d="
-M0 140
-C70 115 120 118 175 132
-C235 148 280 138 326 118
-V138
-C275 162 220 170 170 158
-C110 145 60 150 0 175
-Z"
-fill="${s}"
-opacity="0.32"/>
-
-<!-- Decorative Crystal Lines -->
-<path
-d="M20 25 L95 55"
-stroke="#ffffff"
-stroke-width="2"
-opacity="0.18"/>
-
-<path
-d="M235 30 L315 75"
-stroke="#ffffff"
-stroke-width="2"
-opacity="0.15"/>
-
-<path
-d="M130 18 L210 42"
-stroke="#ffffff"
-stroke-width="1.5"
-opacity="0.15"/>
-
-<!-- Floating Circles -->
-<circle
-cx="292"
-cy="38"
-r="7"
-fill="#ffffff"
-opacity="0.18"/>
-
-<circle
-cx="270"
-cy="62"
-r="4"
-fill="#ffffff"
-opacity="0.25"/>
-
-<circle
-cx="44"
-cy="52"
-r="5"
-fill="#ffffff"
-opacity="0.15"/>
-
-<!-- Shine -->
-<path
-d="M0 0
-L85 0
-L0 85
-Z"
-fill="#ffffff"
-opacity="0.06"/>
-`,
             /* ডিজাইন ২ এর কোড পেস্ট করুন */ `<defs>
 
 <linearGradient id="shieldMain" x1="0%" y1="0%" x2="100%" y2="100%">
