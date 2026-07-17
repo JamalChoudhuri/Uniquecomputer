@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate ID Card Generator - 50 Authentic Designs</title>
+    <title>Ultimate PNG ID Card Studio - 50 Dynamic Themes</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     
     <style>
-        /* CR80 Standard Precision ID Card Ratio */
-        .id-card {
+        /* CR80 Standard Precision ID Card Size (Ratio Maintained for HD Export) */
+        .id-container {
             width: 326px;
             height: 504px;
             position: relative;
@@ -17,16 +17,16 @@
             background: #ffffff;
             font-family: 'Helvetica Neue', Arial, sans-serif;
         }
-        .design-engine {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        .shape-engine {
+            transition: all 0.3s ease;
         }
     </style>
 </head>
 <body class="bg-slate-900 min-h-screen text-slate-100 p-4 flex flex-col items-center select-none">
 
     <header class="mb-4 text-center">
-        <h1 class="text-2xl font-bold text-blue-400 tracking-wide">Digital ID Card Smart Studio</h1>
-        <p class="text-xs text-slate-400 mt-1">৫০টি সম্পূর্ণ আলাদা অথেনটিক প্রফেশনাল আর্কিটেকচার থিম ইঞ্জিন</p>
+        <h1 class="text-2xl font-bold text-blue-400 tracking-wide">Professional ID Card Studio (PNG Edition)</h1>
+        <p class="text-xs text-slate-400 mt-1">৫০টি আলাদা কালার প্যালেট + কাস্টম কালার কন্ট্রোল ও সামঞ্জস্যপূর্ণ ব্যাক ডিজাইন</p>
     </header>
 
     <div class="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
@@ -35,105 +35,129 @@
             
             <div>
                 <div class="flex justify-between items-center mb-1.5">
-                    <label class="text-xs font-bold text-blue-400 uppercase">৫০টি আলাদা অথেনটিক ডিজাইন সিলেক্ট করুন:</label>
-                    <span id="activeDesignTitle" class="text-xs text-emerald-400 font-mono bg-emerald-950/50 px-2 py-0.5 rounded border border-emerald-800/50">Design #1: Classic Tech Corporate</span>
+                    <label class="text-xs font-bold text-blue-400 uppercase">৫০টি আলাদা অথেনটিক ডিজাইন ও কালার প্যালেট:</label>
+                    <span id="activeDesignTitle" class="text-xs text-emerald-400 font-mono bg-emerald-950/50 px-2 py-0.5 rounded border border-emerald-800/50">Design #1</span>
                 </div>
-                <div class="grid grid-cols-10 gap-1 bg-slate-900 p-2 rounded-lg border border-slate-700 max-h-[140px] overflow-y-auto" id="designSelectorGrid">
+                <div class="grid grid-cols-10 gap-1 bg-slate-900 p-2 rounded-lg border border-slate-700 max-h-[120px] overflow-y-auto" id="designSelectorGrid">
                     </div>
+            </div>
+
+            <div class="bg-slate-700/30 p-2 rounded-lg border border-slate-600/50">
+                <label class="block text-xs font-bold text-amber-400 uppercase mb-2">ম্যানুয়াল কালার অ্যাডজাস্টমেন্ট (পছন্দমতো মিক্স করুন):</label>
+                <div class="grid grid-cols-3 gap-2">
+                    <div>
+                        <label class="block text-[10px] text-slate-400 mb-0.5">Primary Color</label>
+                        <input type="color" id="cpPrimary" class="w-full h-7 bg-slate-800 rounded cursor-pointer p-0.5" oninput="applyManualColor()">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] text-slate-400 mb-0.5">Secondary Color</label>
+                        <input type="color" id="cpSecondary" class="w-full h-7 bg-slate-800 rounded cursor-pointer p-0.5" oninput="applyManualColor()">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] text-slate-400 mb-0.5">Header Text</label>
+                        <input type="color" id="cpText" class="w-full h-7 bg-slate-800 rounded cursor-pointer p-0.5" oninput="applyManualColor()">
+                    </div>
+                </div>
             </div>
 
             <div class="grid grid-cols-3 gap-2 bg-slate-700/30 p-2 rounded-lg">
                 <div>
                     <label class="block text-[10px] text-slate-400 mb-1">১. ছবি আপলোড</label>
-                    <input type="file" id="upUser" accept="image/*" class="w-full text-[9px] bg-slate-700 p-1 rounded cursor-pointer" onchange="uploadMedia(event, 'viewUserPhoto')">
+                    <input type="file" accept="image/*" class="w-full text-[9px] bg-slate-700 p-1 rounded cursor-pointer" onchange="uploadMedia(event, 'viewUserPhoto')">
                 </div>
                 <div>
                     <label class="block text-[10px] text-slate-400 mb-1">২. লোগো/মনোগ্রাম</label>
-                    <input type="file" id="upLogo" accept="image/*" class="w-full text-[9px] bg-slate-700 p-1 rounded cursor-pointer" onchange="uploadMedia(event, 'viewLogo')">
+                    <input type="file" accept="image/*" class="w-full text-[9px] bg-slate-700 p-1 rounded cursor-pointer" onchange="uploadMedia(event, 'viewLogo')">
                 </div>
                 <div>
                     <label class="block text-[10px] text-slate-400 mb-1">৩. অথরাইজড সিগনেচার</label>
-                    <input type="file" id="upSign" accept="image/*" class="w-full text-[9px] bg-slate-700 p-1 rounded cursor-pointer" onchange="uploadMedia(event, 'viewSign')">
+                    <input type="file" accept="image/*" class="w-full text-[9px] bg-slate-700 p-1 rounded cursor-pointer" onchange="uploadMedia(event, 'viewSign')">
                 </div>
             </div>
 
-            <div class="space-y-2.5">
+            <div class="space-y-2">
                 <div class="grid grid-cols-2 gap-2">
                     <div>
                         <label class="block text-xs text-slate-400 mb-0.5">প্রতিষ্ঠানের নাম</label>
-                        <input type="text" id="inCompany" value="DIGITAL COMPUTER & STUDIO" class="w-full bg-slate-700 px-2 py-1 rounded text-white focus:outline-none focus:ring-1 focus:ring-blue-500" oninput="updateCardData()">
+                        <input type="text" id="inCompany" value="DIGITAL COMPUTER & STUDIO" class="w-full bg-slate-700 px-2 py-1 rounded text-white text-xs focus:ring-1 focus:ring-blue-500" oninput="updateCardData()">
                     </div>
                     <div>
                         <label class="block text-xs text-slate-400 mb-0.5">কার্ডধারীর নাম</label>
-                        <input type="text" id="inName" value="Md. Asaduzzaman" class="w-full bg-slate-700 px-2 py-1 rounded text-white focus:outline-none focus:ring-1 focus:ring-blue-500" oninput="updateCardData()">
+                        <input type="text" id="inName" value="Md. Asaduzzaman" class="w-full bg-slate-700 px-2 py-1 rounded text-white text-xs focus:ring-1 focus:ring-blue-500" oninput="updateCardData()">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-2 gap-2">
                     <div>
                         <label class="block text-xs text-slate-400 mb-0.5">পদবী / ডেজিগনেশন</label>
-                        <input type="text" id="inDesignation" value="Senior Graphic Designer" class="w-full bg-slate-700 px-2 py-1 rounded text-white focus:outline-none focus:ring-1 focus:ring-blue-500" oninput="updateCardData()">
+                        <input type="text" id="inDesignation" value="Senior Graphic Designer" class="w-full bg-slate-700 px-2 py-1 rounded text-white text-xs focus:ring-1 focus:ring-blue-500" oninput="updateCardData()">
                     </div>
                     <div>
                         <label class="block text-xs text-slate-400 mb-0.5">আইডি নম্বর</label>
-                        <input type="text" id="inIdNo" value="DCS-2026-089" class="w-full bg-slate-700 px-2 py-1 rounded text-white focus:outline-none focus:ring-1 focus:ring-blue-500" oninput="updateCardData()">
+                        <input type="text" id="inIdNo" value="DCS-2026-089" class="w-full bg-slate-700 px-2 py-1 rounded text-white text-xs focus:ring-1 focus:ring-blue-500" oninput="updateCardData()">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-2 gap-2">
                     <div>
                         <label class="block text-xs text-slate-400 mb-0.5">মোবাইল নম্বর</label>
-                        <input type="text" id="inMobile" value="+880 1712-345678" class="w-full bg-slate-700 px-2 py-1 rounded text-white focus:outline-none focus:ring-1 focus:ring-blue-500" oninput="updateCardData()">
+                        <input type="text" id="inMobile" value="+880 1712-345678" class="w-full bg-slate-700 px-2 py-1 rounded text-white text-xs focus:ring-1 focus:ring-blue-500" oninput="updateCardData()">
                     </div>
                     <div>
                         <label class="block text-xs text-slate-400 mb-0.5">ইস্যু তারিখ</label>
-                        <input type="text" id="inIssue" value="15/07/2026" class="w-full bg-slate-700 px-2 py-1 rounded text-white focus:outline-none focus:ring-1 focus:ring-blue-500" oninput="updateCardData()">
+                        <input type="text" id="inIssue" value="15/07/2026" class="w-full bg-slate-700 px-2 py-1 rounded text-white text-xs focus:ring-1 focus:ring-blue-500" oninput="updateCardData()">
                     </div>
                 </div>
 
                 <div class="space-y-1">
-                    <label class="block text-xs font-semibold text-blue-400">Terms & Conditions (ইংরেজীতে এডিট করুন)</label>
-                    <input type="text" id="inTerm1" value="1. This card is non-transferable and property of organization." class="w-full bg-slate-700 px-2 py-1 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500" oninput="updateCardData()">
-                    <input type="text" id="inTerm2" value="2. Holder must display this card while on duty." class="w-full bg-slate-700 px-2 py-1 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500" oninput="updateCardData()">
-                    <input type="text" id="inTerm3" value="3. If found, please return to the office address below." class="w-full bg-slate-700 px-2 py-1 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500" oninput="updateCardData()">
+                    <label class="block text-xs font-semibold text-blue-400">Terms & Conditions (ইংরেজীতে)</label>
+                    <input type="text" id="inTerm1" value="1. This card is non-transferable and property of organization." class="w-full bg-slate-700 px-2 py-1 rounded text-white text-[11px]" oninput="updateCardData()">
+                    <input type="text" id="inTerm2" value="2. Holder must display this card while on duty." class="w-full bg-slate-700 px-2 py-1 rounded text-white text-[11px]" oninput="updateCardData()">
+                    <input type="text" id="inTerm3" value="3. If found, please return to the office address below." class="w-full bg-slate-700 px-2 py-1 rounded text-white text-[11px]" oninput="updateCardData()">
                 </div>
 
                 <div>
-                    <label class="block text-xs text-slate-400 mb-0.5">প্রতিষ্ঠানের ঠিকানা (শর্তাবলীর ঠিক নিচে ফিট হবে)</label>
-                    <textarea id="inAddress" rows="2" class="w-full bg-slate-700 px-2 py-1 rounded text-white text-xs focus:outline-none focus:ring-1 focus:ring-blue-500" oninput="updateCardData()">Main Road, Station Bazar, Faridpur, Bangladesh.</textarea>
+                    <label class="block text-xs text-slate-400 mb-0.5">প্রতিষ্ঠানের ঠিকানা</label>
+                    <textarea id="inAddress" rows="1.5" class="w-full bg-slate-700 px-2 py-1 rounded text-white text-xs" oninput="updateCardData()">Main Road, Station Bazar, Faridpur, Bangladesh.</textarea>
                 </div>
             </div>
 
-            <button onclick="downloadIDPDF()" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-2.5 rounded-lg transition shadow-lg tracking-wide flex items-center justify-center gap-2">
-                📥 আল্ট্রা HD প্রিন্ট রেডি PDF ডাউনলোড
-            </button>
+            <div class="grid grid-cols-2 gap-2 pt-1">
+                <button onclick="downloadPNG('cardFront', 'Front')" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 rounded-lg transition text-xs shadow-lg tracking-wide">
+                    📸 ডাউনলোড Front PNG
+                </button>
+                <button onclick="downloadPNG('cardBack', 'Back')" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 rounded-lg transition text-xs shadow-lg tracking-wide">
+                    📸 ডাউনলোড Back PNG
+                </button>
+            </div>
         </div>
 
         <div class="lg:col-span-7 flex flex-col md:flex-row gap-4 justify-center items-center bg-slate-800 p-5 rounded-xl border border-slate-700 shadow-xl overflow-x-auto">
             
-            <div class="flex flex-col items-center">
-                <span class="text-xs font-bold text-slate-400 mb-1.5 uppercase tracking-widest">Front Side</span>
-                <div id="cardFront" class="id-card shadow-2xl rounded-xl border border-gray-200">
+            <div class="flex flex-col items-center flex-shrink-0">
+                <span class="text-xs font-bold text-slate-400 mb-1.5 uppercase tracking-widest">Front Side (Official Size)</span>
+                <div id="cardFront" class="id-container shadow-2xl rounded-xl border border-gray-300">
                     
-                    <div id="shapeLayer1" class="design-engine absolute w-full"></div>
-                    <div id="shapeLayer2" class="design-engine absolute w-full"></div>
+                    <div id="fShape1" class="shape-engine absolute w-full"></div>
+                    <div id="fShape2" class="shape-engine absolute w-full"></div>
                     
-                    <div id="logoFrame" class="absolute w-9 h-9 bg-white rounded-full flex items-center justify-center p-0.5 shadow-md z-20">
-                        <img id="viewLogo" src="https://via.placeholder.com/40" class="w-full h-full object-contain rounded-full">
+                    <div class="absolute top-0 left-0 w-full px-3 pt-3 flex items-center gap-2 z-20" id="headerAlignmentBox">
+                        <div id="logoFrame" class="w-8 h-8 bg-white rounded-full flex items-center justify-center p-0.5 shadow-md flex-shrink-0">
+                            <img id="viewLogo" src="https://via.placeholder.com/40" class="w-full h-full object-contain rounded-full">
+                        </div>
+                        <div id="txtCompany" class="font-bold text-[11px] uppercase tracking-wide leading-tight line-clamp-2">DIGITAL COMPUTER & STUDIO</div>
                     </div>
                     
-                    <div id="txtCompany" class="absolute font-bold text-sm tracking-wide leading-tight z-20">DIGITAL COMPUTER & STUDIO</div>
-                    
-                    <div id="photoFrame" class="absolute bg-white p-1 shadow-md z-20 overflow-hidden">
+                    <div id="photoFrame" class="absolute bg-white p-1 shadow-md z-20 overflow-hidden flex items-center justify-center">
                         <img id="viewUserPhoto" src="https://via.placeholder.com/150" class="w-full h-full object-cover">
                     </div>
                     
-                    <div class="absolute left-0 w-full text-center px-4 z-20" style="top: 220px;">
-                        <h2 id="txtName" class="text-gray-900 font-extrabold text-base tracking-wide uppercase">Md. Asaduzzaman</h2>
-                        <p id="txtDesignation" class="design-engine font-bold text-xs mt-0.5">Senior Graphic Designer</p>
+                    <div class="absolute left-0 w-full text-center px-4 z-20" style="top: 222px;">
+                        <h2 id="txtName" class="text-gray-900 font-extrabold text-sm tracking-wide uppercase truncate">Md. Asaduzzaman</h2>
+                        <p id="txtDesignation" class="shape-engine font-bold text-[11px] mt-0.5 truncate">Senior Graphic Designer</p>
                     </div>
 
-                    <div class="absolute top-[285px] left-5 right-5 space-y-2 text-[11px] text-gray-700 border-t border-b border-gray-100 py-2.5 z-20">
+                    <div class="absolute top-[282px] left-5 right-5 space-y-1.5 text-[11px] text-gray-700 border-t border-b border-gray-100 py-2 z-20">
                         <div class="flex justify-between items-center">
                             <span class="font-bold text-gray-400 uppercase tracking-wider text-[9px]">ID Number:</span>
                             <span id="txtIdNo" class="font-mono font-bold text-gray-900">DCS-2026-089</span>
@@ -148,42 +172,45 @@
                         </div>
                     </div>
 
-                    <div id="footStrip" class="design-engine absolute bottom-0 left-0 w-full h-[40px] flex items-center justify-center text-[9px] font-bold uppercase tracking-widest z-20">
+                    <div id="footStrip" class="shape-engine absolute bottom-0 left-0 w-full h-[38px] flex items-center justify-center text-[10px] font-bold uppercase tracking-widest z-20">
                         Identification Card
                     </div>
                 </div>
             </div>
 
-            <div class="flex flex-col items-center">
-                <span class="text-xs font-bold text-slate-400 mb-1.5 uppercase tracking-widest">Back Side</span>
-                <div id="cardBack" class="id-card shadow-2xl rounded-xl border border-gray-200 flex flex-col justify-between p-4.5 bg-slate-50/50">
+            <div class="flex flex-col items-center flex-shrink-0">
+                <span class="text-xs font-bold text-slate-400 mb-1.5 uppercase tracking-widest">Back Side (Official Size)</span>
+                <div id="cardBack" class="id-container shadow-2xl rounded-xl border border-gray-200 flex flex-col justify-between bg-slate-50">
                     
-                    <div class="w-full">
-                        <div class="flex items-center gap-1.5 mb-2.5">
-                            <div id="backAccentBar" class="design-engine w-1.5 h-4.5 rounded-sm"></div>
-                            <span class="text-xs font-extrabold text-gray-800 uppercase tracking-wider">Terms of Use</span>
+                    <div id="bShape1" class="shape-engine absolute w-full"></div>
+                    <div id="bShape2" class="shape-engine absolute w-full"></div>
+
+                    <div class="w-full px-4 pt-16 z-20 relative">
+                        <div class="flex items-center gap-1.5 mb-2">
+                            <div id="backAccentBar" class="shape-engine w-1.5 h-4 rounded-sm"></div>
+                            <span class="text-[11px] font-extrabold text-gray-800 uppercase tracking-wider">Terms of Use</span>
                         </div>
                         
-                        <div class="space-y-1.5 text-[10px] text-gray-600 font-medium leading-relaxed pl-0.5">
+                        <div class="space-y-1 text-[10px] text-gray-600 font-medium leading-tight pl-0.5">
                             <p id="txtTerm1">1. This card is non-transferable and property of organization.</p>
                             <p id="txtTerm2">2. Holder must display this card while on duty.</p>
                             <p id="txtTerm3">3. If found, please return to the office address below.</p>
                         </div>
 
-                        <div class="mt-3.5 pt-3 border-t border-dashed border-gray-200 pl-0.5">
+                        <div class="mt-3 pt-2.5 border-t border-dashed border-gray-300 pl-0.5">
                             <span class="block text-[8.5px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">Office Address:</span>
                             <p id="txtAddress" class="text-[9.5px] text-gray-700 font-bold leading-tight">Main Road, Station Bazar, Faridpur, Bangladesh.</p>
                         </div>
                     </div>
 
-                    <div class="w-full grid grid-cols-2 gap-3 items-end mt-auto pt-2">
-                        <div class="text-center flex flex-col items-center">
-                            <div class="w-10 h-10 bg-white/80 rounded-full border border-gray-200 border-2 border-dashed flex items-center justify-center text-[8px] font-bold text-gray-300 uppercase tracking-tighter">Seal</div>
-                            <span class="text-[8.5px] text-gray-400 block mt-0.5">Official Seal</span>
+                    <div class="w-full grid grid-cols-2 gap-3 items-end p-4 z-20 relative mt-auto">
+                        <div class="text-center flex flex-col items-center justify-end">
+                            <div class="w-9 h-9 bg-white/90 rounded-full border-2 border-dashed border-gray-300 flex items-center justify-center text-[8px] font-bold text-gray-400 uppercase tracking-tighter shadow-sm">Seal</div>
+                            <span class="text-[8.5px] text-gray-400 block mt-1">Official Seal</span>
                         </div>
                         
-                        <div class="text-center flex flex-col items-center">
-                            <div class="h-10 w-full flex items-end justify-center pb-0.5">
+                        <div class="text-center flex flex-col items-center justify-end">
+                            <div class="h-9 w-full flex items-end justify-center pb-0.5 overflow-hidden">
                                 <img id="viewSign" src="https://via.placeholder.com/100x35?text=Signature" class="max-h-full max-w-full object-contain">
                             </div>
                             <span class="text-[8.5px] font-bold text-gray-800 border-t border-gray-300 pt-0.5 block w-full">Authorized Sign</span>
@@ -198,215 +225,222 @@
     </div>
 
     <script>
-        // ৫০টি ডিজাইন কনসেপ্টের ডেটা ম্যাট্রিক্স (হুবহু আলাদা কালার স্কিম ও শেপ টাইপ)
+        // ৫০টি সম্পূর্ণ আলাদা কালার প্যালেট ও শেপ আর্কিটেকচার টাইপস ডাটাবেস
         const themesDatabase = [
-            { title: "Classic Tech Corporate", primary: "#1e3a8a", secondary: "#3b82f6", bgType: "skew", textComp: "#ffffff" },
-            { title: "Emerald Organic Studio", primary: "#065f46", secondary: "#10b981", bgType: "curve", textComp: "#ffffff" },
-            { title: "Cyber Neon Orange", primary: "#111827", secondary: "#f97316", bgType: "split", textComp: "#f97316" },
-            { title: "Royal Purple Creative", primary: "#4c1d95", secondary: "#a855f7", bgType: "diagonal", textComp: "#ffffff" },
-            { title: "Minimal Carbon Grey", primary: "#1f2937", secondary: "#9ca3af", bgType: "block", textComp: "#ffffff" },
-            { title: "Crimson Medical Trust", primary: "#991b1b", secondary: "#ef4444", bgType: "skew", textComp: "#ffffff" },
-            { title: "Ocean Deep Navigation", primary: "#0f766e", secondary: "#14b8a6", bgType: "curve", textComp: "#ffffff" },
-            { title: "Sunset Vivid Blast", primary: "#7c2d12", secondary: "#f59e0b", bgType: "split", textComp: "#ffffff" },
-            { title: "Midnight Luxury Silk", primary: "#030712", secondary: "#d97706", bgType: "diagonal", textComp: "#d97706" },
-            { title: "Cyberpunk Grid Toxic", primary: "#0f172a", secondary: "#22c55e", bgType: "block", textComp: "#22c55e" },
-            { title: "Navy Shield Agency", primary: "#172554", secondary: "#60a5fa", bgType: "arc", textComp: "#ffffff" },
-            { title: "Forest Wild Tech", primary: "#14532d", secondary: "#4ade80", bgType: "trapezoid", textComp: "#ffffff" },
-            { title: "Hot Magenta Edge", primary: "#2e1065", secondary: "#ec4899", bgType: "wave", textComp: "#ffffff" },
-            { title: "Industrial Golden Steel", primary: "#292524", secondary: "#eab308", bgType: "chevron", textComp: "#eab308" },
-            { title: "Deep Sea Atlantic", primary: "#1d4ed8", secondary: "#38bdf8", bgType: "arc", textComp: "#ffffff" },
-            { title: "Vintage Terracotta", primary: "#7c2d12", secondary: "#fb923c", bgType: "trapezoid", textComp: "#ffffff" },
-            { title: "Luxury Violet Diamond", primary: "#3b0764", secondary: "#c084fc", bgType: "wave", textComp: "#ffffff" },
-            { title: "Dark Stealth Shadow", primary: "#020617", secondary: "#475569", bgType: "chevron", textComp: "#ffffff" },
-            { title: "Chili Pepper Dynamic", primary: "#7f1d1d", secondary: "#f87171", bgType: "arc", textComp: "#ffffff" },
-            { title: "Teal Modern Matrix", primary: "#134e4a", secondary: "#2dd4bf", bgType: "trapezoid", textComp: "#ffffff" },
-            { title: "Aero Blue Skywise", primary: "#0369a1", secondary: "#7dd3fc", bgType: "stripe", textComp: "#ffffff" },
-            { title: "Eco Lime Renewable", primary: "#1c1917", secondary: "#a3e635", bgType: "glass", textComp: "#a3e635" },
-            { title: "Plum Premium Craft", primary: "#581c87", secondary: "#f472b6", bgType: "stripe", textComp: "#ffffff" },
-            { title: "Gold Bar Elite Class", primary: "#1e1b4b", secondary: "#fbbf24", bgType: "glass", textComp: "#fbbf24" },
-            { title: "Bronze Heavy Duty", primary: "#451a03", secondary: "#fb923c", bgType: "stripe", textComp: "#ffffff" },
-            { title: "Slate Modern Square", primary: "#334155", secondary: "#cbd5e1", bgType: "glass", textComp: "#ffffff" },
-            { title: "Maroon Shield Royal", primary: "#4c0519", secondary: "#fda4af", bgType: "stripe", textComp: "#ffffff" },
-            { title: "Electric Cyan Pulse", primary: "#081c15", secondary: "#06b6d4", bgType: "glass", textComp: "#06b6d4" },
-            { title: "Coffee House Vintage", primary: "#431407", secondary: "#d97706", bgType: "stripe", textComp: "#ffffff" },
-            { title: "Charcoal Minimal Bold", primary: "#18181b", secondary: "#e4e4e7", bgType: "glass", textComp: "#ffffff" },
-            { title: "Skyline Highrise", primary: "#0b132b", secondary: "#48cae4", bgType: "pillar", textComp: "#ffffff" },
-            { title: "Acid Lemon Sharp", primary: "#000000", secondary: "#d4fc79", bgType: "prism", textComp: "#d4fc79" },
-            { title: "Crimson Silk Ribbon", primary: "#4a000f", secondary: "#ff4d6d", bgType: "pillar", textComp: "#ffffff" },
-            { title: "Alpine Fresh Mint", primary: "#1a3a2a", secondary: "#96e6a1", bgType: "prism", textComp: "#ffffff" },
-            { title: "Indigo Flash Radar", primary: "#1e004a", secondary: "#70e000", bgType: "pillar", textComp: "#ffffff" },
-            { title: "Nordic Frost Pale", primary: "#2b2d42", secondary: "#8d99ae", bgType: "prism", textComp: "#ffffff" },
-            { title: "Solar Eclipse Fire", primary: "#1c1c1c", secondary: "#ff6b35", bgType: "pillar", textComp: "#ff6b35" },
-            { title: "Deep Forest Bamboo", primary: "#0b2512", secondary: "#a7c957", bgType: "prism", textComp: "#ffffff" },
-            { title: "Abstract Blue Geometric", primary: "#03045e", secondary: "#00b4d8", bgType: "pillar", textComp: "#ffffff" },
-            { title: "Toxic Green Grid", primary: "#0d0d0d", secondary: "#39ff14", bgType: "prism", textComp: "#39ff14" },
-            { title: "Imperial Dynasty Gold", primary: "#270101", secondary: "#e6ad12", bgType: "crown", textComp: "#e6ad12" },
-            { title: "Titanium Cybernetic", primary: "#25282a", secondary: "#00e5ff", bgType: "shield", textComp: "#ffffff" },
-            { title: "Wineyard Premium Cellar", primary: "#310817", secondary: "#ff758c", bgType: "crown", textComp: "#ffffff" },
-            { title: "Marine Coastal Navy", primary: "#001219", secondary: "#0096c7", bgType: "shield", textComp: "#ffffff" },
-            { title: "Midnight Aurora Violet", primary: "#10002b", secondary: "#e0aaff", bgType: "crown", textComp: "#ffffff" },
-            { title: "Desert Dust Nomad", primary: "#3d261b", secondary: "#e09f67", bgType: "shield", textComp: "#ffffff" },
-            { title: "Graphite Red Racer", primary: "#111111", secondary: "#d00000", bgType: "crown", textComp: "#ffffff" },
-            { title: "Jungle Python Skin", primary: "#132a13", secondary: "#ecf39e", bgType: "shield", textComp: "#ffffff" },
-            { title: "Royal Crown Diamond", primary: "#0f052d", secondary: "#ff007f", bgType: "crown", textComp: "#ffffff" },
-            { title: "Shadow Black Phantom", primary: "#000000", secondary: "#333333", bgType: "shield", textComp: "#ffffff" }
+            { primary: "#1e3a8a", secondary: "#3b82f6", textComp: "#ffffff", bgType: "skew" },
+            { primary: "#065f46", secondary: "#10b981", textComp: "#ffffff", bgType: "curve" },
+            { primary: "#111827", secondary: "#f97316", textComp: "#f97316", bgType: "split" },
+            { primary: "#4c1d95", secondary: "#a855f7", textComp: "#ffffff", bgType: "diagonal" },
+            { primary: "#1f2937", secondary: "#9ca3af", textComp: "#ffffff", bgType: "block" },
+            { primary: "#991b1b", secondary: "#ef4444", textComp: "#ffffff", bgType: "skew" },
+            { primary: "#0f766e", secondary: "#14b8a6", textComp: "#ffffff", bgType: "curve" },
+            { primary: "#7c2d12", secondary: "#f59e0b", textComp: "#ffffff", bgType: "split" },
+            { primary: "#030712", secondary: "#d97706", textComp: "#d97706", bgType: "diagonal" },
+            { primary: "#0f172a", secondary: "#22c55e", textComp: "#22c55e", bgType: "block" },
+            { primary: "#172554", secondary: "#60a5fa", textComp: "#ffffff", bgType: "arc" },
+            { primary: "#14532d", secondary: "#4ade80", textComp: "#ffffff", bgType: "trapezoid" },
+            { primary: "#2e1065", secondary: "#ec4899", textComp: "#ffffff", bgType: "wave" },
+            { primary: "#292524", secondary: "#eab308", textComp: "#eab308", bgType: "chevron" },
+            { primary: "#1d4ed8", secondary: "#38bdf8", textComp: "#ffffff", bgType: "arc" },
+            { primary: "#7c2d12", secondary: "#fb923c", textComp: "#ffffff", bgType: "trapezoid" },
+            { primary: "#3b0764", secondary: "#c084fc", textComp: "#ffffff", bgType: "wave" },
+            { primary: "#020617", secondary: "#475569", textComp: "#ffffff", bgType: "chevron" },
+            { primary: "#7f1d1d", secondary: "#f87171", textComp: "#ffffff", bgType: "arc" },
+            { primary: "#134e4a", secondary: "#2dd4bf", textComp: "#ffffff", bgType: "trapezoid" },
+            { primary: "#0369a1", secondary: "#7dd3fc", textComp: "#ffffff", bgType: "stripe" },
+            { primary: "#1c1917", secondary: "#a3e635", textComp: "#a3e635", bgType: "glass" },
+            { primary: "#581c87", secondary: "#f472b6", textComp: "#ffffff", bgType: "stripe" },
+            { primary: "#1e1b4b", secondary: "#fbbf24", textComp: "#fbbf24", bgType: "glass" },
+            { primary: "#451a03", secondary: "#fb923c", textComp: "#ffffff", bgType: "stripe" },
+            { primary: "#334155", secondary: "#cbd5e1", textComp: "#ffffff", bgType: "glass" },
+            { primary: "#4c0519", secondary: "#fda4af", textComp: "#ffffff", bgType: "stripe" },
+            { primary: "#081c15", secondary: "#06b6d4", textComp: "#06b6d4", bgType: "glass" },
+            { primary: "#431407", secondary: "#d97706", textComp: "#ffffff", bgType: "stripe" },
+            { primary: "#18181b", secondary: "#e4e4e7", textComp: "#ffffff", bgType: "glass" },
+            { primary: "#0b132b", secondary: "#48cae4", textComp: "#ffffff", bgType: "pillar" },
+            { primary: "#000000", secondary: "#d4fc79", textComp: "#d4fc79", bgType: "prism" },
+            { primary: "#4a000f", secondary: "#ff4d6d", textComp: "#ffffff", bgType: "pillar" },
+            { primary: "#1a3a2a", secondary: "#96e6a1", textComp: "#ffffff", bgType: "prism" },
+            { primary: "#1e004a", secondary: "#70e000", textComp: "#ffffff", bgType: "pillar" },
+            { primary: "#2b2d42", secondary: "#8d99ae", textComp: "#ffffff", bgType: "prism" },
+            { primary: "#1c1c1c", secondary: "#ff6b35", textComp: "#ff6b35", bgType: "pillar" },
+            { primary: "#0b2512", secondary: "#a7c957", textComp: "#ffffff", bgType: "prism" },
+            { primary: "#03045e", secondary: "#00b4d8", textComp: "#ffffff", bgType: "pillar" },
+            { primary: "#0d0d0d", secondary: "#39ff14", textComp: "#39ff14", bgType: "prism" },
+            { primary: "#270101", secondary: "#e6ad12", textComp: "#e6ad12", bgType: "crown" },
+            { primary: "#25282a", secondary: "#00e5ff", textComp: "#ffffff", bgType: "shield" },
+            { primary: "#310817", secondary: "#ff758c", textComp: "#ffffff", bgType: "crown" },
+            { primary: "#001219", secondary: "#0096c7", textComp: "#ffffff", bgType: "shield" },
+            { primary: "#10002b", secondary: "#e0aaff", textComp: "#ffffff", bgType: "crown" },
+            { primary: "#3d261b", secondary: "#e09f67", textComp: "#ffffff", bgType: "shield" },
+            { primary: "#111111", secondary: "#d00000", textComp: "#ffffff", bgType: "crown" },
+            { primary: "#132a13", secondary: "#ecf39e", textComp: "#ffffff", bgType: "shield" },
+            { primary: "#0f052d", secondary: "#ff007f", textComp: "#ffffff", bgType: "crown" },
+            { primary: "#000000", secondary: "#333333", textComp: "#ffffff", bgType: "shield" }
         ];
 
-        // ৫০টি বাটন জেনারেট ইঞ্জিন
+        let currentBgType = "skew";
+
+        // ৫০টি ডাইনামিক বাটন রেন্ডার ইঞ্জিন
         const grid = document.getElementById('designSelectorGrid');
         themesDatabase.forEach((t, index) => {
             const btn = document.createElement('button');
-            btn.className = `h-7 text-[10px] font-bold rounded text-white flex items-center justify-center transition-transform hover:scale-105 active:scale-95`;
+            btn.className = `h-6 text-[10px] font-bold rounded flex items-center justify-center transition-transform hover:scale-105 active:scale-95 text-white`;
             btn.style.backgroundColor = t.primary;
-            btn.style.border = `1px solid ${t.secondary}`;
+            btn.style.border = `1.5px solid ${t.secondary}`;
             btn.innerText = index + 1;
-            btn.title = t.title;
-            btn.onclick = () => renderActiveTheme(index);
+            btn.onclick = () => loadThemePalette(index);
             grid.appendChild(btn);
         });
 
-        // থিম ইঞ্জিন রেন্ডারার
-        function renderActiveTheme(index) {
+        // থিম লোডার ও কালার সিঙ্ক ইঞ্জিন (ফ্রন্ট এবং ব্যাক একসঙ্গে ম্যাচ করবে)
+        function loadThemePalette(index) {
             const theme = themesDatabase[index];
-            document.getElementById('activeDesignTitle').innerText = `Design #${index + 1}: ${theme.title}`;
+            document.getElementById('activeDesignTitle').innerText = `Design #${index + 1}`;
             
-            const l1 = document.getElementById('shapeLayer1');
-            const l2 = document.getElementById('shapeLayer2');
+            // কালার পিকারে ভ্যালু সেট
+            document.getElementById('cpPrimary').value = theme.primary;
+            document.getElementById('cpSecondary').value = theme.secondary;
+            document.getElementById('cpText').value = theme.textComp;
+            
+            currentBgType = theme.bgType;
+            executeShapeRender(theme.primary, theme.secondary, theme.textComp);
+        }
+
+        // কাস্টম ম্যানুয়াল কালার পিকার অ্যাপ্লাই ইঞ্জিন
+        function applyManualColor() {
+            const pri = document.getElementById('cpPrimary').value;
+            const sec = document.getElementById('cpSecondary').value;
+            const txt = document.getElementById('cpText').value;
+            executeShapeRender(pri, sec, txt);
+        }
+
+        // মূল শেপ ও আর্কিটেকচার কালার জেনারেটর (ফ্রন্ট ও ব্যাক পারফেক্ট ম্যাচিং)
+        function executeShapeRender(primary, secondary, textComp) {
+            const f1 = document.getElementById('fShape1');
+            const f2 = document.getElementById('fShape2');
+            const b1 = document.getElementById('bShape1');
+            const b2 = document.getElementById('bShape2');
+            
             const comp = document.getElementById('txtCompany');
-            const lf = document.getElementById('logoFrame');
             const pf = document.getElementById('photoFrame');
             const des = document.getElementById('txtDesignation');
             const fs = document.getElementById('footStrip');
             const bac = document.getElementById('backAccentBar');
 
-            // রিসেট ও সিএসএস প্রিপারেশন
-            l1.removeAttribute('style');
-            l2.removeAttribute('style');
+            // রিসেট ও বেসিক সিএসএস ফিক্সিং
+            f1.removeAttribute('style'); f2.removeAttribute('style');
+            b1.removeAttribute('style'); b2.removeAttribute('style');
             
-            l1.style.top = "0px";
-            l1.style.left = "0px";
-            l1.style.height = "115px";
-            l1.style.background = theme.primary;
+            // ফ্রন্ট ও ব্যাক প্রাইমারি শেপ হাইট সেটআপ
+            f1.style.top = "0px"; f1.style.left = "0px"; f1.style.height = "125px"; f1.style.background = primary;
+            b1.style.top = "0px"; b1.style.left = "0px"; b1.style.height = "125px"; b1.style.background = primary;
             
-            // ইউনিভার্সাল থিম রুলস
-            comp.style.color = theme.textComp;
-            des.style.color = theme.secondary;
-            fs.style.background = theme.primary;
-            fs.style.color = theme.textComp;
-            bac.style.background = theme.primary;
+            // সার্বিক টেক্সট কালার এবং ফুটস্ট্রিপ ম্যাচিং
+            comp.style.color = textComp;
+            des.style.color = secondary;
+            fs.style.background = primary;
+            fs.style.color = textComp;
+            bac.style.background = primary;
 
-            // ৫০টি আর্কিটেকচার স্ট্রাকচারাল টাইপস ম্যাপিং ইঞ্জিন
-            if (theme.bgType === "skew") {
-                l1.style.clipPath = "polygon(0 0, 100% 0, 100% 75%, 0 100%)";
-                lf.style.cssText = "top: 14px; left: 16px; border-radius: 50%;";
-                comp.style.cssText = "top: 22px; left: 66px;";
-                pf.style.cssText = "top: 85px; left: 108px; width: 110px; height: 110px; border-radius: 50%;";
+            // ৫০টি টাইপের জিওমেট্রিক আর্কিটেকচার ম্যাপিং (সামঞ্জস্যপূর্ণ ফ্রন্ট ও ব্যাক)
+            if (currentBgType === "skew") {
+                const clip = "polygon(0 0, 100% 0, 100% 70%, 0 100%)";
+                f1.style.clipPath = clip; b1.style.clipPath = clip;
+                pf.style.cssText = "top: 92px; left: 108px; width: 110px; height: 110px; border-radius: 50%; border: 3px solid #fff;";
             } 
-            else if (theme.bgType === "curve") {
-                l1.style.clipPath = "ellipse(75% 55% at 50% 40%)";
-                lf.style.cssText = "top: 14px; left: 144px; border-radius: 50%;";
-                comp.style.cssText = "top: 56px; left: 0px; width: 100%; text-align: center;";
-                pf.style.cssText = "top: 92px; left: 108px; width: 110px; height: 110px; border-radius: 50%; border: 3px solid " + theme.secondary;
+            else if (currentBgType === "curve") {
+                const clip = "ellipse(80% 60% at 50% 40%)";
+                f1.style.clipPath = clip; b1.style.clipPath = clip;
+                pf.style.cssText = "top: 95px; left: 108px; width: 110px; height: 110px; border-radius: 50%; border: 3px solid " + secondary;
             }
-            else if (theme.bgType === "split") {
-                l1.style.height = "140px";
-                l1.style.clipPath = "polygon(0 0, 100% 0, 100% 100%, 0 70%)";
-                l2.style.cssText = "top: 0; left: 0; w-full; height: 145px; z-index: 5; opacity: 0.4;";
-                l2.style.background = theme.secondary;
-                l2.style.clipPath = "polygon(0 0, 100% 0, 100% 80%, 0 100%)";
-                lf.style.cssText = "top: 16px; left: 16px; border-radius: 6px; z-index: 20;";
-                comp.style.cssText = "top: 24px; left: 68px; z-index: 20;";
-                pf.style.cssText = "top: 90px; left: 24px; width: 100px; height: 100px; border-radius: 8px; border: 3px solid #fff;";
+            else if (currentBgType === "split") {
+                f1.style.height = "140px"; b1.style.height = "140px";
+                const clip = "polygon(0 0, 100% 0, 100% 100%, 0 75%)";
+                f1.style.clipPath = clip; b1.style.clipPath = clip;
+                
+                f2.style.cssText = "top:0; left:0; width:100%; height:145px; z-index:5; opacity:0.3; background:" + secondary;
+                b2.style.cssText = "top:0; left:0; width:100%; height:145px; z-index:5; opacity:0.3; background:" + secondary;
+                f2.style.clipPath = "polygon(0 0, 100% 0, 100% 80%, 0 100%)";
+                b2.style.clipPath = "polygon(0 0, 100% 0, 100% 80%, 0 100%)";
+                
+                pf.style.cssText = "top: 95px; left: 24px; width: 102px; height: 102px; border-radius: 8px; border: 3px solid #fff;";
             }
-            else if (theme.bgType === "diagonal") {
-                l1.style.height = "160px";
-                l1.style.clipPath = "polygon(0 0, 100% 0, 70% 100%, 0 100%)";
-                lf.style.cssText = "top: 20px; left: 20px; border-radius: 50%;";
-                comp.style.cssText = "top: 26px; left: 72px;";
-                pf.style.cssText = "top: 85px; right: 24px; width: 105px; height: 105px; border-radius: 50%; border: 3px solid " + theme.secondary;
+            else if (currentBgType === "diagonal") {
+                f1.style.height = "150px"; b1.style.height = "150px";
+                const clip = "polygon(0 0, 100% 0, 75% 100%, 0 100%)";
+                f1.style.clipPath = clip; b1.style.clipPath = clip;
+                pf.style.cssText = "top: 92px; right: 24px; width: 105px; height: 105px; border-radius: 50%; border: 3px solid " + secondary;
             }
-            else if (theme.bgType === "block") {
-                l1.style.height = "95px";
-                l2.style.cssText = "top: 95px; left: 0; width: 100%; height: 6px;";
-                l2.style.background = theme.secondary;
-                lf.style.cssText = "top: 12px; left: 16px; border-radius: 4px;";
-                comp.style.cssText = "top: 20px; left: 66px;";
-                pf.style.cssText = "top: 65px; left: 108px; width: 110px; height: 110px; border-radius: 4px; border: 3px solid " + theme.secondary;
+            else if (currentBgType === "block") {
+                f1.style.height = "92px"; b1.style.height = "92px";
+                f2.style.cssText = "top: 92px; left: 0; width: 100%; height: 6px; background:" + secondary;
+                b2.style.cssText = "top: 92px; left: 0; width: 100%; height: 6px; background:" + secondary;
+                pf.style.cssText = "top: 68px; left: 108px; width: 110px; height: 110px; border-radius: 4px; border: 3px solid " + secondary;
             }
-            else if (theme.bgType === "arc") {
-                l1.style.height = "130px";
-                l1.style.clipPath = "polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%)";
-                lf.style.cssText = "top: 12px; left: 16px; border-radius: 50%;";
-                comp.style.cssText = "top: 20px; left: 64px;";
-                pf.style.cssText = "top: 90px; left: 108px; width: 110px; height: 110px; border-radius: 50%;";
+            else if (currentBgType === "arc") {
+                f1.style.height = "135px"; b1.style.height = "135px";
+                const clip = "polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%)";
+                f1.style.clipPath = clip; b1.style.clipPath = clip;
+                pf.style.cssText = "top: 95px; left: 108px; width: 110px; height: 110px; border-radius: 50%; border: 3px solid #fff;";
             }
-            else if (theme.bgType === "trapezoid") {
-                l1.style.height = "120px";
-                l1.style.clipPath = "polygon(0 0, 100% 0, 85% 100%, 15% 100%)";
-                lf.style.cssText = "top: 14px; left: 35px; border-radius: 50%;";
-                comp.style.cssText = "top: 22px; left: 85px;";
-                pf.style.cssText = "top: 85px; left: 108px; width: 110px; height: 110px; border-radius: 12px;";
+            else if (currentBgType === "trapezoid") {
+                f1.style.height = "120px"; b1.style.height = "120px";
+                const clip = "polygon(0 0, 100% 0, 85% 100%, 15% 100%)";
+                f1.style.clipPath = clip; b1.style.clipPath = clip;
+                pf.style.cssText = "top: 90px; left: 108px; width: 110px; height: 110px; border-radius: 12px; border: 2px solid " + secondary;
             }
-            else if (theme.bgType === "wave") {
-                l1.style.height = "135px";
-                l1.style.clipPath = "polygon(0 0, 100% 0, 100% 85%, 65% 60%, 35% 95%, 0 75%)";
-                lf.style.cssText = "top: 12px; left: 144px; border-radius: 50%;";
-                comp.style.cssText = "top: 54px; left: 0; width: 100%; text-align: center;";
-                pf.style.cssText = "top: 95px; left: 108px; width: 110px; height: 110px; border-radius: 50%;";
+            else if (currentBgType === "wave") {
+                f1.style.height = "130px"; b1.style.height = "130px";
+                const clip = "polygon(0 0, 100% 0, 100% 85%, 65% 65%, 35% 95%, 0 75%)";
+                f1.style.clipPath = clip; b1.style.clipPath = clip;
+                pf.style.cssText = "top: 98px; left: 108px; width: 110px; height: 110px; border-radius: 50%; border: 2px solid " + secondary;
             }
-            else if (theme.bgType === "chevron") {
-                l1.style.height = "110px";
-                l1.style.clipPath = "polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%)";
-                lf.style.cssText = "top: 12px; left: 16px; border-radius: 50%;";
-                comp.style.cssText = "top: 20px; left: 64px;";
-                pf.style.cssText = "top: 80px; left: 108px; width: 110px; height: 110px; border-radius: 50%;";
+            else if (currentBgType === "chevron") {
+                f1.style.height = "110px"; b1.style.height = "110px";
+                const clip = "polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%)";
+                f1.style.clipPath = clip; b1.style.clipPath = clip;
+                pf.style.cssText = "top: 82px; left: 108px; width: 110px; height: 110px; border-radius: 50%; border: 3px solid " + secondary;
             }
-            else if (theme.bgType === "stripe") {
-                l1.style.height = "100px";
-                l2.style.cssText = "top: 0; left: 0; width: 12px; height: 100%;";
-                l2.style.background = theme.secondary;
-                lf.style.cssText = "top: 15px; left: 24px; border-radius: 50%;";
-                comp.style.cssText = "top: 24px; left: 74px;";
-                pf.style.cssText = "top: 75px; left: 108px; width: 110px; height: 110px; border-radius: 50%;";
+            else if (currentBgType === "stripe") {
+                f1.style.height = "105px"; b1.style.height = "105px";
+                f2.style.cssText = "top: 0; left: 0; width: 12px; height: 100%; background:" + secondary;
+                b2.style.cssText = "top: 0; left: 0; width: 12px; height: 100%; background:" + secondary;
+                pf.style.cssText = "top: 78px; left: 108px; width: 110px; height: 110px; border-radius: 50%; border: 2px solid #fff;";
             }
-            else if (theme.bgType === "glass") {
-                l1.style.height = "150px";
-                l1.style.clipPath = "polygon(0 0, 100% 0, 100% 60%, 0 95%)";
-                lf.style.cssText = "top: 16px; left: 16px; border-radius: 50%;";
-                comp.style.cssText = "top: 24px; left: 66px;";
-                pf.style.cssText = "top: 85px; right: 20px; width: 105px; height: 105px; border-radius: 14px;";
+            else if (currentBgType === "glass") {
+                f1.style.height = "145px"; b1.style.height = "145px";
+                const clip = "polygon(0 0, 100% 0, 100% 65%, 0 95%)";
+                f1.style.clipPath = clip; b1.style.clipPath = clip;
+                pf.style.cssText = "top: 90px; right: 20px; width: 105px; height: 105px; border-radius: 12px; border: 2px solid " + secondary;
             }
-            else if (theme.bgType === "pillar") {
-                l1.style.height = "110px";
-                l1.style.clipPath = "polygon(0 0, 100% 0, 100% 90%, 0 100%)";
-                lf.style.cssText = "top: 15px; left: 15px; border-radius: 50%;";
-                comp.style.cssText = "top: 22px; left: 66px;";
-                pf.style.cssText = "top: 85px; left: 20px; width: 105px; height: 105px; border-radius: 50%;";
+            else if (currentBgType === "pillar") {
+                f1.style.height = "115px"; b1.style.height = "115px";
+                const clip = "polygon(0 0, 100% 0, 100% 90%, 0 100%)";
+                f1.style.clipPath = clip; b1.style.clipPath = clip;
+                pf.style.cssText = "top: 88px; left: 20px; width: 105px; height: 105px; border-radius: 50%; border: 2px solid " + secondary;
             }
-            else if (theme.bgType === "prism") {
-                l1.style.height = "125px";
-                l1.style.clipPath = "polygon(0 0, 100% 0, 100% 70%, 0 100%)";
-                lf.style.cssText = "top: 15px; left: 144px; border-radius: 50%;";
-                comp.style.cssText = "top: 55px; left: 0; width: 100%; text-align: center;";
-                pf.style.cssText = "top: 95px; left: 108px; width: 110px; height: 110px; border-radius: 0%;";
+            else if (currentBgType === "prism") {
+                f1.style.height = "125px"; b1.style.height = "125px";
+                const clip = "polygon(0 0, 100% 0, 100% 75%, 0 100%)";
+                f1.style.clipPath = clip; b1.style.clipPath = clip;
+                pf.style.cssText = "top: 95px; left: 108px; width: 110px; height: 110px; border-radius: 0px; border: 3px solid #fff;";
             }
-            else if (theme.bgType === "crown") {
-                l1.style.height = "140px";
-                l1.style.clipPath = "polygon(0 0, 100% 0, 100% 80%, 80% 65%, 50% 95%, 20% 65%, 0 80%)";
-                lf.style.cssText = "top: 12px; left: 16px; border-radius: 50%;";
-                comp.style.cssText = "top: 20px; left: 64px;";
-                pf.style.cssText = "top: 95px; left: 108px; width: 110px; height: 110px; border-radius: 50%;";
+            else if (currentBgType === "crown") {
+                f1.style.height = "140px"; b1.style.height = "140px";
+                const clip = "polygon(0 0, 100% 0, 100% 80%, 80% 65%, 50% 95%, 20% 65%, 0 80%)";
+                f1.style.clipPath = clip; b1.style.clipPath = clip;
+                pf.style.cssText = "top: 98px; left: 108px; width: 110px; height: 110px; border-radius: 50%; border: 2px solid " + secondary;
             }
-            else if (theme.bgType === "shield") {
-                l1.style.height = "120px";
-                l1.style.clipPath = "polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%)";
-                lf.style.cssText = "top: 14px; left: 20px; border-radius: 8px;";
-                comp.style.cssText = "top: 22px; left: 70px;";
-                pf.style.cssText = "top: 80px; left: 108px; width: 110px; height: 110px; border-radius: 50%; border: 3px double " + theme.secondary;
+            else if (currentBgType === "shield") {
+                f1.style.height = "120px"; b1.style.height = "120px";
+                const clip = "polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%)";
+                f1.style.clipPath = clip; b1.style.clipPath = clip;
+                pf.style.cssText = "top: 85px; left: 108px; width: 110px; height: 110px; border-radius: 50%; border: 3px double " + secondary;
             }
         }
 
-        // লাইভ ডেটা ট্রান্সফর্মার স্ক্রিপ্ট
+        // রিয়েলটাইম লাইভ ডাটা ট্রান্সফর্মার ও নিখুঁত অ্যালাইনমেন্ট সিঙ্ক
         function updateCardData() {
             document.getElementById('txtCompany').innerText = document.getElementById('inCompany').value;
             document.getElementById('txtName').innerText = document.getElementById('inName').value;
@@ -415,16 +449,14 @@
             document.getElementById('txtMobile').innerText = document.getElementById('inMobile').value;
             document.getElementById('txtIssue').innerText = document.getElementById('inIssue').value;
             
-            // ইংরেজি কন্ডিশনস ডাটা সিঙ্ক
+            // ব্যাক সাইড ডাটা সিঙ্ক
             document.getElementById('txtTerm1').innerText = document.getElementById('inTerm1').value;
             document.getElementById('txtTerm2').innerText = document.getElementById('inTerm2').value;
             document.getElementById('txtTerm3').innerText = document.getElementById('inTerm3').value;
-            
-            // এড্রেস সিঙ্ক
             document.getElementById('txtAddress').innerText = document.getElementById('inAddress').value;
         }
 
-        // রিয়েলটাইম মিডিয়া রিডার
+        // মিডিয়া ফাইল আপলোডার রিডার
         function uploadMedia(event, targetElementId) {
             if(event.target.files[0]) {
                 const url = URL.createObjectURL(event.target.files[0]);
@@ -432,35 +464,28 @@
             }
         }
 
-        // প্রফেশনাল এক্সপোর্ট লজিক
-        function downloadIDPDF() {
-            const wrapper = document.createElement('div');
-            wrapper.style.display = 'flex';
-            wrapper.style.gap = '35px';
-            wrapper.style.padding = '20px';
-            wrapper.style.background = '#ffffff';
-            
-            const frontClone = document.getElementById('cardFront').cloneNode(true);
-            const backClone = document.getElementById('cardBack').cloneNode(true);
-            
-            wrapper.appendChild(frontClone);
-            wrapper.appendChild(backClone);
-
+        // আল্ট্রা HD প্রিন্ট রেডি পারফেক্ট PNG ডাউনলোডার ইঞ্জিন (ডিজাইনে যা থাকবে হুবহু তাই সেভ হবে)
+        function downloadPNG(elementId, sideName) {
+            const element = document.getElementById(elementId);
             const holderName = document.getElementById('inName').value.replace(/\s+/g, '_');
             
-            const opt = {
-                margin:       8,
-                filename:     `Premium_ID_Card_${holderName}.pdf`,
-                image:        { type: 'jpeg', quality: 1.0 },
-                html2canvas:  { scale: 3.5, useCORS: true, logging: false },
-                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' }
-            };
-
-            html2pdf().set(opt).from(wrapper).save();
+            // হাই রেজোলিউশন ৩x স্কেলিং নিশ্চিতকরণ
+            html2canvas(element, {
+                scale: 3.5,
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: null,
+                logging: false
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = `Official_ID_${sideName}_${holderName}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
         }
 
-        // অটোমেটিক প্রথম ডিজাইন রেন্ডার ইনিশিয়েট
-        renderActiveTheme(0);
+        // ফার্স্ট টাইম ইনিশিয়ালাইজেশন
+        loadThemePalette(0);
         updateCardData();
     </script>
 </body>
