@@ -125,79 +125,72 @@
 
         <div class="lg:col-span-7 flex flex-col md:flex-row gap-4 justify-center items-center bg-slate-900 p-5 rounded-xl border border-slate-800 shadow-2xl overflow-x-auto custom-scrollbar">
             
-            <div class="flex flex-col items-center flex-shrink-0">
-                <span class="text-xs font-bold text-slate-500 mb-1.5 uppercase tracking-widest">Front Side Preview</span>
-                <div id="cardFront" class="id-card-render-box shadow-2xl rounded-xl border border-gray-200">
-                    <svg class="svg-shape-layer" viewBox="0 0 326 504" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g id="svgFrontShapes"></g>
-                    </svg>
-                    <div class="absolute top-0 left-0 w-full px-4 pt-3.5 flex items-center gap-2 z-20">
-                        <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center p-0.5 shadow-md flex-shrink-0">
-                            <img id="viewLogo" src="https://via.placeholder.com/40" class="w-full h-full object-contain rounded-full" crossOrigin="anonymous">
-                        </div>
-                        <div id="txtCompany" class="font-black text-[11px] uppercase tracking-wide leading-tight line-clamp-2">DIGITAL COMPUTER & STUDIO</div>
-                    </div>
-                    <div id="photoFrame" class="absolute bg-white shadow-md z-20 overflow-hidden flex items-center justify-center transition-all duration-300" style="top:95px; left:108px; width:110px; height:110px; border-radius:50%; border:3px solid #fff;">
-                        <img id="viewUserPhoto" src="https://via.placeholder.com/150" class="w-full h-full object-cover" crossOrigin="anonymous">
-                    </div>
-                    <div class="absolute left-0 w-full text-center px-4 z-20" style="top: 226px;">
-                        <h2 id="txtName" class="text-gray-900 font-extrabold text-sm tracking-wide uppercase truncate">Md. Asaduzzaman</h2>
-                        <p id="txtDesignation" class="font-bold text-[11px] mt-0.5 truncate">Senior Graphic Designer</p>
-                    </div>
-                    <div class="absolute top-[288px] left-5 right-5 space-y-1.5 text-[11px] text-gray-700 border-t border-b border-gray-100 py-2.5 z-20">
-                        <div class="flex justify-between items-center">
-                            <span class="font-bold text-gray-400 uppercase tracking-wider text-[9px]">ID Number:</span>
-                            <span id="txtIdNo" class="font-mono font-bold text-gray-900">DCS-2026-089</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="font-bold text-gray-400 uppercase tracking-wider text-[9px]">Mobile:</span>
-                            <span id="txtMobile" class="font-bold text-gray-900">+880 1712-345678</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="font-bold text-gray-400 uppercase tracking-wider text-[9px]">Issue Date:</span>
-                            <span id="txtIssue" class="font-medium text-gray-800">15/07/2026</span>
-                        </div>
-                    </div>
-                    <div id="footStrip" class="absolute bottom-0 left-0 w-full h-[40px] flex items-center justify-center text-[10px] font-bold uppercase tracking-widest z-20">
-                        Identification Card
-                    </div>
-                </div>
-            </div>
+           <div id="cardFront" class="id-card-render-box shadow-2xl rounded-xl border border-gray-200 overflow-hidden relative">
+    <svg class="svg-shape-layer" viewBox="0 0 326 504" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g id="svgFrontShapes"></g>
+    </svg>
+    
+    <!-- Logo & Company -->
+    <div class="absolute top-0 left-0 w-full px-4 pt-3.5 flex items-center gap-2 z-20">
+        <div class="w-8 h-8 bg-white rounded-full shadow-md flex-shrink-0">
+            <img id="viewLogo" src="https://via.placeholder.com/40" class="w-full h-full object-contain rounded-full" crossOrigin="anonymous">
+        </div>
+        <div id="txtCompany" class="font-black text-[11px] uppercase tracking-wide leading-tight line-clamp-2">DIGITAL COMPUTER & STUDIO</div>
+    </div>
 
-            <div class="flex flex-col items-center flex-shrink-0">
-                <span class="text-xs font-bold text-slate-500 mb-1.5 uppercase tracking-widest">Back Side Preview</span>
-                <div id="cardBack" class="id-card-render-box shadow-2xl rounded-xl border border-gray-200 bg-slate-50 flex flex-col justify-between">
-                    <svg class="svg-shape-layer" viewBox="0 0 326 504" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g id="svgBackShapes"></g>
-                    </svg>
-                    <div class="w-full px-5 pt-[162px] z-20 relative flex-1 flex flex-col justify-start">
-                        <div class="flex items-center gap-1.5 mb-2.5">
-                            <div id="backAccentBar" class="w-1.5 h-4 rounded-sm"></div>
-                            <span class="text-[11px] font-extrabold text-gray-800 uppercase tracking-wider">Terms of Use</span>
-                        </div>
-                        <div class="space-y-1.5 text-[10px] text-gray-600 font-medium leading-tight">
-                            <p id="txtTerm1">1. This card is non-transferable and property of organization.</p>
-                            <p id="txtTerm2">2. Holder must display this card while on duty.</p>
-                            <p id="txtTerm3">3. If found, please return to the office address below.</p>
-                        </div>
-                        <div class="mt-4 pt-3 border-t border-dashed border-gray-300">
-                            <span class="block text-[8.5px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">Office Address:</span>
-                            <p id="txtAddress" class="text-[9.5px] text-gray-700 font-bold leading-tight">Main Road, Station Bazar, Faridpur, Bangladesh.</p>
-                        </div>
-                    </div>
-                    <div class="w-full flex justify-center p-5 z-20 relative mt-auto bg-white/60 border-t border-gray-100">
-                        <div class="text-center flex flex-col items-center justify-end w-full">
-                            <div class="h-9 w-32 flex items-end justify-center pb-0.5 overflow-hidden">
-                                <img id="viewSign" src="https://via.placeholder.com/120x35?text=Signature" class="max-h-full max-w-full object-contain" crossOrigin="anonymous">
-                            </div>
-                            <span class="text-[8.5px] font-bold text-gray-800 border-t border-gray-300 pt-0.5 block w-full">Authorized Sign</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- Photo -->
+    <div id="photoFrame" class="absolute shadow-md z-20 overflow-hidden flex items-center justify-center" style="top:95px; left:108px; width:110px; height:110px; border-radius:50%; border:3px solid #fff;">
+        <img id="viewUserPhoto" src="https://via.placeholder.com/150" class="w-full h-full object-cover" crossOrigin="anonymous">
+    </div>
 
+    <!-- Name & Designation -->
+    <div class="absolute w-full px-4 z-20 flex flex-col items-center" style="top: 226px;">
+        <h2 id="txtName" class="text-gray-900 font-extrabold text-sm tracking-wide uppercase text-center break-words w-full">Md. Asaduzzaman</h2>
+        <p id="txtDesignation" class="font-bold text-[11px] mt-0.5 text-center break-words w-full" style="color: rgb(59, 130, 246);">Senior Graphic Designer</p>
+    </div>
+
+    <!-- Details -->
+    <div class="absolute top-[288px] left-5 right-5 space-y-1.5 text-[11px] text-gray-700 border-t border-b border-gray-100 py-2.5 z-20">
+        <div class="flex justify-between items-center"><span class="font-bold text-gray-400 uppercase text-[9px]">ID Number:</span> <span id="txtIdNo" class="font-mono font-bold text-gray-900">DCS-2026-089</span></div>
+        <div class="flex justify-between items-center"><span class="font-bold text-gray-400 uppercase text-[9px]">Mobile:</span> <span id="txtMobile" class="font-bold text-gray-900">+880 1712-345678</span></div>
+        <div class="flex justify-between items-center"><span class="font-bold text-gray-400 uppercase text-[9px]">Issue Date:</span> <span id="txtIssue" class="font-medium text-gray-800">15/07/2026</span></div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footStrip" class="absolute bottom-0 left-0 w-full h-[40px] flex items-center justify-center text-[10px] font-bold uppercase tracking-widest z-20">
+        Identification Card
+    </div>
+</div>
+           <div id="cardBack" class="id-card-render-box shadow-2xl rounded-xl border border-gray-200 bg-slate-50 flex flex-col justify-between relative">
+    <svg class="svg-shape-layer" viewBox="0 0 326 504" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g id="svgBackShapes"></g>
+    </svg>
+    
+    <div class="w-full px-5 pt-[162px] z-20 relative flex-1 flex flex-col justify-start">
+        <div class="flex items-center gap-1.5 mb-2.5">
+            <div id="backAccentBar" class="w-1.5 h-4 rounded-sm"></div>
+            <span class="text-[11px] font-extrabold text-gray-800 uppercase tracking-wider">Terms of Use</span>
+        </div>
+        <div class="space-y-1.5 text-[10px] text-gray-600 font-medium leading-tight">
+            <p id="txtTerm1">1. This card is non-transferable and property of organization.</p>
+            <p id="txtTerm2">2. Holder must display this card while on duty.</p>
+            <p id="txtTerm3">3. If found, please return to the office address below.</p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-dashed border-gray-300">
+            <span class="block text-[8.5px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">Office Address:</span>
+            <p id="txtAddress" class="text-[9.5px] text-gray-700 font-bold leading-tight">Main Road, Station Bazar, Faridpur, Bangladesh.</p>
         </div>
     </div>
+    
+    <div class="w-full flex justify-center p-5 z-20 relative mt-auto bg-white/60 border-t border-gray-100">
+        <div class="text-center flex flex-col items-center justify-end w-full">
+            <div class="h-9 w-32 flex items-end justify-center pb-0.5 overflow-hidden">
+                <img id="viewSign" src="https://via.placeholder.com/120x35?text=Signature" class="max-h-full max-w-full object-contain" crossOrigin="anonymous">
+            </div>
+            <span class="text-[8.5px] font-bold text-gray-800 border-t border-gray-300 pt-0.5 block w-full">Authorized Sign</span>
+        </div>
+    </div>
+</div>
 
     <script>
         let activeShapeId = 1;
