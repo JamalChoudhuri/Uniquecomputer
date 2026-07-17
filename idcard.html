@@ -704,35 +704,33 @@ opacity="0.08"/>
             }
         }
 
-        // নিখুঁত পিডিএফ জেনারেটর ইঞ্জিন (বর্ডার বা ফন্ট বিন্দুমাত্র কাটবে না)
         function exportToPerfectPDF(elementId, sideName) {
-            const cardElement = document.getElementById(elementId);
-            const nameSlug = document.getElementById('inName').value.replace(/\s+/g, '_');
-            
-            // html2canvas দিয়ে ৪ গুণ ম্যাসিভ রেজোলিউশনে রেন্ডার ব্যাকএন্ড তৈরি
-            html2canvas(cardElement, {
-                scale: 4, 
-                useCORS: true,
-                allowTaint: true,
-                backgroundColor: null,
-                logging: false
-            }).then(canvas => {
-                const imgData = canvas.toDataURL('image/png');
-                
-                // CR80 ইন্টারন্যাশনাল স্ট্যান্ডার্ড মিলিমিটার সাইজ ডিক্লেয়ারেশন (85.6mm x 53.98mm)
-                // পোট্রেট অরিয়েন্টেশন অনুযায়ী: width = 54mm, height = 86mm
-                const { jsPDF } = window.jspdf;
-                const pdf = new jsPDF({
-                    orientation: 'portrait',
-                    unit: 'mm',
-                    format: [54, 86]
-                });
+    const cardElement = document.getElementById(elementId);
+    const nameSlug = document.getElementById('inName').value.replace(/\s+/g, '_');
 
-                // একদম বর্ডার টু বর্ডার সেট করার জন্য জিরো মার্জিন রেন্ডারিং
-                pdf.addImage(imgData, 'PNG', 0, 0, 54, 86, undefined, 'FAST');
-                pdf.save(`ID_${sideName}_${nameSlug}.pdf`);
-            });
-        }
+    // ১. কার্ডের ভেতরের লেখা যেন না কাটে, সেজন্য সাময়িকভাবে মার্জিন ঠিক করে নেওয়া
+    cardElement.style.boxSizing = "border-box";
+    cardElement.style.padding = "2px"; // হালকা প্যাডিং যাতে লেখা বর্ডারের সাথে লেগে না থাকে
+
+    html2canvas(cardElement, {
+        scale: 4, // হাই রেজোলিউশন
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: null,
+        logging: false,
+        width: cardElement.offsetWidth, // এলিমেন্টের সঠিক প্রস্থ ধরা
+        height: cardElement.offsetHeight // এলিমেন্টের সঠিক উচ্চতা ধরা
+    }).then(canvas => {
+        
+        // ২. JPG হিসেবে ডাউনলোড করার জন্য সরাসরি ক্যানভাসকে লিংকে রূপান্তর
+        const link = document.createElement('a');
+        link.download = `ID_${sideName}_${nameSlug}.jpg`; // JPG ফরম্যাট
+        
+        // ৩. ছবি কোয়ালিটি সর্বোচ্চ করার জন্য
+        link.href = canvas.toDataURL('image/jpeg', 1.0); 
+        link.click();
+    });
+}
 
         triggerCoreEngineRender();
     </script>
