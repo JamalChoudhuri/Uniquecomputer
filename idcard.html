@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>50 Unique ID Card Studio - High-Res SVG Export</title>
+    <title>50 Unique ID Card Studio - Photoshop 7.0 Ready</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     
     <style>
         /* CR80 International Standard ID Card Dimensions */
@@ -38,41 +39,25 @@
             border-radius: 4px;
         }
 
-        /* Print Settings to prevent text cutting */
         @media print {
-            body * {
-                visibility: hidden;
-            }
-            #printZone, #printZone * {
-                visibility: visible;
-            }
+            body * { visibility: hidden; }
+            #printZone, #printZone * { visibility: visible; }
             #printZone {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-                display: flex !important;
-                flex-direction: row !important;
-                justify-content: center !important;
-                gap: 20px !important;
+                position: absolute; left: 0; top: 0; width: 100%;
+                display: flex !important; flex-direction: row !important;
+                justify-content: center !important; gap: 20px !important;
                 background: white !important;
             }
-            .class-no-print {
-                display: none !important;
-            }
-            .id-card-render-box {
-                box-shadow: none !important;
-                border: 1px solid #ddd !important;
-                page-break-inside: avoid;
-            }
+            .class-no-print { display: none !important; }
+            .id-card-render-box { box-shadow: none !important; border: 1px solid #ddd !important; page-break-inside: avoid; }
         }
     </style>
 </head>
 <body class="bg-slate-950 min-h-screen text-slate-100 p-4 flex flex-col items-center select-none">
 
     <header class="mb-4 text-center class-no-print">
-        <h1 class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-cyan-400 tracking-wide">Premium ID Card Engine v6.5</h1>
-        <p class="text-xs text-slate-400 mt-1">৫০টি সম্পূর্ণ আলাদা রিয়েল ইউনিক ডিজাইন × ১০টি প্রফেশনাল কালার প্যালেট</p>
+        <h1 class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-cyan-400 tracking-wide">Premium ID Card Engine v7.0</h1>
+        <p class="text-xs text-slate-400 mt-1">ফটোশপ ৭.০ ফ্রেন্ডলি হাই-রেজোলিউশন ডিরেক্ট এক্সপোর্ট ইঞ্জিন</p>
     </header>
 
     <div class="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
@@ -81,28 +66,26 @@
             
             <div>
                 <div class="flex justify-between items-center mb-1.5">
-                    <label class="text-xs font-bold text-blue-400 uppercase tracking-wider">১. ৫০টি সম্পূর্ণ আলাদা ডিজাইন সিলেক্ট করুন:</label>
+                    <label class="text-xs font-bold text-blue-400 uppercase tracking-wider">১. ৫০টি ডিজাইন সিলেক্ট করুন:</label>
                     <span id="lblActiveShape" class="text-[11px] font-mono text-cyan-400 bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-800">Shape: 1</span>
                 </div>
-                <div class="grid grid-cols-10 gap-1 bg-slate-950 p-2 rounded-lg border border-slate-800 max-h-[140px] overflow-y-auto custom-scrollbar" id="shapeGridSelector">
-                    </div>
+                <div class="grid grid-cols-10 gap-1 bg-slate-950 p-2 rounded-lg border border-slate-800 max-h-[140px] overflow-y-auto custom-scrollbar" id="shapeGridSelector"></div>
             </div>
 
             <div>
                 <div class="flex justify-between items-center mb-1.5">
-                    <label class="text-xs font-bold text-amber-400 uppercase tracking-wider">২. প্রতিটি ডিজাইনের ১০টি কালার প্যালেট:</label>
+                    <label class="text-xs font-bold text-amber-400 uppercase tracking-wider">২. কালার প্যালেট:</label>
                     <span id="lblActivePalette" class="text-[11px] font-mono text-amber-400 bg-amber-950/60 px-2 py-0.5 rounded border border-amber-800">Palette: P1</span>
                 </div>
-                <div class="grid grid-cols-5 gap-2 bg-slate-950 p-2 rounded-lg border border-slate-800" id="paletteGridSelector">
-                    </div>
+                <div class="grid grid-cols-5 gap-2 bg-slate-950 p-2 rounded-lg border border-slate-800" id="paletteGridSelector"></div>
             </div>
 
             <div class="bg-slate-800/40 p-3 rounded-lg border border-slate-800 grid grid-cols-2 gap-3">
                 <div>
                     <label class="block text-xs font-bold text-slate-400 mb-1.5">ছবির আকৃতি:</label>
                     <div class="flex gap-1">
-                        <button onclick="setPhotoStyle('circle')" id="btnRadCircle" class="flex-1 bg-indigo-600 p-1.5 rounded text-xs font-bold text-white transition">🟢 Round</button>
-                        <button onclick="setPhotoStyle('square')" id="btnRadSquare" class="flex-1 bg-slate-700 p-1.5 rounded text-xs font-bold text-slate-300 transition">🟦 Square</button>
+                        <button onclick="setPhotoStyle('circle')" id="btnRadCircle" class="flex-1 bg-indigo-600 p-1.5 rounded text-xs font-bold text-white">🟢 Round</button>
+                        <button onclick="setPhotoStyle('square')" id="btnRadSquare" class="flex-1 bg-slate-700 p-1.5 rounded text-xs font-bold text-slate-300">🟦 Square</button>
                     </div>
                 </div>
                 <div class="flex flex-col justify-center pl-2">
@@ -151,15 +134,15 @@
 
             <div class="space-y-2">
                 <div class="grid grid-cols-2 gap-2">
-                    <button onclick="downloadPerfectSVG('cardFront', 'Front')" class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-black py-2 rounded text-xs tracking-wider shadow-lg active:scale-95">
-                        📥 FRONT ভেক্টর SVG
+                    <button onclick="exportToPhotoshopFriendly('cardFront', 'Front')" class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-black py-2 rounded text-xs tracking-wider shadow-lg active:scale-95">
+                        📥 FRONT (ফটোশপ রেডি)
                     </button>
-                    <button onclick="downloadPerfectSVG('cardBack', 'Back')" class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-black py-2 rounded text-xs tracking-wider shadow-lg active:scale-95">
-                        📥 BACK ভেক্টর SVG
+                    <button onclick="exportToPhotoshopFriendly('cardBack', 'Back')" class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-black py-2 rounded text-xs tracking-wider shadow-lg active:scale-95">
+                        📥 BACK (ফটোশপ রেডি)
                     </button>
                 </div>
                 <button onclick="window.print()" class="w-full bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-black py-2.5 rounded-lg text-xs tracking-wider shadow-lg active:scale-95">
-                    🖨️ পিডিএফ (PDF) অথবা সরাসরি প্রিন্ট করুন
+                    🖨️ সরাসরি প্রিন্ট অথবা PDF সেভ করুন
                 </button>
             </div>
         </div>
@@ -174,12 +157,12 @@
                     </svg>
                     <div class="absolute top-0 left-0 w-full px-4 pt-3.5 flex items-center gap-2 z-20">
                         <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center p-0.5 shadow-md flex-shrink-0">
-                            <img id="viewLogo" src="https://via.placeholder.com/40" class="w-full h-full object-contain rounded-full">
+                            <img id="viewLogo" src="https://via.placeholder.com/40" class="w-full h-full object-contain rounded-full" crossOrigin="anonymous">
                         </div>
                         <div id="txtCompany" class="font-black text-[11px] uppercase tracking-wide leading-tight line-clamp-2">DIGITAL COMPUTER & STUDIO</div>
                     </div>
                     <div id="photoFrame" class="absolute bg-white shadow-md z-20 overflow-hidden flex items-center justify-center transition-all duration-300" style="top:95px; left:108px; width:110px; height:110px; border-radius:50%; border:3px solid #fff;">
-                        <img id="viewUserPhoto" src="https://via.placeholder.com/150" class="w-full h-full object-cover">
+                        <img id="viewUserPhoto" src="https://via.placeholder.com/150" class="w-full h-full object-cover" crossOrigin="anonymous">
                     </div>
                     <div class="absolute left-0 w-full text-center px-4 z-20" style="top: 226px;">
                         <h2 id="txtName" class="text-gray-900 font-extrabold text-sm tracking-wide uppercase truncate">Md. Asaduzzaman</h2>
@@ -229,7 +212,7 @@
                     <div class="w-full flex justify-center p-5 z-20 relative mt-auto bg-white/60 border-t border-gray-100">
                         <div class="text-center flex flex-col items-center justify-end w-full">
                             <div class="h-9 w-32 flex items-end justify-center pb-0.5 overflow-hidden">
-                                <img id="viewSign" src="https://via.placeholder.com/120x35?text=Signature" class="max-h-full max-w-full object-contain">
+                                <img id="viewSign" src="https://via.placeholder.com/120x35?text=Signature" class="max-h-full max-w-full object-contain" crossOrigin="anonymous">
                             </div>
                             <span class="text-[8.5px] font-bold text-gray-800 border-t border-gray-300 pt-0.5 block w-full">Authorized Sign</span>
                         </div>
@@ -354,10 +337,8 @@
         function triggerCoreEngineRender() {
             const palette = masterPalettes[activePaletteId - 1];
             const pathHtml = getSvgPathData(activeShapeId, palette.primary, palette.secondary);
-            
             document.getElementById('svgFrontShapes').innerHTML = pathHtml;
             document.getElementById('svgBackShapes').innerHTML = pathHtml;
-
             document.getElementById('txtCompany').style.color = palette.textComp;
             document.getElementById('txtDesignation').style.color = palette.secondary;
             document.getElementById('footStrip').style.backgroundColor = palette.primary;
@@ -398,65 +379,32 @@
 
         function processMediaUpload(e, targetId) {
             if (e.target.files[0]) {
-                document.getElementById(targetId).src = URL.createObjectURL(e.target.files[0]);
+                const reader = new FileReader();
+                reader.onload = function(event){
+                    document.getElementById(targetId).src = event.target.result;
+                }
+                reader.readAsDataURL(e.target.files[0]);
             }
         }
 
-        // ১০০% নিখুঁত রিয়েল ভেক্টর SVG ফাইল ডাউনলোড ইঞ্জিন (কোনো স্ক্রিপ্ট বা থার্ড পার্টি লাইব্রেরি ছাড়া)
-        function downloadPerfectSVG(elementId, sideName) {
+        // ফটোশপ ৭.০ ফ্রেন্ডলি হাই-রেজোলিউশন ডাউনলোড ইঞ্জিন (html2canvas ৩ গুণ স্কেল সহ)
+        function exportToPhotoshopFriendly(elementId, sideName) {
             const cardElement = document.getElementById(elementId);
             const nameSlug = document.getElementById('inName').value.replace(/\s+/g, '_');
             
-            // কার্ডের ভেতরের HTML উপাদানগুলোকে একটি স্ট্যান্ডার্ড SVG রেন্ডার ডকুমেন্টে রূপান্তর
-            const svgDocStr = `
-                <svg xmlns="http://www.w3.org/2000/svg" width="326" height="504" viewBox="0 0 326 504">
-                    <foreignObject width="100%" height="100%">
-                        <div xmlns="http://www.w3.org/1999/xhtml" style="width:326px; height:504px; position:relative; overflow:hidden; background:#ffffff; font-family:sans-serif; box-sizing:border-box;">
-                            <style>
-                                .svg-shape-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; }
-                                .absolute { position: absolute; }
-                                .w-full { width: 100%; }
-                                .px-4 { padding-left: 1rem; padding-right: 1rem; }
-                                .pt-3.5 { padding-top: 0.875rem; }
-                                .flex { display: flex; }
-                                .items-center { align-items: center; }
-                                .gap-2 { gap: 0.5rem; }
-                                .z-20 { z-index: 20; }
-                                .rounded-full { border-radius: 9999px; }
-                                .font-black { font-weight: 900; }
-                                .font-bold { font-weight: 700; }
-                                .font-extrabold { font-weight: 800; }
-                                .font-medium { font-weight: 500; }
-                                .text-[11px] { font-size: 11px; }
-                                .text-sm { font-size: 14px; }
-                                .uppercase { text-transform: uppercase; }
-                                .text-center { text-align: center; }
-                                .text-gray-900 { color: #111827; }
-                                .text-gray-700 { color: #374151; }
-                                .text-gray-600 { color: #4b5563; }
-                                .left-5 { left: 1.25rem; }
-                                .right-5 { right: 1.25rem; }
-                                .justify-between { justify-content: space-between; }
-                                .font-mono { font-family: monospace; }
-                                .bottom-0 { bottom: 0; }
-                                .left-0 { left: 0; }
-                                .justify-center { justify-content: center; }
-                                .text-[10px] { font-size: 10px; }
-                                .tracking-widest { letter-spacing: 0.1em; }
-                            </style>
-                            ${cardElement.innerHTML}
-                        </div>
-                    </foreignObject>
-                </svg>
-            `;
-
-            // ফাইল ডাউনলোড প্রসেসিং
-            const blob = new Blob([svgDocStr], { type: 'image/svg+xml;charset=utf-8' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = `ID_Vector_${sideName}_Shape${activeShapeId}_${nameSlug}.svg`;
-            link.click();
-            URL.revokeObjectURL(link.href);
+            // রেজোলিউশন ৩ গুণ বাড়িয়ে রেন্ডার করা যেন প্রিন্ট ক্রিস্প ও হাই-কোয়ালিটি হয়
+            html2canvas(cardElement, {
+                scale: 3,
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: null
+            }).then(canvas => {
+                const image = canvas.toDataURL("image/png");
+                const link = document.createElement('a');
+                link.href = image;
+                link.download = `Photoshop7_Ready_${sideName}_Shape${activeShapeId}_${nameSlug}.png`;
+                link.click();
+            });
         }
 
         triggerCoreEngineRender();
