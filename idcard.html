@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium ID Card Studio - 10 Fixed Master Palettes</title>
+    <title>Ultimate 50-Shape x 10-Palette Premium ID Card Engine</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     
     <style>
-        /* CR80 International Standard ID Card Dimension */
-        .id-card-frame {
+        /* CR80 International Standard ID Card Dimensions */
+        .id-card-render-box {
             width: 326px;
             height: 504px;
             position: relative;
@@ -17,143 +17,146 @@
             background: #ffffff;
             font-family: 'Helvetica Neue', Arial, sans-serif;
         }
-        .design-shape {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        .svg-shape-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
         }
-        /* High Quality PNG Render Support */
-        .html2canvas-container {
-            width: auto !important;
-            height: auto !important;
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
         }
     </style>
 </head>
-<body class="bg-slate-900 min-h-screen text-slate-100 p-6 flex flex-col items-center select-none">
+<body class="bg-slate-950 min-h-screen text-slate-100 p-4 flex flex-col items-center select-none">
 
-    <header class="mb-5 text-center">
-        <h1 class="text-2xl font-bold text-blue-400 tracking-wide">Professional ID Card Studio</h1>
-        <p class="text-xs text-slate-400 mt-1">১০টি প্রফেশনাল ম্যাচিং কালার প্যালেট এবং গোল/স্কয়ার ফটো কনট্রোল</p>
+    <header class="mb-4 text-center">
+        <h1 class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-cyan-400 tracking-wide">Premium ID Card Studio v3.0</h1>
+        <p class="text-xs text-slate-400 mt-1">৫০টি আলাদা জ্যামিতিক ডিজাইন × প্রতিটি ডিজাইনে ১০টি করে ইউনিক কালar প্যালেট</p>
     </header>
 
-    <div class="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+    <div class="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
         
-        <div class="lg:col-span-5 bg-slate-800 p-5 rounded-xl border border-slate-700 space-y-4 shadow-xl text-sm">
+        <div class="lg:col-span-5 bg-slate-900 p-4 rounded-xl border border-slate-800 space-y-4 shadow-2xl text-sm">
             
             <div>
-                <label class="block text-xs font-bold text-blue-400 uppercase mb-2">১০টি রেডিমেড ম্যাচিং কালার প্যালেট সিলেক্ট করুন:</label>
-                <div class="grid grid-cols-5 gap-2" id="paletteContainer">
+                <div class="flex justify-between items-center mb-1.5">
+                    <label class="text-xs font-bold text-blue-400 uppercase tracking-wider">১. ৫০টি আলাদা মূল ডিজাইন সিলেক্ট করুন:</label>
+                    <span id="lblActiveShape" class="text-[11px] font-mono text-cyan-400 bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-800">Shape: 1</span>
+                </div>
+                <div class="grid grid-cols-10 gap-1 bg-slate-950 p-2 rounded-lg border border-slate-800 max-h-[105px] overflow-y-auto custom-scrollbar" id="shapeGridSelector">
                     </div>
             </div>
 
-            <div class="bg-slate-700/40 p-3 rounded-lg border border-slate-600">
-                <label class="block text-xs font-bold text-amber-400 uppercase mb-2">ছবির স্টাইল কন্ট্রোল করুন:</label>
-                <div class="flex gap-3">
-                    <button onclick="changePhotoShape('circle')" class="flex-1 bg-slate-600 hover:bg-slate-500 py-1.5 rounded font-bold text-xs transition">
-                        🟢 গোল ছবি (Circle)
-                    </button>
-                    <button onclick="changePhotoShape('square')" class="flex-1 bg-slate-600 hover:bg-slate-500 py-1.5 rounded font-bold text-xs transition">
-                        🟦 স্কয়ার ছবি (Square)
-                    </button>
+            <div>
+                <div class="flex justify-between items-center mb-1.5">
+                    <label class="text-xs font-bold text-amber-400 uppercase tracking-wider">২. সিলেক্ট করা ডিজাইনের ১০টি কালার প্যালেট:</label>
+                    <span id="lblActivePalette" class="text-[11px] font-mono text-amber-400 bg-amber-950/60 px-2 py-0.5 rounded border border-amber-800">Palette: P1</span>
+                </div>
+                <div class="grid grid-cols-5 gap-2 bg-slate-950 p-2 rounded-lg border border-slate-800" id="paletteGridSelector">
+                    </div>
+            </div>
+
+            <div class="bg-slate-800/40 p-3 rounded-lg border border-slate-800 grid grid-cols-2 gap-3">
+                <div>
+                    <label class="block text-xs font-bold text-slate-400 mb-1.5">ছবির আকৃতি:</label>
+                    <div class="flex gap-1">
+                        <button onclick="setPhotoStyle('circle')" id="btnRadCircle" class="flex-1 bg-indigo-600 p-1.5 rounded text-xs font-bold text-white transition">🟢 Round</button>
+                        <button onclick="setPhotoStyle('square')" id="btnRadSquare" class="flex-1 bg-slate-700 p-1.5 rounded text-xs font-bold text-slate-300 transition">🟦 Square</button>
+                    </div>
+                </div>
+                <div class="flex flex-col justify-center pl-2">
+                    <label class="flex items-center gap-2 cursor-pointer mt-3">
+                        <input type="checkbox" id="chkPhotoBorder" checked onchange="togglePhotoBorder()" class="w-4 h-4 rounded bg-slate-700 border-slate-600 text-blue-500 focus:ring-0">
+                        <span class="text-xs font-bold text-slate-300">ছবির বর্ডার অন রাখুন</span>
+                    </label>
                 </div>
             </div>
 
-            <div class="grid grid-cols-3 gap-2 bg-slate-700/20 p-2 rounded-lg border border-slate-700">
+            <div class="grid grid-cols-3 gap-2 bg-slate-800/20 p-2 rounded-lg border border-slate-800">
                 <div>
-                    <label class="block text-[10px] text-slate-400 mb-1">১. ছবি আপলোড</label>
-                    <input type="file" accept="image/*" class="w-full text-[9px] bg-slate-700 p-1 rounded cursor-pointer" onchange="loadUploadedMedia(event, 'viewUserPhoto')">
+                    <label class="block text-[10px] text-slate-400 mb-1">১. ছবি যোগ করুন</label>
+                    <input type="file" accept="image/*" class="w-full text-[9px] bg-slate-800 p-1 rounded cursor-pointer" onchange="processMediaUpload(event, 'viewUserPhoto')">
                 </div>
                 <div>
-                    <label class="block text-[10px] text-slate-400 mb-1">২. লোগো আপলোড</label>
-                    <input type="file" accept="image/*" class="w-full text-[9px] bg-slate-700 p-1 rounded cursor-pointer" onchange="loadUploadedMedia(event, 'viewLogo')">
+                    <label class="block text-[10px] text-slate-400 mb-1">২. লোগো যোগ করুন</label>
+                    <input type="file" accept="image/*" class="w-full text-[9px] bg-slate-800 p-1 rounded cursor-pointer" onchange="processMediaUpload(event, 'viewLogo')">
                 </div>
                 <div>
-                    <label class="block text-[10px] text-slate-400 mb-1">৩. স্বাক্ষর আপলোড</label>
-                    <input type="file" accept="image/*" class="w-full text-[9px] bg-slate-700 p-1 rounded cursor-pointer" onchange="loadUploadedMedia(event, 'viewSign')">
+                    <label class="block text-[10px] text-slate-400 mb-1">৩. স্বাক্ষর যোগ করুন</label>
+                    <input type="file" accept="image/*" class="w-full text-[9px] bg-slate-800 p-1 rounded cursor-pointer" onchange="processMediaUpload(event, 'viewSign')">
                 </div>
             </div>
 
-            <div class="space-y-2">
+            <div class="space-y-2 max-h-[160px] overflow-y-auto pr-1 custom-scrollbar">
                 <div class="grid grid-cols-2 gap-2">
-                    <div>
-                        <label class="block text-xs text-slate-400 mb-0.5">প্রতিষ্ঠানের নাম</label>
-                        <input type="text" id="inCompany" value="DIGITAL COMPUTER & STUDIO" class="w-full bg-slate-700 px-2 py-1 rounded text-white text-xs" oninput="syncRealtimeData()">
-                    </div>
-                    <div>
-                        <label class="block text-xs text-slate-400 mb-0.5">কার্ডধারীর নাম</label>
-                        <input type="text" id="inName" value="Md. Asaduzzaman" class="w-full bg-slate-700 px-2 py-1 rounded text-white text-xs" oninput="syncRealtimeData()">
-                    </div>
+                    <input type="text" id="inCompany" value="DIGITAL COMPUTER & STUDIO" class="bg-slate-800 p-1.5 rounded text-xs text-white border border-slate-700" oninput="pushLiveTextData()">
+                    <input type="text" id="inName" value="Md. Asaduzzaman" class="bg-slate-800 p-1.5 rounded text-xs text-white border border-slate-700" oninput="pushLiveTextData()">
                 </div>
-
                 <div class="grid grid-cols-2 gap-2">
-                    <div>
-                        <label class="block text-xs text-slate-400 mb-0.5">পদবী / ডেজিগনেশন</label>
-                        <input type="text" id="inDesignation" value="Senior Graphic Designer" class="w-full bg-slate-700 px-2 py-1 rounded text-white text-xs" oninput="syncRealtimeData()">
-                    </div>
-                    <div>
-                        <label class="block text-xs text-slate-400 mb-0.5">আইডি নম্বর</label>
-                        <input type="text" id="inIdNo" value="DCS-2026-089" class="w-full bg-slate-700 px-2 py-1 rounded text-white text-xs" oninput="syncRealtimeData()">
-                    </div>
+                    <input type="text" id="inDesignation" value="Senior Graphic Designer" class="bg-slate-800 p-1.5 rounded text-xs text-white border border-slate-700" oninput="pushLiveTextData()">
+                    <input type="text" id="inIdNo" value="DCS-2026-089" class="bg-slate-800 p-1.5 rounded text-xs text-white border border-slate-700" oninput="pushLiveTextData()">
                 </div>
-
                 <div class="grid grid-cols-2 gap-2">
-                    <div>
-                        <label class="block text-xs text-slate-400 mb-0.5">মোবাইল নম্বর</label>
-                        <input type="text" id="inMobile" value="+880 1712-345678" class="w-full bg-slate-700 px-2 py-1 rounded text-white text-xs" oninput="syncRealtimeData()">
-                    </div>
-                    <div>
-                        <label class="block text-xs text-slate-400 mb-0.5">ইস্যু তারিখ</label>
-                        <input type="text" id="inIssue" value="15/07/2026" class="w-full bg-slate-700 px-2 py-1 rounded text-white text-xs" oninput="syncRealtimeData()">
-                    </div>
+                    <input type="text" id="inMobile" value="+880 1712-345678" class="bg-slate-800 p-1.5 rounded text-xs text-white border border-slate-700" oninput="pushLiveTextData()">
+                    <input type="text" id="inIssue" value="15/07/2026" class="bg-slate-800 p-1.5 rounded text-xs text-white border border-slate-700" oninput="pushLiveTextData()">
                 </div>
-
                 <div class="space-y-1">
-                    <label class="block text-xs font-semibold text-blue-400">Terms & Conditions (ইংরেজীতে)</label>
-                    <input type="text" id="inTerm1" value="1. This card is non-transferable and property of organization." class="w-full bg-slate-700 px-2 py-1 rounded text-white text-[11px]" oninput="syncRealtimeData()">
-                    <input type="text" id="inTerm2" value="2. Holder must display this card while on duty." class="w-full bg-slate-700 px-2 py-1 rounded text-white text-[11px]" oninput="syncRealtimeData()">
-                    <input type="text" id="inTerm3" value="3. If found, please return to the office address below." class="w-full bg-slate-700 px-2 py-1 rounded text-white text-[11px]" oninput="syncRealtimeData()">
+                    <input type="text" id="inTerm1" value="1. This card is non-transferable and property of organization." class="w-full bg-slate-800 p-1 rounded text-[11px] border border-slate-700" oninput="pushLiveTextData()">
+                    <input type="text" id="inTerm2" value="2. Holder must display this card while on duty." class="w-full bg-slate-800 p-1 rounded text-[11px] border border-slate-700" oninput="pushLiveTextData()">
+                    <input type="text" id="inTerm3" value="3. If found, please return to the office address below." class="w-full bg-slate-800 p-1 rounded text-[11px] border border-slate-700" oninput="pushLiveTextData()">
                 </div>
-
-                <div>
-                    <label class="block text-xs text-slate-400 mb-0.5">প্রতিষ্ঠানের ঠিকানা</label>
-                    <textarea id="inAddress" rows="1.5" class="w-full bg-slate-700 px-2 py-1 rounded text-white text-xs" oninput="syncRealtimeData()">Main Road, Station Bazar, Faridpur, Bangladesh.</textarea>
-                </div>
+                <textarea id="inAddress" rows="1.5" class="w-full bg-slate-800 p-1.5 rounded text-xs text-white border border-slate-700" oninput="pushLiveTextData()">Main Road, Station Bazar, Faridpur, Bangladesh.</textarea>
             </div>
 
-            <div class="grid grid-cols-2 gap-2 pt-2">
-                <button onclick="triggerPNGDownload('cardFront', 'Front')" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-lg text-xs shadow-lg tracking-wide">
-                    📸 ডাউনলোড Front PNG
+            <div class="grid grid-cols-2 gap-2 pt-1">
+                <button onclick="executePNGExport('cardFront', 'Front')" class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-black py-2.5 rounded-lg text-xs tracking-wider shadow-lg">
+                    📥 ডাউনলোড FRONT (PNG)
                 </button>
-                <button onclick="triggerPNGDownload('cardBack', 'Back')" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2.5 rounded-lg text-xs shadow-lg tracking-wide">
-                    📸 ডাউনলোড Back PNG
+                <button onclick="executePNGExport('cardBack', 'Back')" class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-black py-2.5 rounded-lg text-xs tracking-wider shadow-lg">
+                    📥 ডাউনলোড BACK (PNG)
                 </button>
             </div>
         </div>
 
-        <div class="lg:col-span-7 flex flex-col md:flex-row gap-5 justify-center items-center bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-xl overflow-x-auto">
+        <div class="lg:col-span-7 flex flex-col md:flex-row gap-4 justify-center items-center bg-slate-900 p-5 rounded-xl border border-slate-800 shadow-2xl overflow-x-auto custom-scrollbar">
             
             <div class="flex flex-col items-center flex-shrink-0">
-                <span class="text-xs font-bold text-slate-400 mb-2 uppercase tracking-wider">Front Side (অফিসিয়াল সাইজ)</span>
-                <div id="cardFront" class="id-card-frame shadow-2xl rounded-xl border border-gray-300">
+                <span class="text-xs font-bold text-slate-500 mb-1.5 uppercase tracking-widest">Front Side Preview</span>
+                <div id="cardFront" class="id-card-render-box shadow-2xl rounded-xl border border-gray-200">
                     
-                    <div id="fShape1" class="design-shape absolute w-full top-0 left-0"></div>
-                    <div id="fShape2" class="design-shape absolute w-full top-0 left-0"></div>
+                    <svg class="svg-shape-layer" viewBox="0 0 326 504" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g id="svgFrontShapes"></g>
+                    </svg>
                     
                     <div class="absolute top-0 left-0 w-full px-4 pt-3.5 flex items-center gap-2 z-20">
                         <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center p-0.5 shadow-md flex-shrink-0">
                             <img id="viewLogo" src="https://via.placeholder.com/40" class="w-full h-full object-contain rounded-full">
                         </div>
-                        <div id="txtCompany" class="font-bold text-[11px] uppercase tracking-wide leading-tight line-clamp-2">DIGITAL COMPUTER & STUDIO</div>
+                        <div id="txtCompany" class="font-black text-[11px] uppercase tracking-wide leading-tight line-clamp-2">DIGITAL COMPUTER & STUDIO</div>
                     </div>
                     
-                    <div id="photoFrame" class="absolute bg-white p-1 shadow-md z-20 overflow-hidden flex items-center justify-center transition-all duration-300">
+                    <div id="photoFrame" class="absolute bg-white shadow-md z-20 overflow-hidden flex items-center justify-center transition-all duration-300" style="top:92px; left:108px; width:110px; height:110px; border-radius:50%; border:3px solid #fff;">
                         <img id="viewUserPhoto" src="https://via.placeholder.com/150" class="w-full h-full object-cover">
                     </div>
                     
-                    <div class="absolute left-0 w-full text-center px-4 z-20" style="top: 230px;">
+                    <div class="absolute left-0 w-full text-center px-4 z-20" style="top: 226px;">
                         <h2 id="txtName" class="text-gray-900 font-extrabold text-sm tracking-wide uppercase truncate">Md. Asaduzzaman</h2>
                         <p id="txtDesignation" class="font-bold text-[11px] mt-0.5 truncate">Senior Graphic Designer</p>
                     </div>
 
-                    <div class="absolute top-[290px] left-5 right-5 space-y-1.5 text-[11px] text-gray-700 border-t border-b border-gray-100 py-2.5 z-20">
+                    <div class="absolute top-[288px] left-5 right-5 space-y-1.5 text-[11px] text-gray-700 border-t border-b border-gray-100 py-2.5 z-20">
                         <div class="flex justify-between items-center">
                             <span class="font-bold text-gray-400 uppercase tracking-wider text-[9px]">ID Number:</span>
                             <span id="txtIdNo" class="font-mono font-bold text-gray-900">DCS-2026-089</span>
@@ -168,40 +171,41 @@
                         </div>
                     </div>
 
-                    <div id="footStrip" class="design-shape absolute bottom-0 left-0 w-full h-[40px] flex items-center justify-center text-[10px] font-bold uppercase tracking-widest z-20">
+                    <div id="footStrip" class="absolute bottom-0 left-0 w-full h-[40px] flex items-center justify-center text-[10px] font-bold uppercase tracking-widest z-20">
                         Identification Card
                     </div>
                 </div>
             </div>
 
             <div class="flex flex-col items-center flex-shrink-0">
-                <span class="text-xs font-bold text-slate-400 mb-2 uppercase tracking-wider">Back Side (সামঞ্জস্যপূর্ণ ডিজাইন)</span>
-                <div id="cardBack" class="id-card-frame shadow-2xl rounded-xl border border-gray-300 bg-slate-50 flex flex-col justify-between">
+                <span class="text-xs font-bold text-slate-500 mb-1.5 uppercase tracking-widest">Back Side Preview</span>
+                <div id="cardBack" class="id-card-render-box shadow-2xl rounded-xl border border-gray-200 bg-slate-50 flex flex-col justify-between">
                     
-                    <div id="bShape1" class="design-shape absolute w-full top-0 left-0"></div>
-                    <div id="bShape2" class="design-shape absolute w-full top-0 left-0"></div>
+                    <svg class="svg-shape-layer" viewBox="0 0 326 504" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g id="svgBackShapes"></g>
+                    </svg>
 
-                    <div class="w-full px-5 pt-[155px] z-20 relative">
-                        <div class="flex items-center gap-1.5 mb-2.5">
-                            <div id="backAccentBar" class="design-shape w-1.5 h-4 rounded-sm"></div>
+                    <div class="w-full px-5 pt-[160px] z-20 relative flex-1 flex flex-col justify-start">
+                        <div class="flex items-center gap-1.5 mb-2">
+                            <div id="backAccentBar" class="w-1.5 h-4 rounded-sm"></div>
                             <span class="text-[11px] font-extrabold text-gray-800 uppercase tracking-wider">Terms of Use</span>
                         </div>
                         
-                        <div class="space-y-1.5 text-[10px] text-gray-600 font-medium leading-tight">
+                        <div class="space-y-1 text-[10px] text-gray-600 font-medium leading-tight">
                             <p id="txtTerm1">1. This card is non-transferable and property of organization.</p>
                             <p id="txtTerm2">2. Holder must display this card while on duty.</p>
                             <p id="txtTerm3">3. If found, please return to the office address below.</p>
                         </div>
 
-                        <div class="mt-4 pt-3 border-t border-dashed border-gray-300">
+                        <div class="mt-3 pt-2.5 border-t border-dashed border-gray-300">
                             <span class="block text-[8.5px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">Office Address:</span>
                             <p id="txtAddress" class="text-[9.5px] text-gray-700 font-bold leading-tight">Main Road, Station Bazar, Faridpur, Bangladesh.</p>
                         </div>
                     </div>
 
-                    <div class="w-full grid grid-cols-2 gap-4 items-end p-5 z-20 relative mt-auto">
+                    <div class="w-full grid grid-cols-2 gap-4 items-end p-4 z-20 relative mt-auto bg-white/60 border-t border-gray-100">
                         <div class="text-center flex flex-col items-center justify-end">
-                            <div class="w-9 h-9 bg-white/90 rounded-full border border-dashed border-gray-400 flex items-center justify-center text-[8px] font-bold text-gray-400 uppercase tracking-tighter shadow-sm">Seal</div>
+                            <div class="w-9 h-9 bg-white rounded-full border border-dashed border-gray-400 flex items-center justify-center text-[8px] font-bold text-gray-400 uppercase tracking-tighter">Seal</div>
                             <span class="text-[8.5px] text-gray-400 block mt-1">Official Seal</span>
                         </div>
                         
@@ -221,119 +225,153 @@
     </div>
 
     <script>
-        // আপনার পছন্দমতো ১০টি সেরা ম্যাচিং অফিশিয়াল কালার প্যালেট ডাটাবেস
-        const fixedMasterPalettes = [
-            { name: "Navy Blue", primary: "#1e3a8a", secondary: "#3b82f6", textComp: "#ffffff", shapeStyle: "diagonal" },
-            { name: "Emerald", primary: "#065f46", secondary: "#10b981", textComp: "#ffffff", shapeStyle: "curve" },
-            { name: "Charcoal", primary: "#1f2937", secondary: "#f97316", textComp: "#ffffff", shapeStyle: "skew" },
-            { name: "Royal Purple", primary: "#4c1d95", secondary: "#a855f7", textComp: "#ffffff", shapeStyle: "block" },
-            { name: "Deep Teal", primary: "#0f766e", secondary: "#14b8a6", textComp: "#ffffff", shapeStyle: "diagonal" },
-            { name: "Crimson Red", primary: "#991b1b", secondary: "#ef4444", textComp: "#ffffff", shapeStyle: "curve" },
-            { name: "Midnight Gold", primary: "#0f172a", secondary: "#eab308", textComp: "#eab308", shapeStyle: "skew" },
-            { name: "Forest Green", primary: "#14532d", secondary: "#4ade80", textComp: "#ffffff", shapeStyle: "block" },
-            { name: "Ocean Cyan", primary: "#0369a1", secondary: "#06b6d4", textComp: "#ffffff", shapeStyle: "diagonal" },
-            { name: "Luxury Black", primary: "#090d16", secondary: "#9ca3af", textComp: "#ffffff", shapeStyle: "curve" }
+        // গ্লোবাল স্টেট ট্র্যাকিং
+        let activeShapeId = 1;
+        let activePaletteId = 1;
+        let currentPhotoRadius = "circle";
+        let hasPhotoBorder = true;
+
+        // ১০টি গোল্ডেন রেডিমেড ম্যাচিং কালার প্যালেট ডেটাবেস
+        const masterPalettes = [
+            { primary: "#1e3a8a", secondary: "#3b82f6", textComp: "#ffffff", darkAccent: "#172554" }, // 1. Classic Corporate Blue
+            { primary: "#065f46", secondary: "#10b981", textComp: "#ffffff", darkAccent: "#064e3b" }, // 2. Emerald Green Eco
+            { primary: "#1e293b", secondary: "#f97316", textComp: "#ffffff", darkAccent: "#0f172a" }, // 3. Slate Orange Premium
+            { primary: "#4c1d95", secondary: "#a855f7", textComp: "#ffffff", darkAccent: "#2e1065" }, // 4. Royal Violet Elegant
+            { primary: "#0f766e", secondary: "#14b8a6", textComp: "#ffffff", darkAccent: "#115e59" }, // 5. Luxury Cyan Teal
+            { primary: "#991b1b", secondary: "#ef4444", textComp: "#ffffff", darkAccent: "#7f1d1d" }, // 6. Deep Crimson Authority
+            { primary: "#111827", secondary: "#eab308", textComp: "#eab308", darkAccent: "#030712" }, // 7. Midnight Gold Classic
+            { primary: "#3f2b96", secondary: "#a8c0ff", textComp: "#ffffff", darkAccent: "#2a1b60" }, // 8. Neon Sky Fusion
+            { primary: "#2d3748", secondary: "#a0aec0", textComp: "#ffffff", darkAccent: "#1a202c" }, // 9. Modern Minimal Grey
+            { primary: "#000000", secondary: "#39ff14", textComp: "#39ff14", darkAccent: "#121212" }  // 10. Cyber Matrix Green
         ];
 
-        let currentShapeStyle = "diagonal";
-        let currentPhotoShape = "circle";
+        // ৫০টি আকৃতির জন্য ডাইনামিক SVG পাথ জেনারেটর ইঞ্জিন
+        function getSvgPathData(shapeId, p, s) {
+            // ৫টি বেস জ্যামিতিক আর্কিটেকচার যা ৫০টি আলাদা ভার্সনে ডিস্ট্রিবিউটেড হবে
+            const mod = shapeId % 5;
+            let heightOffset = 110 + (shapeId % 6) * 6; // ১২0px থেকে 150px ডাইনামিক হাইট শিফটিং
+            
+            if (mod === 1) { // Diagonal Slant Cut
+                return `<path d="M0 0 H326 V${heightOffset - 25} L0 ${heightOffset} Z" fill="${p}"/>
+                        <path d="M0 0 H326 V${heightOffset - 35} L0 ${heightOffset - 10} Z" fill="${s}" opacity="0.2"/>`;
+            } else if (mod === 2) { // Smooth Curve Wave
+                return `<path d="M0 0 H326 V${heightOffset - 20} Q163 ${heightOffset + 25} 0 ${heightOffset - 20} Z" fill="${p}"/>
+                        <path d="M0 0 H326 V${heightOffset - 30} Q163 ${heightOffset + 15} 0 ${heightOffset - 30} Z" fill="${s}" opacity="0.25"/>`;
+            } else if (mod === 3) { // Geometric Chevron Arrow
+                return `<path d="M0 0 H326 V${heightOffset - 20} L163 ${heightOffset} L0 ${heightOffset - 20} Z" fill="${p}"/>
+                        <path d="M0 0 H326 V${heightOffset - 30} L163 ${heightOffset - 10} L0 ${heightOffset - 30} Z" fill="${s}" opacity="0.15"/>`;
+            } else if (mod === 4) { // Triple Block Stripe Steps
+                return `<path d="M0 0 H326 V${heightOffset - 15} H0 Z" fill="${p}"/>
+                        <path d="M0 ${heightOffset - 15} H326 V${heightOffset - 8} H0 Z" fill="${s}"/>`;
+            } else { // Multi Vertex Prism Polygon
+                return `<path d="M0 0 H326 V${heightOffset - 30} L240 ${heightOffset} L90 ${heightOffset - 15} L0 ${heightOffset} Z" fill="${p}"/>`;
+            }
+        }
 
-        // ১০টি প্যালেট বাটন জেনারেট করা
-        const pContainer = document.getElementById('paletteContainer');
-        fixedMasterPalettes.forEach((p, index) => {
+        // ৫০টি শেপ বাটন রেন্ডার করা
+        const shapeGrid = document.getElementById('shapeGridSelector');
+        for (let i = 1; i <= 50; i++) {
             const btn = document.createElement('button');
-            btn.className = `h-9 text-[10px] font-bold rounded-lg flex flex-col items-center justify-center p-1 border border-slate-600 shadow transition-all hover:scale-105 active:scale-95 text-white`;
-            btn.style.backgroundColor = p.primary;
-            btn.innerHTML = `<span style="color:${p.secondary}">P-${index+1}</span>`;
-            btn.onclick = () => applyFixedPalette(index);
-            pContainer.appendChild(btn);
+            btn.id = `btnShape_${i}`;
+            btn.className = `h-7 rounded text-xs font-bold transition-all border ${i === 1 ? 'bg-blue-600 text-white border-blue-400' : 'bg-slate-800 text-slate-400 border-slate-700 hover:bg-slate-700'}`;
+            btn.innerText = i;
+            btn.onclick = () => selectShape(i);
+            shapeGrid.appendChild(btn);
+        }
+
+        // ১০টি প্যালেট বাটন রেন্ডার করা
+        const paletteGrid = document.getElementById('paletteGridSelector');
+        masterPalettes.forEach((pal, idx) => {
+            const pId = idx + 1;
+            const btn = document.createElement('button');
+            btn.id = `btnPal_${pId}`;
+            btn.className = `h-8 rounded-md text-[10px] font-black transition-all border flex flex-col items-center justify-center p-0.5 ${pId === 1 ? 'ring-2 ring-white border-white' : 'border-slate-800'}`;
+            btn.style.backgroundColor = pal.primary;
+            btn.innerHTML = `<span style="color:${pal.secondary}">P${pId}</span>`;
+            btn.onclick = () => selectPalette(pId);
+            paletteGrid.appendChild(btn);
         });
 
-        // নির্দিষ্ট প্যালেট অ্যাপ্লাই করার ফাংশন
-        function applyFixedPalette(index) {
-            const p = fixedMasterPalettes[index];
-            currentShapeStyle = p.shapeStyle;
-            renderShapesAndColors(p.primary, p.secondary, p.textComp);
+        function selectShape(id) {
+            document.getElementById(`btnShape_${activeShapeId}`).classList.remove('bg-blue-600', 'text-white', 'border-blue-400');
+            document.getElementById(`btnShape_${activeShapeId}`).classList.add('bg-slate-800', 'text-slate-400', 'border-slate-700');
+            
+            activeShapeId = id;
+            document.getElementById(`btnShape_${id}`).classList.remove('bg-slate-800', 'text-slate-400', 'border-slate-700');
+            document.getElementById(`btnShape_${id}`).classList.add('bg-blue-600', 'text-white', 'border-blue-400');
+            document.getElementById('lblActiveShape').innerText = `Shape: ${id}`;
+            
+            triggerCoreEngineRender();
         }
 
-        // ছবি গোল অথবা স্কয়ার করার স্যুইচ ফাংশন
-        function changePhotoShape(shape) {
-            currentPhotoShape = shape;
+        function selectPalette(id) {
+            document.getElementById(`btnPal_${activePaletteId}`).classList.remove('ring-2', 'ring-white', 'border-white');
+            activePaletteId = id;
+            document.getElementById(`btnPal_${id}`).classList.add('ring-2', 'ring-white', 'border-white');
+            document.getElementById('lblActivePalette').innerText = `Palette: P${id}`;
+            
+            triggerCoreEngineRender();
+        }
+
+        // কোর কালার ও আর্কিটেকচার রেন্ডারিং প্রসেসর (SVG ফিক্সড লেয়ার ব্যাকগ্রাউন্ড)
+        function triggerCoreEngineRender() {
+            const palette = masterPalettes[activePaletteId - 1];
+            const p = palette.primary;
+            const s = palette.secondary;
+            const t = palette.textComp;
+
+            // SVG কন্টেন্ট ম্যাপিং
+            const frontPathHtml = getSvgPathData(activeShapeId, p, s);
+            const backPathHtml = getSvgPathData(activeShapeId, p, s); // ব্যাক পার্ট ফ্রন্টের সাথে সম্পূর্ণ ম্যাচ থাকবে
+            
+            document.getElementById('svgFrontShapes').innerHTML = frontPathHtml;
+            document.getElementById('svgBackShapes').innerHTML = backPathHtml;
+
+            // কালার ফোর্সিং
+            document.getElementById('txtCompany').style.color = t;
+            document.getElementById('txtDesignation').style.color = s;
+            document.getElementById('footStrip').style.backgroundColor = p;
+            document.getElementById('footStrip').style.color = t;
+            document.getElementById('backAccentBar').style.backgroundColor = p;
+
+            // ছবির পজিশনিং ও লেআউট অটো টিউনিং
             const pf = document.getElementById('photoFrame');
-            if (shape === 'circle') {
+            if (activeShapeId % 5 === 3) { // Chevron
+                pf.style.top = "102px"; pf.style.left = "108px";
+            } else if (activeShapeId % 5 === 4) { // Block
+                pf.style.top = "76px"; pf.style.left = "108px";
+            } else {
+                pf.style.top = "95px"; pf.style.left = "108px";
+            }
+        }
+
+        // ফটো রেডিয়াস ও বর্ডার রিয়েলটাইম টিউনিং
+        function setPhotoStyle(radiusType) {
+            currentPhotoRadius = radiusType;
+            const pf = document.getElementById('photoFrame');
+            
+            const circleBtn = document.getElementById('btnRadCircle');
+            const squareBtn = document.getElementById('btnRadSquare');
+
+            if (radiusType === 'circle') {
                 pf.style.borderRadius = "50%";
+                circleBtn.className = "flex-1 bg-indigo-600 p-1.5 rounded text-xs font-bold text-white transition";
+                squareBtn.className = "flex-1 bg-slate-700 p-1.5 rounded text-xs font-bold text-slate-300 transition";
             } else {
                 pf.style.borderRadius = "8px";
+                squareBtn.className = "flex-1 bg-indigo-600 p-1.5 rounded text-xs font-bold text-white transition";
+                circleBtn.className = "flex-1 bg-slate-700 p-1.5 rounded text-xs font-bold text-slate-300 transition";
             }
         }
 
-        // শেপ আর্কিটেকচার রেন্ডারিং ও ব্যাক-ফ্রন্ট ম্যাচিং ইঞ্জিন
-        function renderShapesAndColors(primary, secondary, textComp) {
-            const f1 = document.getElementById('fShape1');
-            const f2 = document.getElementById('fShape2');
-            const b1 = document.getElementById('bShape1');
-            const b2 = document.getElementById('bShape2');
-            
-            const comp = document.getElementById('txtCompany');
+        function togglePhotoBorder() {
+            hasPhotoBorder = document.getElementById('chkPhotoBorder').checked;
             const pf = document.getElementById('photoFrame');
-            const des = document.getElementById('txtDesignation');
-            const fs = document.getElementById('footStrip');
-            const bac = document.getElementById('backAccentBar');
-
-            // রিসেট ও ডিফল্ট কালার ট্রিগার
-            f1.removeAttribute('style'); f2.removeAttribute('style');
-            b1.removeAttribute('style'); b2.removeAttribute('style');
-            
-            f1.style.height = "135px"; f1.style.background = primary;
-            b1.style.height = "135px"; b1.style.background = primary;
-            
-            comp.style.color = textComp;
-            des.style.color = secondary;
-            fs.style.background = primary;
-            fs.style.color = textComp;
-            bac.style.background = primary;
-
-            // ছবির ডিফল্ট পজিশন ও সাইজ রিসেট
-            pf.style.width = "110px";
-            pf.style.height = "110px";
-            pf.style.border = `3px solid #ffffff`;
-
-            // স্টাইল অনুযায়ী শেপ এবং পজিশনিং কাটা
-            if (currentShapeStyle === "diagonal") {
-                const clip = "polygon(0 0, 100% 0, 100% 75%, 0 100%)";
-                f1.style.clipPath = clip; b1.style.clipPath = clip;
-                pf.style.top = "95px"; pf.style.left = "108px";
-            } 
-            else if (currentShapeStyle === "curve") {
-                const clip = "ellipse(85% 65% at 50% 35%)";
-                f1.style.clipPath = clip; b1.style.clipPath = clip;
-                pf.style.top = "95px"; pf.style.left = "108px";
-                pf.style.border = `3px solid ${secondary}`;
-            }
-            else if (currentShapeStyle === "skew") {
-                f1.style.height = "145px"; b1.style.height = "145px";
-                const clip = "polygon(0 0, 100% 0, 100% 100%, 0 75%)";
-                f1.style.clipPath = clip; b1.style.clipPath = clip;
-                
-                f2.style.cssText = `top:0; left:0; width:100%; height:150px; z-index:5; opacity:0.25; background:${secondary}; clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);`;
-                b2.style.cssText = `top:0; left:0; width:100%; height:150px; z-index:5; opacity:0.25; background:${secondary}; clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);`;
-                
-                pf.style.top = "100px"; pf.style.left = "25px";
-            }
-            else if (currentShapeStyle === "block") {
-                f1.style.height = "95px"; b1.style.height = "95px";
-                f2.style.cssText = `top: 95px; left: 0; width: 100%; height: 6px; background:${secondary};`;
-                b2.style.cssText = `top: 95px; left: 0; width: 100%; height: 6px; background:${secondary};`;
-                pf.style.top = "70px"; pf.style.left = "108px";
-                pf.style.border = `3px solid ${secondary}`;
-            }
-
-            // আগের সিলেক্ট করা ছবির শেপ স্টাইল বজায় রাখা
-            changePhotoShape(currentPhotoShape);
+            pf.style.border = hasPhotoBorder ? "3px solid #ffffff" : "0px solid transparent";
         }
 
-        // রিয়েলটাইম ইনপুট সিঙ্ক
-        function syncRealtimeData() {
+        // টেক্সট সিনক্রোনাইজার
+        function pushLiveTextData() {
             document.getElementById('txtCompany').innerText = document.getElementById('inCompany').value;
             document.getElementById('txtName').innerText = document.getElementById('inName').value;
             document.getElementById('txtDesignation').innerText = document.getElementById('inDesignation').value;
@@ -347,35 +385,39 @@
             document.getElementById('txtAddress').innerText = document.getElementById('inAddress').value;
         }
 
-        // মিডিয়া রিডার
-        function loadUploadedMedia(event, elementId) {
-            if(event.target.files[0]) {
-                document.getElementById(elementId).src = URL.createObjectURL(event.target.files[0]);
+        // মিডিয়া প্রসেসর
+        function processMediaUpload(e, targetId) {
+            if (e.target.files[0]) {
+                document.getElementById(targetId).src = URL.createObjectURL(e.target.files[0]);
             }
         }
 
-        // হাই-রেজোলিউশন ট্রু পিএনজি ডাউনলোড সিস্টেম (যা স্ক্রিনে আছে সব আসবে)
-        function triggerPNGDownload(elementId, side) {
-            const element = document.getElementById(elementId);
-            const nameSlug = document.getElementById('inName').value.replace(/\s+/g, '_');
+        // ১০০% নিখুঁত ভেক্টর ব্যাকগ্রাউন্ড সহ হাই-কোয়ালিটি PNG ডাউনলোড সিস্টেম
+        function executePNGExport(boxId, side) {
+            const targetNode = document.getElementById(boxId);
+            const fileNameSlug = document.getElementById('inName').value.replace(/\s+/g, '_');
             
-            // html2canvas দিয়ে নিখুঁত কালার ও শেপ ট্র্যাকিং ফিক্স
-            html2canvas(element, {
-                scale: 3, // ক্রিস্প ক্লিয়ার কোয়ালিটি ৩x গুণ
+            // আল্ট্রা ক্রিস্প কোয়ালিটির জন্য ৩.৫x স্কেলিং এবং ক্যানভাস রেন্ডার টিউনিং
+            html2canvas(targetNode, {
+                scale: 3.5,
                 useCORS: true,
                 allowTaint: true,
-                backgroundColor: null
+                backgroundColor: null,
+                scrollX: 0,
+                scrollY: 0,
+                windowWidth: targetNode.scrollWidth,
+                windowHeight: targetNode.scrollHeight
             }).then(canvas => {
-                const downloadLink = document.createElement('a');
-                downloadLink.download = `ID_Card_${side}_${nameSlug}.png`;
-                downloadLink.href = canvas.toDataURL('image/png');
-                downloadLink.click();
+                const link = document.createElement('a');
+                link.download = `ID_Card_${side}_Shape${activeShapeId}_${fileNameSlug}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
             });
         }
 
-        // প্রথমবার ওপেন হওয়ার সময় ১ নম্বর প্যালেট সেটআপ করা
-        applyFixedPalette(0);
-        syncRealtimeData();
+        // লাইভ বুটস্ট্র্যাপ রানার
+        triggerCoreEngineRender();
+        pushLiveTextData();
     </script>
 </body>
 </html>
