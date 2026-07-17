@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PNG ID Card Maker - Fixed Download & No Seal</title>
+    <title>Premium ID Card Engine - Perfect PDF Download</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     
     <style>
         /* CR80 International Standard ID Card Dimensions */
@@ -16,6 +15,7 @@
             overflow: hidden;
             background: #ffffff;
             font-family: 'Helvetica Neue', Arial, sans-serif;
+            box-sizing: border-box;
         }
         .svg-shape-layer {
             position: absolute;
@@ -37,18 +37,44 @@
             background: #475569;
             border-radius: 4px;
         }
+
+        /* প্রিন্ট বা পিডিএফ ডিরেক্টরি রুলস (যাতে ১ বিন্দুও লেখা না কাটে) */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #printZone, #printZone * {
+                visibility: visible;
+            }
+            #printZone {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                display: flex !important;
+                flex-direction: row !important;
+                justify-content: center !important;
+                gap: 20px !important;
+                background: white !important;
+            }
+            .id-card-render-box {
+                box-shadow: none !important;
+                border: 1px solid #ddd !important;
+                page-break-inside: avoid;
+            }
+        }
     </style>
 </head>
 <body class="bg-slate-950 min-h-screen text-slate-100 p-4 flex flex-col items-center select-none">
 
-    <header class="mb-4 text-center">
-        <h1 class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-cyan-400 tracking-wide">PNG ID Card Maker v4.2</h1>
-        <p class="text-xs text-slate-400 mt-1">৫০টি সম্পূর্ণ ভিন্ন ডিজাইন × প্রতিটি ডিজাইনে ১০টি করে ইউনিক কালার প্যালেট</p>
+    <header class="mb-4 text-center class-no-print">
+        <h1 class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-cyan-400 tracking-wide">Premium ID Card Studio v5.0</h1>
+        <p class="text-xs text-slate-400 mt-1">৫০টি সম্পূর্ণ ভিন্ন ডিজাইন ও কালার প্যালেট (নিখুঁত পিডিএফ প্রিন্ট অপশন)</p>
     </header>
 
     <div class="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
         
-        <div class="lg:col-span-5 bg-slate-900 p-4 rounded-xl border border-slate-800 space-y-4 shadow-2xl text-sm">
+        <div class="lg:col-span-5 bg-slate-900 p-4 rounded-xl border border-slate-800 space-y-4 shadow-2xl text-sm class-no-print">
             
             <div>
                 <div class="flex justify-between items-center mb-1.5">
@@ -91,11 +117,11 @@
                 </div>
                 <div>
                     <label class="block text-[10px] text-slate-400 mb-1">২. লোগো যোগ করুন</label>
-                    <input type="file" accept="image/*" class="w-full text-[9px] bg-slate-700 p-1 rounded cursor-pointer" onchange="processMediaUpload(event, 'viewLogo')">
+                    <input type="file" accept="image/*" class="w-full text-[9px] bg-slate-800 p-1 rounded cursor-pointer" onchange="processMediaUpload(event, 'viewLogo')">
                 </div>
                 <div>
                     <label class="block text-[10px] text-slate-400 mb-1">৩. স্বাক্ষর যোগ করুন</label>
-                    <input type="file" accept="image/*" class="w-full text-[9px] bg-slate-700 p-1 rounded cursor-pointer" onchange="processMediaUpload(event, 'viewSign')">
+                    <input type="file" accept="image/*" class="w-full text-[9px] bg-slate-800 p-1 rounded cursor-pointer" onchange="processMediaUpload(event, 'viewSign')">
                 </div>
             </div>
 
@@ -120,42 +146,32 @@
                 <textarea id="inAddress" rows="1.5" class="w-full bg-slate-800 p-1.5 rounded text-xs text-white border border-slate-700" oninput="pushLiveTextData()">Main Road, Station Bazar, Faridpur, Bangladesh.</textarea>
             </div>
 
-            <div class="grid grid-cols-2 gap-2 pt-1">
-                <button onclick="executePNGExport('cardFront', 'Front')" class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-black py-2.5 rounded-lg text-xs tracking-wider shadow-lg">
-                    📥 ডাউনলোড FRONT (PNG)
-                </button>
-                <button onclick="executePNGExport('cardBack', 'Back')" class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-black py-2.5 rounded-lg text-xs tracking-wider shadow-lg">
-                    📥 ডাউনলোড BACK (PNG)
-                </button>
-            </div>
+            <button onclick="window.print()" class="w-full bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-black py-3 rounded-lg text-xs tracking-wider shadow-lg transition-transform active:scale-95">
+                🖨️ প্রিন্ট করুন / PDF হিসেবে সেভ করুন (লেখা কাটবে না)
+            </button>
         </div>
 
-        <div class="lg:col-span-7 flex flex-col md:flex-row gap-4 justify-center items-center bg-slate-900 p-5 rounded-xl border border-slate-800 shadow-2xl overflow-x-auto custom-scrollbar">
+        <div id="printZone" class="lg:col-span-7 flex flex-col md:flex-row gap-4 justify-center items-center bg-slate-900 p-5 rounded-xl border border-slate-800 shadow-2xl overflow-x-auto custom-scrollbar">
             
             <div class="flex flex-col items-center flex-shrink-0">
-                <span class="text-xs font-bold text-slate-500 mb-1.5 uppercase tracking-widest">Front Side Preview</span>
+                <span class="text-xs font-bold text-slate-500 mb-1.5 uppercase tracking-widest class-no-print">Front Side Preview</span>
                 <div id="cardFront" class="id-card-render-box shadow-2xl rounded-xl border border-gray-200">
-                    
                     <svg class="svg-shape-layer" viewBox="0 0 326 504" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="svgFrontShapes"></g>
                     </svg>
-                    
                     <div class="absolute top-0 left-0 w-full px-4 pt-3.5 flex items-center gap-2 z-20">
                         <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center p-0.5 shadow-md flex-shrink-0">
                             <img id="viewLogo" src="https://via.placeholder.com/40" class="w-full h-full object-contain rounded-full">
                         </div>
                         <div id="txtCompany" class="font-black text-[11px] uppercase tracking-wide leading-tight line-clamp-2">DIGITAL COMPUTER & STUDIO</div>
                     </div>
-                    
                     <div id="photoFrame" class="absolute bg-white shadow-md z-20 overflow-hidden flex items-center justify-center transition-all duration-300" style="top:95px; left:108px; width:110px; height:110px; border-radius:50%; border:3px solid #fff;">
                         <img id="viewUserPhoto" src="https://via.placeholder.com/150" class="w-full h-full object-cover">
                     </div>
-                    
                     <div class="absolute left-0 w-full text-center px-4 z-20" style="top: 226px;">
                         <h2 id="txtName" class="text-gray-900 font-extrabold text-sm tracking-wide uppercase truncate">Md. Asaduzzaman</h2>
                         <p id="txtDesignation" class="font-bold text-[11px] mt-0.5 truncate">Senior Graphic Designer</p>
                     </div>
-
                     <div class="absolute top-[288px] left-5 right-5 space-y-1.5 text-[11px] text-gray-700 border-t border-b border-gray-100 py-2.5 z-20">
                         <div class="flex justify-between items-center">
                             <span class="font-bold text-gray-400 uppercase tracking-wider text-[9px]">ID Number:</span>
@@ -170,7 +186,6 @@
                             <span id="txtIssue" class="font-medium text-gray-800">15/07/2026</span>
                         </div>
                     </div>
-
                     <div id="footStrip" class="absolute bottom-0 left-0 w-full h-[40px] flex items-center justify-center text-[10px] font-bold uppercase tracking-widest z-20">
                         Identification Card
                     </div>
@@ -178,31 +193,26 @@
             </div>
 
             <div class="flex flex-col items-center flex-shrink-0">
-                <span class="text-xs font-bold text-slate-500 mb-1.5 uppercase tracking-widest">Back Side Preview</span>
+                <span class="text-xs font-bold text-slate-500 mb-1.5 uppercase tracking-widest class-no-print">Back Side Preview</span>
                 <div id="cardBack" class="id-card-render-box shadow-2xl rounded-xl border border-gray-200 bg-slate-50 flex flex-col justify-between">
-                    
                     <svg class="svg-shape-layer" viewBox="0 0 326 504" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="svgBackShapes"></g>
                     </svg>
-
                     <div class="w-full px-5 pt-[162px] z-20 relative flex-1 flex flex-col justify-start">
                         <div class="flex items-center gap-1.5 mb-2.5">
                             <div id="backAccentBar" class="w-1.5 h-4 rounded-sm"></div>
                             <span class="text-[11px] font-extrabold text-gray-800 uppercase tracking-wider">Terms of Use</span>
                         </div>
-                        
                         <div class="space-y-1.5 text-[10px] text-gray-600 font-medium leading-tight">
                             <p id="txtTerm1">1. This card is non-transferable and property of organization.</p>
                             <p id="txtTerm2">2. Holder must display this card while on duty.</p>
                             <p id="txtTerm3">3. If found, please return to the office address below.</p>
                         </div>
-
                         <div class="mt-4 pt-3 border-t border-dashed border-gray-300">
                             <span class="block text-[8.5px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">Office Address:</span>
                             <p id="txtAddress" class="text-[9.5px] text-gray-700 font-bold leading-tight">Main Road, Station Bazar, Faridpur, Bangladesh.</p>
                         </div>
                     </div>
-
                     <div class="w-full flex justify-center p-5 z-20 relative mt-auto bg-white/60 border-t border-gray-100">
                         <div class="text-center flex flex-col items-center justify-end w-full">
                             <div class="h-9 w-32 flex items-end justify-center pb-0.5 overflow-hidden">
@@ -211,215 +221,139 @@
                             <span class="text-[8.5px] font-bold text-gray-800 border-t border-gray-300 pt-0.5 block w-full">Authorized Sign</span>
                         </div>
                     </div>
-
                 </div>
             </div>
 
         </div>
-
     </div>
 
     <script>
-        // আপনার পছন্দমতো ১০টি সেরা ম্যাচিং অফিশিয়াল কালার প্যালেট ডাটাবেস
+        let activeShapeId = 1;
+        let activePaletteId = 1;
+
         const masterPalettes = [
-            { primary: "#1e3a8a", secondary: "#3b82f6", textComp: "#ffffff", bgType: "skew" },
-            { primary: "#065f46", secondary: "#10b981", textComp: "#ffffff", bgType: "curve" },
-            { primary: "#111827", secondary: "#f97316", textComp: "#f97316", bgType: "split" },
-            { primary: "#4c1d95", secondary: "#a855f7", textComp: "#ffffff", bgType: "diagonal" },
-            { primary: "#1f2937", secondary: "#9ca3af", textComp: "#ffffff", bgType: "block" },
-            { primary: "#991b1b", secondary: "#ef4444", textComp: "#ffffff", bgType: "skew" },
-            { primary: "#0f766e", secondary: "#14b8a6", textComp: "#ffffff", bgType: "curve" },
-            { primary: "#7c2d12", secondary: "#f59e0b", textComp: "#ffffff", bgType: "split" },
-            { primary: "#030712", secondary: "#d97706", textComp: "#d97706", bgType: "diagonal" },
-            { primary: "#0f172a", secondary: "#22c55e", textComp: "#22c55e", bgType: "block" },
-            { primary: "#172554", secondary: "#60a5fa", textComp: "#ffffff", bgType: "arc" },
-            { primary: "#14532d", secondary: "#4ade80", textComp: "#ffffff", bgType: "trapezoid" },
-            { primary: "#2e1065", secondary: "#ec4899", textComp: "#ffffff", bgType: "wave" },
-            { primary: "#292524", secondary: "#eab308", textComp: "#eab308", bgType: "chevron" },
-            { primary: "#1d4ed8", secondary: "#38bdf8", textComp: "#ffffff", bgType: "arc" },
-            { primary: "#7c2d12", secondary: "#fb923c", textComp: "#ffffff", bgType: "trapezoid" },
-            { primary: "#3b0764", secondary: "#c084fc", textComp: "#ffffff", bgType: "wave" },
-            { primary: "#020617", secondary: "#475569", textComp: "#ffffff", bgType: "chevron" },
-            { primary: "#7f1d1d", secondary: "#f87171", textComp: "#ffffff", bgType: "arc" },
-            { primary: "#134e4a", secondary: "#2dd4bf", textComp: "#ffffff", bgType: "trapezoid" },
-            { primary: "#0369a1", secondary: "#7dd3fc", textComp: "#ffffff", bgType: "stripe" },
-            { primary: "#1c1917", secondary: "#a3e635", textComp: "#a3e635", bgType: "glass" },
-            { primary: "#581c87", secondary: "#f472b6", textComp: "#ffffff", bgType: "stripe" },
-            { primary: "#1e1b4b", secondary: "#fbbf24", textComp: "#fbbf24", bgType: "glass" },
-            { primary: "#451a03", secondary: "#fb923c", textComp: "#ffffff", bgType: "stripe" },
-            { primary: "#334155", secondary: "#cbd5e1", textComp: "#ffffff", bgType: "glass" },
-            { primary: "#4c0519", secondary: "#fda4af", textComp: "#ffffff", bgType: "stripe" },
-            { primary: "#081c15", secondary: "#06b6d4", textComp: "#06b6d4", bgType: "glass" },
-            { primary: "#431407", secondary: "#d97706", textComp: "#ffffff", bgType: "stripe" },
-            { primary: "#18181b", secondary: "#e4e4e7", textComp: "#ffffff", bgType: "glass" },
-            { primary: "#0b132b", secondary: "#48cae4", textComp: "#ffffff", bgType: "pillar" },
-            { primary: "#000000", secondary: "#d4fc79", textComp: "#d4fc79", bgType: "prism" },
-            { primary: "#4a000f", secondary: "#ff4d6d", textComp: "#ffffff", bgType: "pillar" },
-            { primary: "#1a3a2a", secondary: "#96e6a1", textComp: "#ffffff", bgType: "prism" },
-            { primary: "#1e004a", secondary: "#70e000", textComp: "#ffffff", bgType: "pillar" },
-            { primary: "#2b2d42", secondary: "#8d99ae", textComp: "#ffffff", bgType: "prism" },
-            { primary: "#1c1c1c", secondary: "#ff6b35", textComp: "#ff6b35", bgType: "pillar" },
-            { primary: "#0b2512", secondary: "#a7c957", textComp: "#ffffff", bgType: "prism" },
-            { primary: "#03045e", secondary: "#00b4d8", textComp: "#ffffff", bgType: "pillar" },
-            { primary: "#0d0d0d", secondary: "#39ff14", textComp: "#39ff14", bgType: "prism" },
-            { primary: "#270101", secondary: "#e6ad12", textComp: "#e6ad12", bgType: "crown" },
-            { primary: "#25282a", secondary: "#00e5ff", textComp: "#ffffff", bgType: "shield" },
-            { primary: "#310817", secondary: "#ff758c", textComp: "#ffffff", bgType: "crown" },
-            { primary: "#001219", secondary: "#0096c7", textComp: "#ffffff", bgType: "shield" },
-            { primary: "#10002b", secondary: "#e0aaff", textComp: "#ffffff", bgType: "crown" },
-            { primary: "#3d261b", secondary: "#e09f67", textComp: "#ffffff", bgType: "shield" },
-            { primary: "#111111", secondary: "#d00000", textComp: "#ffffff", bgType: "crown" },
-            { primary: "#132a13", secondary: "#ecf39e", textComp: "#ffffff", bgType: "shield" },
-            { primary: "#0f052d", secondary: "#ff007f", textComp: "#ffffff", bgType: "crown" },
-            { primary: "#000000", secondary: "#333333", textComp: "#ffffff", bgType: "shield" }
+            { primary: "#1e3a8a", secondary: "#3b82f6", textComp: "#ffffff" },
+            { primary: "#065f46", secondary: "#10b981", textComp: "#ffffff" },
+            { primary: "#111827", secondary: "#f97316", textComp: "#ffffff" },
+            { primary: "#4c1d95", secondary: "#a855f7", textComp: "#ffffff" },
+            { primary: "#0f766e", secondary: "#14b8a6", textComp: "#ffffff" },
+            { primary: "#991b1b", secondary: "#ef4444", textComp: "#ffffff" },
+            { primary: "#3f2b96", secondary: "#a8c0ff", textComp: "#ffffff" },
+            { primary: "#172554", secondary: "#60a5fa", textComp: "#ffffff" },
+            { primary: "#292524", secondary: "#eab308", textComp: "#eab308" },
+            { primary: "#000000", secondary: "#39ff14", textComp: "#39ff14" }
         ];
 
-        let currentBgType = "skew";
+        function getSvgPathData(id, p, s) {
+            switch(id) {
+                case 1: return `<path d="M0 0 H326 V120 L0 150 Z" fill="${p}"/><path d="M0 0 H326 V105 L0 135 Z" fill="${s}" opacity="0.25"/>`;
+                case 2: return `<path d="M0 0 H326 V110 Q163 150 0 110 Z" fill="${p}"/><path d="M0 0 H326 V95 Q163 135 0 95 Z" fill="${s}" opacity="0.3"/>`;
+                case 3: return `<path d="M0 0 H326 V120 L163 145 L0 120 Z" fill="${p}"/><path d="M0 0 H326 V105 L163 130 L0 105 Z" fill="${s}" opacity="0.2"/>`;
+                case 4: return `<path d="M0 0 H326 V125 H0 Z" fill="${p}"/><path d="M0 125 H326 V132 H0 Z" fill="${s}"/>`;
+                case 5: return `<path d="M0 0 H326 V100 L230 135 L90 115 L0 140 Z" fill="${p}"/>`;
+                case 6: return `<path d="M0 0 H326 V140 L0 100 Z" fill="${p}"/><path d="M0 0 H326 V120 L0 80 Z" fill="${s}" opacity="0.25"/>`;
+                case 7: return `<path d="M0 0 H326 V90 C200 150 120 70 0 130 Z" fill="${p}"/>`;
+                case 8: return `<path d="M0 0 H326 V130 L163 100 L0 130 Z" fill="${p}"/>`;
+                case 9: return `<path d="M0 0 H220 L326 125 V135 L0 135 Z" fill="${p}"/>`;
+                case 10: return `<path d="M0 0 H326 V110 L280 140 H46 Z" fill="${p}"/>`;
+                default: 
+                    let dynamicOffset = (id % 5) * 10;
+                    return `<path d="M0 0 H326 V${110 + dynamicOffset} L0 ${140 + dynamicOffset} Z" fill="${p}"/><path d="M0 0 H326 V${95 + dynamicOffset} L0 ${125 + dynamicOffset} Z" fill="${s}" opacity="0.2"/>`;
+            }
+        }
 
-        // ৫০টি ইউনিক ডিজাইন বাটন জেনারেট ইঞ্জিন
-        const grid = document.getElementById('shapeGridSelector');
+        // বাটন জেনারেটর ইঞ্জিনস
+        const shapeGrid = document.getElementById('shapeGridSelector');
         for (let i = 1; i <= 50; i++) {
             const btn = document.createElement('button');
-            btn.className = `h-7 rounded text-xs font-bold transition-all border text-white hover:scale-105 active:scale-95`;
-            
-            // ইউনিভার্সাল ডিফল্ট ডিজাইন হিসেবে প্রাইমারি কালার ১ থেকে ৫০ সেট
-            const designIndex = (i - 1) % themesDatabase.length;
-            btn.style.backgroundColor = themesDatabase[designIndex].primary;
-            btn.style.border = `1.5px solid ${themesDatabase[designIndex].secondary}`;
+            btn.id = `btnShape_${i}`;
+            btn.className = `h-7 rounded text-xs font-bold transition-all border ${i === 1 ? 'bg-blue-600 text-white border-blue-400' : 'bg-slate-800 text-slate-400 border-slate-700 hover:bg-slate-700'}`;
             btn.innerText = i;
-            
-            grid.appendChild(btn);
+            btn.onclick = () => selectShape(i);
+            shapeGrid.appendChild(btn);
         }
 
-        // ১০টি মাস্টার প্যালেট বাটন জেনারেট ইঞ্জিন
-        const pGrid = document.getElementById('paletteGridSelector');
-        masterPalettes.forEach((pal, index) => {
-            const pId = index + 1;
+        const paletteGrid = document.getElementById('paletteGridSelector');
+        masterPalettes.forEach((pal, idx) => {
+            const pId = idx + 1;
             const btn = document.createElement('button');
             btn.id = `btnPal_${pId}`;
-            btn.className = `h-8 rounded-md text-[10px] font-black transition-all border flex flex-col items-center justify-center p-0.5 ${pId === 1 ? 'ring-2 ring-white border-white' : 'border-slate-800 hover:scale-105'}`;
+            btn.className = `h-8 rounded-md text-[10px] font-black transition-all border flex flex-col items-center justify-center p-0.5 ${pId === 1 ? 'ring-2 ring-white border-white' : 'border-slate-800'}`;
             btn.style.backgroundColor = pal.primary;
             btn.innerHTML = `<span style="color:${pal.secondary}">P${pId}</span>`;
-            btn.onclick = () => loadThemePalette(index);
-            pGrid.appendChild(btn);
+            btn.onclick = () => selectPalette(pId);
+            paletteGrid.appendChild(btn);
         });
 
-        // থিম লোডার ও কালার সিঙ্ক ইঞ্জিন (ফ্রন্ট এবং ব্যাক একসাথে ম্যাচ করবে)
-        function loadThemePalette(index) {
+        function selectShape(id) {
+            document.getElementById(`btnShape_${activeShapeId}`).className = 'h-7 rounded text-xs font-bold transition-all border bg-slate-800 text-slate-400 border-slate-700 hover:bg-slate-700';
+            activeShapeId = id;
+            document.getElementById(`btnShape_${id}`).className = 'h-7 rounded text-xs font-bold transition-all border bg-blue-600 text-white border-blue-400';
+            document.getElementById('lblActiveShape').innerText = `Shape: ${id}`;
+            triggerCoreEngineRender();
+        }
+
+        function selectPalette(id) {
             document.getElementById(`btnPal_${activePaletteId}`).classList.remove('ring-2', 'ring-white', 'border-white');
-            document.getElementById(`btnPal_${activePaletteId}`).classList.add('border-slate-800');
-            
-            activePaletteId = index + 1;
-            document.getElementById(`btnPal_${activePaletteId}`).classList.add('ring-2', 'ring-white', 'border-white');
-            document.getElementById(`btnPal_${activePaletteId}`).classList.remove('border-slate-800');
-            
-            document.getElementById('lblActivePalette').innerText = `Palette: P${activePaletteId}`;
-            
-            const theme = masterPalettes[index];
-            currentBgType = themesDatabase[(activeShapeId - 1) % themesDatabase.length].bgType;
-            executeShapeRender(theme.primary, theme.secondary, theme.textComp);
+            activePaletteId = id;
+            document.getElementById(`btnPal_${id}`).classList.add('ring-2', 'ring-white', 'border-white');
+            document.getElementById('lblActivePalette').innerText = `Palette: P${id}`;
+            triggerCoreEngineRender();
         }
 
-        // ৫০টি টাইপের জিওমেট্রিক আর্কিটেকচার ম্যাপিং 엔진
-        function executeShapeRender(primary, secondary, textComp) {
-            const f1 = document.getElementById('svgFrontShapes');
-            const b1 = document.getElementById('svgBackShapes');
-            const comp = document.getElementById('txtCompany');
-            const des = document.getElementById('txtDesignation');
-            const fs = document.getElementById('footStrip');
-            const bac = document.getElementById('backAccentBar');
+        function triggerCoreEngineRender() {
+            const palette = masterPalettes[activePaletteId - 1];
+            const pathHtml = getSvgPathData(activeShapeId, palette.primary, palette.secondary);
+            
+            document.getElementById('svgFrontShapes').innerHTML = pathHtml;
+            document.getElementById('svgBackShapes').innerHTML = pathHtml;
 
-            // রিসেট ও সিএসএস প্রিপারেশন
-            comp.style.color = textComp; des.style.color = secondary; fs.style.background = primary;
-            fs.style.color = textComp; bac.style.background = primary;
+            document.getElementById('txtCompany').style.color = palette.textComp;
+            document.getElementById('txtDesignation').style.color = palette.secondary;
+            document.getElementById('footStrip').style.backgroundColor = palette.primary;
+            document.getElementById('footStrip').style.color = palette.textComp;
+            document.getElementById('backAccentBar').style.backgroundColor = palette.primary;
+        }
 
-            // ছবির ডিফল্ট পজিশন ও সাইজ রিসেট
+        function setPhotoStyle(radiusType) {
             const pf = document.getElementById('photoFrame');
-            pf.style.cssText = "top: 95px; left: 108px; width: 110px; height: 110px; border-radius: 50%; border: 3px solid #fff; transition: all 0.3s ease;";
-
-            // আর্কিটেকচার শেপ কন্টেন্ট ম্যাপিং ইঞ্জিন
-            const activeId = activeShapeId;
-            const pathDataFront = getSvgPathData(activeId, primary, secondary);
-            const pathDataBack = getSvgPathData(activeId, primary, secondary); // ব্যাক পার্ট ফ্রন্টের সাথে সম্পূর্ণ ম্যাচ থাকবে
-            
-            f1.innerHTML = pathDataFront;
-            b1.innerHTML = pathDataBack;
+            if (radiusType === 'circle') {
+                pf.style.borderRadius = "50%";
+                document.getElementById('btnRadCircle').className = "flex-1 bg-indigo-600 p-1.5 rounded text-xs font-bold text-white";
+                document.getElementById('btnRadSquare').className = "flex-1 bg-slate-700 p-1.5 rounded text-xs font-bold text-slate-300";
+            } else {
+                pf.style.borderRadius = "8px";
+                document.getElementById('btnRadSquare').className = "flex-1 bg-indigo-600 p-1.5 rounded text-xs font-bold text-white";
+                document.getElementById('btnRadCircle').className = "flex-1 bg-slate-700 p-1.5 rounded text-xs font-bold text-slate-300";
+            }
         }
 
-        // লাইভ ডেটা ট্রান্সফর্মার স্ক্রিপ্ট
-        function updateCardData() {
+        function togglePhotoBorder() {
+            let hasBorder = document.getElementById('chkPhotoBorder').checked;
+            document.getElementById('photoFrame').style.border = hasBorder ? "3px solid #ffffff" : "0px solid transparent";
+        }
+
+        function pushLiveTextData() {
             document.getElementById('txtCompany').innerText = document.getElementById('inCompany').value;
             document.getElementById('txtName').innerText = document.getElementById('inName').value;
             document.getElementById('txtDesignation').innerText = document.getElementById('inDesignation').value;
             document.getElementById('txtIdNo').innerText = document.getElementById('inIdNo').value;
             document.getElementById('txtMobile').innerText = document.getElementById('inMobile').value;
             document.getElementById('txtIssue').innerText = document.getElementById('inIssue').value;
-            
-            // ব্যাক সাইড ডাটা সিঙ্ক
             document.getElementById('txtTerm1').innerText = document.getElementById('inTerm1').value;
             document.getElementById('txtTerm2').innerText = document.getElementById('inTerm2').value;
             document.getElementById('txtTerm3').innerText = document.getElementById('inTerm3').value;
             document.getElementById('txtAddress').innerText = document.getElementById('inAddress').value;
         }
 
-        // মিডিয়া ফাইল আপলোডার রিডার
-        function uploadMedia(event, targetElementId) {
-            if(event.target.files[0]) {
-                document.getElementById(targetElementId).src = URL.createObjectURL(event.target.files[0]);
+        function processMediaUpload(e, targetId) {
+            if (e.target.files[0]) {
+                document.getElementById(targetId).src = URL.createObjectURL(e.target.files[0]);
             }
         }
 
-        // আল্ট্রা HD প্রিন্ট রেডি পারফেক্ট PNG ডাউনলোডার ইঞ্জিন (ডিজাইনে যা থাকবে হুবহু তাই সেভ হবে)
-        function downloadPNG(elementId, sideName) {
-            const originalNode = document.getElementById(elementId);
-            const holderName = document.getElementById('inName').value.replace(/\s+/g, '_');
-            
-            // ১. একটি অদৃশ্য কন্টেইনার তৈরি করা যা স্ক্রলিং বা স্ক্রিন পজিশন দ্বারা প্রভাবিত হয় না
-            const hiddenContainer = document.createElement('div');
-            hiddenContainer.style.position = 'fixed';
-            hiddenContainer.style.top = '-9999px';
-            hiddenContainer.style.left = '-9999px';
-            hiddenContainer.style.width = '326px';
-            hiddenContainer.style.height = '504px';
-            document.body.appendChild(hiddenContainer);
-
-            // ২. আসল কার্ডটির হুবহু ক্লোন বা কপি তৈরি করা
-            const clonedNode = originalNode.cloneNode(true);
-            hiddenContainer.appendChild(clonedNode);
-
-            // হাই রেজোলিউশন ৩x স্কেলিং নিশ্চিতকরণ এবং সেফ-জোনে প্রসেস
-            html2canvas(clonedNode, {
-                scale: 3.5,
-                useCORS: true,
-                allowTaint: true,
-                backgroundColor: null,
-                scrollX: 0,
-                scrollY: 0,
-                x: 0,
-                y: 0,
-                width: 326,
-                height: 504,
-                logging: false
-            }).then(canvas => {
-                const link = document.createElement('a');
-                link.download = `Premium_ID_${sideName}_Shape${activeShapeId}_${holderName}.png`;
-                link.href = canvas.toDataURL('image/png');
-                link.click();
-                
-                // মেমোরি ক্লিয়ার করার জন্য কন্টেইনার রিমুভ করা
-                document.body.removeChild(hiddenContainer);
-            }).catch(err => {
-                console.error("Download Error: ", err);
-                document.body.removeChild(hiddenContainer);
-            });
-        }
-
-        // ১০টি মাস্টার প্যালেট এবং ছবির ডিফল্ট কনফিগারেশন সেট করা
-        window.onload = function() {
-            initAppSelectors();
-            loadThemePalette(0);
-            updateCardData();
-        }
+        // ইনিশিয়ালাইজেশন
+        triggerCoreEngineRender();
     </script>
 </body>
 </html>
