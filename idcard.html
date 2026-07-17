@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>50 Unique ID Card Studio - Fixed PNG & PDF</title>
+    <title>50 Unique ID Card Studio - High-Res SVG Export</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     
     <style>
         /* CR80 International Standard ID Card Dimensions */
@@ -72,7 +71,7 @@
 <body class="bg-slate-950 min-h-screen text-slate-100 p-4 flex flex-col items-center select-none">
 
     <header class="mb-4 text-center class-no-print">
-        <h1 class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-cyan-400 tracking-wide">Premium ID Card Engine v6.0</h1>
+        <h1 class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-cyan-400 tracking-wide">Premium ID Card Engine v6.5</h1>
         <p class="text-xs text-slate-400 mt-1">৫০টি সম্পূর্ণ আলাদা রিয়েল ইউনিক ডিজাইন × ১০টি প্রফেশনাল কালার প্যালেট</p>
     </header>
 
@@ -152,11 +151,11 @@
 
             <div class="space-y-2">
                 <div class="grid grid-cols-2 gap-2">
-                    <button onclick="executePNGExport('cardFront', 'Front')" class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-black py-2 rounded text-xs tracking-wider shadow-lg active:scale-95">
-                        📥 FRONT PNG
+                    <button onclick="downloadPerfectSVG('cardFront', 'Front')" class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-black py-2 rounded text-xs tracking-wider shadow-lg active:scale-95">
+                        📥 FRONT ভেক্টর SVG
                     </button>
-                    <button onclick="executePNGExport('cardBack', 'Back')" class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-black py-2 rounded text-xs tracking-wider shadow-lg active:scale-95">
-                        📥 BACK PNG
+                    <button onclick="downloadPerfectSVG('cardBack', 'Back')" class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-black py-2 rounded text-xs tracking-wider shadow-lg active:scale-95">
+                        📥 BACK ভেক্টর SVG
                     </button>
                 </div>
                 <button onclick="window.print()" class="w-full bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-black py-2.5 rounded-lg text-xs tracking-wider shadow-lg active:scale-95">
@@ -245,7 +244,6 @@
         let activeShapeId = 1;
         let activePaletteId = 1;
 
-        // ১০টি রেডিমেড প্রো প্রিমিয়াম কালার স্কিম
         const masterPalettes = [
             { primary: "#1e3a8a", secondary: "#3b82f6", textComp: "#ffffff" },
             { primary: "#065f46", secondary: "#10b981", textComp: "#ffffff" },
@@ -259,7 +257,6 @@
             { primary: "#000000", secondary: "#e4e4e7", textComp: "#ffffff" }
         ];
 
-        // ৫০টি সম্পূর্ণ ভিন্ন আলাদা আলাদা রিয়েল SVG আর্কিটেকচার ডেটা ম্যাপিং
         function getSvgPathData(id, p, s) {
             switch(id) {
                 case 1: return `<path d="M0 0 H326 V120 L0 150 Z" fill="${p}"/><path d="M0 0 H326 V105 L0 135 Z" fill="${s}" opacity="0.25"/>`;
@@ -316,7 +313,6 @@
             }
         }
 
-        // বাটন জেনারেটর কোড ব্লক
         const shapeGrid = document.getElementById('shapeGridSelector');
         for (let i = 1; i <= 50; i++) {
             const btn = document.createElement('button');
@@ -406,47 +402,63 @@
             }
         }
 
-        // নিখুঁত হাই-রেজোলিউশন PNG ডাউনলোড প্রসেসর (লেখা কাটবে না)
-        function executePNGExport(elementId, sideName) {
-            const originalNode = document.getElementById(elementId);
+        // ১০০% নিখুঁত রিয়েল ভেক্টর SVG ফাইল ডাউনলোড ইঞ্জিন (কোনো স্ক্রিপ্ট বা থার্ড পার্টি লাইব্রেরি ছাড়া)
+        function downloadPerfectSVG(elementId, sideName) {
+            const cardElement = document.getElementById(elementId);
             const nameSlug = document.getElementById('inName').value.replace(/\s+/g, '_');
             
-            const tempBox = document.createElement('div');
-            tempBox.style.position = 'fixed';
-            tempBox.style.top = '-9999px';
-            tempBox.style.left = '-9999px';
-            tempBox.style.width = '326px';
-            tempBox.style.height = '504px';
-            document.body.appendChild(tempBox);
+            // কার্ডের ভেতরের HTML উপাদানগুলোকে একটি স্ট্যান্ডার্ড SVG রেন্ডার ডকুমেন্টে রূপান্তর
+            const svgDocStr = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="326" height="504" viewBox="0 0 326 504">
+                    <foreignObject width="100%" height="100%">
+                        <div xmlns="http://www.w3.org/1999/xhtml" style="width:326px; height:504px; position:relative; overflow:hidden; background:#ffffff; font-family:sans-serif; box-sizing:border-box;">
+                            <style>
+                                .svg-shape-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; }
+                                .absolute { position: absolute; }
+                                .w-full { width: 100%; }
+                                .px-4 { padding-left: 1rem; padding-right: 1rem; }
+                                .pt-3.5 { padding-top: 0.875rem; }
+                                .flex { display: flex; }
+                                .items-center { align-items: center; }
+                                .gap-2 { gap: 0.5rem; }
+                                .z-20 { z-index: 20; }
+                                .rounded-full { border-radius: 9999px; }
+                                .font-black { font-weight: 900; }
+                                .font-bold { font-weight: 700; }
+                                .font-extrabold { font-weight: 800; }
+                                .font-medium { font-weight: 500; }
+                                .text-[11px] { font-size: 11px; }
+                                .text-sm { font-size: 14px; }
+                                .uppercase { text-transform: uppercase; }
+                                .text-center { text-align: center; }
+                                .text-gray-900 { color: #111827; }
+                                .text-gray-700 { color: #374151; }
+                                .text-gray-600 { color: #4b5563; }
+                                .left-5 { left: 1.25rem; }
+                                .right-5 { right: 1.25rem; }
+                                .justify-between { justify-content: space-between; }
+                                .font-mono { font-family: monospace; }
+                                .bottom-0 { bottom: 0; }
+                                .left-0 { left: 0; }
+                                .justify-center { justify-content: center; }
+                                .text-[10px] { font-size: 10px; }
+                                .tracking-widest { letter-spacing: 0.1em; }
+                            </style>
+                            ${cardElement.innerHTML}
+                        </div>
+                    </foreignObject>
+                </svg>
+            `;
 
-            const clonedNode = originalNode.cloneNode(true);
-            tempBox.appendChild(clonedNode);
-
-            html2canvas(clonedNode, {
-                scale: 4, // হাই ডেফিনিশন ৪x ক্লিয়ারিটি
-                useCORS: true,
-                allowTaint: true,
-                backgroundColor: null,
-                scrollX: 0,
-                scrollY: 0,
-                x: 0,
-                y: 0,
-                width: 326,
-                height: 504,
-                logging: false
-            }).then(canvas => {
-                const link = document.createElement('a');
-                link.download = `ID_${sideName}_Shape${activeShapeId}_${nameSlug}.png`;
-                link.href = canvas.toDataURL('image/png');
-                link.click();
-                document.body.removeChild(tempBox);
-            }).catch(err => {
-                console.error("Export failed: ", err);
-                document.body.removeChild(tempBox);
-            });
+            // ফাইল ডাউনলোড প্রসেসিং
+            const blob = new Blob([svgDocStr], { type: 'image/svg+xml;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `ID_Vector_${sideName}_Shape${activeShapeId}_${nameSlug}.svg`;
+            link.click();
+            URL.revokeObjectURL(link.href);
         }
 
-        // ডিফল্ট অ্যাপ্লিকেশন রেন্ডার স্টার্ট
         triggerCoreEngineRender();
     </script>
 </body>
