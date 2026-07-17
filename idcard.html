@@ -9,16 +9,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     
     <style>
-        /* CR80 Standard ID Card Dimensions */
+       /* CR80 Standard ID Card Dimensions */
         .id-card-render-box {
             width: 326px;
             height: 504px;
             position: relative;
-            overflow: hidden;
+            overflow: visible; /* 'hidden' থেকে পরিবর্তন করে 'visible' করুন */
             background: #ffffff;
             font-family: 'Helvetica Neue', Arial, sans-serif;
             box-sizing: border-box;
+            padding: 5px; /* লেখা যেন বর্ডারের সাথে লেগে না থাকে */
         }
+        
         .svg-shape-layer {
             position: absolute;
             top: 0;
@@ -27,17 +29,6 @@
             height: 100%;
             pointer-events: none;
             z-index: 10;
-        }
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 5px;
-            height: 5px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #0f172a;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 4px;
         }
     </style>
 </head>
@@ -704,34 +695,35 @@ opacity="0.08"/>
             }
         }
 
-        function exportToPerfectPDF(elementId, sideName) {
+       function exportToPerfectPDF(elementId, sideName) {
     const cardElement = document.getElementById(elementId);
     const nameSlug = document.getElementById('inName').value.replace(/\s+/g, '_');
 
-    // ১. কার্ডের ভেতরের লেখা যেন না কাটে, সেজন্য সাময়িকভাবে মার্জিন ঠিক করে নেওয়া
-    cardElement.style.boxSizing = "border-box";
-    cardElement.style.padding = "2px"; // হালকা প্যাডিং যাতে লেখা বর্ডারের সাথে লেগে না থাকে
-
-    html2canvas(cardElement, {
-        scale: 4, // হাই রেজোলিউশন
+    // কনফিগারেশন: কার্ডের কন্টেন্ট যেন কোনোভাবেই না কাটে
+    const options = {
+        scale: 4, 
         useCORS: true,
         allowTaint: true,
         backgroundColor: null,
         logging: false,
-        width: cardElement.offsetWidth, // এলিমেন্টের সঠিক প্রস্থ ধরা
-        height: cardElement.offsetHeight // এলিমেন্টের সঠিক উচ্চতা ধরা
-    }).then(canvas => {
-        
-        // ২. JPG হিসেবে ডাউনলোড করার জন্য সরাসরি ক্যানভাসকে লিংকে রূপান্তর
+        // offsetWidth এর বদলে scrollWidth ব্যবহার করা নিরাপদ, কারণ এতে হিডেন কন্টেন্টও আসে
+        width: cardElement.scrollWidth, 
+        height: cardElement.scrollHeight,
+        windowWidth: cardElement.scrollWidth,
+        windowHeight: cardElement.scrollHeight,
+        x: 0,
+        y: 0
+    };
+
+    html2canvas(cardElement, options).then(canvas => {
         const link = document.createElement('a');
-        link.download = `ID_${sideName}_${nameSlug}.jpg`; // JPG ফরম্যাট
+        link.download = `ID_${sideName}_${nameSlug}.jpg`;
         
-        // ৩. ছবি কোয়ালিটি সর্বোচ্চ করার জন্য
+        // কোয়ালিটি ১০০% এবং JPG ফরম্যাট
         link.href = canvas.toDataURL('image/jpeg', 1.0); 
         link.click();
     });
 }
-
         triggerCoreEngineRender();
     </script>
 </body>
