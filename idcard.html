@@ -10,13 +10,15 @@
     
     <style>
         .id-card-render-box {
-            width: 326px;
-            height: 504px;
-            position: relative;
-            background: #ffffff;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            box-sizing: border-box;
-            overflow: hidden;
+    width: 326px;
+    height: 504px;
+    position: relative;
+    background: #ffffff;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    box-sizing: border-box; /* এটি খুব গুরুত্বপূর্ণ */
+    overflow: hidden;
+    padding: 10px; /* ভেতরে সামান্য জায়গা রাখা হয়েছে যেন লেখা না কাটে */
+    border: 1px solid #e2e8f0;
         }
         .svg-shape-layer {
             position: absolute;
@@ -354,11 +356,33 @@
             }
         }
 
-        // WYSIWYG ইঞ্জিন: স্ক্রিনে যা দেখা যাচ্ছে ঠিক সেটিকে হুবহু পিডিএফে কনভার্ট করার ফাংশন
-        function exportPerfectPreviewPDF(elementId, sideName) {
-            const element = document.getElementById(elementId);
-            const nameAttr = document.getElementById('inName').value.replace(/\s+/g, '_');
+      // সংশোধিত এক্সপোর্ট ফাংশন - এটি কোনো লেখা বা বর্ডার কাটবে না
+function exportPerfectPreviewPDF(elementId, sideName) {
+    const element = document.getElementById(elementId);
+    const nameAttr = document.getElementById('inName').value.replace(/\s+/g, '_');
 
+    // মার্জিন এবং স্কেলিং ঠিক রাখা হয়েছে
+    const opt = {
+        scale: 3, 
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: "#ffffff",
+        windowWidth: element.scrollWidth,
+        windowHeight: element.scrollHeight,
+        x: 0,
+        y: 0
+    };
+
+    html2canvas(element, opt).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+        const { jsPDF } = window.jspdf;
+        
+        // পিডিএফে কার্ডটি বসানোর সময় সামান্য মার্জিন রাখা হয়েছে যাতে বর্ডার না কাটে
+        const pdf = new jsPDF('p', 'mm', [54, 86]);
+        pdf.addImage(imgData, 'PNG', 0, 0, 54, 86);
+        pdf.save(`ID_${sideName}_${nameAttr}.pdf`);
+    });
+}
             // হাই-রেজোলিউশন কোয়ালিটি নিশ্চিত করার কনফিগারেশন
             const opt = {
                 scale: 4, // ৪ গুণ শার্প রেজোলিউশন (বিন্দুমাত্র ফাটবে না বা কাটবে না)
