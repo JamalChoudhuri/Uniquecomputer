@@ -1,0 +1,2003 @@
+/*=========================================================
+ Business Letterhead Generator
+ style.css (PART-1)
+=========================================================*/
+
+
+/*=========================================================
+RESET
+=========================================================*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    background:#eceff3;
+
+    font-family:Arial,Helvetica,sans-serif;
+
+    color:#222;
+
+}
+
+
+/*=========================================================
+MAIN CONTAINER
+=========================================================*/
+
+.container{
+
+    width:100%;
+
+    min-height:100vh;
+
+    display:flex;
+
+    gap:25px;
+
+    padding:25px;
+
+}
+
+
+/*=========================================================
+LEFT PANEL
+=========================================================*/
+
+.left-panel{
+
+    width:360px;
+
+    background:#ffffff;
+
+    border-radius:12px;
+
+    padding:20px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+
+    overflow:auto;
+
+}
+
+
+.left-panel h2{
+
+    text-align:center;
+
+    margin-bottom:20px;
+
+    color:#0066cc;
+
+}
+
+
+/*=========================================================
+LABEL
+=========================================================*/
+
+.left-panel label{
+
+    display:block;
+
+    margin-top:15px;
+
+    margin-bottom:6px;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+}
+
+
+/*=========================================================
+INPUT
+=========================================================*/
+
+.left-panel input{
+
+    width:100%;
+
+    padding:10px;
+
+    border:1px solid #cccccc;
+
+    border-radius:6px;
+
+    outline:none;
+
+    transition:.3s;
+
+}
+
+
+.left-panel input:focus{
+
+    border-color:#0066ff;
+
+}
+
+
+/*=========================================================
+TEXTAREA
+=========================================================*/
+
+.left-panel textarea{
+
+    width:100%;
+
+    height:80px;
+
+    resize:vertical;
+
+    padding:10px;
+
+    border-radius:6px;
+
+    border:1px solid #cccccc;
+
+    outline:none;
+
+}
+
+
+.left-panel textarea:focus{
+
+    border-color:#0066ff;
+
+}
+
+
+/*=========================================================
+SELECT
+=========================================================*/
+
+.left-panel select{
+
+    width:100%;
+
+    padding:10px;
+
+    border-radius:6px;
+
+    border:1px solid #cccccc;
+
+    cursor:pointer;
+
+}
+
+
+/*=========================================================
+FILE INPUT
+=========================================================*/
+
+input[type=file]{
+
+    padding:8px;
+
+}
+
+
+/*=========================================================
+COLOR PICKER
+=========================================================*/
+
+input[type=color]{
+
+    width:100%;
+
+    height:45px;
+
+    cursor:pointer;
+
+    border:none;
+
+    background:none;
+
+}
+
+
+/*=========================================================
+BUTTON
+=========================================================*/
+
+button{
+
+    width:100%;
+
+    margin-top:20px;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:#0066ff;
+
+    color:#fff;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+
+button:hover{
+
+    background:#004fc5;
+
+}
+
+
+button i{
+
+    margin-right:8px;
+
+}
+
+
+/*=========================================================
+SCROLLBAR
+=========================================================*/
+
+.left-panel::-webkit-scrollbar{
+
+    width:7px;
+
+}
+
+.left-panel::-webkit-scrollbar-thumb{
+
+    background:#888;
+
+    border-radius:20px;
+
+}
+
+.left-panel::-webkit-scrollbar-track{
+
+    background:#eee;
+
+}
+
+
+/*=========================================================
+PREVIEW AREA
+=========================================================*/
+
+.preview-area{
+
+    flex:1;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:flex-start;
+
+}
+
+
+/*=========================================================
+A4 PAPER
+=========================================================*/
+
+#letterhead{
+
+    width:210mm;
+
+    min-height:297mm;
+
+    background:#ffffff;
+
+    box-shadow:0 0 15px rgba(0,0,0,.2);
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+
+/*=========================================================
+DESIGN-1 START
+এখান থেকে Design-1 CSS শুরু হবে
+=========================================================*/
+
+
+.header{
+
+    width:100%;
+
+    height:160px;
+
+    background:#0b5ed7;
+
+    color:white;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:25px;
+
+}
+
+
+.logo-box{
+
+    width:110px;
+
+    height:110px;
+
+    background:white;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    overflow:hidden;
+
+}
+
+
+.logo-box img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:contain;
+
+}
+
+
+.company{
+
+    flex:1;
+
+    text-align:center;
+
+    padding:0 20px;
+
+}
+
+
+.company h1{
+
+    font-size:34px;
+
+    margin-bottom:10px;
+
+}
+
+
+.company p{
+
+    font-size:18px;
+
+}
+
+
+.mono-box{
+
+    width:90px;
+
+    height:90px;
+
+    border-radius:50%;
+
+    overflow:hidden;
+
+    background:#ffffff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+
+.mono-box img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:contain;
+
+}
+
+
+/*=========================================================
+DESIGN-1 CSS END
+=========================================================*/
+
+
+/*=========================================================
+DESIGN-2 START
+এখান থেকে প্রিমিয়াম কোয়ালিটির ডিজাইন শুরু হবে
+=========================================================*/
+
+.header {
+    width: 100%;
+    min-height: 140px;
+    background: linear-gradient(135deg, #0d6efd, #0a4bb3);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 40px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    border-bottom: 4px solid #084298;
+}
+
+.logo-box {
+    width: 100px;
+    height: 100px;
+    background: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.logo-box:hover {
+    transform: scale(1.05);
+}
+
+.logo-box img {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+}
+
+.company {
+    flex: 1;
+    text-align: center;
+    padding: 0 30px;
+}
+
+.company h1 {
+    font-size: 38px;
+    font-weight: 700;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+.company p {
+    font-size: 18px;
+    font-weight: 300;
+    opacity: 0.9;
+    margin-top: 5px;
+}
+
+.mono-box {
+    width: 85px;
+    height: 85px;
+    border-radius: 15px; /* গোল কোণার বদলে হালকা রাউন্ডেড শেপ প্রিমিয়াম লাগে */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.mono-box:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.mono-box img {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+}
+
+/*=========================================================
+DESIGN-2 CSS END
+=========================================================*/
+
+
+/*=========================================================
+DESIGN-3 START
+আধুনিক গ্লাস-মর্ফিজম (Glassmorphism) প্রিমিয়াম ডিজাইন
+=========================================================*/
+
+.header {
+    width: 100%;
+    min-height: 150px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 50px;
+    position: relative;
+    overflow: hidden;
+}
+
+.logo-box {
+    width: 95px;
+    height: 95px;
+    background: linear-gradient(145deg, #ffffff, #e6e6e6);
+    border-radius: 20px; /* রাউন্ডেড স্কয়ার শেপ */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transition: 0.4s;
+}
+
+.logo-box:hover {
+    transform: rotate(5deg) scale(1.05);
+}
+
+.logo-box img {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+}
+
+.company {
+    flex: 1;
+    text-align: center;
+    padding: 0 40px;
+}
+
+.company h1 {
+    font-size: 40px;
+    font-weight: 800;
+    margin: 0;
+    color: #ffffff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.company p {
+    font-size: 16px;
+    color: #a0c4ff;
+    margin-top: 8px;
+    letter-spacing: 1.5px;
+}
+
+.mono-box {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #ffffff;
+    transition: 0.3s;
+}
+
+.mono-box:hover {
+    background: #ffffff;
+    cursor: pointer;
+}
+
+.mono-box img {
+    width: 60%;
+    height: 60%;
+    object-fit: contain;
+    filter: invert(1);
+}
+
+.mono-box:hover img {
+    filter: invert(0);
+}
+
+/*=========================================================
+DESIGN-3 CSS END
+=========================================================*/
+
+
+/*=========================================================
+DESIGN-4 START
+মিনিমালিস্টিক এবং প্রিমিয়াম ব্ল্যাক অ্যান্ড হোয়াইট ডিজাইন
+=========================================================*/
+
+.header {
+    width: 100%;
+    height: 150px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.logo-box {
+    width: 90px;
+    height: 90px;
+    background: #000000;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s ease;
+}
+
+.logo-box:hover {
+    background: #333333;
+}
+
+.logo-box img {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+}
+
+.company {
+    flex: 1;
+    text-align: center;
+    padding: 0 30px;
+}
+
+.company h1 {
+    font-size: 36px;
+    font-weight: 900;
+    color: #000000;
+    margin: 0;
+    letter-spacing: -1px;
+}
+
+.company p {
+    font-size: 16px;
+    color: #666666;
+    margin-top: 5px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.mono-box {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #f8f8f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #e0e0e0;
+    transition: 0.3s;
+}
+
+.mono-box:hover {
+    border-color: #000000;
+    background: #ffffff;
+}
+
+.mono-box img {
+    width: 50%;
+    height: 50%;
+    object-fit: contain;
+}
+
+/*=========================================================
+DESIGN-4 CSS END
+=========================================================*/
+/*=========================================================
+DESIGN-5 START
+গ্লোয়িং নিয়ন (Glowing Neon) স্টাইল প্রিমিয়াম ডিজাইন
+=========================================================*/
+
+.header {
+    width: 100%;
+    height: 160px;
+    background: #000000;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 60px;
+    border-bottom: 2px solid #333;
+    box-shadow: 0 10px 30px rgba(0, 255, 255, 0.1);
+}
+
+.logo-box {
+    width: 100px;
+    height: 100px;
+    background: #111;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #00ffff;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+    transition: 0.4s;
+}
+
+.logo-box:hover {
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.8);
+}
+
+.logo-box img {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+}
+
+.company {
+    flex: 1;
+    text-align: center;
+    padding: 0 40px;
+}
+
+.company h1 {
+    font-size: 42px;
+    font-weight: 800;
+    margin: 0;
+    color: #00ffff;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.company p {
+    font-size: 18px;
+    color: #cccccc;
+    margin-top: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.mono-box {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #555;
+    transition: 0.4s;
+}
+
+.mono-box:hover {
+    border-color: #00ffff;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+}
+
+.mono-box img {
+    width: 50%;
+    height: 50%;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+}
+
+/*=========================================================
+DESIGN-5 CSS END
+=========================================================*/
+
+/*=========================================================
+...
+
+...
+
+...
+
+এভাবে Design-50 পর্যন্ত যোগ করবেন
+
+=========================================================*/
+/*=========================================================
+ Business Letterhead Generator
+ style.css (PART-2A)
+ Letter Body + Footer + Preview
+=========================================================*/
+
+
+/*=========================================================
+LETTER BODY
+=========================================================*/
+
+.body{
+
+    width:100%;
+
+    min-height:720px;
+
+    padding:45px;
+
+    background:#ffffff;
+
+    color:#222;
+
+    font-size:16px;
+
+    line-height:30px;
+
+}
+
+
+.body h2{
+
+    margin-bottom:15px;
+
+    color:#0b5ed7;
+
+}
+
+
+.body h3{
+
+    margin-bottom:10px;
+
+}
+
+
+.body p{
+
+    margin-bottom:15px;
+
+    text-align:justify;
+
+}
+
+
+.body ul{
+
+    margin-left:30px;
+
+    margin-bottom:20px;
+
+}
+
+
+.body li{
+
+    margin-bottom:10px;
+
+}
+
+
+.body table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    margin-top:20px;
+
+}
+
+
+.body table td{
+
+    border:1px solid #dddddd;
+
+    padding:10px;
+
+}
+
+
+.body table th{
+
+    background:#0b5ed7;
+
+    color:#ffffff;
+
+    padding:12px;
+
+}
+
+
+/*=========================================================
+FOOTER
+=========================================================*/
+
+.footer{
+
+    position:absolute;
+
+    left:0;
+
+    bottom:0;
+
+    width:100%;
+
+    background:#0b5ed7;
+
+    color:#ffffff;
+
+    text-align:center;
+
+    padding:18px;
+
+}
+
+
+.footer p{
+
+    margin:4px 0;
+
+    font-size:14px;
+
+}
+
+
+/*=========================================================
+LIVE DATA
+=========================================================*/
+
+#companyPreview{
+
+    word-break:break-word;
+
+}
+
+#taglinePreview{
+
+    word-break:break-word;
+
+}
+
+#addressPreview{
+
+    word-break:break-word;
+
+}
+
+#mobilePreview{
+
+    word-break:break-word;
+
+}
+
+#ownerPreview{
+
+    word-break:break-word;
+
+}
+
+#savingPreview{
+
+    word-break:break-word;
+
+}
+
+
+/*=========================================================
+LOGO
+=========================================================*/
+
+#logoPreview{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:contain;
+
+}
+
+
+/*=========================================================
+MONOGRAM
+=========================================================*/
+
+#monoPreview{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:contain;
+
+}
+
+
+/*=========================================================
+SHADOW
+=========================================================*/
+
+#letterhead{
+
+    transition:.35s;
+
+}
+
+#letterhead:hover{
+
+    box-shadow:0 15px 35px rgba(0,0,0,.30);
+
+}
+
+
+/*=========================================================
+UTILITY
+=========================================================*/
+
+.text-center{
+
+    text-align:center;
+
+}
+
+.text-left{
+
+    text-align:left;
+
+}
+
+.text-right{
+
+    text-align:right;
+
+}
+
+
+.bold{
+
+    font-weight:bold;
+
+}
+
+.uppercase{
+
+    text-transform:uppercase;
+
+}
+
+.capitalize{
+
+    text-transform:capitalize;
+
+}
+
+
+/*=========================================================
+SPACING
+=========================================================*/
+
+.mt-10{
+
+    margin-top:10px;
+
+}
+
+.mt-20{
+
+    margin-top:20px;
+
+}
+
+.mt-30{
+
+    margin-top:30px;
+
+}
+
+.mb-10{
+
+    margin-bottom:10px;
+
+}
+
+.mb-20{
+
+    margin-bottom:20px;
+
+}
+
+.mb-30{
+
+    margin-bottom:30px;
+
+}
+
+
+/*=========================================================
+DISPLAY
+=========================================================*/
+
+.flex{
+
+    display:flex;
+
+}
+
+.space-between{
+
+    justify-content:space-between;
+
+}
+
+.align-center{
+
+    align-items:center;
+
+}
+
+
+/*=========================================================
+IMAGE
+=========================================================*/
+
+img{
+
+    max-width:100%;
+
+}
+
+
+/*=========================================================
+FORM ANIMATION
+=========================================================*/
+
+input,
+textarea,
+select,
+button{
+
+    transition:.30s;
+
+}
+
+
+input:hover{
+
+    border-color:#0b5ed7;
+
+}
+
+
+textarea:hover{
+
+    border-color:#0b5ed7;
+
+}
+
+
+select:hover{
+
+    border-color:#0b5ed7;
+
+}
+
+
+/*=========================================================
+BUTTON EFFECT
+=========================================================*/
+
+button:active{
+
+    transform:scale(.98);
+
+}
+
+
+/*=========================================================
+UPLOAD BOX
+=========================================================*/
+
+input[type=file]{
+
+    background:#f5f5f5;
+
+    border:1px dashed #999999;
+
+}
+
+
+/*=========================================================
+COLOR PICKER
+=========================================================*/
+
+input[type=color]{
+
+    border-radius:8px;
+
+}
+
+
+/*=========================================================
+PREVIEW BACKGROUND
+=========================================================*/
+
+.preview-area{
+
+    background:#dfe5ea;
+
+    border-radius:12px;
+
+    padding:20px;
+
+}
+
+
+/*=========================================================
+DESIGN 1 EXTRA STYLE
+=========================================================*/
+
+.header{
+
+    border-bottom:6px solid #ffd000;
+
+}
+
+.footer{
+
+    border-top:4px solid #ffd000;
+
+}
+
+
+/*=========================================================
+DESIGN-2 CSS START
+
+এখানে Design-2 এর CSS লিখবেন
+
+=========================================================*/
+
+
+/*=========================================================
+DESIGN-3 CSS START
+
+এখানে Design-3 এর CSS লিখবেন
+
+=========================================================*/
+
+
+/*=========================================================
+DESIGN-4 CSS START
+
+এখানে Design-4 এর CSS লিখবেন
+
+=========================================================*/
+
+
+/*=========================================================
+Design-5
+
+=========================================================*/
+
+
+/*=========================================================
+Design-6
+
+=========================================================*/
+
+
+/*=========================================================
+Design-7
+
+=========================================================*/
+
+
+/*=========================================================
+Design-8
+
+=========================================================*/
+
+
+/*=========================================================
+...
+
+...
+
+...
+
+Design-50 পর্যন্ত এখানে CSS লিখবেন
+
+=========================================================*/
+/*=========================================================
+ Business Letterhead Generator
+ style.css (PART-2B-1)
+ Responsive CSS
+=========================================================*/
+
+
+/*=========================================================
+LARGE DESKTOP
+=========================================================*/
+
+@media (max-width:1400px){
+
+.container{
+
+    padding:20px;
+
+    gap:20px;
+
+}
+
+.left-panel{
+
+    width:340px;
+
+}
+
+}
+
+
+/*=========================================================
+LAPTOP
+=========================================================*/
+
+@media (max-width:1200px){
+
+.container{
+
+    gap:15px;
+
+}
+
+.left-panel{
+
+    width:320px;
+
+}
+
+#letterhead{
+
+    transform:scale(.90);
+
+    transform-origin:top center;
+
+}
+
+}
+
+
+/*=========================================================
+TABLET
+=========================================================*/
+
+@media (max-width:992px){
+
+.container{
+
+    flex-direction:column;
+
+}
+
+.left-panel{
+
+    width:100%;
+
+}
+
+.preview-area{
+
+    width:100%;
+
+    overflow:auto;
+
+    justify-content:center;
+
+}
+
+#letterhead{
+
+    transform:scale(.82);
+
+    transform-origin:top center;
+
+}
+
+}
+
+
+/*=========================================================
+MOBILE
+=========================================================*/
+
+@media (max-width:768px){
+
+.container{
+
+    padding:10px;
+
+}
+
+.left-panel{
+
+    padding:15px;
+
+}
+
+.left-panel h2{
+
+    font-size:22px;
+
+}
+
+.left-panel label{
+
+    font-size:14px;
+
+}
+
+.left-panel input{
+
+    font-size:14px;
+
+}
+
+.left-panel textarea{
+
+    font-size:14px;
+
+}
+
+.left-panel select{
+
+    font-size:14px;
+
+}
+
+button{
+
+    font-size:15px;
+
+}
+
+.preview-area{
+
+    overflow-x:auto;
+
+    padding:10px;
+
+}
+
+#letterhead{
+
+    transform:scale(.62);
+
+    transform-origin:top center;
+
+}
+
+.header{
+
+    padding:18px;
+
+}
+
+.company h1{
+
+    font-size:28px;
+
+}
+
+.company p{
+
+    font-size:15px;
+
+}
+
+.logo-box{
+
+    width:85px;
+
+    height:85px;
+
+}
+
+.mono-box{
+
+    width:70px;
+
+    height:70px;
+
+}
+
+}
+
+
+/*=========================================================
+SMALL MOBILE
+=========================================================*/
+
+@media (max-width:576px){
+
+#letterhead{
+
+    transform:scale(.52);
+
+}
+
+.company h1{
+
+    font-size:22px;
+
+}
+
+.company p{
+
+    font-size:13px;
+
+}
+
+.logo-box{
+
+    width:70px;
+
+    height:70px;
+
+}
+
+.mono-box{
+
+    width:60px;
+
+    height:60px;
+
+}
+
+.body{
+
+    padding:30px;
+
+}
+
+.footer{
+
+    font-size:12px;
+
+}
+
+}
+
+
+/*=========================================================
+VERY SMALL MOBILE
+=========================================================*/
+
+@media (max-width:420px){
+
+.container{
+
+    padding:5px;
+
+}
+
+.left-panel{
+
+    border-radius:8px;
+
+    padding:10px;
+
+}
+
+.left-panel h2{
+
+    font-size:20px;
+
+}
+
+button{
+
+    padding:12px;
+
+}
+
+#letterhead{
+
+    transform:scale(.42);
+
+}
+
+}
+
+
+/*=========================================================
+LANDSCAPE MOBILE
+=========================================================*/
+
+@media (max-height:500px){
+
+.container{
+
+    flex-direction:row;
+
+}
+
+.left-panel{
+
+    height:95vh;
+
+    overflow:auto;
+
+}
+
+.preview-area{
+
+    overflow:auto;
+
+}
+
+}
+
+
+/*=========================================================
+END OF RESPONSIVE
+=========================================================*/
+
+
+/*=========================================================
+DESIGN-2 RESPONSIVE
+
+এখানে Design-2 এর Responsive CSS লিখবেন
+
+=========================================================*/
+
+
+/*=========================================================
+DESIGN-3 RESPONSIVE
+
+এখানে Design-3 এর Responsive CSS লিখবেন
+
+=========================================================*/
+
+
+/*=========================================================
+DESIGN-4 RESPONSIVE
+
+এখানে Design-4 এর Responsive CSS লিখবেন
+
+=========================================================*/
+
+
+/*=========================================================
+...
+
+...
+
+...
+
+এভাবে Design-50 পর্যন্ত Responsive CSS লিখবেন
+
+=========================================================*/
+/*=========================================================
+ Business Letterhead Generator
+ style.css (PART-2B-2)
+ Print + PDF + A4 Settings
+=========================================================*/
+
+
+/*=========================================================
+A4 PAGE
+=========================================================*/
+
+@page{
+
+    size:A4 portrait;
+
+    margin:0;
+
+}
+
+
+/*=========================================================
+PRINT STYLE
+=========================================================*/
+
+@media print{
+
+body{
+
+    background:#ffffff !important;
+
+}
+
+.container{
+
+    display:block;
+
+    padding:0;
+
+    margin:0;
+
+}
+
+.left-panel{
+
+    display:none !important;
+
+}
+
+.preview-area{
+
+    width:100%;
+
+    margin:0;
+
+    padding:0;
+
+    background:#ffffff;
+
+}
+
+#letterhead{
+
+    width:210mm;
+
+    min-height:297mm;
+
+    margin:0;
+
+    box-shadow:none;
+
+    border:none;
+
+    transform:none !important;
+
+    overflow:hidden;
+
+}
+
+button{
+
+    display:none;
+
+}
+
+}
+
+
+/*=========================================================
+PDF FRIENDLY
+=========================================================*/
+
+#letterhead{
+
+    -webkit-print-color-adjust:exact;
+
+    print-color-adjust:exact;
+
+}
+
+
+/*=========================================================
+NO PAGE BREAK
+=========================================================*/
+
+.header,
+.footer,
+.logo-box,
+.mono-box{
+
+    page-break-inside:avoid;
+
+    break-inside:avoid;
+
+}
+
+
+/*=========================================================
+BODY PAGE BREAK
+=========================================================*/
+
+.body{
+
+    page-break-inside:auto;
+
+}
+
+
+/*=========================================================
+TABLE PRINT
+=========================================================*/
+
+table{
+
+    page-break-inside:auto;
+
+}
+
+tr{
+
+    page-break-inside:avoid;
+
+}
+
+thead{
+
+    display:table-header-group;
+
+}
+
+
+/*=========================================================
+IMAGE PRINT
+=========================================================*/
+
+img{
+
+    page-break-inside:avoid;
+
+    max-width:100%;
+
+}
+
+
+/*=========================================================
+PDF SHADOW REMOVE
+=========================================================*/
+
+@media print{
+
+#letterhead{
+
+    box-shadow:none !important;
+
+}
+
+}
+
+
+/*=========================================================
+BACKGROUND PRINT
+=========================================================*/
+
+@media print{
+
+.header{
+
+    background:#0b5ed7 !important;
+
+    color:#ffffff !important;
+
+}
+
+.footer{
+
+    background:#0b5ed7 !important;
+
+    color:#ffffff !important;
+
+}
+
+}
+
+
+/*=========================================================
+LETTER SIZE LOCK
+=========================================================*/
+
+#letterhead{
+
+    max-width:210mm;
+
+    min-width:210mm;
+
+}
+
+
+/*=========================================================
+PRINT FONT
+=========================================================*/
+
+@media print{
+
+body{
+
+    font-family:Arial,Helvetica,sans-serif;
+
+}
+
+}
+
+
+/*=========================================================
+DESIGN-2 PRINT CSS
+
+এখানে Design-2 এর Print CSS লিখবেন
+
+=========================================================*/
+
+/*=========================================================
+PRINT SETTINGS
+সকল ডিজাইনের জন্য প্রিন্ট ফ্রন্ট সেটিংস
+=========================================================*/
+
+@media print {
+    body {
+        font-family: Arial, Helvetica, sans-serif !important;
+    }
+
+    /* প্রিন্ট করার সময় হেডার ব্যাকগ্রাউন্ড এবং কালার ঠিক রাখার জন্য */
+    .header {
+        background: #ffffff !important;
+        color: #000000 !important;
+        border-bottom: 2px solid #000000 !important;
+        -webkit-print-color-adjust: exact;
+    }
+
+    .company h1, .company p {
+        color: #000000 !important;
+    }
+
+    /* প্রিন্ট করার সময় অপ্রয়োজনীয় ব্যাকগ্রাউন্ড শ্যাডো বা গ্লো ইফেক্ট বাদ দেওয়া */
+    .logo-box, .mono-box {
+        box-shadow: none !important;
+        border: 1px solid #000000 !important;
+    }
+}
+/*=========================================================
+DESIGN-3 PRINT CSS
+
+এখানে Design-3 এর Print CSS লিখবেন
+
+=========================================================*/
+
+
+/*=========================================================
+DESIGN-4 PRINT CSS
+
+এখানে Design-4 এর Print CSS লিখবেন
+
+=========================================================*/
+
+
+/*=========================================================
+DESIGN-5 PRINT CSS
+
+=========================================================*/
+
+
+/*=========================================================
+DESIGN-6 PRINT CSS
+
+=========================================================*/
+
+
+/*=========================================================
+DESIGN-7 PRINT CSS
+
+=========================================================*/
+
+
+/*=========================================================
+DESIGN-8 PRINT CSS
+
+=========================================================*/
+
+
+/*=========================================================
+...
+
+...
+
+...
+
+DESIGN-50 PRINT CSS
+
+=========================================================*/
+
+
+/*=========================================================
+END OF STYLE.CSS
+=========================================================*/
