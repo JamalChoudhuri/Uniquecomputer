@@ -318,7 +318,7 @@ DESIGN-1 START
 =========================================================*/
 
 
-.header{
+.Design5 .header{
 
     width:100%;
 
@@ -339,7 +339,7 @@ DESIGN-1 START
 }
 
 
-.logo-box{
+.Design5 .logo-box{
 
     width:110px;
 
@@ -360,7 +360,7 @@ DESIGN-1 START
 }
 
 
-.logo-box img{
+.Design5 .logo-box img{
 
     width:100%;
 
@@ -382,7 +382,7 @@ DESIGN-1 START
 }
 
 
-.company h1{
+.Design5 .company h1{
 
     font-size:34px;
 
@@ -391,14 +391,14 @@ DESIGN-1 START
 }
 
 
-.company p{
+.Design5 .company p{
 
     font-size:18px;
 
 }
 
 
-.mono-box{
+.Design5 .mono-box{
 
     width:90px;
 
@@ -419,7 +419,7 @@ DESIGN-1 START
 }
 
 
-.mono-box img{
+.Design5 .mono-box img{
 
     width:100%;
 
@@ -440,7 +440,7 @@ DESIGN-2 START
 এখান থেকে প্রিমিয়াম কোয়ালিটির ডিজাইন শুরু হবে
 =========================================================*/
 
-.header {
+.Design1 .header {
     width: 100%;
     min-height: 140px;
     background: linear-gradient(135deg, #0d6efd, #0a4bb3);
@@ -453,7 +453,7 @@ DESIGN-2 START
     border-bottom: 4px solid #084298;
 }
 
-.logo-box {
+.Design1 .logo-box {
     width: 100px;
     height: 100px;
     background: #ffffff;
@@ -466,23 +466,23 @@ DESIGN-2 START
     transition: transform 0.3s ease;
 }
 
-.logo-box:hover {
+.Design1 .logo-box:hover {
     transform: scale(1.05);
 }
 
-.logo-box img {
+.Design1 .logo-box img {
     width: 90%;
     height: 90%;
     object-fit: contain;
 }
 
-.company {
+.Design1 .company {
     flex: 1;
     text-align: center;
     padding: 0 30px;
 }
 
-.company h1 {
+.Design1 .company h1 {
     font-size: 38px;
     font-weight: 700;
     margin: 0;
@@ -491,14 +491,14 @@ DESIGN-2 START
     text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
 }
 
-.company p {
+.Design1 .company p {
     font-size: 18px;
     font-weight: 300;
     opacity: 0.9;
     margin-top: 5px;
 }
 
-.mono-box {
+.Design1 .mono-box {
     width: 85px;
     height: 85px;
     border-radius: 15px; /* গোল কোণার বদলে হালকা রাউন্ডেড শেপ প্রিমিয়াম লাগে */
@@ -511,11 +511,11 @@ DESIGN-2 START
     transition: all 0.3s ease;
 }
 
-.mono-box:hover {
+.Design1 .mono-box:hover {
     background: rgba(255, 255, 255, 0.2);
 }
 
-.mono-box img {
+.Design1 .mono-box img {
     width: 70%;
     height: 70%;
     object-fit: contain;
@@ -531,7 +531,7 @@ DESIGN-3 START
 আধুনিক গ্লাস-মর্ফিজম (Glassmorphism) প্রিমিয়াম ডিজাইন
 =========================================================*/
 
-.header {
+.Design2 .header {
     width: 100%;
     min-height: 150px;
     background: rgba(255, 255, 255, 0.05);
@@ -547,7 +547,7 @@ DESIGN-3 START
     overflow: hidden;
 }
 
-.logo-box {
+.Design2 .logo-box {
     width: 95px;
     height: 95px;
     background: linear-gradient(145deg, #ffffff, #e6e6e6);
@@ -559,23 +559,23 @@ DESIGN-3 START
     transition: 0.4s;
 }
 
-.logo-box:hover {
+.Design2 .logo-box:hover {
     transform: rotate(5deg) scale(1.05);
 }
 
-.logo-box img {
+.Design2 .logo-box img {
     width: 80%;
     height: 80%;
     object-fit: contain;
 }
 
-.company {
+.Design2 .company {
     flex: 1;
     text-align: center;
     padding: 0 40px;
 }
 
-.company h1 {
+.Design2 .company h1 {
     font-size: 40px;
     font-weight: 800;
     margin: 0;
@@ -584,14 +584,14 @@ DESIGN-3 START
     text-transform: uppercase;
 }
 
-.company p {
+.Design2 .company p {
     font-size: 16px;
     color: #a0c4ff;
     margin-top: 8px;
     letter-spacing: 1.5px;
 }
 
-.mono-box {
+.Design2 .mono-box {
     width: 70px;
     height: 70px;
     border-radius: 50%;
@@ -603,19 +603,19 @@ DESIGN-3 START
     transition: 0.3s;
 }
 
-.mono-box:hover {
+.Design2 .mono-box:hover {
     background: #ffffff;
     cursor: pointer;
 }
 
-.mono-box img {
+.Design2 .mono-box img {
     width: 60%;
     height: 60%;
     object-fit: contain;
     filter: invert(1);
 }
 
-.mono-box:hover img {
+.Design 2 .mono-box:hover img {
     filter: invert(0);
 }
 
@@ -629,7 +629,7 @@ DESIGN-4 START
 মিনিমালিস্টিক এবং প্রিমিয়াম ব্ল্যাক অ্যান্ড হোয়াইট ডিজাইন
 =========================================================*/
 
-.header {
+.Design3 .header {
     width: 100%;
     height: 150px;
     background: #ffffff;
@@ -640,7 +640,7 @@ DESIGN-4 START
     border-bottom: 2px solid #f0f0f0;
 }
 
-.logo-box {
+.Design3 .logo-box {
     width: 90px;
     height: 90px;
     background: #000000;
@@ -651,23 +651,23 @@ DESIGN-4 START
     transition: 0.5s ease;
 }
 
-.logo-box:hover {
+.Design3 .logo-box:hover {
     background: #333333;
 }
 
-.logo-box img {
+.Design3 .logo-box img {
     width: 70%;
     height: 70%;
     object-fit: contain;
 }
 
-.company {
+.Design3 .company {
     flex: 1;
     text-align: center;
     padding: 0 30px;
 }
 
-.company h1 {
+.Design3 .company h1 {
     font-size: 36px;
     font-weight: 900;
     color: #000000;
@@ -675,7 +675,7 @@ DESIGN-4 START
     letter-spacing: -1px;
 }
 
-.company p {
+.Design3 .company p {
     font-size: 16px;
     color: #666666;
     margin-top: 5px;
@@ -683,7 +683,7 @@ DESIGN-4 START
     text-transform: uppercase;
 }
 
-.mono-box {
+.Design3 .mono-box {
     width: 80px;
     height: 80px;
     border-radius: 50%;
@@ -695,12 +695,12 @@ DESIGN-4 START
     transition: 0.3s;
 }
 
-.mono-box:hover {
+.Design3 .mono-box:hover {
     border-color: #000000;
     background: #ffffff;
 }
 
-.mono-box img {
+.Design3 .mono-box img {
     width: 50%;
     height: 50%;
     object-fit: contain;
@@ -714,7 +714,7 @@ DESIGN-5 START
 গ্লোয়িং নিয়ন (Glowing Neon) স্টাইল প্রিমিয়াম ডিজাইন
 =========================================================*/
 
-.header {
+.Design4 .header {
     width: 100%;
     height: 160px;
     background: #000000;
@@ -727,7 +727,7 @@ DESIGN-5 START
     box-shadow: 0 10px 30px rgba(0, 255, 255, 0.1);
 }
 
-.logo-box {
+.Design4 .logo-box {
     width: 100px;
     height: 100px;
     background: #111;
@@ -740,23 +740,23 @@ DESIGN-5 START
     transition: 0.4s;
 }
 
-.logo-box:hover {
+.Design4 .logo-box:hover {
     box-shadow: 0 0 30px rgba(0, 255, 255, 0.8);
 }
 
-.logo-box img {
+.Design4 .logo-box img {
     width: 70%;
     height: 70%;
     object-fit: contain;
 }
 
-.company {
+.Design4 .company {
     flex: 1;
     text-align: center;
     padding: 0 40px;
 }
 
-.company h1 {
+.Design4 .company h1 {
     font-size: 42px;
     font-weight: 800;
     margin: 0;
@@ -764,7 +764,7 @@ DESIGN-5 START
     text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
 }
 
-.company p {
+.Design4 .company p {
     font-size: 18px;
     color: #cccccc;
     margin-top: 10px;
@@ -772,7 +772,7 @@ DESIGN-5 START
     text-transform: uppercase;
 }
 
-.mono-box {
+.Design4 .mono-box {
     width: 80px;
     height: 80px;
     border-radius: 50%;
@@ -784,12 +784,12 @@ DESIGN-5 START
     transition: 0.4s;
 }
 
-.mono-box:hover {
+.Design4 .mono-box:hover {
     border-color: #00ffff;
     box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
 }
 
-.mono-box img {
+.Design4 .mono-box img {
     width: 50%;
     height: 50%;
     object-fit: contain;
