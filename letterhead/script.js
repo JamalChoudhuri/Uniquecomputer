@@ -533,7 +533,7 @@ if(letterhead){
 
 
 letterhead.classList.add(
-"design-"+number
+"Design-"+number
 );
 
 
@@ -560,12 +560,12 @@ templateSelect.addEventListener(
 function(){
 
 
-let designNumber =
+let DesignNumber =
 this.value;
 
 
 
-loadTemplate(designNumber);
+loadTemplate(DesignNumber);
 
 
 
@@ -596,69 +596,13 @@ loadTemplate(1);
 //==========================================================
 
 
+function loadTemplate(number){
 
-function designOne(){
+    removeAllDesignClass();
 
-
-/*
-==========================
- DESIGN 1 SETTINGS
- এখানে Design-1 এর
- বিশেষ পরিবর্তন লিখবেন
-==========================
-*/
-
+    letterhead.classList.add("design-"+number);
 
 }
-
-
-
-
-function designTwo(){
-
-
-/*
-==========================
- DESIGN 2 SETTINGS
-
- এখানে Design-2 এর
- পরিবর্তন লিখবেন
-
-==========================
-*/
-
-
-}
-
-
-
-
-//==========================================================
-// DESIGN MAP
-//
-// এখানে ৫০টি Design Function
-// সংযুক্ত করা যাবে
-//==========================================================
-
-
-const designFunctions = {
-
-
-1:designOne,
-
-2:designTwo,
-
-
-//3:designThree,
-//4:designFour,
-//5:designFive,
-
-//...
-
-//50:designFifty
-
-
-};
 
 
 
@@ -692,15 +636,6 @@ templateSelect.addEventListener(
 function(){
 
 
-runDesignFunction(
-Number(this.value)
-);
-
-
-});
-
-
-}
 
 
 
