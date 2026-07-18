@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Business Letterhead Generator</title>
+
+<!-- ===========================
+CSS File Link করা হয়েছে
+প্রয়োজনে পরিবর্তন করুন
+=========================== -->
+<link rel="stylesheet" href="style.css">
+
+<!-- ===========================
+Font Awesome Link করা হয়েছে
+=========================== -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<!--==============================
+LEFT PANEL
+===============================-->
+
+<div class="left-panel">
+
+<h2>Letter Head Generator</h2>
+
+<label>Template Design</label>
+
+<select id="templateSelect">
+
+<!--==============================
+এখান থেকে ৫০টি ডিজাইন যোগ করবেন
+===============================-->
+
+<option value="1">Design 1</option>
+
+<option value="2">Design 2</option>
+
+<option value="3">Design 3</option>
+
+<option value="4">Design 4</option>
+
+<option value="5">Design 5</option>
+
+<option value="6">Design 6</option>
+
+<option value="7">Design 7</option>
+
+<option value="8">Design 8</option>
+
+<option value="9">Design 9</option>
+
+<option value="10">Design 10</option>
+
+<option value="11">Design 11</option>
+
+<option value="12">Design 12</option>
+
+<option value="13">Design 13</option>
+
+<option value="14">Design 14</option>
+
+<option value="15">Design 15</option>
+
+<option value="16">Design 16</option>
+
+<option value="17">Design 17</option>
+
+<option value="18">Design 18</option>
+
+<option value="19">Design 19</option>
+
+<option value="20">Design 20</option>
+
+<option value="21">Design 21</option>
+
+<option value="22">Design 22</option>
+
+<option value="23">Design 23</option>
+
+<option value="24">Design 24</option>
+
+<option value="25">Design 25</option>
+
+<option value="26">Design 26</option>
+
+<option value="27">Design 27</option>
+
+<option value="28">Design 28</option>
+
+<option value="29">Design 29</option>
+
+<option value="30">Design 30</option>
+
+<option value="31">Design 31</option>
+
+<option value="32">Design 32</option>
+
+<option value="33">Design 33</option>
+
+<option value="34">Design 34</option>
+
+<option value="35">Design 35</option>
+
+<option value="36">Design 36</option>
+
+<option value="37">Design 37</option>
+
+<option value="38">Design 38</option>
+
+<option value="39">Design 39</option>
+
+<option value="40">Design 40</option>
+
+<option value="41">Design 41</option>
+
+<option value="42">Design 42</option>
+
+<option value="43">Design 43</option>
+
+<option value="44">Design 44</option>
+
+<option value="45">Design 45</option>
+
+<option value="46">Design 46</option>
+
+<option value="47">Design 47</option>
+
+<option value="48">Design 48</option>
+
+<option value="49">Design 49</option>
+
+<option value="50">Design 50</option>
+
+</select>
+
+<label>Company Name</label>
+<input type="text" id="companyName">
+
+<label>Tag Line</label>
+<input type="text" id="tagline">
+
+<label>Mobile Number</label>
+<input type="text" id="mobile">
+
+<label>Address</label>
+<textarea id="address"></textarea>
+
+<label>Proprietor Name</label>
+<input type="text" id="owner">
+
+<label>Savings Name</label>
+<input type="text" id="savings">
+
+<label>Upload Logo</label>
+<input type="file" id="logoUpload">
+
+<label>Upload Monogram</label>
+<input type="file" id="monoUpload">
+
+<label>Header Color</label>
+<input type="color" id="headerColor">
+
+<label>Footer Color</label>
+<input type="color" id="footerColor">
+
+<label>Text Color</label>
+<input type="color" id="textColor">
+
+<button id="downloadPDF">
+<i class="fa-solid fa-download"></i>
+Download PDF
+</button>
+
+</div>
+
+<!--==============================
+LIVE PREVIEW
+===============================-->
+
+<div class="preview-area">
+
+<div id="letterhead">
+
+<!--==============================
+DESIGN 1 START
+এই অংশ পরিবর্তন করে নতুন ডিজাইন করতে পারবেন
+===============================-->
+
+<div class="header">
+
+<div class="logo-box">
+
+<img id="logoPreview">
+
+</div>
+
+<div class="company">
+
+<h1 id="companyPreview">
+Company Name
+</h1>
+
+<p id="taglinePreview">
+Tag Line
+</p>
+
+</div>
+
+<div class="mono-box">
+
+<img id="monoPreview">
+
+</div>
+
+</div>
+
+<div class="body">
+
+<br><br><br><br><br>
+
+<p>
+এখানে Letter লিখবেন...
+</p>
+
+</div>
+
+<div class="footer">
+
+<p id="addressPreview">
+Address
+</p>
+
+<p id="mobilePreview">
+Mobile
+</p>
+
+<p id="ownerPreview">
+Proprietor
+</p>
+
+<p id="savingPreview">
+Savings Name
+</p>
+
+</div>
+
+<!--==============================
+DESIGN 1 END
+===============================-->
+
+<!--==============================
+DESIGN 2 START
+এখানে Design 2 থাকবে
+===============================-->
+
+<!--==============================
+DESIGN 3 START
+===============================-->
+
+<!--==============================
+DESIGN 4 START
+===============================-->
+
+<!--==============================
+..........
+..........
+..........
+===============================-->
+
+<!--==============================
+DESIGN 50 START
+===============================-->
+
+</div>
+
+</div>
+
+</div>
+
+<!--==============================
+PDF Library Link করা হয়েছে
+প্রয়োজনে পরিবর্তন করুন
+===============================-->
+
+<!--
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+-->
+
+<!--==============================
+JavaScript File Link করা হয়েছে
+===============================-->
+
+<script src="script.js"></script>
+
+</body>
+</html>
