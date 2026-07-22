@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>বিজনেস কার্ড জেনারেটর - ১০০টি ডিজাইন</title>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Noto Sans Bengali', sans-serif;
+            background: #f3f4f6;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #app {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Left Panel */
+        .left-panel {
+            width: 420px;
+            background: #fff;
+            border-right: 1px solid #e5e7eb;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .header {
+            padding: 16px 20px;
+            border-bottom: 1px solid #e5e7eb;
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: #fff;
+        }
+
+        .header h2 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .header p {
+            margin: 4px 0 0;
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .scroll-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+        }
+
+        .scroll-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .scroll-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .scroll-content::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .section-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+
+        /* Card Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 6px;
+        }
+
+        .card-btn {
+            padding: 8px 4px;
+            border: 2px solid #e5e7eb;
+            border-radius: 6px;
+            background: #fff;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 600;
+            color: #374151;
+            transition: all 0.2s;
+        }
+
+        .card-btn:hover {
+            border-color: #93c5fd;
+            background: #f0f7ff;
+        }
+
+        .card-btn.active {
+            border-color: #3b82f6;
+            background: #eff6ff;
+            color: #3b82f6;
+        }
+
+        /* Palette Grid */
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+        }
+
+        .palette-btn {
+            height: 36px;
+            border: 3px solid transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.2s;
+            padding: 0;
+        }
+
+        .palette-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .palette-btn.active {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+        }
+
+        .palette-colors {
+            display: flex;
+            height: 100%;
+        }
+
+        .palette-color {
+            flex: 1;
+        }
+
+        /* Input Fields */
+        .input-group {
+            margin-bottom: 10px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 11px;
+            font-weight: 600;
+            color: #4b5563;
+            margin-bottom: 4px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 13px;
+            outline: none;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .input-group input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        /* Logo Upload */
+        .logo-upload {
+            border: 2px dashed #d1d5db;
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .logo-upload:hover {
+            border-color: #3b82f6;
+            background: #eff6ff;
+        }
+
+        .logo-upload.dragover {
+            border-color: #3b82f6;
+            background: #eff6ff;
+        }
+
+        .logo-preview {
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        .logo-preview img {
+            max-height: 60px;
+            max-width: 100px;
+            border-radius: 4px;
+        }
+
+        .logo-preview-text {
+            margin-top: 4px;
+            font-size: 11px;
+            color: #3b82f6;
+        }
+
+        /* Download Button */
+        .download-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #059669, #10b981);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 6px -1px rgba(5, 150, 105, 0.3);
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 12px -1px rgba(5, 150, 105, 0.4);
+        }
+
+        .download-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Right Panel */
+        .right-panel {
+            flex: 1;
+            background: #e5e7eb;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            position: relative;
+        }
+
+        .live-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #fff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #374151;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: #ef4444;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .preview-container {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border-radius: 16px;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .card-preview {
+            width: 600px;
+            height: 340px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .preview-info {
+            margin-top: 16px;
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .left-panel {
+                width: 350px;
+            }
+            .card-preview {
+                width: 450px;
+                height: 255px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- Left Panel: Controls -->
+        <div class="left-panel">
+            <div class="header">
+                <h2>বিজনেস কার্ড জেনারেটর</h2>
+                <p>১০০টি ডিজাইন | ১০টি কালার প্যালেট | লাইভ প্রিভিউ</p>
+            </div>
+            
+            <div class="scroll-content">
+                <!-- Card Selector -->
+                <div class="section">
+                    <label class="section-label">কার্ড ডিজাইন নির্বাচন করুন</label>
+                    <div class="card-grid" id="cardGrid"></div>
+                </div>
+                
+                <!-- Color Palette -->
+                <div class="section">
+                    <label class="section-label">কালার প্যালেট</label>
+                    <div class="palette-grid" id="paletteGrid"></div>
+                </div>
+                
+                <!-- Input Fields -->
+                <div class="section">
+                    <label class="section-label">তথ্য প্রবেশ করুন</label>
+                    <div id="inputFields"></div>
+                </div>
+                
+                <!-- Logo Upload -->
+                <div class="section">
+                    <label class="section-label">লোগো আপলোড</label>
+                    <div class="logo-upload" id="logoUpload" onclick="document.getElementById('logoInput').click()">
+                        <input type="file" id="logoInput" accept="image/*" style="display:none;" onchange="handleLogoUpload(event)">
+                        <div class="logo-preview" id="logoPreview">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" style="margin:0 auto 8px; display:block;">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="17 8 12 3 7 8"/>
+                                <line x1="12" y1="3" x2="12" y2="15"/>
+                            </svg>
+                            লোগো আপলোড করুন (Drag & Drop)
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Download Button -->
+                <button class="download-btn" onclick="downloadCard()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="7 10 12 15 17 10"/>
+                        <line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                    হাই কোয়ালিটি PNG ডাউনলোড
+                </button>
+            </div>
+        </div>
+        
+        <!-- Right Panel: Live Preview -->
+        <div class="right-panel">
+            <div class="live-badge">
+                <span class="live-dot"></span>
+                লাইভ প্রিভিউ
+            </div>
+            <div class="preview-container">
+                <div class="card-preview" id="cardPreview"></div>
+            </div>
+            <p class="preview-info">৬০০ x ৩৪০ পিক্সেল | প্রিন্ট রেডি</p>
+        </div>
+    </div>
+
+    <script>
+        // State
+        let state = {
+            cardIndex: 0,
+            paletteIndex: 0,
+            logo: null,
+            data: {
+                name: 'মোঃ আব্দুল করিম',
+                designation: 'প্রধান নির্বাহী কর্মকর্তা',
+                company: 'বাংলাদেশ টেক সলিউশন্স লিমিটেড',
+                mobile: '+৮৮০ ১৭১২-৩৪৫৬৭৮',
+                email: 'info@bdtech.com',
+                address: '১২৩/এ, গুলশান এভিনিউ, ঢাকা-১২১২',
+                website: 'www.bdtech.com',
+                tagline: 'ভবিষ্যতের প্রযুক্তি, আজকের সমাধান'
+            }
+        };
+
+        // 10 Color Palettes
+        const palettes = [
+            { name: 'Ocean', primary: '#0c4a6e', secondary: '#0284c7', accent: '#38bdf8', text: '#0f172a', light: '#f0f9ff' },
+            { name: 'Forest', primary: '#064e3b', secondary: '#059669', accent: '#34d399', text: '#022c22', light: '#ecfdf5' },
+            { name: 'Sunset', primary: '#7c2d12', secondary: '#ea580c', accent: '#fb923c', text: '#431407', light: '#fff7ed' },
+            { name: 'Royal', primary: '#3b0764', secondary: '#7c3aed', accent: '#a78bfa', text: '#2e1065', light: '#faf5ff' },
+            { name: 'Cherry', primary: '#881337', secondary: '#e11d48', accent: '#fb7185', text: '#4c0519', light: '#fff1f2' },
+            { name: 'Midnight', primary: '#0f172a', secondary: '#334155', accent: '#64748b', text: '#f8fafc', light: '#1e293b' },
+            { name: 'Gold', primary: '#713f12', secondary: '#ca8a04', accent: '#facc15', text: '#422006', light: '#fefce8' },
+            { name: 'Teal', primary: '#134e4a', secondary: '#0d9488', accent: '#5eead4', text: '#042f2e', light: '#f0fdfa' },
+            { name: 'Coral', primary: '#9f1239', secondary: '#e11d48', accent: '#fda4af', text: '#881337', light: '#fff1f2' },
+            { name: 'Slate', primary: '#1e293b', secondary: '#475569', accent: '#94a3b8', text: '#f1f5f9', light: '#334155' }
+        ];
+
+        // 100 Card Designs
+        const cardDesigns = [];
+        for(let i = 0; i < 100; i++) {
+            cardDesigns.push({
+                id: i,
+                name: `ডিজাইন ${i+1}`,
+                render: (p, d, logo) => generateCardHTML(i, p, d, logo)
+            });
+        }
+
+        function getLogoHTML(logo, size = 50) {
+            if (logo) {
+                return `<img src="${logo}" style="max-height:${size}px; max-width:${size * 2}px; object-fit:contain;">`;
+            }
+            return `<div style="width:${size}px;height:${size}px;background:rgba(255,255,255,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:10px;color:rgba(255,255,255,0.6);">লোগো</div>`;
+        }
+
+        function getLogoHTMLDark(logo, size = 50) {
+            if (logo) {
+                return `<img src="${logo}" style="max-height:${size}px; max-width:${size * 2}px; object-fit:contain;">`;
+            }
+            return `<div style="width:${size}px;height:${size}px;background:${p.primary}20;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:10px;color:${p.primary};">লোগো</div>`;
+        }
+
+        function generateCardHTML(designId, p, d, logo) {
+            const logoHTML = getLogoHTML(logo);
+            const logoSmall = getLogoHTML(logo, 35);
+            const logoTiny = getLogoHTML(logo, 30);
+
+            const patterns = [
+                `background: linear-gradient(135deg, ${p.primary} 0%, ${p.secondary} 100%);`,
+                `background: ${p.primary};`,
+                `background: linear-gradient(45deg, ${p.primary} 25%, ${p.secondary} 25%, ${p.secondary} 50%, ${p.primary} 50%, ${p.primary} 75%, ${p.secondary} 75%); background-size: 20px 20px;`,
+                `background: radial-gradient(circle at 30% 30%, ${p.secondary}, ${p.primary});`,
+                `background: ${p.primary}; position:relative;`,
+                `background: linear-gradient(to right, ${p.primary} 60%, ${p.secondary});`,
+                `background: ${p.primary}; border-left: 6px solid ${p.accent};`,
+                `background: repeating-linear-gradient(45deg, ${p.primary}, ${p.primary} 10px, ${p.secondary} 10px, ${p.secondary} 20px);`,
+                `background: ${p.primary}; box-shadow: inset 0 0 60px rgba(0,0,0,0.3);`,
+                `background: linear-gradient(180deg, ${p.primary} 0%, ${p.secondary} 50%, ${p.accent} 100%);`
+            ];
+
+            // Base 20 layouts
+            const layouts = [
+                // Layout 0: Classic Left Bar
+                `<div style="width:100%;height:100%;display:flex;${patterns[0]}">
+                    <div style="width:35%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;background:rgba(255,255,255,0.1);border-right:2px solid ${p.accent};">
+                        ${logoHTML}
+                        <div style="margin-top:12px;font-size:11px;color:${p.accent};font-weight:700;text-align:center;">${d.company}</div>
+                    </div>
+                    <div style="flex:1;padding:24px;display:flex;flex-direction:column;justify-content:center;color:${p.text};">
+                        <div style="font-size:26px;font-weight:800;margin-bottom:4px;color:#fff;">${d.name}</div>
+                        <div style="font-size:13px;color:${p.accent};margin-bottom:16px;font-weight:600;">${d.designation}</div>
+                        <div style="font-size:11px;color:rgba(255,255,255,0.85);line-height:1.8;">
+                            <div>📱 ${d.mobile}</div>
+                            <div>✉️ ${d.email}</div>
+                            <div>🌐 ${d.website}</div>
+                            <div>📍 ${d.address}</div>
+                        </div>
+                    </div>
+                </div>`,
+
+                // Layout 1: Modern Center
+                `<div style="width:100%;height:100%;${patterns[1]};display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px;position:relative;">
+                    <div style="position:absolute;top:0;left:0;right:0;height:4px;background:${p.accent};"></div>
+                    <div style="margin-bottom:16px;">${logoHTML}</div>
+                    <div style="font-size:24px;font-weight:800;color:#fff;margin-bottom:4px;">${d.name}</div>
+                    <div style="font-size:13px;color:${p.accent};margin-bottom:12px;font-weight:600;">${d.designation}</div>
+                    <div style="font-size:11px;color:rgba(255,255,255,0.8);line-height:1.8;">
+                        <div>${d.company}</div>
+                        <div>${d.mobile} | ${d.email}</div>
+                        <div>${d.address}</div>
+                    </div>
+                    <div style="position:absolute;bottom:0;left:0;right:0;height:4px;background:${p.accent};"></div>
+                </div>`,
+
+                // Layout 2: Diagonal Split
+                `<div style="width:100%;height:100%;position:relative;overflow:hidden;background:${p.light};">
+                    <div style="position:absolute;top:-50%;left:-20%;width:80%;height:200%;background:${p.primary};transform:rotate(15deg);transform-origin:center;"></div>
+                    <div style="position:relative;z-index:2;display:flex;height:100%;">
+                        <div style="width:45%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;">
+                            ${logoHTML}
+                            <div style="margin-top:12px;font-size:11px;color:#fff;font-weight:700;text-align:center;">${d.company}</div>
+                        </div>
+                        <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:24px;color:${p.text};">
+                            <div style="font-size:22px;font-weight:800;margin-bottom:4px;color:${p.primary};">${d.name}</div>
+                            <div style="font-size:12px;color:${p.secondary};margin-bottom:14px;font-weight:600;">${d.designation}</div>
+                            <div style="font-size:10px;color:#555;line-height:1.8;">
+                                <div>📱 ${d.mobile}</div>
+                                <div>✉️ ${d.email}</div>
+                                <div>🌐 ${d.website}</div>
+                                <div>📍 ${d.address}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`,
+
+                // Layout 3: Top Heavy
+                `<div style="width:100%;height:100%;display:flex;flex-direction:column;background:#fff;">
+                    <div style="height:45%;${patterns[0]};display:flex;align-items:center;justify-content:space-between;padding:0 30px;">
+                        <div style="color:#fff;">
+                            <div style="font-size:20px;font-weight:800;">${d.name}</div>
+                            <div style="font-size:12px;color:${p.accent};margin-top:4px;">${d.designation}</div>
+                        </div>
+                        <div>${logoHTML}</div>
+                    </div>
+                    <div style="flex:1;padding:20px 30px;display:flex;flex-direction:column;justify-content:center;color:${p.text};">
+                        <div style="font-size:11px;font-weight:700;color:${p.primary};margin-bottom:8px;">${d.company}</div>
+                        <div style="font-size:10px;color:#555;line-height:1.8;">
+                            <div>📱 ${d.mobile}</div>
+                            <div>✉️ ${d.email}</div>
+                            <div>🌐 ${d.website}</div>
+                            <div>📍 ${d.address}</div>
+                        </div>
+                    </div>
+                </div>`,
+
+                // Layout 4: Minimalist Border
+                `<div style="width:100%;height:100%;background:#fff;display:flex;align-items:center;justify-content:center;padding:30px;">
+                    <div style="width:100%;height:100%;border:3px solid ${p.primary};padding:24px;display:flex;flex-direction:column;justify-content:space-between;">
+                        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+                            <div>
+                                <div style="font-size:22px;font-weight:800;color:${p.primary};">${d.name}</div>
+                                <div style="font-size:12px;color:${p.secondary};margin-top:4px;font-weight:600;">${d.designation}</div>
+                            </div>
+                            <div>${logoHTML}</div>
+                        </div>
+                        <div style="font-size:10px;color:#555;line-height:1.8;">
+                            <div style="font-weight:700;color:${p.primary};margin-bottom:4px;">${d.company}</div>
+                            <div>📱 ${d.mobile} | ✉️ ${d.email}</div>
+                            <div>🌐 ${d.website}</div>
+                            <div>📍 ${d.address}</div>
+                        </div>
+                    </div>
+                </div>`,
+
+                // Layout 5: Gradient Circle
+                `<div style="width:100%;height:100%;${patterns[3]};display:flex;align-items:center;padding:30px;position:relative;">
+                    <div style="position:absolute;right:-50px;top:-50px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,0.1);"></div>
+                    <div style="position:absolute;right:50px;bottom:-30px;width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,0.08);"></div>
+                    <div style="display:flex;align-items:center;gap:24px;position:relative;z-index:2;">
+                        <div style="width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;border:3px solid ${p.accent};">
+                            ${logoSmall}
+                        </div>
+                        <div style="color:#fff;">
+                            <div style="font-size:24px;font-weight:800;">${d.name}</div>
+                            <div style="font-size:13px;color:${p.accent};margin:4px 0 12px;font-weight:600;">${d.designation}</div>
+                            <div style="font-size:10px;opacity:0.9;line-height:1.7;">
+                                <div>${d.company}</div>
+                                <div>${d.mobile} | ${d.email}</div>
+                                <div>${d.address}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`,
+
+                // Layout 6: Right Sidebar
+                `<div style="width:100%;height:100%;display:flex;background:#fff;">
+                    <div style="flex:1;padding:28px;display:flex;flex-direction:column;justify-content:center;">
+                        <div style="font-size:24px;font-weight:800;color:${p.primary};margin-bottom:4px;">${d.name}</div>
+                        <div style="font-size:12px;color:${p.secondary};margin-bottom:16px;font-weight:600;">${d.designation}</div>
+                        <div style="font-size:10px;color:#555;line-height:1.8;">
+                            <div>📱 ${d.mobile}</div>
+                            <div>✉️ ${d.email}</div>
+                            <div>🌐 ${d.website}</div>
+                            <div>📍 ${d.address}</div>
+                        </div>
+                    </div>
+                    <div style="width:160px;${patterns[0]};display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;">
+                        ${logoHTML}
+                        <div style="margin-top:12px;font-size:10px;color:#fff;text-align:center;font-weight:600;">${d.company}</div>
+                        <div style="margin-top:8px;font-size:9px;color:${p.accent};text-align:center;">${d.tagline}</div>
+                    </div>
+                </div>`,
+
+                // Layout 7: Striped Pattern
+                `<div style="width:100%;height:100%;${patterns[2]};display:flex;align-items:center;justify-content:center;padding:30px;">
+                    <div style="background:rgba(255,255,255,0.95);padding:24px;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,0.2);display:flex;gap:20px;align-items:center;max-width:90%;">
+                        <div style="flex-shrink:0;">${logoHTML}</div>
+                        <div>
+                            <div style="font-size:20px;font-weight:800;color:${p.primary};">${d.name}</div>
+                            <div style="font-size:11px;color:${p.secondary};margin:4px 0 10px;font-weight:600;">${d.designation} | ${d.company}</div>
+                            <div style="font-size:10px;color:#555;line-height:1.6;">
+                                <div>${d.mobile} | ${d.email}</div>
+                                <div>${d.website}</div>
+                                <div>${d.address}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`,
+
+                // Layout 8: Bottom Bar
+                `<div style="width:100%;height:100%;background:#fff;display:flex;flex-direction:column;">
+                    <div style="flex:1;padding:28px;display:flex;flex-direction:column;justify-content:center;">
+                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+                            <div>
+                                <div style="font-size:26px;font-weight:800;color:${p.primary};">${d.name}</div>
+                                <div style="font-size:13px;color:${p.secondary};margin-top:4px;font-weight:600;">${d.designation}</div>
+                            </div>
+                            <div>${logoHTML}</div>
+                        </div>
+                        <div style="font-size:11px;color:#555;line-height:1.6;">
+                            <div>${d.company}</div>
+                            <div>${d.address}</div>
+                        </div>
+                    </div>
+                    <div style="${patterns[0]};padding:12px 28px;display:flex;justify-content:space-between;align-items:center;color:#fff;font-size:10px;">
+                        <span>📱 ${d.mobile}</span>
+                        <span>✉️ ${d.email}</span>
+                        <span>🌐 ${d.website}</span>
+                    </div>
+                </div>`,
+
+                // Layout 9: Photo Style
+                `<div style="width:100%;height:100%;${patterns[4]};display:flex;padding:0;overflow:hidden;">
+                    <div style="position:absolute;top:0;left:0;right:0;bottom:0;${patterns[3]};opacity:0.3;"></div>
+                    <div style="width:40%;${patterns[0]};display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;position:relative;z-index:2;">
+                        <div style="width:70px;height:70px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;margin-bottom:12px;border:2px solid ${p.accent};">
+                            ${logoSmall}
+                        </div>
+                        <div style="color:#fff;font-size:11px;font-weight:700;text-align:center;">${d.company}</div>
+                    </div>
+                    <div style="flex:1;padding:24px;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2;background:rgba(255,255,255,0.95);">
+                        <div style="font-size:22px;font-weight:800;color:${p.primary};margin-bottom:4px;">${d.name}</div>
+                        <div style="font-size:12px;color:${p.secondary};margin-bottom:14px;font-weight:600;">${d.designation}</div>
+                        <div style="font-size:10px;color:#555;line-height:1.8;">
+                            <div>📱 ${d.mobile}</div>
+                            <div>✉️ ${d.email}</div>
+                            <div>🌐 ${d.website}</div>
+                            <div>📍 ${d.address}</div>
+                        </div>
+                    </div>
+                </div>`,
+
+                // Layout 10: Corner Accent
+                `<div style="width:100%;height:100%;background:#fff;position:relative;overflow:hidden;">
+                    <div style="position:absolute;top:0;right:0;width:120px;height:120px;background:${p.accent};clip-path:polygon(0 0,100% 0,100% 100%);"></div>
+                    <div style="padding:28px;height:100%;display:flex;flex-direction:column;justify-content:space-between;position:relative;z-index:2;">
+                        <div>
+                            <div style="font-size:24px;font-weight:800;color:${p.primary};">${d.name}</div>
+                            <div style="font-size:12px;color:${p.secondary};margin-top:4px;font-weight:600;">${d.designation}</div>
+                        </div>
+                        <div style="display:flex;justify-content:space-between;align-items:flex-end;">
+                            <div style="font-size:10px;color:#555;line-height:1.7;">
+                                <div style="font-weight:700;color:${p.primary};margin-bottom:4px;">${d.company}</div>
+                                <div>📱 ${d.mobile}</div>
+                                <div>✉️ ${d.email}</div>
+                                <div>🌐 ${d.website}</div>
+                                <div>📍 ${d.address}</div>
+                            </div>
+                            <div style="margin-bottom:8px;">${logoHTML}</div>
+                        </div>
+                    </div>
+                </div>`,
+
+                // Layout 11: Vertical Lines
+                `<div style="width:100%;height:100%;display:flex;background:#fff;">
+                    <div style="width:8px;background:${p.primary};"></div>
+                    <div style="width:4px;background:${p.secondary};margin-left:4px;"></div>
+                    <div style="width:2px;background:${p.accent};margin-left:4px;margin-right:16px;"></div>
+                    <div style="flex:1;padding:24px;display:flex;flex-direction:column;justify-content:center;">
+                        <div style="font-size:22px;font-weight:800;color:${p.primary};margin-bottom:4px;">${d.name}</div>
+                        <div style="font-size:12px;color:${p.secondary};margin-bottom:12px;font-weight:600;">${d.designation}</div>
+                        <div style="font-size:10px;color:#555;line-height:1.7;">
+                            <div style="font-weight:700;margin-bottom:4px;">${d.company}</div>
+                            <div>📱 ${d.mobile}</div>
+                            <div>✉️ ${d.email}</div>
+                            <div>🌐 ${d.website}</div>
+                            <div>📍 ${d.address}</div>
+                        </div>
+                    </div>
+                    <div style="width:100px;display:flex;align-items:center;justify-content:center;padding:16px;">${logoHTML}</div>
+                </div>`,
+
+                // Layout 12: Floating Card
+                `<div style="width:100%;height:100%;background:${p.light};display:flex;align-items:center;justify-content:center;padding:20px;">
+                    <div style="width:100%;height:100%;background:#fff;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.1);padding:24px;display:flex;flex-direction:column;justify-content:space-between;border-top:4px solid ${p.primary};">
+                        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+                            <div>
+                                <div style="font-size:22px;font-weight:800;color:${p.primary};">${d.name}</div>
+                                <div style="font-size:12px;color:${p.secondary};margin-top:4px;font-weight:600;">${d.designation}</div>
+                            </div>
+                            <div>${logoHTML}</div>
+                        </div>
+                        <div style="font-size:10px;color:#555;line-height:1.7;">
+                            <div style="font-weight:700;color:${p.primary};margin-bottom:4px;">${d.company}</div>
+                            <div>📱 ${d.mobile} | ✉️ ${d.email}</div>
+                            <div>🌐 ${d.website}</div>
+                            <div>📍 ${d.address}</div>
+                        </div>
+                    </div>
+                </div>`,
+
+                // Layout 13: Dark Mode
+                `<div style="width:100%;height:100%;background:${p.primary};display:flex;align-items:center;padding:28px;position:relative;overflow:hidden;">
+                    <div style="position:absolute;top:-20px;right:-20px;width:100px;height:100px;border-radius:50%;border:20px solid ${p.secondary};opacity:0.3;"></div>
+                    <div style="position:absolute;bottom:-30px;left:30%;width:80px;height:80px;border-radius:50%;background:${p.accent};opacity:0.2;"></div>
+                    <div style="display:flex;gap:20px;align-items:center;position:relative;z-index:2;">
+                        <div style="width:60px;height:60px;border-radius:12px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.2);">
+                            ${logoSmall}
+                        </div>
+                        <div style="color:#fff;">
+                            <div style="font-size:22px;font-weight:800;">${d.name}</div>
+                            <div style="font-size:12px;color:${p.accent};margin:4px 0 10px;font-weight:600;">${d.designation}</div>
+                            <div style="font-size:10px;opacity:0.8;line-height:1.6;">
+                                <div>${d.company}</div>
+                                <div>${d.mobile} | ${d.email}</div>
+                                <div>${d.website}</div>
+                                <div>${d.address}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`,
+
+                // Layout 14: Wave Pattern
+                `<div style="width:100%;height:100%;background:#fff;position:relative;overflow:hidden;">
+                    <svg style="position:absolute;top:0;left:0;width:100%;height:100%;" viewBox="0 0 600 340" preserveAspectRatio="none">
+                        <path d="M0,80 Q150,20 300,80 T600,80 L600,0 L0,0 Z" fill="${p.primary}"/>
+                        <path d="M0,100 Q150,60 300,100 T600,100 L600,80 L0,80 Z" fill="${p.secondary}" opacity="0.6"/>
+                    </svg>
+                    <div style="position:relative;z-index:2;padding:28px;height:100%;display:flex;flex-direction:column;justify-content:space-between;">
+                        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+                            <div style="color:#fff;">
+                                <div style="font-size:20px;font-weight:800;">${d.name}</div>
+                                <div style="font-size:11px;color:${p.accent};margin-top:4px;">${d.designation}</div>
+                            </div>
+                            <div style="filter:brightness(0) invert(1);">${logoHTML}</div>
+                        </div>
+                        <div style="font-size:10px;color:#555;line-height:1.7;">
+                            <div style="font-weight:700;color:${p.primary};margin-bottom:4px;">${d.company}</div>
+                            <div>📱 ${d.mobile}</div>
+                            <div>✉️ ${d.email}</div>
+                            <div>🌐 ${d.website}</div>
+                            <div>📍 ${d.address}</div>
+                        </div>
+                    </div>
+                </div>`,
+
+                // Layout 15: Badge Style
+                `<div style="width:100%;height:100%;background:${p.light};display:flex;align-items:center;justify-content:center;padding:24px;">
+                    <div style="width:100%;height:100%;background:#fff;border-radius:16px;overflow:hidden;display:flex;box-shadow:0 4px 20px rgba(0,0,0,0.08);">
+                        <div style="width:35%;${patterns[0]};display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;">
+                            <div style="width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;border:2px solid ${p.accent};">
+                                ${logoSmall}
+                            </div>
+                            <div style="margin-top:10px;font-size:10px;color:#fff;text-align:center;font-weight:700;">${d.company}</div>
+                        </div>
+                        <div style="flex:1;padding:20px;display:flex;flex-direction:column;justify-content:center;">
+                            <div style="font-size:20px;font-weight:800;color:${p.primary};">${d.name}</div>
+                            <div style="font-size:11px;color:${p.secondary};margin:4px 0 10px;font-weight:600;">${d.designation}</div>
+                            <div style="font-size:9px;color:#555;line-height:1.7;">
+                                <div>📱 ${d.mobile}</div>
+                                <div>✉️ ${d.email}</div>
+                                <div>🌐 ${d.website}</div>
+                                <div>📍 ${d.address}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`,
+
+                // Layout 16: Hexagon Pattern
+                `<div style="width:100%;height:100%;background:${p.primary};position:relative;overflow:hidden;display:flex;align-items:center;padding:28px;">
+                    <div style="position:absolute;top:0;left:0;right:0;bottom:0;opacity:0.1;">
+                        <svg width="100%" height="100%">
+                            <defs>
+                                <pattern id="hex" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+                                    <polygon points="15,2 27,8 27,22 15,28 3,22 3,8" fill="none" stroke="#fff" stroke-width="1"/>
+                                </pattern>
+                            </defs>
+                            <rect width="100%" height="100%" fill="url(#hex)"/>
+                        </svg>
+                    </div>
+                    <div style="position:relative;z-index:2;display:flex;gap:20px;align-items:center;">
+                        <div style="width:70px;height:70px;background:${p.accent};clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);display:flex;align-items:center;justify-content:center;">
+                            ${logoTiny}
+                        </div>
+                        <div style="color:#fff;">
+                            <div style="font-size:22px;font-weight:800;">${d.name}</div>
+                            <div style="font-size:12px;color:${p.accent};margin:4px 0 10px;font-weight:600;">${d.designation}</div>
+                            <div style="font-size:10px;opacity:0.85;line-height:1.6;">
+                                <div>${d.company}</div>
+                                <div>${d.mobile} | ${d.email}</div>
+                                <div>${d.address}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`,
+
+                // Layout 17: Split with Image
+                `<div style="width:100%;height:100%;display:flex;background:#fff;">
+                    <div style="width:50%;${patterns[0]};display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;position:relative;">
+                        <div style="position:absolute;inset:0;${patterns[3]};opacity:0.5;"></div>
+                        <div style="position:relative;z-index:2;text-align:center;">
+                            ${logoHTML}
+                            <div style="margin-top:14px;font-size:13px;color:#fff;font-weight:700;">${d.company}</div>
+                            <div style="margin-top:6px;font-size:10px;color:${p.accent};">${d.tagline}</div>
+                        </div>
+                    </div>
+                    <div style="width:50%;padding:24px;display:flex;flex-direction:column;justify-content:center;">
+                        <div style="font-size:22px;font-weight:800;color:${p.primary};margin-bottom:4px;">${d.name}</div>
+                        <div style="font-size:12px;color:${p.secondary};margin-bottom:14px;font-weight:600;">${d.designation}</div>
+                        <div style="font-size:10px;color:#555;line-height:1.8;">
+                            <div>📱 ${d.mobile}</div>
+                            <div>✉️ ${d.email}</div>
+                            <div>🌐 ${d.website}</div>
+                            <div>📍 ${d.address}</div>
+                        </div>
+                    </div>
+                </div>`,
+
+                // Layout 18: Rounded Pill
+                `<div style="width:100%;height:100%;background:${p.light};display:flex;align-items:center;justify-content:center;padding:20px;">
+                    <div style="width:100%;height:100%;background:#fff;border-radius:30px;box-shadow:0 8px 30px rgba(0,0,0,0.1);display:flex;overflow:hidden;">
+                        <div style="width:12px;background:${p.primary};"></div>
+                        <div style="flex:1;padding:24px;display:flex;flex-direction:column;justify-content:center;">
+                            <div style="font-size:22px;font-weight:800;color:${p.primary};">${d.name}</div>
+                            <div style="font-size:12px;color:${p.secondary};margin:4px 0 12px;font-weight:600;">${d.designation}</div>
+                            <div style="font-size:10px;color:#555;line-height:1.7;">
+                                <div style="font-weight:700;margin-bottom:4px;">${d.company}</div>
+                                <div>📱 ${d.mobile} | ✉️ ${d.email}</div>
+                                <div>🌐 ${d.website}</div>
+                                <div>📍 ${d.address}</div>
+                            </div>
+                        </div>
+                        <div style="width:100px;display:flex;align-items:center;justify-content:center;padding:16px;background:${p.primary};">
+                            <div style="filter:brightness(0) invert(1);">${logoHTML}</div>
+                        </div>
+                    </div>
+                </div>`,
+
+                // Layout 19: Tag Style
+                `<div style="width:100%;height:100%;background:#fff;display:flex;flex-direction:column;position:relative;overflow:hidden;">
+                    <div style="height:30%;${patterns[0]};display:flex;align-items:center;padding:0 28px;justify-content:space-between;">
+                        <div style="color:#fff;font-size:18px;font-weight:800;">${d.company}</div>
+                        <div>${logoHTML}</div>
+                    </div>
+                    <div style="flex:1;padding:20px 28px;display:flex;flex-direction:column;justify-content:center;">
+                        <div style="font-size:22px;font-weight:800;color:${p.primary};margin-bottom:4px;">${d.name}</div>
+                        <div style="display:inline-block;background:${p.accent};color:#fff;padding:2px 10px;border-radius:12px;font-size:10px;font-weight:700;margin-bottom:12px;width:fit-content;">${d.designation}</div>
+                        <div style="font-size:10px;color:#555;line-height:1.7;">
+                            <div>📱 ${d.mobile}</div>
+                            <div>✉️ ${d.email}</div>
+                            <div>🌐 ${d.website}</div>
+                            <div>📍 ${d.address}</div>
+                        </div>
+                    </div>
+                    <div style="position:absolute;bottom:0;right:0;width:80px;height:80px;background:${p.accent};clip-path:polygon(100% 0,100% 100%,0 100%);opacity:0.3;"></div>
+                </div>`
+            ];
+
+            // For designs 0-19, use base layouts
+            if (designId < 20) {
+                return layouts[designId];
+            }
+
+            // For designs 20-99, generate variations
+            const baseIdx = designId % 20;
+            let html = layouts[baseIdx];
+
+            // Apply variations based on designId
+            const variations = designId % 10;
+
+            switch(variations) {
+                case 0:
+                    // Swap left/right
+                    html = html.replace('width:35%', 'width:35%;order:2;')
+                               .replace('flex:1;', 'flex:1;order:1;');
+                    break;
+                case 1:
+                    // Change border radius
+                    html = html.replace(/border-radius:\d+px/g, 'border-radius:0px');
+                    break;
+                case 2:
+                    // Add shadow
+                    html = html.replace('background:#fff;', 'background:#fff;box-shadow:inset 0 0 20px rgba(0,0,0,0.05);');
+                    break;
+                case 3:
+                    // Change padding
+                    html = html.replace(/padding:\d+px/g, 'padding:40px');
+                    break;
+                case 4:
+                    // Add dotted border
+                    html = html.replace('border:3px solid', 'border:3px dotted');
+                    break;
+                case 5:
+                    // Gradient text for name
+                    html = html.replace(/font-size:22px;font-weight:800;color:#[a-f0-9]+;/, 
+                        `font-size:22px;font-weight:800;background:linear-gradient(135deg,${p.primary},${p.secondary});-webkit-background-clip:text;-webkit-text-fill-color:transparent;`);
+                    break;
+                case 6:
+                    // Rounded corners on one side
+                    html = html.replace('border-radius:12px', 'border-radius:12px 0 12px 0');
+                    break;
+                case 7:
+                    // Add icon style bullets
+                    html = html.replace(/📱/g, '☎').replace(/✉️/g, '@').replace(/🌐/g, '🔗').replace(/📍/g, '⌖');
+                    break;
+                case 8:
+                    // Double border
+                    html = html.replace(/border:([^;]+);/g, 'border:$1;border-double:4px;');
+                    break;
+                case 9:
+                    // Opacity variation
+                    html = html.replace(/background:([^;]+);/g, 'background:$1;opacity:0.95;');
+                    break;
+            }
+
+            // Additional variation for designs 40+
+            if (designId >= 40) {
+                const extraVar = Math.floor(designId / 10) % 5;
+                switch(extraVar) {
+                    case 0:
+                        html = html.replace(/font-size:22px/, 'font-size:26px');
+                        break;
+                    case 1:
+                        html = html.replace(/font-size:10px/, 'font-size:11px');
+                        break;
+                    case 2:
+                        html = html.replace(/gap:20px/, 'gap:30px');
+                        break;
+                    case 3:
+                        html = html.replace(/font-weight:800/, 'font-weight:700');
+                        break;
+                    case 4:
+                        html = html.replace(/margin-bottom:12px/, 'margin-bottom:20px');
+                        break;
+                }
+            }
+
+            // For designs 60+, add pattern overlay
+            if (designId >= 60) {
+                const patternType = designId % 3;
+                let patternSVG = '';
+                if (patternType === 0) {
+                    patternSVG = `<svg style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0.03;pointer-events:none;" viewBox="0 0 100 100" preserveAspectRatio="none">
+                        <pattern id="dots${designId}" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                            <circle cx="10" cy="10" r="2" fill="${p.primary}"/>
+                        </pattern>
+                        <rect width="100" height="100" fill="url(#dots${designId})"/>
+                    </svg>`;
+                } else if (patternType === 1) {
+                    patternSVG = `<svg style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0.03;pointer-events:none;" viewBox="0 0 100 100" preserveAspectRatio="none">
+                        <pattern id="lines${designId}" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
+                            <line x1="0" y1="5" x2="10" y2="5" stroke="${p.primary}" stroke-width="1"/>
+                        </pattern>
+                        <rect width="100" height="100" fill="url(#lines${designId})"/>
+                    </svg>`;
+                } else {
+                    patternSVG = `<svg style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0.03;pointer-events:none;" viewBox="0 0 100 100" preserveAspectRatio="none">
+                        <pattern id="grid${designId}" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                            <rect width="20" height="20" fill="none" stroke="${p.primary}" stroke-width="0.5"/>
+                        </pattern>
+                        <rect width="100" height="100" fill="url(#grid${designId})"/>
+                    </svg>`;
+                }
+                html = html.replace('position:relative;', 'position:relative;') + patternSVG;
+            }
+
+            // For designs 80+, add decorative elements
+            if (designId >= 80) {
+                const decoType = designId % 4;
+                let deco = '';
+                if (decoType === 0) {
+                    deco = `<div style="position:absolute;top:10px;left:10px;width:30px;height:30px;border-top:3px solid ${p.accent};border-left:3px solid ${p.accent};"></div>
+                            <div style="position:absolute;bottom:10px;right:10px;width:30px;height:30px;border-bottom:3px solid ${p.accent};border-right:3px solid ${p.accent};"></div>`;
+                } else if (decoType === 1) {
+                    deco = `<div style="position:absolute;top:50%;left:0;width:4px;height:40px;background:${p.accent};transform:translateY(-50%);"></div>`;
+                } else if (decoType === 2) {
+                    deco = `<div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:60px;height:3px;background:${p.accent};"></div>`;
+                } else {
+                    deco = `<div style="position:absolute;bottom:20px;right:20px;width:20px;height:20px;border-radius:50%;background:${p.accent};opacity:0.3;"></div>`;
+                }
+                html = html.replace('position:relative;', 'position:relative;') + deco;
+            }
+
+            return html;
+        }
+
+        // Initialize UI
+        function init() {
+            renderCardGrid();
+            renderPaletteGrid();
+            renderInputFields();
+            updatePreview();
+            setupDragDrop();
+        }
+
+        function renderCardGrid() {
+            const grid = document.getElementById('cardGrid');
+            grid.innerHTML = '';
+            for (let i = 0; i < 100; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'card-btn' + (i === state.cardIndex ? ' active' : '');
+                btn.textContent = i + 1;
+                btn.onclick = () => {
+                    state.cardIndex = i;
+                    renderCardGrid();
+                    updatePreview();
+                };
+                grid.appendChild(btn);
+            }
+        }
+
+        function renderPaletteGrid() {
+            const grid = document.getElementById('paletteGrid');
+            grid.innerHTML = '';
+            palettes.forEach((pal, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'palette-btn' + (i === state.paletteIndex ? ' active' : '');
+                btn.innerHTML = `
+                    <div class="palette-colors">
+                        <div class="palette-color" style="background:${pal.primary};"></div>
+                        <div class="palette-color" style="background:${pal.secondary};"></div>
+                        <div class="palette-color" style="background:${pal.accent};"></div>
+                    </div>
+                `;
+                btn.title = pal.name;
+                btn.onclick = () => {
+                    state.paletteIndex = i;
+                    renderPaletteGrid();
+                    updatePreview();
+                };
+                grid.appendChild(btn);
+            });
+        }
+
+        function renderInputFields() {
+            const container = document.getElementById('inputFields');
+            const fields = [
+                { key: 'name', label: 'নাম', placeholder: 'আপনার নাম লিখুন' },
+                { key: 'designation', label: 'পদবি', placeholder: 'পদবি লিখুন' },
+                { key: 'company', label: 'প্রতিষ্ঠানের নাম', placeholder: 'প্রতিষ্ঠানের নাম' },
+                { key: 'mobile', label: 'মোবাইল', placeholder: 'মোবাইল নম্বর' },
+                { key: 'email', label: 'ইমেইল', placeholder: 'ইমেইল ঠিকানা' },
+                { key: 'website', label: 'ওয়েবসাইট', placeholder: 'www.example.com' },
+                { key: 'address', label: 'ঠিকানা', placeholder: 'প্রতিষ্ঠানের ঠিকানা' },
+                { key: 'tagline', label: 'ট্যাগলাইন', placeholder: 'স্লোগান বা ট্যাগলাইন' }
+            ];
+
+            container.innerHTML = '';
+            fields.forEach(f => {
+                const div = document.createElement('div');
+                div.className = 'input-group';
+                div.innerHTML = `
+                    <label>${f.label}</label>
+                    <input type="text" value="${state.data[f.key]}" placeholder="${f.placeholder}" 
+                        oninput="updateData('${f.key}', this.value)">
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function updateData(key, value) {
+            state.data[key] = value;
+            updatePreview();
+        }
+
+        function updatePreview() {
+            const preview = document.getElementById('cardPreview');
+            const p = palettes[state.paletteIndex];
+            const design = cardDesigns[state.cardIndex];
+            preview.innerHTML = design.render(p, state.data, state.logo);
+        }
+
+        function handleLogoUpload(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (evt) => {
+                state.logo = evt.target.result;
+                document.getElementById('logoPreview').innerHTML = `
+                    <img src="${evt.target.result}" style="max-height:60px;max-width:100px;border-radius:4px;">
+                    <div class="logo-preview-text">লোগো আপলোড হয়েছে</div>
+                `;
+                updatePreview();
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function setupDragDrop() {
+            const uploadArea = document.getElementById('logoUpload');
+            
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('dragover');
+            });
+            
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.classList.remove('dragover');
+            });
+            
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('dragover');
+                const file = e.dataTransfer.files[0];
+                if (file && file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = (evt) => {
+                        state.logo = evt.target.result;
+                        document.getElementById('logoPreview').innerHTML = `
+                            <img src="${evt.target.result}" style="max-height:60px;max-width:100px;border-radius:4px;">
+                            <div class="logo-preview-text">লোগো আপলোড হয়েছে</div>
+                        `;
+                        updatePreview();
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        function downloadCard() {
+            const preview = document.getElementById('cardPreview');
+            html2canvas(preview, { 
+                scale: 3, 
+                useCORS: true, 
+                backgroundColor: null,
+                logging: false
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = `business-card-design-${state.cardIndex + 1}-${palettes[state.paletteIndex].name}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        }
+
+        // Start
+        init();
+    </script>
+</body>
+</html>
