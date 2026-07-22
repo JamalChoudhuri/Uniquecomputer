@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>আইডি কার্ড স্টুডিও — ১০০+ প্রিমিয়াম ডিজাইন</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,500&family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- ===================== TOP BAR ===================== -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">ID</span>
+      <div class="brand-text">
+        <strong>আইডি কার্ড স্টুডিও</strong>
+        <small>১০০টি প্রিমিয়াম ডিজাইন · লাইভ এডিটর</small>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <button class="btn btn-ghost" id="btnGallery">🗂️ ডিজাইন গ্যালারি</button>
+      <button class="btn btn-ghost" id="btnFlip">🔄 কার্ড উল্টান</button>
+      <div class="btn-group">
+        <button class="btn btn-primary" id="btnDownloadFront">⬇️ সামনের অংশ PNG</button>
+        <button class="btn btn-primary" id="btnDownloadBack">⬇️ পেছনের অংশ PNG</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="workspace">
+
+    <!-- ===================== LEFT: CONTROLS ===================== -->
+    <aside class="panel panel-controls">
+
+      <div class="control-tabs">
+        <button class="tab-btn active" data-tab="tab-content">✍️ তথ্য</button>
+        <button class="tab-btn" data-tab="tab-design">🎨 ডিজাইন</button>
+        <button class="tab-btn" data-tab="tab-images">🖼️ ছবি</button>
+      </div>
+
+      <!-- ---- CONTENT TAB ---- -->
+      <section class="tab-panel active" id="tab-content">
+
+        <div class="field-group">
+          <h4>প্রতিষ্ঠানের তথ্য (হেডার)</h4>
+          <label>প্রতিষ্ঠানের নাম
+            <input type="text" id="inpOrgName" value="গ্রিনভিউ ইন্টারন্যাশনাল লিমিটেড" maxlength="40">
+          </label>
+          <label>সাবটাইটেল / স্লোগান
+            <input type="text" id="inpOrgTagline" value="Excellence in Every Detail" maxlength="50">
+          </label>
+        </div>
+
+        <div class="field-group">
+          <h4>ব্যক্তির তথ্য</h4>
+          <label>পূর্ণ নাম
+            <input type="text" id="inpName" value="রাহুল আহমেদ" maxlength="30">
+          </label>
+          <label>ডেসিগনেশন / শ্রেণি <span id="lblDesignation">পদবি</span>
+            <input type="text" id="inpDesignation" value="সিনিয়র সফটওয়্যার ইঞ্জিনিয়ার" maxlength="35">
+          </label>
+          <label>আইডি নম্বর
+            <input type="text" id="inpIdNo" value="EMP-2026-0143" maxlength="20">
+          </label>
+          <label id="lblExtraFieldWrap">অতিরিক্ত তথ্য <span id="lblExtraField">বিভাগ</span>
+            <input type="text" id="inpExtra" value="ইঞ্জিনিয়ারিং ও প্রোডাক্ট" maxlength="30">
+          </label>
+          <div class="two-col">
+            <label>জয়েনিং / ভর্তির তারিখ
+              <input type="date" id="inpJoinDate" value="2023-01-15">
+            </label>
+            <label>মেয়াদ শেষ
+              <input type="date" id="inpExpiry" value="2027-01-15">
+            </label>
+          </div>
+          <div class="two-col">
+            <label>রক্তের গ্রুপ
+              <input type="text" id="inpBlood" value="O+" maxlength="4">
+            </label>
+            <label>ফোন নম্বর
+              <input type="text" id="inpPhone" value="+৮৮০ ১৭xx-xxxxxx" maxlength="20">
+            </label>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <h4>ব্যাক পার্ট — ঠিকানা ও শর্তাবলী</h4>
+          <label>প্রতিষ্ঠানের ঠিকানা
+            <textarea id="inpAddress" rows="2" maxlength="120">১২৩, গুলশান এভিনিউ, ঢাকা - ১২১২, বাংলাদেশ | www.greenview-intl.com</textarea>
+          </label>
+          <label>টার্মস অ্যান্ড কন্ডিশন
+            <textarea id="inpTerms" rows="4" maxlength="320">১. এই কার্ডটি প্রতিষ্ঠানের সম্পত্তি এবং অহস্তান্তরযোগ্য।
+২. হারিয়ে গেলে সাথে সাথে প্রশাসন বিভাগে জানাতে হবে।
+৩. কার্ডটি সর্বদা দৃশ্যমান স্থানে পরিধান করতে হবে।
+৪. মেয়াদ উত্তীর্ণ হলে কার্ডটি ফেরত দিতে হবে।</textarea>
+          </label>
+          <label>প্রাপ্তির ঠিকানা (পাওয়া গেলে ফেরত দিন)
+            <input type="text" id="inpReturnTo" value="যদি এই কার্ডটি খুঁজে পান, দয়া করে নিকটস্থ পোস্ট অফিসে জমা দিন।" maxlength="90">
+          </label>
+          <label>অথরাইজড সিগনেচারের নাম
+            <input type="text" id="inpSignName" value="মোঃ কামরুল হাসান, HR ম্যানেজার" maxlength="35">
+          </label>
+        </div>
+      </section>
+
+      <!-- ---- DESIGN TAB ---- -->
+      <section class="tab-panel" id="tab-design">
+
+        <div class="field-group">
+          <h4>ক্যাটাগরি বাছাই করুন</h4>
+          <div class="chip-row" id="categoryChips">
+            <button class="chip active" data-cat="employee">👔 এমপ্লয়ি</button>
+            <button class="chip" data-cat="student">🎓 স্টুডেন্ট</button>
+            <button class="chip" data-cat="doctor">🩺 চিকিৎসক</button>
+            <button class="chip" data-cat="teacher">📚 শিক্ষক</button>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <h4>ডিজাইন টেমপ্লেট <span class="count-badge" id="templateCountBadge">২৫টি</span></h4>
+          <div class="template-grid" id="templateGrid"></div>
+        </div>
+
+        <div class="field-group">
+          <h4>কালার প্যালেট (১০টি)</h4>
+          <div class="palette-row" id="paletteRow"></div>
+          <p class="palette-name" id="paletteName"></p>
+        </div>
+      </section>
+
+      <!-- ---- IMAGES TAB ---- -->
+      <section class="tab-panel" id="tab-images">
+        <div class="field-group">
+          <h4>প্রতিষ্ঠানের লোগো</h4>
+          <div class="uploader" id="uploaderLogo">
+            <input type="file" id="inpLogoFile" accept="image/*" hidden>
+            <div class="uploader-box" id="uploaderLogoBox">
+              <span>📤 লোগো আপলোড করুন</span>
+              <small>PNG / JPG / SVG — স্বচ্ছ ব্যাকগ্রাউন্ড ভালো ফলাফল দেয়</small>
+            </div>
+          </div>
+          <button class="btn btn-secondary btn-block" id="btnRemoveLogo">লোগো মুছুন</button>
+        </div>
+
+        <div class="field-group">
+          <h4>ব্যক্তির ছবি</h4>
+          <div class="uploader" id="uploaderPhoto">
+            <input type="file" id="inpPhotoFile" accept="image/*" hidden>
+            <div class="uploader-box" id="uploaderPhotoBox">
+              <span>📤 ছবি আপলোড করুন</span>
+              <small>স্কয়ার ছবি সবচেয়ে ভালো মানায়</small>
+            </div>
+          </div>
+          <button class="btn btn-secondary btn-block" id="btnRemovePhoto">ছবি মুছুন</button>
+        </div>
+
+        <div class="field-group">
+          <h4>অথরাইজড সিগনেচার</h4>
+          <div class="uploader" id="uploaderSign">
+            <input type="file" id="inpSignFile" accept="image/*" hidden>
+            <div class="uploader-box" id="uploaderSignBox">
+              <span>📤 সিগনেচার আপলোড করুন</span>
+              <small>স্বচ্ছ ব্যাকগ্রাউন্ড PNG সবচেয়ে ভালো</small>
+            </div>
+          </div>
+          <button class="btn btn-secondary btn-block" id="btnRemoveSign">সিগনেচার মুছুন</button>
+        </div>
+
+        <div class="field-group">
+          <h4>QR / বারকোড</h4>
+          <label class="switch-row">
+            <span>QR কোড দেখান</span>
+            <input type="checkbox" id="chkShowQR" checked>
+          </label>
+          <label class="switch-row">
+            <span>বারকোড দেখান (পেছনে)</span>
+            <input type="checkbox" id="chkShowBarcode" checked>
+          </label>
+        </div>
+      </section>
+
+    </aside>
+
+    <!-- ===================== CENTER: LIVE PREVIEW ===================== -->
+    <main class="panel panel-preview">
+      <div class="preview-toolbar">
+        <span class="preview-label">লাইভ প্রিভিউ</span>
+        <div class="side-toggle">
+          <button class="side-btn active" data-side="front">সামনের দিক</button>
+          <button class="side-btn" data-side="back">পেছনের দিক</button>
+        </div>
+        <span class="zoom-label" id="zoomLabel">CR-80 · 3.375" × 2.125"</span>
+      </div>
+
+      <div class="preview-stage">
+        <div class="card-flip-wrap" id="cardFlipWrap">
+          <div class="id-card" id="idCardFront" data-side="front">
+            <div class="deco-layer" id="decoLayerFront"></div>
+            <div class="card-header">
+              <div class="org-logo" id="orgLogoFront"><span class="logo-fallback" id="logoFallbackFront">GV</span></div>
+              <div class="org-text">
+                <strong id="orgNameFront">গ্রিনভিউ ইন্টারন্যাশনাল লিমিটেড</strong>
+                <small id="orgTaglineFront">Excellence in Every Detail</small>
+              </div>
+              <div class="cat-badge" id="catBadgeFront">EMPLOYEE ID</div>
+            </div>
+
+            <div class="right-col">
+              <div class="card-body">
+                <div class="photo-frame" id="photoFrameFront">
+                  <div class="photo-placeholder" id="photoPlaceholderFront">👤</div>
+                </div>
+                <div class="person-info">
+                  <h3 id="personNameFront">রাহুল আহমেদ</h3>
+                  <p class="designation" id="personDesigFront">সিনিয়র সফটওয়্যার ইঞ্জিনিয়ার</p>
+                  <div class="info-rows" id="infoRowsFront"></div>
+                </div>
+              </div>
+
+              <div class="card-footer">
+                <div class="id-strip">
+                  <span class="id-label">ID NO</span>
+                  <span class="id-value" id="idNoFront">EMP-2026-0143</span>
+                </div>
+                <div class="qr-box" id="qrBoxFront">▦▦▦<br>▦ ▦▦<br>▦▦ ▦</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="id-card id-card-back" id="idCardBack" data-side="back">
+            <div class="deco-layer" id="decoLayerBack"></div>
+            <div class="back-header">
+              <strong id="orgNameBack">গ্রিনভিউ ইন্টারন্যাশনাল লিমিটেড</strong>
+            </div>
+
+            <div class="back-body">
+              <p class="back-address" id="orgAddressBack">১২৩, গুলশান এভিনিউ, ঢাকা - ১২১২, বাংলাদেশ</p>
+              <div class="terms-box">
+                <h5>শর্তাবলী</h5>
+                <p id="termsBack"></p>
+              </div>
+              <p class="return-line" id="returnLineBack"></p>
+            </div>
+
+            <div class="back-footer">
+              <div class="barcode-box" id="barcodeBack">
+                <div class="barcode-bars"></div>
+                <small id="barcodeNumBack">EMP-2026-0143</small>
+              </div>
+              <div class="signature-box">
+                <div class="signature-slot" id="signatureSlotBack"><em>স্বাক্ষর</em></div>
+                <span id="signNameBack">মোঃ কামরুল হাসান, HR ম্যানেজার</span>
+                <small>অথরাইজড সিগনেচার</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="preview-hint">💡 টিপ: বাম পাশে যেকোনো তথ্য পরিবর্তন করলেই এখানে সাথে সাথে পরিবর্তন দেখতে পাবেন।</p>
+    </main>
+
+  </div>
+</div>
+
+<!-- Gallery Modal -->
+<div class="modal-overlay" id="galleryModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3>🗂️ সকল ডিজাইন গ্যালারি — <span id="galleryCount">১০০</span>টি প্রিমিয়াম টেমপ্লেট</h3>
+      <button class="modal-close" id="closeGalleryModal">✕</button>
+    </div>
+    <div class="modal-filters">
+      <button class="chip active" data-gcat="all">সবগুলো</button>
+      <button class="chip" data-gcat="employee">👔 এমপ্লয়ি (২৫)</button>
+      <button class="chip" data-gcat="student">🎓 স্টুডেন্ট (২৫)</button>
+      <button class="chip" data-gcat="doctor">🩺 চিকিৎসক (২৫)</button>
+      <button class="chip" data-gcat="teacher">📚 শিক্ষক (২৫)</button>
+    </div>
+    <div class="modal-grid" id="modalGrid"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="templates.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
