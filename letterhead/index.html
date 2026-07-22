@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Letterhead Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Playfair+Display:wght@400;600;700&family=Courier+Prime&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- Control Panel (Sidebar Inputs) -->
+        <div class="control-panel">
+            <h2>Letterhead Generator</h2>
+            
+            <!-- Company Info -->
+            <div class="section-group">
+                <h3>১. কোম্পানির মৌলিক তথ্য</h3>
+                <div class="form-group">
+                    <label>কোম্পানির নাম</label>
+                    <input type="text" id="companyName" placeholder="যেমন: Unique Computer" value="Unique Computer">
+                </div>
+                <div class="form-group">
+                    <label>স্লোগান / ট্যাগলাইন</label>
+                    <input type="text" id="companySlogan" placeholder="যেমন: Innovating the Future" value="Innovating the Future">
+                </div>
+                <div class="form-group">
+                    <label>রেজিস্ট্রেশন / ট্যাক্স আইডি</label>
+                    <input type="text" id="companyReg" placeholder="যেমন: TRAD/DNCC/123456/2026" value="TRAD/DNCC/123456/2026">
+                </div>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="section-group">
+                <h3>২. যোগাযোগের তথ্য</h3>
+                <div class="form-group">
+                    <label>অফিসের ঠিকানা</label>
+                    <input type="text" id="companyAddress" placeholder="ঠিকানা লিখুন" value="Faridpur Sadar, Faridpur">
+                </div>
+                <div class="form-group">
+                    <label>ফোন নম্বর</label>
+                    <input type="text" id="companyPhone" placeholder="ফোন নম্বর" value="+880 1700-000000">
+                </div>
+                <div class="form-group">
+                    <label>ইমেইল ঠিকানা</label>
+                    <input type="text" id="companyEmail" placeholder="ইমেইল" value="info@uniquecomputer.com">
+                </div>
+                <div class="form-group">
+                    <label>ওয়েবসাইট</label>
+                    <input type="text" id="companyWeb" placeholder="ওয়েবসাইট লিঙ্ক" value="www.uniquecomputer.com">
+                </div>
+            </div>
+
+            <!-- Branding & Design -->
+            <div class="section-group">
+                <h3>৩. ব্র্যান্ডিং ও ডিজাইন</h3>
+                <div class="form-group">
+                    <label>কোম্পানির লোগো আপলোড</label>
+                    <input type="file" id="logoUpload" accept="image/*">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>থিম কালার</label>
+                        <input type="color" id="primaryColor" value="#1a365d">
+                    </div>
+                    <div class="form-group">
+                        <label>ফন্ট স্টাইল</label>
+                        <select id="fontStyle">
+                            <option value="'Inter', sans-serif">Inter</option>
+                            <option value="'Roboto', sans-serif">Roboto</option>
+                            <option value="'Playfair Display', serif">Playfair Display</option>
+                            <option value="'Courier Prime', monospace">Courier Prime</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>হেডার অ্যালাইনমেন্ট</label>
+                        <select id="headerAlign">
+                            <option value="left">বামে (Left)</option>
+                            <option value="center" selected>মাঝখানে (Center)</option>
+                            <option value="right">ডানে (Right)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>ফুটার লেআউট</label>
+                        <select id="footerLayout">
+                            <option value="inline">এক লাইনে (Inline)</option>
+                            <option value="split" selected>দুই কলাম (Split)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Export Actions -->
+            <button id="printBtn" class="action-btn">প্রিন্ট / PDF সেভ করুন</button>
+        </div>
+
+        <!-- Live Preview Area -->
+        <div class="preview-area">
+            <div class="page-container">
+                <div id="letterheadPage" class="letterhead-page">
+                    <!-- Header -->
+                    <div id="previewHeader" class="letterhead-header center">
+                        <div id="logoContainer" class="logo-container hidden">
+                            <img id="previewLogo" src="" alt="Logo">
+                        </div>
+                        <div class="company-text">
+                            <h1 id="outCompanyName">Unique Computer</h1>
+                            <p id="outCompanySlogan">Innovating the Future</p>
+                        </div>
+                    </div>
+
+                    <!-- Body Content Placeholder -->
+                    <div class="letterhead-body">
+                        <div class="memo-details">
+                            <p><strong>তারিখ:</strong> <span id="currentDate"></span></p>
+                            <p><strong>সূত্র নং:</strong> UC/2026/___</p>
+                        </div>
+                        <div class="sample-content">
+                            <p>বরাবর,<br>ব্যবস্থাপনা পরিচালক,<br>প্রতিষ্ঠান বা ব্যক্তির নাম...</p>
+                            <p><strong>বিষয়: লেটারহেড ব্যবহারের আবেদনপত্র সংক্রান্ত।</strong></p>
+                            <p>মহোদয়,</p>
+                            <p>যথাযথ সম্মান প্রদর্শনপূর্বক নিবেদন এই যে, আপনার প্রদত্ত নির্দেশ অনুযায়ী এই প্রফেশনাল লেটারহেডটি তৈরি করা হয়েছে। এখানে আপনার প্রয়োজনমতো যেকোনো অফিশিয়াল চিঠি বা ডকুমেন্টস লিখতে পারবেন। রিয়েল-টাইম প্রিভিউ এর মাধ্যমে পরিবর্তনগুলো তাৎক্ষণিকভাবে দেখা যাচ্ছে।</p>
+                            <br>
+                            <p>বিনীত নিবেদক,</p>
+                            <br><br>
+                            <p>_______________________</p>
+                        </div>
+                    </div>
+
+                    <!-- Footer -->
+                    <div id="previewFooter" class="letterhead-footer split">
+                        <div class="footer-col">
+                            <p><span id="outCompanyAddress">Faridpur Sadar, Faridpur</span></p>
+                            <p>ফোন: <span id="outCompanyPhone">+880 1700-000000</span></p>
+                        </div>
+                        <div class="footer-col right-align">
+                            <p>ইমেইল: <span id="outCompanyEmail">info@uniquecomputer.com</span></p>
+                            <p>ওয়েবসাইট: <span id="outCompanyWeb">www.uniquecomputer.com</span> | Reg: <span id="outCompanyReg">TRAD/DNCC/123456/2026</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
