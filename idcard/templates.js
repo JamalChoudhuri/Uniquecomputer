@@ -62,61 +62,136 @@ Object.keys(CATEGORIES).forEach((catKey, ci) => {
 
 /* ---------------------------------------------------------------------
    Decoration SVG generator — produces a background pattern layer
-   parameterized by the palette colors, sized to a 460x290 card.
+   parameterized by the palette colors, sized to a 290x460 portrait card.
+   Each pattern is deliberately layered (multiple shape generations,
+   varying scale/opacity) for a richer, premium faceted look.
 --------------------------------------------------------------------- */
 function buildDecoSVG(decoKey, palette, skeleton) {
   const P = palette.primary, S = palette.secondary, A = palette.accent;
-  const W = 460, H = 290;
+  const W = 290, H = 460;
 
   if (decoKey === "d5") {
-    // Clean minimal: soft single gradient wash, no shapes
+    // Clean minimal: soft gradient wash + one delicate hairline hexagon accent
+    const cx = W - 46, cy = 54, r = 40;
+    const hexPts = Array.from({length:6}, (_,i) => {
+      const ang = Math.PI/180 * (60*i - 30);
+      return `${(cx+r*Math.cos(ang)).toFixed(1)},${(cy+r*Math.sin(ang)).toFixed(1)}`;
+    }).join(" ");
     return `<svg width="100%" height="100%" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">
       <defs><linearGradient id="g5" x1="0" y1="0" x2="1" y2="1">
         <stop offset="0" stop-color="${S}" stop-opacity="0.10"/>
         <stop offset="1" stop-color="${A}" stop-opacity="0.05"/>
       </linearGradient></defs>
       <rect width="${W}" height="${H}" fill="url(#g5)"/>
+      <polygon points="${hexPts}" fill="none" stroke="${A}" stroke-width="1" opacity="0.5"/>
+      <circle cx="${cx}" cy="${cy}" r="4" fill="${A}" opacity="0.5"/>
     </svg>`;
   }
 
   if (decoKey === "d1") {
-    // Circles cluster, top-right + bottom-left
+    // Layered concentric orbit rings (top-right) + mirrored micro-cluster (bottom-left)
+    const cx1 = W - 34, cy1 = 40;
+    let rings = "";
+    [98, 74, 52, 33].forEach((r, i) => {
+      rings += `<circle cx="${cx1}" cy="${cy1}" r="${r}" fill="none" stroke="${i % 2 === 0 ? S : A}" stroke-width="${i === 3 ? 2 : 1}" opacity="${0.22 - i*0.03}"/>`;
+    });
+    // small orbiting dots along the outer ring
+    let orbitDots = "";
+    for (let i = 0; i < 7; i++) {
+      const ang = (Math.PI * 2 / 7) * i;
+      orbitDots += `<circle cx="${(cx1+98*Math.cos(ang)).toFixed(1)}" cy="${(cy1+98*Math.sin(ang)).toFixed(1)}" r="3" fill="${A}" opacity="0.35"/>`;
+    }
+    const cx2 = 36, cy2 = H - 46;
+    let rings2 = "";
+    [60, 40, 24].forEach((r, i) => {
+      rings2 += `<circle cx="${cx2}" cy="${cy2}" r="${r}" fill="${i === 2 ? A : P}" opacity="${i === 2 ? 0.18 : 0.08 - i*0.02}"/>`;
+    });
     return `<svg width="100%" height="100%" viewBox="0 0 ${W} ${H}">
-      <circle cx="${W-40}" cy="30" r="90" fill="${S}" opacity="0.14"/>
-      <circle cx="${W-10}" cy="20" r="45" fill="${A}" opacity="0.20"/>
-      <circle cx="30" cy="${H-20}" r="70" fill="${P}" opacity="0.10"/>
-      <circle cx="60" cy="${H+10}" r="35" fill="${A}" opacity="0.14"/>
+      <circle cx="${cx1}" cy="${cy1}" r="118" fill="${S}" opacity="0.08"/>
+      ${rings}${orbitDots}${rings2}
     </svg>`;
   }
 
   if (decoKey === "d2") {
-    // Dot grid, top band
+    // Dense hex-packed dot lattice in the top corner, opacity fades with distance from corner
+    const originX = W, originY = 0;
     let dots = "";
-    for (let r = 0; r < 5; r++) {
-      for (let c = 0; c < 14; c++) {
-        dots += `<circle cx="${W - 20 - c*13}" cy="${16 + r*13}" r="1.6" fill="${A}" opacity="${0.5 - r*0.08}"/>`;
+    const rows = 9, cols = 8, spacing = 15;
+    for (let r = 0; r < rows; r++) {
+      const rowOffset = (r % 2) * (spacing / 2);
+      for (let c = 0; c < cols; c++) {
+        const x = originX - 14 - rowOffset - c * spacing;
+        const y = 14 + r * (spacing * 0.86);
+        if (x < W * 0.32) continue;
+        const dist = Math.hypot(originX - x, originY - y);
+        const op = Math.max(0, 0.55 - dist / 260);
+        if (op <= 0.02) continue;
+        dots += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="1.7" fill="${A}" opacity="${op.toFixed(2)}"/>`;
       }
     }
-    return `<svg width="100%" height="100%" viewBox="0 0 ${W} ${H}">${dots}</svg>`;
+    return `<svg width="100%" height="100%" viewBox="0 0 ${W} ${H}">
+      <circle cx="${W}" cy="0" r="150" fill="${S}" opacity="0.05"/>
+      ${dots}
+    </svg>`;
   }
 
   if (decoKey === "d3") {
-    // Geometric triangles cluster corner
+    // Faceted low-poly triangle mesh filling the top-right corner
+    const gridSize = 4, cell = 42, ox = W - gridSize * cell + 18, oy = -18;
+    const colors = [A, S, P];
+    let tris = "";
+    let seed = 17;
+    const rnd = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+    for (let r = 0; r < gridSize; r++) {
+      for (let c = 0; c < gridSize; c++) {
+        if (r + c > gridSize) continue; // trim to a triangular corner region
+        const x0 = ox + c*cell, y0 = oy + r*cell;
+        const jitter = () => (rnd()-0.5)*8;
+        const x1 = x0+cell+jitter(), y1 = y0+jitter();
+        const x2 = x0+jitter(), y2 = y0+cell+jitter();
+        const x3 = x1, y3 = y0+cell+jitter();
+        const col1 = colors[(r+c) % colors.length];
+        const col2 = colors[(r+c+1) % colors.length];
+        const op1 = (0.06 + rnd()*0.10).toFixed(2);
+        const op2 = (0.05 + rnd()*0.09).toFixed(2);
+        tris += `<polygon points="${x0.toFixed(1)},${y0.toFixed(1)} ${x1.toFixed(1)},${y1.toFixed(1)} ${x2.toFixed(1)},${y2.toFixed(1)}" fill="${col1}" opacity="${op1}"/>`;
+        tris += `<polygon points="${x1.toFixed(1)},${y1.toFixed(1)} ${x3.toFixed(1)},${y3.toFixed(1)} ${x2.toFixed(1)},${y2.toFixed(1)}" fill="${col2}" opacity="${op2}"/>`;
+      }
+    }
+    // echo a smaller faceted cluster bottom-left, plus a thin hexagon outline for polish
+    const hx = 40, hy = H - 54, hr = 34;
+    const hexPts = Array.from({length:6}, (_,i) => {
+      const ang = Math.PI/180*(60*i);
+      return `${(hx+hr*Math.cos(ang)).toFixed(1)},${(hy+hr*Math.sin(ang)).toFixed(1)}`;
+    }).join(" ");
     return `<svg width="100%" height="100%" viewBox="0 0 ${W} ${H}">
-      <polygon points="${W},0 ${W},110 ${W-110},0" fill="${S}" opacity="0.16"/>
-      <polygon points="${W},0 ${W},60 ${W-60},0" fill="${A}" opacity="0.22"/>
-      <polygon points="0,${H} 90,${H} 0,${H-90}" fill="${P}" opacity="0.12"/>
-      <polygon points="0,${H} 40,${H} 0,${H-40}" fill="${A}" opacity="0.16"/>
+      ${tris}
+      <polygon points="${hexPts}" fill="${P}" opacity="0.07"/>
+      <polygon points="${hexPts}" fill="none" stroke="${A}" stroke-width="1.2" opacity="0.28"/>
     </svg>`;
   }
 
   if (decoKey === "d4") {
-    // Diagonal stripes band
-    let stripes = "";
-    for (let i = -4; i < 12; i++) {
-      stripes += `<rect x="${i*36}" y="0" width="14" height="${H*1.6}" transform="rotate(22 ${i*36} 0)" fill="${i % 2 === 0 ? A : S}" opacity="${i % 2 === 0 ? 0.10 : 0.06}"/>`;
+    // Layered herringbone / chevron band across the header-to-mid region
+    let chevrons = "";
+    const rowsN = 6, colsN = 5, cw = 60, ch = 26;
+    for (let r = 0; r < rowsN; r++) {
+      for (let c = 0; c < colsN; c++) {
+        const x = -40 + c*cw + (r % 2 === 0 ? 0 : cw/2);
+        const y = -10 + r*ch;
+        const flip = (r + c) % 2 === 0;
+        const col = flip ? A : S;
+        const op = flip ? 0.09 : 0.055;
+        const pts = flip
+          ? `${x},${y+ch} ${x+cw/2},${y} ${x+cw},${y+ch} ${x+cw/2},${y+ch*0.55}`
+          : `${x},${y} ${x+cw/2},${y+ch} ${x+cw},${y} ${x+cw/2},${y+ch*0.45}`;
+        chevrons += `<polygon points="${pts}" fill="${col}" opacity="${op}"/>`;
+      }
     }
-    return `<svg width="100%" height="100%" viewBox="0 0 ${W} ${H}"><g>${stripes}</g></svg>`;
+    return `<svg width="100%" height="100%" viewBox="0 0 ${W} ${H}">
+      <g>${chevrons}</g>
+      <rect x="0" y="0" width="${W}" height="150" fill="none"/>
+    </svg>`;
   }
 
   return "";
